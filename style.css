@@ -1,0 +1,414 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+.header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 85px;
+    padding: 0 25px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, .25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.logo {
+    padding-right: 60px;
+}
+
+.logo img {
+    height: 60px;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    gap: 50px;
+    height: 100%;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 35px;
+    font-size: 20px;
+    color: #888;
+    text-decoration: none;
+    position: relative;
+    transition: color .3s ease;
+}
+
+.menu a:hover {
+    color: #fff;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    background: #ff3c00;
+    transform: scaleY(.05);
+    transform-origin: bottom;
+    border-radius: 15px 15px 0 0;
+    transition: transform .3s ease;
+    z-index: -1;
+}
+
+.menu a:hover::after {
+    transform: scaleY(1);
+}
+
+.menu a:nth-child(2)::after {
+    background: #22a645;
+}
+
+.menu a:nth-child(3)::after {
+    background: #d9d900;
+}
+
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.search-box {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 950px;
+    padding: 25px 40px;
+    background: #fff;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    z-index: 10;
+}
+
+.search-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a2b4b;
+    white-space: nowrap;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    border-bottom: 2px solid #1a2b4b;
+    font-size: 18px;
+    outline: none;
+    background: transparent;
+    padding: 8px;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+.cachoeira {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-height: 600px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 50px 30px;
+    gap: 50px;
+}
+
+.cachoeira::-webkit-scrollbar {
+    display: none;
+}
+
+.cachoeira {
+    scrollbar-width: none;
+}
+
+#card-turismo {
+    display: flex;
+    gap: 30px;
+    padding: 140px 130px;
+    overflow: visible;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    z-index: 20;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+#titulo {
+    flex: 0 0 400px;    
+    max-width: 500px;
+    padding: 20px;
+}
+
+#titulo h3 {
+    font-size: 30px;
+    color: #666;
+}
+
+#titulo h1 {
+    font-size: 60px;
+    font-weight: 900;
+    color: #555;
+    margin: 30px 0;
+    max-width: 480px;
+}
+
+#titulo p {
+    font-size: 20px;
+    color: #666;
+    max-width: 560px;
+}
+
+
+.card {
+    flex: 0 0 400px;
+    height: 600px;
+    border-radius: 35px;
+    overflow: hidden;
+    position: relative;
+    pointer-events: auto;
+    transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.45s ease;
+
+    transform-origin: center;
+}
+
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    pointer-events: none;
+    z-index: 1;
+    
+}
+
+
+.card h3,
+.card button {
+    position: absolute;
+    z-index: 2;
+   
+}
+
+.card h3 {
+    bottom: 90px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+}
+
+.card button {
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    padding: 12px;
+    border-radius: 50px;
+    border: 3px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.hoteis {
+    max-width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hoteis h2 {
+    font-size: 55px;
+    color: #4b2e1a;
+}
+
+.hotel-cards {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.lucas h3{
+    margin-top: 20px;
+}
+.bruno h3 {
+    margin-top: 20px;
+}
+.ana h3{
+    margin-top: 20px;
+}
+.fernanda h3 {
+    margin-top: 20px;
+}
+.eduardo h3{
+    margin-top: 20px;
+}
+
+
+.hotel-cards img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 35px;
+    display: block;
+    position: relative;
+}
+
+
+.instagram {
+    max-width: 1200px;
+    margin: 140px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.instagram h2 {
+    font-size: 50px;
+    color: #4b2e1a;
+    margin-bottom: 10px;
+}
+
+.instagram p {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+
+.instagram-feed {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+.instagram-feed blockquote {
+    max-width: 350px;
+    width: 100%;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.fino{
+    font-weight: 100;
+}
+
+.verde{
+    color: #009100;
+
+}
+
+.rating {
+    margin-top: 10px;
+    color: #f4b400; /* dourado */
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.rating span {
+    color: #555;
+    font-size: 14px;
+    margin-left: 6px;
+}
+
+.rating i {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.rating i:hover {
+    transform: scale(1.2);
+}
+
+.card-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.card-social a {
+    font-size: 18px;
+    color: #555;
+    transition: 0.3s ease;
+}
+
+.card-social a:hover {
+    transform: scale(1.2);
+}
+.card-social .fa-instagram:hover {
+    color: #E1306C;
+}
+
+.card-social .fa-facebook-f:hover {
+    color: #1877F2;
+}
+
+.card-social .fa-whatsapp:hover {
+    color: #25D366;
+}
