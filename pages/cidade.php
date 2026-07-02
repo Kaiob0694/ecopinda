@@ -1,5 +1,5 @@
-<?php include 'includes/head.php'; ?>
-<?php include 'includes/header.php'; ?>
+<?php include '../includes/head.php'; ?>
+<?php include '../includes/header.php'; ?>
 
     <section class="hero">
         <video autoplay muted loop playsinline class="video-bg">
