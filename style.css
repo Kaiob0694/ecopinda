@@ -1,4 +1,17 @@
-/* RESET */
+/* ===========================
+   RESET
+=========================== */
+
+:root {
+    --laranja: #ff3c00;
+    --verde: #22a645;
+    --amarelo: #d9d900;
+    --marrom: #4b2e1a;
+    --cinza: #555;
+    --cinza-claro: #666;
+    --branco: #fff;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,17 +24,21 @@ body {
     overflow-x: hidden;
 }
 
+/* ===========================
+   HEADER
+=========================== */
+
 .header {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 85%;
+    width: 95%;
     height: 85px;
     padding: 0 25px;
-    background: #fff;
+    background: var(--branco);
     border-radius: 20px;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, .25);
+    box-shadow: 0 4px 25px rgba(0,0,0,.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,10 +50,13 @@ body {
 }
 
 .logo img {
-    height: 60px;
+    height: 80px;
 }
 
-/* MENU */
+/* ===========================
+   MENU
+=========================== */
+
 .menu {
     display: flex;
     gap: 50px;
@@ -50,14 +70,14 @@ body {
     height: 100%;
     padding: 0 35px;
     font-size: 20px;
-    color: #888;
+    color: #000000;
     text-decoration: none;
     position: relative;
     transition: color .3s ease;
 }
 
 .menu a:hover {
-    color: #fff;
+    color: var(--branco);
 }
 
 .menu a::after {
@@ -67,7 +87,7 @@ body {
     left: 0;
     width: 100%;
     height: 85%;
-    background: #ff3c00;
+    background: var(--laranja);
     transform: scaleY(.05);
     transform-origin: bottom;
     border-radius: 15px 15px 0 0;
@@ -80,18 +100,25 @@ body {
 }
 
 .menu a:nth-child(2)::after {
-    background: #22a645;
+    background: var(--verde);
 }
 
 .menu a:nth-child(3)::after {
-    background: #d9d900;
+    background: var(--amarelo);
 }
 
+/* ===========================
+   HERO
+=========================== */
 
 .hero {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+}
+
+.hero2 {
+    position: relative;
 }
 
 .video-bg {
@@ -101,6 +128,9 @@ body {
     display: block;
 }
 
+/* ===========================
+   SEARCH
+=========================== */
 
 .search-box {
     position: absolute;
@@ -110,9 +140,9 @@ body {
     width: 85%;
     max-width: 950px;
     padding: 25px 40px;
-    background: #fff;
+    background: var(--branco);
     border-radius: 50px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
     display: flex;
     gap: 25px;
     align-items: center;
@@ -130,10 +160,10 @@ body {
     flex: 1;
     border: none;
     border-bottom: 2px solid #1a2b4b;
-    font-size: 18px;
-    outline: none;
     background: transparent;
+    outline: none;
     padding: 8px;
+    font-size: 18px;
 }
 
 .search-btn {
@@ -143,25 +173,23 @@ body {
     cursor: pointer;
 }
 
+/* ===========================
+   TURISMO
+=========================== */
 
 .cachoeira {
     display: flex;
-    flex-direction: row;
     align-items: center;
     width: 100%;
     min-height: 600px;
     overflow-x: auto;
-    overflow-y: visible;
-    padding: 50px 30px;
+    padding: 90px 30px;
     gap: 50px;
+    scrollbar-width: none;
 }
 
 .cachoeira::-webkit-scrollbar {
     display: none;
-}
-
-.cachoeira {
-    scrollbar-width: none;
 }
 
 #card-turismo {
@@ -171,38 +199,34 @@ body {
     overflow: visible;
 }
 
-.card:hover {
-    cursor: pointer;
-    transform: scale(1.08);
-    z-index: 20;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
-}
-
 #titulo {
-    flex: 0 0 400px;    
+    flex: 0 0 400px;
     max-width: 500px;
     padding: 20px;
 }
 
 #titulo h3 {
     font-size: 30px;
-    color: #666;
+    color: var(--cinza-claro);
 }
 
 #titulo h1 {
     font-size: 60px;
     font-weight: 900;
-    color: #555;
+    color: var(--cinza);
     margin: 30px 0;
     max-width: 480px;
 }
 
 #titulo p {
     font-size: 20px;
-    color: #666;
+    color: var(--cinza-claro);
     max-width: 560px;
 }
 
+/* ===========================
+   CARDS
+=========================== */
 
 .card {
     flex: 0 0 400px;
@@ -210,49 +234,46 @@ body {
     border-radius: 35px;
     overflow: hidden;
     position: relative;
-    pointer-events: auto;
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.45s ease;
-
-    transform-origin: center;
+    transition: transform .45s cubic-bezier(.22,1,.36,1),
+                box-shadow .45s ease;
 }
 
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    z-index: 20;
+    box-shadow: 0 30px 70px rgba(0,0,0,.35);
+}
 
 .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
-
 
 .card::after {
-    content: '';
+    content: "";
     position: absolute;
-    bottom: 0;
     left: 0;
+    bottom: 0;
     width: 100%;
     height: 40%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-    pointer-events: none;
-    z-index: 1;
-    
+    background: linear-gradient(to top,
+            rgba(0,0,0,.6),
+            transparent);
 }
-
 
 .card h3,
 .card button {
     position: absolute;
     z-index: 2;
-   
 }
 
 .card h3 {
     bottom: 90px;
     width: 100%;
     text-align: center;
-    color: #fff;
+    color: var(--branco);
     font-size: 20px;
 }
 
@@ -263,24 +284,33 @@ body {
     width: 220px;
     padding: 12px;
     border-radius: 50px;
-    border: 3px solid #fff;
+    border: 3px solid var(--branco);
     background: transparent;
-    color: #fff;
+    color: var(--branco);
     font-size: 18px;
     cursor: pointer;
+    transition: .3s;
 }
 
+.card button:hover {
+    background: var(--branco);
+    color: #333;
+}
+
+/* ===========================
+   HOTÉIS
+=========================== */
 
 .hoteis {
     max-width: 1200px;
     margin: 120px auto;
-    text-align: center;
     padding: 0 20px;
+    text-align: center;
 }
 
 .hoteis h2 {
     font-size: 55px;
-    color: #4b2e1a;
+    color: var(--marrom);
 }
 
 .hotel-cards {
@@ -289,32 +319,25 @@ body {
     justify-content: center;
     gap: 30px;
 }
-.lucas h3{
-    margin-top: 20px;
-}
-.bruno h3 {
-    margin-top: 20px;
-}
-.ana h3{
-    margin-top: 20px;
-}
-.fernanda h3 {
-    margin-top: 20px;
-}
-.eduardo h3{
-    margin-top: 20px;
-}
-
 
 .hotel-cards img {
     width: 300px;
     height: 300px;
-    object-fit: cover;
     border-radius: 35px;
-    display: block;
-    position: relative;
+    object-fit: cover;
 }
 
+.lucas h3,
+.bruno h3,
+.ana h3,
+.fernanda h3,
+.eduardo h3 {
+    margin-top: 20px;
+}
+
+/* ===========================
+   INSTAGRAM
+=========================== */
 
 .instagram {
     max-width: 1200px;
@@ -325,60 +348,61 @@ body {
 
 .instagram h2 {
     font-size: 50px;
-    color: #4b2e1a;
+    color: var(--marrom);
     margin-bottom: 10px;
 }
 
 .instagram p {
     font-size: 20px;
-    color: #666;
+    color: var(--cinza-claro);
     margin-bottom: 50px;
 }
 
-
 .instagram-feed {
     display: flex;
-    gap: 30px;
     justify-content: center;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
-
 .instagram-feed blockquote {
-    max-width: 350px;
     width: 100%;
-    border-radius: 25px;
+    max-width: 350px;
     overflow: hidden;
+    border-radius: 25px;
 }
 
-.fino{
+/* ===========================
+   UTILITÁRIOS
+=========================== */
+
+.fino {
     font-weight: 100;
 }
 
-.verde{
+.verde {
     color: #009100;
-
 }
 
 .rating {
     margin-top: 10px;
-    color: #f4b400; /* dourado */
-    font-size: 18px;
+    color: #f4b400;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 4px;
+    font-size: 18px;
 }
 
 .rating span {
-    color: #555;
-    font-size: 14px;
     margin-left: 6px;
+    color: var(--cinza);
+    font-size: 14px;
 }
 
 .rating i {
-    transition: transform 0.2s ease;
     cursor: pointer;
+    transition: transform .2s;
 }
 
 .rating i:hover {
@@ -393,14 +417,15 @@ body {
 }
 
 .card-social a {
+    color: var(--cinza);
     font-size: 18px;
-    color: #555;
-    transition: 0.3s ease;
+    transition: .3s;
 }
 
 .card-social a:hover {
     transform: scale(1.2);
 }
+
 .card-social .fa-instagram:hover {
     color: #E1306C;
 }
@@ -411,4 +436,86 @@ body {
 
 .card-social .fa-whatsapp:hover {
     color: #25D366;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width: 992px) {
+
+    .header {
+        width: 95%;
+        height: auto;
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .logo {
+        padding: 0;
+        margin-bottom: 15px;
+    }
+
+    .menu {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu a {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .search-box {
+        flex-direction: column;
+        border-radius: 25px;
+        padding: 25px;
+    }
+
+    #card-turismo {
+        padding: 80px 30px;
+    }
+
+    #titulo {
+        flex: 0 0 300px;
+    }
+
+    #titulo h1 {
+        font-size: 42px;
+    }
+
+    .hotel-cards {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero {
+        height: 70vh;
+    }
+
+    #titulo h1 {
+        font-size: 34px;
+    }
+
+    #titulo p {
+        font-size: 18px;
+    }
+
+    .card {
+        flex: 0 0 300px;
+        height: 450px;
+    }
+
+    .hotel-cards img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .instagram h2,
+    .hoteis h2 {
+        font-size: 36px;
+    }
 }
