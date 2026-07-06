@@ -1,7 +1,9 @@
 <header class="header">
-        <div class="logo">
-            <img src="../assets/img2/logo.png" alt="">
-        </div>
+    <div class="logo">
+        <a href="/index.php">
+            <img src="../assets/img2/logo.png" alt="pinda eco">
+        </a>
+    </div>
 
         <nav class="menu">
             <a href="#">Início</a>
