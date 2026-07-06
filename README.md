@@ -2,6 +2,9 @@
 
 ## 1. Dados do Projeto
 
+**Dominío do Servidor**
+http://pindaeco.rf.gd/
+
 **Nome dos integrantes:**  
 João Vítor Pereira Paulo, Caio César Barbosa, Lívia Campos, Raquele Chaves Rodrigues  
 
@@ -10,6 +13,9 @@ EcoPinda Tour – Plataforma de turismo inteligente para divulgação de trilhas
 
 **Público-alvo:**  
 Estudantes, moradores e turistas interessados em conhecer melhor os pontos turísticos e naturais de Pindamonhangaba e região  
+
+**Nome dos docentes:** 
+André e Tainá
 
 ---
 
@@ -22,12 +28,18 @@ Além disso, a plataforma busca incentivar o turismo sustentável e a exploraç�
 ---
 
 ## 3. Objetivo do Projeto
-
 O nosso projeto tem como objetivo facilitar o acesso dos usuários a informações em um único site, reunindo dados sobre locais para visitação em Pindamonhangaba e região.  
 
 A plataforma apresenta informações organizadas sobre pontos turísticos, hotéis, restaurantes e outros atrativos, permitindo que moradores e turistas encontrem tudo de forma rápida, prática e centralizada.  
 
 Além disso, o projeto busca incentivar o turismo local e a valorização dos espaços naturais e urbanos, promovendo uma experiência mais acessível e informativa para os usuários.
+
+
+---
+
+## 4. Como editar localmente
+
+Pegue o  sql do migrations.sql e lançar no servidor local. 
 
  
 

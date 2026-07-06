@@ -1,0 +1,171 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    width:100%;
+    min-height:100vh;
+    font-family:'Segoe UI', Roboto, Arial, sans-serif;
+    background:#f4f6f8;
+    color:#2c2c2c;
+}
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+    z-index:1000;
+}
+
+.header-container{
+    width:100%;
+    max-width:1200px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.logo h1{
+    font-size:20px;
+    font-weight:700;
+    color:#1a1a1a;
+}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#555;
+    font-weight:600;
+    font-size:15px;
+    position:relative;
+}
+
+nav a:hover{
+    color:#ff5a1f;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;
+    left:0;
+    width:100%;
+    height:2px;
+    background:#ff5a1f;
+    transform:scaleX(0);
+    transition:.3s;
+}
+
+nav a:hover::after,
+nav a.ativo::after{
+    transform:scaleX(1);
+}
+
+.banner{
+    width:100%;
+    height:420px;
+    margin-top:80px;
+    background:url("img/banner_gastronomia.jpg") center/cover no-repeat;
+    position:relative;
+}
+
+.banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.35);
+}
+
+.titulo{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:60px 20px 30px;
+    text-align:center;
+}
+
+.titulo h2{
+    font-size:34px;
+    font-weight:700;
+}
+
+.titulo p{
+    margin-top:8px;
+    color:#666;
+}
+
+.restaurantes{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px 80px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+
+.card h3{
+    margin:12px 14px 4px;
+    font-size:18px;
+}
+
+.card p{
+    margin:3px 14px;
+    font-size:13px;
+    color:#666;
+}
+
+.preco{
+    margin:15px auto 20px;
+    background:#2ecc71;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:700;
+    font-size:14px;
+}
+
+footer{
+    width:100%;
+    background:#111;
+    color:#aaa;
+    text-align:center;
+    padding:40px 20px;
+    font-size:14px;
+    margin-top:40px;
+}
