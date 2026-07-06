@@ -82,6 +82,7 @@
         <h2>
             <span class="fino">Guia de</span>
             <strong class="verde">Turismo</strong>
+            
         </h2>
 
         <div class="hotel-cards">

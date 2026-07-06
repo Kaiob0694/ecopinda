@@ -42,3 +42,4 @@ if ($row = mysqli_fetch_assoc($resultado)) {
     exit;
 
 }
+
