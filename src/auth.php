@@ -5,7 +5,7 @@ require "conexao.php";
 $email = trim($_POST['email'] ?? '');
 $senha = trim($_POST['senha'] ?? '');
 
-// Consulta segura com prepared statement (evita SQL Injection)
+
 $sql = "SELECT * FROM usuarios WHERE email = ?";
 $stmt = mysqli_prepare($conexao, $sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -16,13 +16,13 @@ if ($row = mysqli_fetch_assoc($resultado)) {
 
     if ($row['senha'] === $senha) {
 
-        // Login correto: guarda os dados do usuário na sessão
+        
         $_SESSION['usuario_id']    = $row['id'];
         $_SESSION['usuario_nome']  = $row['nome'];
         $_SESSION['usuario_email'] = $row['email'];
 
-        // Volta para a página principal já logado
-        header("Location: /index.php");
+      
+        header("Location: ../pages/profile.php");
         exit;
 
     } else {
