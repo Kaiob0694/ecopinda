@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: cadastro_restaurante.php");
+            header("Location: restaurante.php");
             exit;
         } else {
             echo "Erro ao cadastrar restaurante: " . mysqli_error($conexao);
