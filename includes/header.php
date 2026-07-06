@@ -6,10 +6,10 @@
         <nav class="menu">
             <a href="#">Início</a>
             <a href="/../pages/cidade.php">Cidade</a>
-            <a href="#">Turismo</a>
-            <a href="hoteis/index.html">Hotéis</a>
+            <a href="/../pages/turismo.php">Turismo</a>
+            <a href="/../pages/hoteis.php">Hotéis</a>
             <a href="gastronomia/index.html">Gastronomia</a>
             <a href="/../pages/login.php">Login</a>
             <span class="indicator"></span>
         </nav>
-    </header>
+</header>
