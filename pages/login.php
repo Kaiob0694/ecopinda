@@ -45,7 +45,7 @@ unset($_SESSION['login_email']);
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    /* fallback em gradiente caso a imagem não carregue */
+   
     background:linear-gradient(180deg, var(--dusk-top) 0%, var(--dusk-mid) 45%, var(--dusk-glow) 78%, #f3c9a8 100%);
   }
 
@@ -58,7 +58,7 @@ unset($_SESSION['login_email']);
     z-index:0;
   }
 
-  /* leve véu escuro sobre a foto pra manter o texto branco legível */
+  
   .bg-overlay{
     position:absolute;
     inset:0;
@@ -66,7 +66,7 @@ unset($_SESSION['login_email']);
     background:linear-gradient(180deg, rgba(20,15,40,0.15) 0%, rgba(15,10,30,0.35) 100%);
   }
 
-  /* céu com leve textura de nuvem */
+  
   .cloud{
     position:absolute;
     z-index:2;
@@ -108,7 +108,7 @@ unset($_SESSION['login_email']);
     filter:drop-shadow(0 2px 12px rgba(0,0,0,0.35));
   }
 
-  /* fallback textual caso a imagem da logo não exista */
+  
   .card .logo-fallback{
     display:none;
     margin:0 0 30px;
