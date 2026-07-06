@@ -193,7 +193,7 @@ unset($_SESSION['login_email']);
       <div class="erro"><?= htmlspecialchars($erro) ?></div>
     <?php endif; ?>
 
-    <form action="process_login.php" method="POST" novalidate>
+    <form action="../src/auth.php" method="POST" novalidate>
       <div class="field">
         <input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($email_anterior) ?>" required autofocus>
       </div>
