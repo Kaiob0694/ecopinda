@@ -11,7 +11,7 @@
         <a href="#">Turismo</a>
         <a href="hoteis/index.html">Hotéis</a>
         <a href="gastronomia/index.html">Gastronomia</a>
-        <a href="/../pages/login.php">Login</a>
+        <a href="pages/login.php">Login</a>
         <span class="indicator"></span>
     </nav>
 </header>
