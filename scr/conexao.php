@@ -2,15 +2,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = "sql206.infinityfree.com";
-$usuario = "if0_42297225";
-$senha = "zgbGSOdQNMrhcud";
-$banco = "if0_42297225_pindaeco";
+// $host = "sql206.infinityfree.com";
+// $usuario = "if0_42297225";
+// $senha = "zgbGSOdQNMrhcud";
+// $banco = "if0_42297225_pindaeco";
 
-// $host = "localhost";
-// $usuario = "root";
-// $senha = "1234";
-// $banco = "sistema_login";
+$host = "localhost";
+$usuario = "root";
+$senha = "1234";
+$banco = "pindaeco";
 
 $conexao = mysqli_connect($host, $usuario,$senha, $banco);
 
