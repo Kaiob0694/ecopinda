@@ -1,0 +1,182 @@
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomia - PindaEco Tour</title>
+
+    <link rel="stylesheet" href="Gastronomia.css">
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+
+        <div class="logo">
+            <h1>🍽 PindaEco Tour</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="cidade.html">Cidade</a>
+            <a href="turismo.html">Turismo</a>
+            <a href="hoteis.html">Hotéis</a>
+            <a href="gastronomia.php" class="ativo">Gastronomia</a>
+        </nav>
+
+    </div>
+</header>
+
+<section class="banner"></section>
+
+<section class="titulo">
+    <h2>🍽 Gastronomia de Pindamonhangaba</h2>
+    <p>Conheça alguns dos restaurantes mais bem avaliados da cidade.</p>
+</section>
+
+<section class="restaurantes">
+
+    <article class="card">
+        <img src="img/trento.jpg" alt="Restaurante Trento Grill">
+        <h3>Restaurante Trento Grill</h3>
+        <p>🍛 Culinária Brasileira e Japonesa</p>
+        <p>⭐ Avaliação: 4,7/5</p>
+        <p>💰 Faixa de preço: R$ 60 a R$ 120</p>
+        <p>📍 Centro - Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Restaurante+Trento+Grill+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/armazem.jpg" alt="Armazém da Fazenda">
+        <h3>Armazém da Fazenda</h3>
+        <p>🍕 Comida brasileira e pizzaria</p>
+        <p>⭐ Avaliação: 4,2/5</p>
+        <p>💰 Faixa de preço: R$ 50 a R$ 100</p>
+        <p>📍 Centro - Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Armazem+da+Fazenda+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/labella.jpg" alt="La Bella Pizzaria">
+        <h3>La Bella Pizzaria</h3>
+        <p>🍕 Pizzaria</p>
+        <p>⭐ Avaliação: 4,5/5</p>
+        <p>💰 Faixa de preço: R$ 60 a R$ 120</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=La+Bella+Pizzaria+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/minuano.jpg" alt="Churrascaria Minuano">
+        <h3>Churrascaria Minuano</h3>
+        <p>🥩 Rodízio de Carnes</p>
+        <p>⭐ Avaliação: 4,0/5</p>
+        <p>💰 Faixa de preço: R$ 90 a R$ 150</p>
+        <p>📍 Centro</p>
+
+        <a href="https://maps.google.com/?q=Churrascaria+Minuano+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/gramado.jpg" alt="Gramado Churrascaria">
+        <h3>Gramado Churrascaria</h3>
+        <p>🥩 Churrascaria</p>
+        <p>⭐ Avaliação: 4,0/5</p>
+        <p>💰 Faixa de preço: R$ 80 a R$ 140</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Gramado+Churrascaria+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/colmeia.jpg" alt="Restaurante Colmeia">
+        <h3>Restaurante Colmeia</h3>
+        <p>🍛 Comida Caseira</p>
+        <p>⭐ Avaliação: 4,1/5</p>
+        <p>💰 Faixa de preço: R$ 40 a R$ 70</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Restaurante+Colmeia+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/vitoria.jpg" alt="Vitória Restaurante">
+        <h3>Vitória Restaurante</h3>
+        <p>🍛 Buffet</p>
+        <p>⭐ Avaliação: 4,2/5</p>
+        <p>💰 Faixa de preço: R$ 35 a R$ 60</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Vitoria+Restaurante+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/mamis.jpg" alt="Mami's Küche">
+        <h3>Mami's Küche</h3>
+        <p>🇩🇪 Culinária Alemã</p>
+        <p>⭐ Avaliação: 4,7/5</p>
+        <p>💰 Faixa de preço: R$ 70 a R$ 130</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Mamis+Kuche+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/saomarcos.jpg" alt="Restaurante São Marcos">
+        <h3>Restaurante São Marcos</h3>
+        <p>🍛 Comida Brasileira</p>
+        <p>⭐ Avaliação: 4,2/5</p>
+        <p>💰 Faixa de preço: R$ 35 a R$ 60</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Restaurante+Sao+Marcos+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+    <article class="card">
+        <img src="img/inspirato.jpg" alt="Inspirato Café">
+        <h3>Inspirato Café e Doces</h3>
+        <p>☕ Cafeteria</p>
+        <p>⭐ Avaliação: 4,6/5</p>
+        <p>💰 Faixa de preço: R$ 20 a R$ 50</p>
+        <p>📍 Pindamonhangaba</p>
+
+        <a href="https://maps.google.com/?q=Inspirato+Cafe+Pindamonhangaba" target="_blank">
+            📍 Como chegar
+        </a>
+    </article>
+
+</section>
+
+<footer>
+    <p>&copy; 2026 PindaEco Tour - Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
