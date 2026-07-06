@@ -1,7 +1,7 @@
 <header class="header">
     <div class="logo">
         <a href="/index.php">
-            <img src="../assets/img2/logo.png" alt="Projeto Escola">
+            <img src="../assets/img2/logo.png" alt="pinda eco">
         </a>
     </div>
 
