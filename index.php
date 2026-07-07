@@ -1,5 +1,6 @@
 <?php include 'includes/head.php'; ?>
 <?php include 'includes/header.php'; ?>
+<link rel="stylesheet" href="../style.css">
 
     <section class="hero">
         <video autoplay muted loop playsinline class="video-bg">
@@ -81,6 +82,7 @@
         <h2>
             <span class="fino">Guia de</span>
             <strong class="verde">Turismo</strong>
+            
         </h2>
 
         <div class="hotel-cards">
