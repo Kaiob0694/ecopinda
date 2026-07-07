@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario_email'] = $email;
             $_SESSION['perfil_sucesso'] = "Perfil atualizado com sucesso!";
             mysqli_stmt_close($stmtUpdate);
-            header("Location: profile.php");
+            header("Location: ../pages/profile.php");
             exit;
         } else {
             $erros[] = "Erro ao atualizar o perfil: " . mysqli_error($conexao);
@@ -293,7 +293,7 @@ function formatarTelefone($v) {
                 <button type="submit" class="profile-btn profile-btn-edit">
                     <i class="fa-solid fa-check"></i> Salvar Alterações
                 </button>
-                <a href="profile.php" class="profile-btn profile-btn-exit">
+                <a href="../pages/profile.php" class="profile-btn profile-btn-exit">
                     <i class="fa-solid fa-xmark"></i> Cancelar
                 </a>
             </div>
