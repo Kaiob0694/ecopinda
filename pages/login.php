@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Se já estiver logado, manda direto pro dashboard
+
 if (!empty($_SESSION['usuario_id'])) {
-  header('Location: index.php');
+  header('Location: pages/login.php');
   exit;
 }
 
