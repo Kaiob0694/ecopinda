@@ -6,7 +6,7 @@
     </div>
 
     <nav class="menu">
-        <a href="#">Início</a>
+        <a href="../index.php">Início</a>
         <a href="/../pages/cidade.php">Cidade</a>
         <a href="#">Turismo</a>
         <a href="hoteis/index.html">Hotéis</a>
