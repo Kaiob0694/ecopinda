@@ -1,24 +1,128 @@
+<?php 
+session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /hoteis.php');
+    exit();
+}
 
+require_once __DIR__ . "/../src/conexao.php";
+
+$sql = "SELECT * FROM hoteis";
+$result = mysqli_query($conexao, $sql);
+
+if (!$result) {
+    die("Erro na consulta: " . mysqli_error($conexao));
+}
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Onde se Hospedar em Pindamonhangaba</title>
-<link rel="stylesheet" href="style_hoteis.css">
+<title>Hotéis em Pindamonhangaba</title>
+<link rel="stylesheet" href="assets/css/style_hoteis.css">
 
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#d9d9d9;
+    margin:0;
+    padding:50px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+/* GRID AUTOMÁTICA */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(340px, 340px));
+    justify-content:center;
+    gap:35px;
+}
+
+.card{
+    width:340px;
+    height:256px;
+    background:#fffefe;
+    border-radius:70px;
+    padding:15px;
+    text-align:center;
+    box-sizing:border-box;
+    transition:0.3s;
+
+    border:3px solid #f8f5f5;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* HOVER MODERNO */
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#6f6f6f;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
+}
+
+.card img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:40px;
+    transition:0.3s;
+}
+
+.card:hover img{
+    transform:scale(1.05);
+}
+
+.card h3{
+    margin:10px 0 5px;
+}
+
+.card p{
+    margin:2px 0;
+    font-size:14px;
+}
+
+.card span{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
+<div class="container">
+
+
 <h1>Onde se Hospedar em Pindamonhangaba</h1>
+
+<p>
+    <a href="formulariohotel.php">Cadastrar novo hotel</a> |
+    <a href="logout.php">Sair</a>
+</p>
 
 <div class="grid">
 
-<div class="card">
+<?php while ($hotel = mysqli_fetch_assoc($result)) { ?>
+    <div class="card">
+        <div class="img-box">
+            <a href="#">
+                <img src="<?php echo $hotel['imagem']; ?>" alt="<?php echo $hotel['nome']; ?>">
+            </a>
+        </div>
 
+        <h3><?php echo $hotel['nome']; ?></h3>
+        <p><?php echo $hotel['endereco']; ?></p>
+        <span><?php echo $hotel['telefone']; ?></span>
+    </div>
+<?php } ?>
+</div>
     <div class="img-box">
         <a href="#">
             <img src="img/Hotel Vitória.jpg" alt="Hotel Vitória">
@@ -105,7 +209,7 @@
     <span>(12) 99676-1525</span>
 
 </div>
-
+</div>
 </div>
 
 </body>

@@ -12,7 +12,7 @@
 ---
 
 ## 3ª Etapa – Modelagem Conceitual
-- [ ]  Identificar entidades principais  
+- [x]  Identificar entidades principais  
 - [] Definir relacionamentos  
 - [x] Modelagem lógica (tabelas)  
 - [ ] Modelagem física (SQL)  
