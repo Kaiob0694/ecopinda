@@ -16,7 +16,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $possui_wifi = mysqli_real_escape_string($conexao, $_POST['possui_wifi']);
     $horario_funcionamento = mysqli_real_escape_string($conexao, $_POST['horario_funcionamento']);
 
-    $sql = "INSERT INTO restaurante
+
+     $imagem = "";
+
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+
+        $nomeImagem = time() . "_" . basename($_FILES['foto']['name']);
+
+        // caminho físico real
+        $pasta = __DIR__ . "/assets/img/imgGastronomia/";
+
+        // cria a pasta caso não exista
+        if (!is_dir($pasta)) {
+            mkdir($pasta, 0777, true);
+        }
+
+        $destino = $pasta . $nomeImagem;
+
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $destino)) {
+
+            // caminho salvo no banco
+            $imagem = "/assets/img/imgGastronomia/" . $nomeImagem;
+
+        } else {
+
+            echo "Falha no upload";
+            echo "<pre>";
+            print_r($_FILES);
+            echo "</pre>";
+            exit;
+        }
+    }
+      $sql = "INSERT INTO restaurante
     (
         nome,
         logradouro,
