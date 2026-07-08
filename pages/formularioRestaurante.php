@@ -17,8 +17,11 @@ session_start();
 
         <h1>Cadastro de Restaurante</h1>
 
-        <form action="cadastrorestaurante.php" method="POST">
+        <form action="cadastroRestaurante.php" method="POST" enctype="multipart/form-data">
 
+        <label>Foto do Restaurante:</label><br>
+       <input type="file" name="foto" accept="image/*"><br><br>
+    
             <label for="nome">Nome:</label><br>
             <input type="text" id="nome" name="nome" required><br><br>
 
