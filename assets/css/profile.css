@@ -64,7 +64,7 @@
 /* CARD em vidro, com acento das cores do site no topo */
 .profile-card {
     width: 100%;
-    max-width: 480px;
+    max-width: 1480px;
     padding: 44px 38px 36px;
     border-radius: 24px;
     background: rgba(255, 255, 255, 0.10);
@@ -256,7 +256,7 @@
 
 /* CARD MAIS LARGO PARA O FORMULÁRIO */
 .profile-card-form {
-    max-width: 460px;
+    max-width: 1460px;
     padding-top: 40px;
 }
 

@@ -87,8 +87,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $extensoesPermitidas = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'webp' => 'image/webp'];
             $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
 
-            $tipoReal = mime_content_type($arquivo['tmp_name']);
-            $imagemValida = getimagesize($arquivo['tmp_name']) !== false;
+            $infoImagem = getimagesize($arquivo['tmp_name']);
+            $imagemValida = $infoImagem !== false;
+
+            // Descobre o tipo MIME real sem depender da extensão fileinfo
+            if (function_exists('mime_content_type')) {
+                $tipoReal = mime_content_type($arquivo['tmp_name']);
+            } elseif ($imagemValida) {
+                $tipoReal = $infoImagem['mime']; // getimagesize também retorna o mime
+            } else {
+                $tipoReal = null;
+            }
 
             if (!$imagemValida || !isset($extensoesPermitidas[$extensao]) || $tipoReal !== $extensoesPermitidas[$extensao]) {
                 $erros[] = "Formato de imagem inválido. Use JPG, PNG ou WEBP.";
@@ -229,7 +238,6 @@ function formatarTelefone($v) {
                 <label for="foto" class="avatar-camera-btn" title="Alterar foto">
                     <i class="fa-solid fa-camera"></i>
                 </label>
-                <input type="file" id="foto" name="foto" accept=".jpg,.jpeg,.png,.webp" style="display:none;">
             </div>
             <h1>Editar Perfil</h1>
             <p><i class="fa-solid fa-leaf"></i> Atualize seus dados</p>
@@ -247,6 +255,8 @@ function formatarTelefone($v) {
         <?php endif; ?>
 
         <form method="POST" class="profile-form" enctype="multipart/form-data" novalidate>
+
+            <input type="file" id="foto" name="foto" accept=".jpg,.jpeg,.png,.webp" style="display:none;">
 
             <div class="form-group">
                 <label for="nome"><i class="fa-solid fa-user"></i> Nome</label>
