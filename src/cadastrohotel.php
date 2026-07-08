@@ -10,7 +10,7 @@ global $conexao;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-   $nome = trim($_POST['Nome']);
+$nome = trim($_POST['Nome']);
 $endereco = trim($_POST['Endereço']);
 $cidade = trim($_POST['Cidade']);
 $estado = trim($_POST['Estado']);

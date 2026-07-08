@@ -23,7 +23,7 @@ if (!$result) {
     <meta charset="UTF-8">
     <title>Hotéis - PindaEco Tour</title>
 
-    <link rel="stylesheet" href="../assets/css/style_hoteis.css">
+    <link rel="stylesheet" href="../pages/assets/css/style_hoteis.css">
 </head>
 
 <body>
@@ -75,6 +75,12 @@ if (!$result) {
         <p>Possui Wi-Fi: <?php echo $row['possui_wifi'] ? 'Sim' : 'Não'; ?></p>
 
         <p>Possui Estacionamento: <?php echo $row['possui_estacionamento'] ? 'Sim' : 'Não'; ?></p>
+
+         <a 
+        href="../src/deletarhotel.php?id=1<?php echo $row['id']; ?>"
+        onclick="return confirm('Tem certeza que deseja excluir este hotel?');">
+            Excluir Hotel
+        </a>
 
     </article>
 
