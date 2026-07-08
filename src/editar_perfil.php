@@ -170,6 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $_SESSION['usuario_nome']  = $nome;
             $_SESSION['usuario_email'] = $email;
+            $_SESSION['usuario_foto']  = $foto_final;
             $_SESSION['perfil_sucesso'] = "Perfil atualizado com sucesso!";
             mysqli_stmt_close($stmtUpdate);
             header("Location: ../pages/profile.php");
@@ -210,7 +211,7 @@ function formatarTelefone($v) {
 }
 ?>
 
-<?php include '../includes/head.php'; ?>
+<?php $prefixo = '../'; include '../includes/head.php'; ?>
 
 <link rel="stylesheet" href="../assets/css/profile.css">
 

@@ -102,3 +102,50 @@ body {
 .menu a:nth-child(3)::after {
     background: var(--amarelo);
 }
+
+/* ===========================
+   USUÁRIO LOGADO (HEADER)
+=========================== */
+
+.menu-usuario {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px !important;
+}
+
+.menu-avatar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--laranja), var(--verde));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--branco);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+.menu-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-usuario-nome {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    white-space: nowrap;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-usuario:hover .menu-usuario-nome {
+    color: var(--branco);
+}

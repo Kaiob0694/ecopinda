@@ -86,6 +86,7 @@ if (mysqli_stmt_execute($stmtInsert)) {
     $_SESSION['usuario_id']    = $novo_id;
     $_SESSION['usuario_nome']  = $nome;
     $_SESSION['usuario_email'] = $email;
+    $_SESSION['usuario_foto']  = '';
 
     header("Location: ../pages/profile.php");
     exit;

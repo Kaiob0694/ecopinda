@@ -20,6 +20,7 @@ if ($row = mysqli_fetch_assoc($resultado)) {
         $_SESSION['usuario_id']    = $row['id'];
         $_SESSION['usuario_nome']  = $row['nome'];
         $_SESSION['usuario_email'] = $row['email'];
+        $_SESSION['usuario_foto']  = $row['foto'] ?? '';
 
       
         header("Location: ../pages/profile.php");
