@@ -35,14 +35,14 @@ $result = mysqli_query($conexao, $sql);
  
     </div>
 </header>
-<a href="formularioRestaurante.php">Cadastrar Novo Restaurante</a>
+
 <section class="banner"></section>
  
 <section class="titulo">
     <h2>Gastronomia de Pindamonhangaba</h2>
     <p>Conheça alguns dos restaurantes da cidade.</p>
 </section>
-<!-- /assets/img/imgGastronomia/LabellaPizzarria.jpg --> 
+<a href="formularioRestaurante.php">Cadastrar Novo Restaurante</a>
 <section class="restaurantes">
  
 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -62,6 +62,16 @@ $result = mysqli_query($conexao, $sql);
         <p>Delivery: <?php echo $row['possui_delivery']; ?></p>
  
         <p>Wi-Fi: <?php echo $row['possui_wifi']; ?></p>
+
+        <a 
+        href="../src/deletarRestaurante.php?id=<?php echo $row['id']; ?>"
+        onclick="return confirm('Tem certeza que deseja excluir este restaurante?');">
+            Excluir Restaurante
+        </a>
+
+
+
+        
  
     </article>
  
@@ -75,3 +85,5 @@ $result = mysqli_query($conexao, $sql);
  
 </body>
 </html>
+
+
