@@ -1,10 +1,9 @@
-
 <?php
 session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -14,56 +13,66 @@ session_start();
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1>Cadastro de Restaurante</h1>
+        <h1>Cadastro de Restaurante</h1>
 
-    <form action="cadastrorestaurante.php" method="POST">
+        <form action="cadastroRestaurante.php" method="POST" enctype="multipart/form-data">
 
-        <label>Nome:</label><br>
-        <input type="text" name="nome" required><br><br>
+        <label>Foto do Restaurante:</label><br>
+       <input type="file" name="foto" accept="image/*"><br><br>
+    
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" name="nome" required><br><br>
 
-        <label>Logradouro:</label><br>
-        <input type="text" name="logradouro" required><br><br>
+            <label for="logradouro">Logradouro:</label><br>
+            <input type="text" id="logradouro" name="logradouro" required><br><br>
 
-        <label>Número:</label><br>
-        <input type="number" name="numero" required><br><br>
+            <label for="numero">Número:</label><br>
+            <input type="number" id="numero" name="numero" required><br><br>
 
-        <label>Cidade:</label><br>
-        <input type="text" name="cidade" required><br><br>
+            <label for="cidade">Cidade:</label><br>
+            <input type="text" id="cidade" name="cidade" required><br><br>
 
-        <label>CEP:</label><br>
-        <input type="text" name="cep" required><br><br>
+            <label for="cep">CEP:</label><br>
+            <input type="text" id="cep" name="cep" required><br><br>
 
-        <label>Telefone:</label><br>
-        <input type="text" name="telefone" required><br><br>
+            <label for="telefone">Telefone:</label><br>
+            <input type="text" id="telefone" name="telefone" required><br><br>
 
-        <label>E-mail:</label><br>
-        <input type="email" name="email" required><br><br>
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
 
-        <label>Categoria:</label><br>
-        <input type="text" name="categoria" required><br><br>
+            <label for="categoria">Categoria:</label><br>
+            <input type="text" id="categoria" name="categoria" required><br><br>
 
-        <label>Possui Delivery?</label><br>
-        <select name="possui_delivery" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select><br><br>
+            <label for="possui_delivery">Possui Delivery?</label><br>
+            <select id="possui_delivery" name="possui_delivery" required>
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+            </select><br><br>
 
-        <label>Possui Wi-Fi?</label><br>
-        <select name="possui_wifi" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select><br><br>
+            <label for="possui_wifi">Possui Wi-Fi?</label><br>
+            <select id="possui_wifi" name="possui_wifi" required>
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+            </select><br><br>
 
-        <label>Horário de Funcionamento:</label><br>
-        <input type="text" name="horario_funcionamento" required><br><br>
+            <label for="horario_funcionamento">Horário de Funcionamento:</label><br>
+            <input type="text" id="horario_funcionamento" name="horario_funcionamento" required><br><br>
 
-        <button type="submit">Cadastrar</button>
+            <div class="botoes">
+                <button type="submit">Cadastrar Restaurante</button>
 
-    </form>
+                <a href="restaurante.php">
+                    <button type="button">Voltar</button>
+                </a>
+            </div>
 
-</div>
+        </form>
+
+    </div>
 
 </body>
+
 </html>

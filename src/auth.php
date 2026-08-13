@@ -14,12 +14,17 @@ $resultado = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($resultado)) {
 
-    if ($row['senha'] === $senha) {
+    // Aceita senhas com hash (novos cadastros) e senhas antigas em texto puro,
+    // para não travar contas criadas antes do password_hash()
+    $senha_confere = password_verify($senha, $row['senha']) || $row['senha'] === $senha;
+
+    if ($senha_confere) {
 
         
         $_SESSION['usuario_id']    = $row['id'];
         $_SESSION['usuario_nome']  = $row['nome'];
         $_SESSION['usuario_email'] = $row['email'];
+        $_SESSION['usuario_foto']  = $row['foto'] ?? '';
 
       
         header("Location: ../pages/profile.php");
@@ -42,4 +47,3 @@ if ($row = mysqli_fetch_assoc($resultado)) {
     exit;
 
 }
-
