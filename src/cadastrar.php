@@ -71,9 +71,11 @@ if (!empty($erros)) {
 }
 
 // Insere o novo usuário
+$senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
 $sqlInsert = "INSERT INTO usuarios (nome, cpf, email, senha, telefone, cep) VALUES (?, ?, ?, ?, ?, ?)";
 $stmtInsert = mysqli_prepare($conexao, $sqlInsert);
-mysqli_stmt_bind_param($stmtInsert, "ssssss", $nome, $cpf, $email, $senha, $telefone, $cep);
+mysqli_stmt_bind_param($stmtInsert, "ssssss", $nome, $cpf, $email, $senha_hash, $telefone, $cep);
 
 if (mysqli_stmt_execute($stmtInsert)) {
 

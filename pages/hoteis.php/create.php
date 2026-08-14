@@ -17,7 +17,7 @@ session_start();
 
     <h2>Cadastro de Hotel</h2>
 
-       <form action="cadastro.php" method="POST">
+       <form action="../src/cadastrohotel.php" method="POST">
 
         <label>Nome do Hotel:</label><br>
         <input type="text" name="Nome" required><br><br>
@@ -65,11 +65,3 @@ session_start();
 
 </body>
 </html>
-
-       
-
-
-
-
-    
-
