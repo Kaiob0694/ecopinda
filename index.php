@@ -1,25 +1,25 @@
 <?php include 'includes/head.php'; ?>
 <?php include 'includes/header.php'; ?>
 <link rel="stylesheet" href="../style.css">
-
+ 
     <section class="hero">
         <video autoplay muted loop playsinline class="video-bg">
             <source src="assets/video/intro.mp4" type="video/mp4">
             Seu navegador não suporta a tag de vídeo.
         </video>
     </section>
-
+ 
     <section class="hero2">
         <div class="search-box">
             <span class="search-title">Descubra mais Pindamonhangaba:</span>
-
+ 
             <input id="searchInput" type="text" placeholder="">
             <button class="search-btn">
                 <i class="lupa">&#128269;</i>
             </button>
         </div>
     </section>
-
+ 
     <section class="cachoeira">
         <div id="titulo">
             <h3>ONDE IR</h3>
@@ -29,64 +29,64 @@
                 turismo rural que proporcionam contato direto com a natureza. Seu patrimônio histórico e cultural
                 preserva a identidade local por meio de igrejas, museus e manifestações culturais.</p>
         </div>
-
+ 
         <div id="card-turismo">
             <div class="card">
                 <img src="assets/img2/historia.png" alt="">
                 <h3>História da Cidade</h3>
                 <button>saiba mais</button>
             </div>
-
+ 
             <div class="card">
                 <img src="assets/img2/gastronomia.png" alt="">
                 <h3>Gastronomia</h3>
                 <button>saiba mais</button>
             </div>
-
+ 
             <div class="card">
                 <img src="assets/img2/esporte.png" alt="">
                 <h3>Esportes e Lazer</h3>
                 <button>saiba mais</button>
             </div>
-
+ 
             <div class="card">
                 <img src="assets/img2/transporte.png" alt="">
                 <h3>Transporte</h3>
                 <button>saiba mais</button>
             </div>
-
+ 
             <div class="card">
                 <img src="assets/img2/saude.png" alt="">
                 <h3>Saúde</h3>
                 <button>saiba mais</button>
             </div>
-
+ 
             <div class="card">
                 <img src="assets/img2/comunidade.png" alt="">
                 <h3>Comunidade</h3>
                 <button>saiba mais</button>
             </div>
-
+ 
             <div class="card">
                 <img src="assets/img2/apoio.png" alt="">
                 <h3>Apoio ao Turismo</h3>
                 <button>saiba mais</button>
             </div>
         </div>
-
-
+ 
+ 
     </section>
-
-
+ 
+ 
     <section class="hoteis">
         <h2>
             <span class="fino">Guia de</span>
             <strong class="verde">Turismo</strong>
-            
+           
         </h2>
-
+ 
         <div class="hotel-cards">
-
+ 
             <div class="lucas">
                 <img src="assets/img2/lucas monteverde.png" alt="">
                 <h3>Lucas MonteVerde</h3>
@@ -103,22 +103,22 @@
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-
+ 
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-
+ 
                     <a href="https://wa.me/5512999999999" target="_blank">
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                 </div>
             </div>
-
+ 
             <div class="bruno">
                 <img src="assets/img2/bruno.png" alt="">
                 <h3>Bruno Alencar</h3>
                 <p>Turismo noturno, lendas urbanas e histórias locais</p>
-
+ 
                 <div class="rating">
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -131,22 +131,22 @@
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-
+ 
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-
+ 
                     <a href="https://wa.me/5512999999999" target="_blank">
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                 </div>
             </div>
-
+ 
             <div class="ana">
                 <img src="assets/img2/ana.png" alt="">
                 <h3>Ana Beatriz Campos</h3>
                 <p>Turismo histórico e cultural</p>
-
+ 
                 <div class="rating">
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -159,22 +159,22 @@
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-
+ 
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-
+ 
                     <a href="https://wa.me/5512999999999" target="_blank">
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                 </div>
             </div>
-
+ 
             <div class="fernanda">
                 <img src="assets/img2/fernanda.png" alt="">
                 <h3>Fernanda Rocha</h3>
                 <p>Turismo religioso e peregrinações</p>
-
+ 
                 <div class="rating">
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -187,22 +187,22 @@
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-
+ 
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-
+ 
                     <a href="https://wa.me/5512999999999" target="_blank">
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                 </div>
             </div>
-
+ 
             <div class="eduardo">
                 <img src="assets/img2/eduardo.png" alt="">
                 <h3>Eduardo Pacheco</h3>
                 <p>Ecoturismo e observação da vida selvagem</p>
-
+ 
                 <div class="rating">
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -215,44 +215,44 @@
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-
+ 
                     <a href="#" target="_blank">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-
+ 
                     <a href="https://wa.me/5512999999999" target="_blank">
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                 </div>
             </div>
-
-
+ 
+ 
         </div>
     </section>
-
+ 
     <section class="instagram">
         <h2>Momentos de Pindamonhangaba</h2>
         <p>Acompanhe fotos e experiências compartilhadas no Instagram</p>
-
+ 
         <div class="instagram-feed">
-
+ 
             <blockquote class="instagram-media"
                 data-instgrm-permalink="https://www.instagram.com/p/CPlQOuWNgIK/?utm_source=ig_web_copy_link"
                 data-instgrm-version="14">
             </blockquote>
-
-
+ 
+ 
             <blockquote class="instagram-media"
                 data-instgrm-permalink="https://www.instagram.com/reel/DSTNMhKgdd1/?utm_source=ig_web_copy_link"
                 data-instgrm-version="14">
             </blockquote>
-
-
+ 
+ 
             <blockquote class="instagram-media"
                 data-instgrm-permalink="https://www.instagram.com/p/DSUtRn9jViu/?utm_source=ig_web_copy_link"
                 data-instgrm-version="14">
             </blockquote>
         </div>
     </section>
-
+ 
 <?php include 'includes/footer.php'; ?>
