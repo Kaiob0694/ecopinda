@@ -138,9 +138,11 @@ function campo($valor)
                     <i class="fa-solid fa-pen"></i> Editar Perfil
                 </a>
 
-                <a href="../pages/usuarios.php" class="profile-btn profile-btn-user">
+                <?php if ($usuarioMaster): ?>                
+                    <a href="../pages/usuarios.php" class="profile-btn profile-btn-user">
                     <i class="fa-solid fa-user"></i> Gerenciador de Usuário
                 </a>
+                <?php endif; ?>
 
                 <a href="../src/logout.php" class="profile-btn profile-btn-exit">
                     <i class="fa-solid fa-right-from-bracket"></i> Sair

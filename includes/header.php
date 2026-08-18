@@ -35,7 +35,9 @@ if (!function_exists('iniciaisHeader')) {
         <a href="pages/hoteis.php">Hotéis</a>
         <a href="pages/restaurante.php">Restaurantes</a>
 
-
+        <?php if ($usuarioMaster): ?>
+            <a href="pages/usuarios.php">Usuários</a>
+        <?php endif; ?>
 
         <?php if ($usuarioLogado): ?>
             <a href="pages/profile.php" class="menu-usuario">
