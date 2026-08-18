@@ -29,8 +29,8 @@ if (!function_exists('iniciaisHeader')) {
         <a href="../index.php">Início</a>
         <a href="/pages/cidade.php">Cidade</a>
         <a href="#">Turismo</a>
-        <a href="pages/hoteis.php">Hotéis</a>
-        <a href="pages/restaurante.php">Restaurantes</a>
+        <a href="/pages/hoteis.php">Hotéis</a>
+        <a href="/pages/restaurante.php">Restaurantes</a>
  
         <?php if ($usuarioLogado): ?>
             <a href="pages/profile.php" class="menu-usuario">
@@ -44,7 +44,7 @@ if (!function_exists('iniciaisHeader')) {
                 <span class="menu-usuario-nome"><?= htmlspecialchars($usuarioNome) ?></span>
             </a>
         <?php else: ?>
-            <a href="pages/login.php">Login</a>
+            <a href="/pages/login.php">Login</a>
         <?php endif; ?>
  
         <span class="indicator"></span>
