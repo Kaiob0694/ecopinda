@@ -69,6 +69,13 @@ $result = mysqli_query($conexao, $sql);
             Excluir Restaurante
         </a>
 
+                <a 
+        href="../src/deletarRestaurante.php?id=<?php echo $row['id']; ?>"
+        onclick="return confirm('Tem certeza que deseja excluir este restaurante?');">
+            Editar
+        </a>
+
+
 
 
         
