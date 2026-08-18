@@ -6,6 +6,9 @@ if (session_status() === PHP_SESSION_NONE) {
 $usuarioLogado = isset($_SESSION['usuario_id']);
 $usuarioNome   = $_SESSION['usuario_nome'] ?? '';
 $usuarioFoto   = $_SESSION['usuario_foto'] ?? '';
+$usuarioTipo   = $_SESSION['usuario_tipo'] ?? 'usuario';
+$usuarioAdmin  = in_array($usuarioTipo, ['admin', 'master'], true);
+$usuarioMaster = $usuarioTipo === 'master';
 
 if (!function_exists('iniciaisHeader')) {
     function iniciaisHeader($nome) {
@@ -32,6 +35,8 @@ if (!function_exists('iniciaisHeader')) {
         <a href="pages/hoteis.php">Hotéis</a>
         <a href="pages/restaurante.php">Restaurantes</a>
 
+
+
         <?php if ($usuarioLogado): ?>
             <a href="pages/profile.php" class="menu-usuario">
                 <span class="menu-avatar">
@@ -41,7 +46,14 @@ if (!function_exists('iniciaisHeader')) {
                         <?= htmlspecialchars(iniciaisHeader($usuarioNome)) ?>
                     <?php endif; ?>
                 </span>
-                <span class="menu-usuario-nome"><?= htmlspecialchars($usuarioNome) ?></span>
+                <span class="menu-usuario-nome">
+                    <?= htmlspecialchars($usuarioNome) ?>
+                    <?php if ($usuarioMaster): ?>
+                        <small style="opacity:.7;">(master)</small>
+                    <?php elseif ($usuarioAdmin): ?>
+                        <small style="opacity:.7;">(admin)</small>
+                    <?php endif; ?>
+                </span>
             </a>
         <?php else: ?>
             <a href="pages/login.php">Login</a>
