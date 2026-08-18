@@ -2,11 +2,11 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+ 
 $usuarioLogado = isset($_SESSION['usuario_id']);
 $usuarioNome   = $_SESSION['usuario_nome'] ?? '';
 $usuarioFoto   = $_SESSION['usuario_foto'] ?? '';
-
+ 
 if (!function_exists('iniciaisHeader')) {
     function iniciaisHeader($nome) {
         $partes = preg_split('/\s+/', trim($nome));
@@ -24,14 +24,14 @@ if (!function_exists('iniciaisHeader')) {
             <img src="../assets/img2/logo.png" alt="pinda eco">
         </a>
     </div>
-
+ 
     <nav class="menu">
         <a href="../index.php">Início</a>
         <a href="/pages/cidade.php">Cidade</a>
         <a href="#">Turismo</a>
         <a href="pages/hoteis.php">Hotéis</a>
         <a href="pages/restaurante.php">Restaurantes</a>
-
+ 
         <?php if ($usuarioLogado): ?>
             <a href="pages/profile.php" class="menu-usuario">
                 <span class="menu-avatar">
@@ -46,7 +46,7 @@ if (!function_exists('iniciaisHeader')) {
         <?php else: ?>
             <a href="pages/login.php">Login</a>
         <?php endif; ?>
-
+ 
         <span class="indicator"></span>
     </nav>
 </header>

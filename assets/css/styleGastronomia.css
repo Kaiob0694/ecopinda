@@ -1,171 +1,585 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body{
-    width:100%;
-    min-height:100vh;
-    font-family:'Segoe UI', Roboto, Arial, sans-serif;
-    background:#f4f6f8;
-    color:#2c2c2c;
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #eef7f0;
+    color: #26352a;
 }
 
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:80px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(255,255,255,0.92);
-    backdrop-filter:blur(12px);
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-    z-index:1000;
+/* HEADER */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 80, 30, 0.12);
+
+    z-index: 1000;
 }
 
-.header-container{
-    width:100%;
-    max-width:1200px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
+.logo {
+    display: flex;
+    align-items: center;
 }
 
-.logo h1{
-    font-size:20px;
-    font-weight:700;
-    color:#1a1a1a;
+.logo a {
+    display: flex;
+    align-items: center;
 }
 
-nav{
-    display:flex;
-    gap:25px;
+.logo img {
+    width: 150px;
+    height: auto;
+    display: block;
 }
 
-nav a{
-    text-decoration:none;
-    color:#555;
-    font-weight:600;
-    font-size:15px;
-    position:relative;
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
-nav a:hover{
-    color:#ff5a1f;
+.menu > a {
+    position: relative;
+
+    text-decoration: none;
+    color: #3f5746;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    white-space: nowrap;
 }
 
-nav a::after{
-    content:"";
-    position:absolute;
-    bottom:-6px;
-    left:0;
-    width:100%;
-    height:2px;
-    background:#ff5a1f;
-    transform:scaleX(0);
-    transition:.3s;
+.menu > a:hover {
+    color: #f26b38;
 }
 
-nav a:hover::after,
-nav a.ativo::after{
-    transform:scaleX(1);
+.menu > a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+
+    width: 100%;
+    height: 2px;
+
+    background: #f26b38;
+
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition: 0.3s;
 }
 
-.banner{
-    width:100%;
-    height:420px;
-    margin-top:80px;
-    background:url("img/banner_gastronomia.jpg") center/cover no-repeat;
-    position:relative;
+.menu > a:hover::after {
+    transform: scaleX(1);
 }
 
-.banner::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.35);
+/* DROPDOWN */
+
+.dropdown {
+    position: relative;
 }
 
-.titulo{
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:60px 20px 30px;
-    text-align:center;
+.dropdown-btn {
+    border: none;
+    background: transparent;
+
+    color: #3f5746;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    padding: 0;
 }
 
-.titulo h2{
-    font-size:34px;
-    font-weight:700;
+.dropdown-btn:hover {
+    color: #f26b38;
 }
 
-.titulo p{
-    margin-top:8px;
-    color:#666;
+.dropdown-menu {
+    display: none;
+
+    position: absolute;
+
+    top: 30px;
+    right: 0;
+
+    min-width: 250px;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    padding: 8px 0;
+
+    z-index: 2000;
 }
 
-.restaurantes{
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 20px 80px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-    gap:20px;
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
-.card{
-    background:#fff;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    transition:.3s;
-    display:flex;
-    flex-direction:column;
+.dropdown-menu a {
+    display: block;
+
+    padding: 12px 16px;
+
+    color: #3f5746;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    white-space: nowrap;
 }
 
-.card:hover{
-    transform:translateY(-8px);
+.dropdown-menu a:hover {
+    background: #eef7f0;
+    color: #18733b;
 }
 
-.card img{
-    width:100%;
-    height:170px;
-    object-fit:cover;
+/* USUÁRIO */
+
+.menu-usuario {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
 }
 
-.card h3{
-    margin:12px 14px 4px;
-    font-size:18px;
+.menu-avatar {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #3fa65b;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.card p{
-    margin:3px 14px;
-    font-size:13px;
-    color:#666;
+.menu-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
 }
 
-.preco{
-    margin:15px auto 20px;
-    background:#2ecc71;
-    color:#fff;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:700;
-    font-size:14px;
+.menu-usuario-nome {
+    color: #3f5746;
+    font-weight: 600;
+
+    max-width: 150px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-footer{
-    width:100%;
-    background:#111;
-    color:#aaa;
-    text-align:center;
-    padding:40px 20px;
-    font-size:14px;
-    margin-top:40px;
+/* INDICADOR */
+
+.indicator {
+    display: none;
+}
+
+/* BANNER */
+
+.banner {
+    width: 100%;
+    height: 420px;
+
+    margin-top: 80px;
+
+    background: url("../img/imgGastronomia/gastronomia.png") center / cover no-repeat;
+
+    position: relative;
+}
+
+.banner::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(20, 80, 40, 0.25);
+}
+
+/* TÍTULO */
+
+.titulo {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 60px 20px 30px;
+
+    text-align: center;
+}
+
+.titulo h2 {
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #176b38;
+}
+
+.titulo p {
+    margin-top: 8px;
+
+    color: #55705d;
+}
+
+/* BOTÃO CADASTRAR */
+
+.botao-cadastro {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto 35px;
+
+    padding: 0 20px;
+}
+
+.botao-cadastro a {
+    display: inline-block;
+
+    background: #f26b38;
+
+    color: #ffffff;
+
+    padding: 12px 22px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    box-shadow: 0 4px 10px rgba(242, 107, 56, 0.25);
+
+    transition: 0.3s;
+}
+
+.botao-cadastro a:hover {
+    background: #d95727;
+
+    transform: translateY(-2px);
+}
+
+/* RESTAURANTES */
+
+.restaurantes {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 0 20px 80px;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 25px;
+}
+
+/* CARD */
+
+.card {
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 6px 20px rgba(35, 100, 55, 0.12);
+
+    transition: 0.3s;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding-bottom: 20px;
+
+    border-top: 4px solid #3fa65b;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 12px 28px rgba(35, 100, 55, 0.18);
+}
+
+.card img {
+    width: 100%;
+    height: 190px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.sem-imagem {
+    width: 100%;
+    height: 190px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dfeee2;
+
+    color: #587060;
+
+    font-weight: 600;
+}
+
+.card h3 {
+    margin: 16px 16px 8px;
+
+    font-size: 20px;
+
+    color: #176b38;
+}
+
+.card p {
+    margin: 5px 16px;
+
+    font-size: 14px;
+
+    color: #587060;
+}
+
+.card p strong {
+    color: #304a38;
+}
+
+/* BOTÕES DOS CARDS */
+
+.acoes {
+    display: flex;
+
+    gap: 10px;
+
+    margin: 20px 16px 0;
+
+    margin-top: auto;
+}
+
+.acoes a {
+    flex: 1;
+
+    text-align: center;
+
+    padding: 10px 8px;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+/* EDITAR */
+
+.btn-editar {
+    background: #3fa65b;
+    color: #ffffff;
+}
+
+.btn-editar:hover {
+    background: #2f8748;
+}
+
+/* EXCLUIR */
+
+.btn-excluir {
+    background: #dc3545;
+    color: #ffffff;
+}
+
+.btn-excluir:hover {
+    background: #b02a37;
+}
+
+/* NENHUM RESTAURANTE */
+
+.nenhum-restaurante {
+    grid-column: 1 / -1;
+
+    background: #ffffff;
+
+    padding: 50px 20px;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow: 0 6px 20px rgba(35, 100, 55, 0.12);
+}
+
+.nenhum-restaurante h3 {
+    color: #176b38;
+
+    margin-bottom: 10px;
+}
+
+.nenhum-restaurante p {
+    color: #587060;
+}
+
+/* RODAPÉ */
+
+footer {
+    width: 100%;
+
+    background: #14532d;
+
+    color: #d9eadf;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    font-size: 14px;
+
+    border-top: 5px solid #f26b38;
+}
+
+/* CELULAR */
+
+@media (max-width: 900px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .menu > a {
+        font-size: 14px;
+    }
+
+    .dropdown-btn {
+        font-size: 14px;
+    }
+
+    .logo img {
+        width: 125px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .header {
+        height: auto;
+        min-height: 100px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        padding: 10px 15px;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    .menu {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 10px 14px;
+    }
+
+    .menu > a {
+        font-size: 13px;
+    }
+
+    .dropdown-btn {
+        font-size: 13px;
+    }
+
+    .menu-usuario-nome {
+        max-width: 100px;
+    }
+
+    .banner {
+        margin-top: 110px;
+        height: 300px;
+    }
+
+    .titulo {
+        padding: 40px 20px 25px;
+    }
+
+    .titulo h2 {
+        font-size: 27px;
+    }
+
+    .restaurantes {
+        grid-template-columns: 1fr;
+
+        padding: 0 15px 60px;
+    }
+
+    .acoes {
+        flex-direction: column;
+    }
+
+    .dropdown-menu {
+        right: auto;
+        left: 50%;
+
+        transform: translateX(-50%);
+    }
 }
