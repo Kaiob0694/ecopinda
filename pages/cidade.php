@@ -3,9 +3,10 @@
 <?php include '../includes/header.php'; ?>
 
 <section class="hero">
-    <section class="hero">
-        <img src="../assets/img2/pindamonhangaba_cidade.jpeg" alt="Pindamonhangaba" class="hero-bg">
-    </section>
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="/assets/video/cidade.mp4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
 </section>
 
 <section class="cachoeira">

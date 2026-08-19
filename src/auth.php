@@ -22,7 +22,7 @@ if ($row = mysqli_fetch_assoc($resultado)) {
         $_SESSION['usuario_nome']  = $row['nome'];
         $_SESSION['usuario_email'] = $row['email'];
         $_SESSION['usuario_foto']  = $row['foto'] ?? '';
-        $_SESSION['nivel']         = $row['nivel'];
+        $_SESSION['usuario_tipo']  = $row['tipo_usuario'] ?? 'usuario';
 
         header("Location: ../pages/profile.php");
         exit;
