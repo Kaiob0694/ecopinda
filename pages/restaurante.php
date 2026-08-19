@@ -24,8 +24,7 @@ if (!$result) {
 </head>
 
 <body>
-
-<?php include(__DIR__ . "/../includes/header.php"); ?>
+<?php include '../includes/header.php'; ?> 
 
 <section class="banner"></section>
 
