@@ -72,6 +72,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $possui_wifi = isset($_POST['possui_wifi']) ? 1 : 0;
 
+    // FOTO
+    $imagem = $restaurante['imagem'] ?? '';
+
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === 0) {
+
+        $nomeImagem = basename($_FILES['imagem']['name']);
+
+        $nomeImagem = time() . '_' . $nomeImagem;
+
+        $pasta = __DIR__ . '/../uploads/restaurantes/';
+
+        if (!is_dir($pasta)) {
+            mkdir($pasta, 0777, true);
+        }
+
+        if (move_uploaded_file(
+            $_FILES['imagem']['tmp_name'],
+            $pasta . $nomeImagem
+        )) {
+            $imagem = $nomeImagem;
+        }
+    }
+
+
+
+
 
     $sql = "UPDATE restaurante SET
 
@@ -85,6 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         categoria = '$categoria',
         possui_delivery = $possui_delivery,
         possui_wifi = $possui_wifi,
+        imagem = '$imagem',
         horario_funcionamento = '$horario'
 
         WHERE id = $id";
@@ -94,7 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header("Location: ../pages/restaurante.php");
         exit();
-
     } else {
 
         echo "Erro ao editar restaurante: "
@@ -106,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /* =========================
    BUSCAR RESTAURANTE
 ========================= */
+$id = (int) $_GET['id'];
 
 $sql = "SELECT * FROM restaurante WHERE id = $id";
 
@@ -137,8 +164,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
 
     <h1>Editar Restaurante</h1>
 
-
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
 
 
         <!-- NOME -->
@@ -152,8 +178,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             id="nome"
             name="nome"
             value="<?= htmlspecialchars($restaurante['nome'] ?? '') ?>"
-            required
-        >
+            required>
 
 
         <br><br>
@@ -170,8 +195,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             id="logradouro"
             name="logradouro"
             value="<?= htmlspecialchars($restaurante['logradouro'] ?? '') ?>"
-            required
-        >
+            required>
 
 
         <br><br>
@@ -187,8 +211,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             type="number"
             id="numero"
             name="numero"
-            value="<?= htmlspecialchars($restaurante['numero'] ?? '') ?>"
-        >
+            value="<?= htmlspecialchars($restaurante['numero'] ?? '') ?>">
 
 
         <br><br>
@@ -205,8 +228,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             id="cidade"
             name="cidade"
             value="<?= htmlspecialchars($restaurante['cidade'] ?? '') ?>"
-            required
-        >
+            required>
 
 
         <br><br>
@@ -222,8 +244,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             type="text"
             id="cep"
             name="cep"
-            value="<?= htmlspecialchars($restaurante['cep'] ?? '') ?>"
-        >
+            value="<?= htmlspecialchars($restaurante['cep'] ?? '') ?>">
 
 
         <br><br>
@@ -239,8 +260,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             type="text"
             id="telefone"
             name="telefone"
-            value="<?= htmlspecialchars($restaurante['telefone'] ?? '') ?>"
-        >
+            value="<?= htmlspecialchars($restaurante['telefone'] ?? '') ?>">
 
 
         <br><br>
@@ -256,8 +276,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             type="email"
             id="email"
             name="email"
-            value="<?= htmlspecialchars($restaurante['email'] ?? '') ?>"
-        >
+            value="<?= htmlspecialchars($restaurante['email'] ?? '') ?>">
 
 
         <br><br>
@@ -273,8 +292,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             type="text"
             id="categoria"
             name="categoria"
-            value="<?= htmlspecialchars($restaurante['categoria'] ?? '') ?>"
-        >
+            value="<?= htmlspecialchars($restaurante['categoria'] ?? '') ?>">
 
 
         <br><br>
@@ -290,8 +308,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
             type="text"
             id="horario_funcionamento"
             name="horario_funcionamento"
-            value="<?= htmlspecialchars($restaurante['horario_funcionamento'] ?? '') ?>"
-        >
+            value="<?= htmlspecialchars($restaurante['horario_funcionamento'] ?? '') ?>">
 
 
         <br><br>
@@ -310,8 +327,7 @@ $restaurante = mysqli_fetch_assoc($resultado);
                 if (!empty($restaurante['possui_delivery'])) {
                     echo 'checked';
                 }
-                ?>
-            >
+                ?>>
 
             Possui Delivery
 
@@ -334,13 +350,38 @@ $restaurante = mysqli_fetch_assoc($resultado);
                 if (!empty($restaurante['possui_wifi'])) {
                     echo 'checked';
                 }
-                ?>
-            >
+                ?>>
 
             Possui Wi-Fi
 
         </label>
 
+        <br><br>
+
+        <?php if (!empty($restaurante['imagem'])): ?>
+
+            <p>Imagem atual:</p>
+
+            <img
+                src="../uploads/restaurantes/<?= htmlspecialchars($restaurante['imagem']) ?>"
+                alt="Foto do restaurante"
+                width="250">
+
+            <br><br>
+
+        <?php endif; ?>
+
+        <label for="imagem">
+            Foto do restaurante:
+        </label>
+
+        <br>
+
+        <input
+            type="file"
+            id="imagem"
+            name="imagem"
+            accept="image/*">
 
         <br><br>
 
