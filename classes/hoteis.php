@@ -1,8 +1,7 @@
 <?php
-
 require_once __DIR__ . "/../config/conexao.php";
 
-class Aluno
+class Hotel
 {
 
     private $conexao;
@@ -17,7 +16,7 @@ class Aluno
     public function listar()
     {
 
-        $sql = "SELECT * FROM aluno";
+        $sql = "SELECT * FROM hotel";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
@@ -28,7 +27,7 @@ class Aluno
     public function buscarPorId($id)
     {
 
-        $sql = "SELECT * FROM aluno WHERE id_aluno = :id";
+        $sql = "SELECT * FROM hotel WHERE id_hotel = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
@@ -41,70 +40,105 @@ class Aluno
 
     public function cadastrar(
         $nome,
-        $data_nasc,
-        $cpf,
-        $endereco,
-        $telefone
+        $endereco, 
+        $cidade,
+        $cep,
+        $telefone,
+        $email,
+        $quantidade_quartos,
+        $possui_wifi,
+        $possui_estacionamento,
+        $data_cadastro 
     ) {
 
         $sql = "
-            INSERT INTO aluno
+            INSERT INTO hotel
             (
                 nome,
-                data_nasc,
-                cpf,
-                endereco,
-                telefone
+                endereco, 
+                cidade,
+                cep,
+                telefone,
+                email,
+                quantidade_quartos,
+                possui_wifi,
+                possui_estacionamento,
+                data_cadastro
             )
             VALUES
             (
                 :nome,
-                :data_nasc,
-                :cpf,
-                :endereco,
-                :telefone
+                :endereco, 
+                :cidade,
+                :cep,
+                :telefone,
+                :email,
+                :quantidade_quartos,
+                :possui_wifi,
+                :possui_estacionamento,
+                :data_cadastro
             )
         ";
 
         $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':data_nasc', $data_nasc);
-        $stmt->bindParam(':cpf', $cpf);
         $stmt->bindParam(':endereco', $endereco);
+        $stmt->bindParam(':cidade', $cidade);
+        $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':quantidade_quartos', $quantidade_quartos);
+        $stmt->bindParam(':possui_wifi', $possui_wifi);
+        $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
+        $stmt->bindParam(':data_cadastro', $data_cadastro);
 
         return $stmt->execute();
     }
 
     public function editar(
-        $id,
         $nome,
-        $data_nasc,
-        $cpf,
         $endereco,
-        $telefone
+        $cidade,
+        $cep,
+        $telefone,
+        $email,
+        $quantidade_quartos,
+        $possui_wifi,
+        $possui_estacionamento,
+        $data_cadastro,
+        $id
     ) {
 
         $sql = "
-            UPDATE aluno
+            UPDATE hotel
             SET
                 nome = :nome,
-                data_nasc = :data_nasc,
-                cpf = :cpf,
                 endereco = :endereco,
-                telefone = :telefone
-            WHERE id_aluno = :id
+                cidade = :cidade,
+                cep = :cep,
+                telefone = :telefone,
+                email = :email,
+                quantidade_quartos = :quantidade_quartos,
+                possui_wifi = :possui_wifi,
+                possui_estacionamento = :possui_estacionamento,
+                data_cadastro = :data_cadastro
+            WHERE id_hotel = :id
         ";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':data_nasc', $data_nasc);
-        $stmt->bindParam(':cpf', $cpf);
         $stmt->bindParam(':endereco', $endereco);
+        $stmt->bindParam(':cidade', $cidade);
+        $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':quantidade_quartos', $quantidade_quartos);
+        $stmt->bindParam(':possui_wifi', $possui_wifi);
+        $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
+        $stmt->bindParam(':data_cadastro', $data_cadastro);
+        $stmt->bindParam(':id', $id);
 
         return $stmt->execute();
     }
@@ -112,7 +146,7 @@ class Aluno
     public function excluir($id)
     {
 
-        $sql = "DELETE FROM aluno WHERE id_aluno = :id";
+        $sql = "DELETE FROM hotel WHERE id_hotel = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
@@ -121,19 +155,9 @@ class Aluno
         return $stmt->execute();
     }
 
-    public function listarNaoMatriculados()
-    {
-        $sql = "
-        SELECT *
-        FROM aluno
-        WHERE id_aluno NOT IN
-        (
-            SELECT id_aluno
-            FROM matricula
-        )
-        ORDER BY nome
-    ";
-
+   public function buscarTodos()
+{
+        $sql = "SELECT * FROM hotel";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 
