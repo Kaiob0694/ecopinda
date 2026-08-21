@@ -320,6 +320,11 @@ $cep      = $dados_anteriores['cep'] ?? '';
         </div>
       </div>
 
+      <div class="field">
+        <label for="codigo_admin">Código de administrador (opcional)</label>
+        <input type="password" id="codigo_admin" name="codigo_admin" placeholder="Deixe em branco se não tiver" autocomplete="off">
+      </div>
+
       <button type="submit" class="btn-cadastro">Criar Conta</button>
     </form>
 

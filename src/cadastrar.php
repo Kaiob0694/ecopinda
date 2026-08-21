@@ -14,6 +14,13 @@ $telefone       = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
 $cep            = preg_replace('/\D/', '', $_POST['cep'] ?? '');
 $senha          = trim($_POST['senha'] ?? '');
 $senha_confirma = trim($_POST['senha_confirma'] ?? '');
+$codigo_admin   = trim($_POST['codigo_admin'] ?? '');
+
+// Nível de acesso: só vira "admin" se o código correto for informado.
+// Por padrão, todo cadastro público é criado como "usuario".
+$tipo_usuario = ($codigo_admin !== '' && hash_equals(CODIGO_CADASTRO_ADMIN, $codigo_admin))
+    ? 'admin'
+    : 'usuario';
 
 // Todo cadastro público é sempre criado como "usuario".
 // Só um administrador master pode promover uma conta a admin depois,
