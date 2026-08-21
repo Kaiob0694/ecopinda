@@ -6,6 +6,8 @@ if (session_status() === PHP_SESSION_NONE) {
 $usuarioLogado = isset($_SESSION['usuario_id']);
 $usuarioNome   = $_SESSION['usuario_nome'] ?? '';
 $usuarioFoto   = $_SESSION['usuario_foto'] ?? '';
+$usuarioTipo   = $_SESSION['usuario_tipo'] ?? 'usuario';
+$usuarioAdmin  = $usuarioTipo === 'admin';
 
 if (!function_exists('iniciaisHeader')) {
     function iniciaisHeader($nome) {
@@ -41,7 +43,12 @@ if (!function_exists('iniciaisHeader')) {
                         <?= htmlspecialchars(iniciaisHeader($usuarioNome)) ?>
                     <?php endif; ?>
                 </span>
-                <span class="menu-usuario-nome"><?= htmlspecialchars($usuarioNome) ?></span>
+                <span class="menu-usuario-nome">
+                    <?= htmlspecialchars($usuarioNome) ?>
+                    <?php if ($usuarioAdmin): ?>
+                        <small style="opacity:.7;">(admin)</small>
+                    <?php endif; ?>
+                </span>
             </a>
         <?php else: ?>
             <a href="pages/login.php">Login</a>

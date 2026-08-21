@@ -1,0 +1,190 @@
+/* ===========================
+   PAINEL DE USUÁRIOS — administrador master
+   (usa as variáveis de style_header.css)
+=========================== */
+
+.usuarios-page {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.usuarios-page .bg-photo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.usuarios-page .bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(20, 30, 20, 0.55) 0%,
+            rgba(34, 40, 25, 0.65) 55%,
+            rgba(15, 12, 10, 0.75) 100%);
+    z-index: 1;
+}
+
+.usuarios-container {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    padding: 150px 20px 60px;
+}
+
+.usuarios-card {
+    width: 100%;
+    max-width: 1480px;
+    padding: 40px 38px 36px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+    position: relative;
+    overflow: hidden;
+}
+
+.usuarios-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--laranja), var(--verde), var(--amarelo));
+}
+
+.usuarios-header {
+    margin-bottom: 28px;
+}
+
+.usuarios-header h1 {
+    color: var(--branco);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.usuarios-header p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.form-alerta {
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+.form-alerta-erro {
+    background: rgba(200, 50, 50, 0.20);
+    border: 1px solid rgba(255, 120, 120, 0.4);
+    color: #ffe1e1;
+}
+
+.form-alerta-sucesso {
+    background: rgba(34, 166, 69, 0.22);
+    border: 1px solid rgba(120, 220, 150, 0.4);
+    color: #d9f7e3;
+}
+
+.usuarios-tabela-wrap {
+    overflow-x: auto;
+}
+
+.usuarios-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+}
+
+.usuarios-tabela th,
+.usuarios-tabela td {
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    color: var(--branco);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.usuarios-tabela th {
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+}
+
+.usuarios-tabela tr:hover td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.badge-usuario {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.badge-admin {
+    background: rgba(217, 217, 0, 0.22);
+    color: var(--amarelo);
+}
+
+.badge-master {
+    background: linear-gradient(135deg, var(--laranja), var(--verde));
+    color: var(--branco);
+}
+
+.acao-form {
+    display: inline-block;
+}
+
+.btn-acao {
+    padding: 8px 14px;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--branco);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s ease, background .2s ease;
+}
+
+.btn-acao:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.btn-acao-promover {
+    background: rgba(34, 166, 69, 0.28);
+    border-color: rgba(120, 220, 150, 0.4);
+}
+
+.btn-acao-rebaixar {
+    background: rgba(200, 50, 50, 0.28);
+    border-color: rgba(255, 120, 120, 0.4);
+}
+
+.voce-tag {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
