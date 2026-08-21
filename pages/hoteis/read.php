@@ -4,8 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once "../../classes/hoteis.php";
+require_once "../../classes/hotel_fotos.php";
 
 $hotel = new Hotel();
+$hotelFoto = new HotelFoto();
 $dados = $hotel->listar();
 
 include "../../includes/header.php";
@@ -37,6 +39,7 @@ include "../../includes/head.php";
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Foto</th>
                         <th>Nome</th>
                         <th>Endereço</th>
                         <th>Cidade</th>
@@ -58,7 +61,23 @@ include "../../includes/head.php";
                         <tr>
 
                             <td>
-                                <?= $linha['id_hoteis'] ?>
+                                <?= $linha['id'] ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $fotosHotel = $hotelFoto->listarPorHotel($linha['id']);
+                                    $primeiraFoto = $fotosHotel[0]['caminho'] ?? null;
+                                ?>
+
+                                <?php if ($primeiraFoto): ?>
+                                    <img
+                                        src="/ecopinda/uploads/hoteis/<?= htmlspecialchars($primeiraFoto) ?>"
+                                        alt="Foto do hotel"
+                                        width="70">
+                                <?php else: ?>
+                                    <span class="status-nao">Sem foto</span>
+                                <?php endif; ?>
                             </td>
 
                             <td>
@@ -135,14 +154,14 @@ include "../../includes/head.php";
 
                                     <a
                                         class="editar"
-                                        href="editar.php?id=<?= $linha['id_hoteis'] ?>"
+                                        href="update.php?id=<?= $linha['id'] ?>"
                                     >
                                         Editar
                                     </a>
 
                                     <a
                                         class="excluir"
-                                        href="excluir.php?id=<?= $linha['id_hoteis'] ?>"
+                                        href="delete.php?id=<?= $linha['id'] ?>"
                                         onclick="return confirm('Deseja realmente excluir este hotel?')"
                                     >
                                         Excluir

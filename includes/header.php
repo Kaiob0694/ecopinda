@@ -36,15 +36,15 @@ if (!function_exists('iniciaisHeader')) {
     </div>
  
     <nav class="menu">
-        <a href="../index.php">Início</a>
-        <a href="/pages/cidade.php">Cidade</a>
+        <a href="/index.php">Início</a>
+        <a href="/ecopinda/pages/cidade.php">Cidade</a>
         <a href="#">Turismo</a>
-        <a href="pages/hoteis/read.php">Hotéis</a>
-        <a href="pages/restaurante.php">Restaurantes</a>
+        <a href="/ecopinda/pages/hoteis/read.php">Hotéis</a>
+        <a href="/ecopinda/pages/restaurante.php">Restaurantes</a>
 
         <?php if ($usuarioLogado): ?>
 
-            <a href="pages/profile.php" class="menu-usuario">
+            <a href="/ecopinda/pages/profile.php" class="menu-usuario">
 
                 <!-- FOTO / INICIAIS -->
                 <span class="menu-avatar">
@@ -102,7 +102,7 @@ if (!function_exists('iniciaisHeader')) {
 
         <!-- USUÁRIO NÃO LOGADO -->
         <?php else: ?>
-            <a href="/pages/login.php">Login</a>
+            <a href="/ecopinda/pages/login.php">Login</a>
         <?php endif; ?>
  
         <span class="indicator"></span>

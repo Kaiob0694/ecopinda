@@ -24,7 +24,7 @@ if ($row = mysqli_fetch_assoc($resultado)) {
         $_SESSION['usuario_foto']  = $row['foto'] ?? '';
         $_SESSION['usuario_tipo']  = $row['tipo_usuario'] ?? 'usuario';
 
-        header("Location: ../pages/profile.php");
+        header("Location: /ecopinda/pages/profile.php");
         exit;
 
     } else {
@@ -32,7 +32,7 @@ if ($row = mysqli_fetch_assoc($resultado)) {
         $_SESSION['login_erro']  = "Senha incorreta";
         $_SESSION['login_email'] = $email;
 
-        header("Location: /pages/login.php");
+        header("Location: /ecopinda/pages/login.php");
         exit;
     }
 

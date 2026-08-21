@@ -1,16 +1,18 @@
 <?php
 
-
 require_once "../../classes/hoteis.php";
+require_once "../../includes/upload_fotos_hotel.php";
 
 $hotel = new Hotel();
-
+$errosFotos = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $hotel->cadastrar(
+
+    $id_hotel = $hotel->cadastrar(
         $_POST['nome'],
-        $_POST['endereço'],
+        $_POST['endereco'],
         $_POST['cidade'],
+        $_POST['estado'],
         $_POST['cep'],
         $_POST['telefone'],
         $_POST['email'],
@@ -20,83 +22,129 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['data_cadastro']
     );
 
-    header("Location: read.php");
-    exit;
+    if ($id_hotel) {
+        $errosFotos = salvarFotosHotel($id_hotel);
+    }
+
+    if (empty($errosFotos)) {
+        header("Location: read.php");
+        exit;
+    }
 }
 
-include "../../includes/header.php";
 include "../../includes/head.php";
-
+include "../../includes/header.php";
 ?>
 
-<h2>Cadastrar Hotel</h2>
+<!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
+<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-hotel.css?v=<?= time(); ?>">
 
-<form method="POST">
+<main class="cadastro-hotel-container">
+    <div class="cadastro-hotel-painel">
+        
+        <div class="cadastro-hotel-topo">
+            <h2 class="cadastro-hotel-titulo">Cadastrar Hotel</h2>
+        </div>
 
-  <p>
-      Nome:<br>
-      <input type="text" name="nome" required>
-    </p>
+        <?php if (!empty($errosFotos)): ?>
+            <div class="erros-upload">
+                <p>O hotel foi cadastrado, mas houve problema com algumas fotos:</p>
+                <ul>
+                    <?php foreach ($errosFotos as $erro): ?>
+                        <li><?= htmlspecialchars($erro) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <p>
+                    <a href="read.php">Ir para a lista de hotéis</a>
+                </p>
+            </div>
+        <?php endif; ?>
 
-  <p>
-      Endereço:<br>
-      <input type="text" name="endereço" required>
-    </p>
+        <form method="POST" enctype="multipart/form-data" class="formulario-hotel">
+            
+            <div class="formulario-hotel-grid">
 
-    <p>
-        Cidade:<br>
-        <input type="text" name="cidade" required>
-    </p>
+                <div class="campo-hotel largo">
+                    <label>Nome <span class="obrigatorio">*</span></label>
+                    <input type="text" name="nome" placeholder="Digite o nome do hotel" required>
+                </div>
 
-    <p>
-        CEP:<br>
-        <input type="text" name="cep" required>
-    </p>
+                <div class="campo-hotel largo">
+                    <label>Endereço <span class="obrigatorio">*</span></label>
+                    <input type="text" name="endereco" placeholder="Ex: Av. Principal, 123" required>
+                </div>
 
-    <p>
-        Telefone:<br>
-        <input type="text" name="telefone">
-    </p>
+                <div class="campo-hotel">
+                    <label>Cidade <span class="obrigatorio">*</span></label>
+                    <input type="text" name="cidade" required>
+                </div>
 
-    <p>
-        Email:<br>
-        <input type="email" name="email">
-    </p>
+                <div class="campo-hotel">
+                    <label>Estado <span class="obrigatorio">*</span></label>
+                    <input type="text" name="estado" maxlength="50" required>
+                </div>
 
-    <p>
-        Quantidade de Quartos:<br>
-        <input type="number" name="quantidade_quartos">
-    </p>
-    
-    <p>
-        Possui Wi-Fi:<br>
-        <select name="possui_wifi" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select>
-    </p>
+                <div class="campo-hotel">
+                    <label>CEP <span class="obrigatorio">*</span></label>
+                    <input type="text" name="cep" placeholder="00000-000" required>
+                </div>
 
-    <p>
-        Possui Estacionamento:<br>
-        <select name="possui_estacionamento" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select>
-    </p>
+                <div class="campo-hotel">
+                    <label>Telefone</label>
+                    <input type="text" name="telefone" placeholder="(00) 00000-0000">
+                </div>
 
-    <p>
-        Data de Cadastro:<br>
-        <input type="date" name="data_cadastro" required>
-    </p>
+                <div class="campo-hotel">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="contato@hotel.com">
+                </div>
 
-    <button type="submit">
-        Salvar 
-    </button>
+                <div class="campo-hotel">
+                    <label>Quantidade de Quartos</label>
+                    <input type="number" name="quantidade_quartos" min="1">
+                </div>
 
-</form>
+                <div class="campo-hotel">
+                    <label>Possui Wi-Fi <span class="obrigatorio">*</span></label>
+                    <select name="possui_wifi" required>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
 
+                <div class="campo-hotel">
+                    <label>Possui Estacionamento <span class="obrigatorio">*</span></label>
+                    <select name="possui_estacionamento" required>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+
+                <div class="campo-hotel">
+                    <label>Data de Cadastro <span class="obrigatorio">*</span></label>
+                    <input type="date" name="data_cadastro" required>
+                </div>
+
+                <div class="campo-hotel largo">
+                    <label>Fotos do Hotel</label>
+                    <input type="file" name="fotos[]" accept=".jpg,.jpeg,.png,.webp" multiple>
+                    <small>
+                        Você pode selecionar várias fotos de uma vez (JPG, PNG ou WEBP, até 5 MB cada).
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="formulario-hotel-acoes">
+                <a href="read.php" class="botao-voltar-hotel">Voltar</a>
+                <button type="submit" class="botao-salvar-hotel">Salvar</button>
+            </div>
+
+        </form>
+
+    </div>
+</main>
 
 <?php
 include "../../includes/footer.php";
 ?>
-
