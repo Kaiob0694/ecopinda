@@ -22,6 +22,11 @@ $tipo_usuario = ($codigo_admin !== '' && hash_equals(CODIGO_CADASTRO_ADMIN, $cod
     ? 'admin'
     : 'usuario';
 
+// Todo cadastro público é sempre criado como "usuario".
+// Só um administrador master pode promover uma conta a admin depois,
+// pelo painel de usuários (pages/usuarios.php).
+$tipo_usuario = 'usuario';
+
 $erros = [];
 
 // Guarda os dados digitados para reexibir o formulário em caso de erro

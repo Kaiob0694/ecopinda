@@ -13,7 +13,8 @@ if (session_status() === PHP_SESSION_NONE) {
 $usuarioLogado = isset($_SESSION['usuario_id']);
 $usuarioTipo   = $_SESSION['usuario_tipo'] ?? 'usuario';
 
-if (!$usuarioLogado || $usuarioTipo !== 'admin') {
+// O administrador master também tem acesso a tudo que é restrito a admin.
+if (!$usuarioLogado || !in_array($usuarioTipo, ['admin', 'master'], true)) {
     http_response_code(403);
     echo "Acesso restrito a administradores.";
     exit;

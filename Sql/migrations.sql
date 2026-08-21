@@ -86,7 +86,7 @@ CREATE TABLE `usuarios` (
   `telefone` varchar(15) DEFAULT NULL,
   `cep` varchar(8) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
-  `tipo_usuario` enum('usuario','admin') NOT NULL DEFAULT 'usuario'
+  `tipo_usuario` enum('usuario','admin','master') NOT NULL DEFAULT 'usuario'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -94,7 +94,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha`, `telefone`, `cep`, `foto`, `tipo_usuario`) VALUES
-(4, 'Kaio Cesar Barbosa', '43755472864', 'kaiobarbosa0694@gmail.com', '$2y$10$Go1W5g1la3aaoRxOh87mQeo/i5xWfrTA140cDRHoF.0bDmJTH1nbi', '12992108610', '12420468', 'user_4_1786450066.png', 'admin'),
+(4, 'Kaio Cesar Barbosa', '43755472864', 'kaiobarbosa0694@gmail.com', '$2y$10$Go1W5g1la3aaoRxOh87mQeo/i5xWfrTA140cDRHoF.0bDmJTH1nbi', '12992108610', '12420468', 'user_4_1786450066.png', 'master'),
 (2, 'João', '22222222222', 'joao@email.com', '123456', '12992108610', '12420680', NULL, 'usuario'),
 (5, 'Sofia Figueiredo', '43755472861', 'sofia@gmail.com', '$2y$10$URbgb.TtRB62nCdIO4DwMeXFiByf0b4Y2TKAa7zk8MiVeM9A7Toga', '12992108611', '12420468', NULL, 'usuario');
 
