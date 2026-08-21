@@ -1,152 +1,264 @@
+/* =========================
+   VARIÁVEIS DE DESIGN
+========================= */
+:root {
+    --primary: #10b981;
+    --primary-hover: #059669;
+    --primary-light: rgba(16, 185, 129, 0.12);
+    
+    --secondary: #64748b;
+    --secondary-hover: #475569;
+    
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-input: #f8fafc;
+    
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    
+    --border-color: #e2e8f0;
+    --border-radius: 10px;
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+/* =========================
+   RESET & BASE
+========================= */
 * {
     box-sizing: border-box;
 }
 
-body {
+html, body {
     margin: 0;
-    padding: 30px 15px;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    padding: 0;
 }
 
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =========================
+   ÁREA DO FORMULÁRIO
+========================= */
+.pagina-formulario {
+    width: 100%;
+    padding: 80px 24px 40px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* =========================
+   CONTAINER
+========================= */
 .container {
     width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px; /* Reduzido levemente para melhor legibilidade dos campos */
+    padding: 48px;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
 }
 
-h1 {
-    margin: 0 0 30px;
+/* =========================
+   TÍTULO
+========================= */
+.container h1 {
+    margin: 0 0 36px;
     text-align: center;
-    color: #333;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
 }
 
+/* =========================
+   FORMULÁRIO
+========================= */
 form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 28px;
+    row-gap: 16px;
 }
 
+/* =========================
+   LABEL
+========================= */
 label {
-    margin-top: 15px;
-    margin-bottom: 7px;
-    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
 }
 
+/* =========================
+   INPUTS E SELECT
+========================= */
 input,
 select {
     width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    background-color: #fff;
+    height: 46px;
+    padding: 10px 16px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-input);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-main);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input::placeholder {
+    color: #94a3b8;
 }
 
 input:focus,
 select:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+    border-color: var(--primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px var(--primary-light);
 }
 
+/* =========================
+   INPUT DE FOTO
+========================= */
 input[type="file"] {
-    padding: 8px;
-    background-color: #f8f8f8;
+    height: auto;
+    padding: 10px 14px;
+    background-color: var(--bg-input);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
-input:invalid:not(:placeholder-shown) {
-    border-color: #dc3545;
+input[type="file"]::file-selector-button {
+    padding: 6px 12px;
+    margin-right: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-input:valid,
-select:valid {
-    border-color: #28a745;
+input[type="file"]::file-selector-button:hover {
+    background-color: #f1f5f9;
 }
 
-small {
-    display: block;
-    margin-top: 6px;
-    color: #666;
-    line-height: 1.4;
-}
-
-img {
-    display: block;
-    max-width: 250px;
-    max-height: 250px;
-    margin: 10px auto;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    object-fit: cover;
-}
-
+/* =========================
+   OUTRA CATEGORIA
+========================= */
 #outra_categoria {
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
+/* =========================
+   BOTÕES
+========================= */
 .botoes {
+    grid-column: 1 / -1;
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
+    align-items: center;
+    gap: 16px;
+    margin-top: 36px;
+    padding-top: 12px;
 }
 
 .botoes button,
 .botao-voltar {
+    min-width: 180px;
     padding: 12px 24px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
+    font-family: inherit;
     font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
     text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.botoes button:active,
+.botao-voltar:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   BOTÃO CADASTRAR
+========================= */
 .botoes button {
-    background-color: #28a745;
-    color: #fff;
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-sm);
 }
 
 .botoes button:hover {
-    background-color: #218838;
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
 }
 
+/* =========================
+   BOTÃO VOLTAR
+========================= */
 .botao-voltar {
-    background-color: #6c757d;
-    color: #fff;
+    background-color: transparent;
+    color: var(--secondary);
+    border: 1.5px solid var(--border-color);
 }
 
 .botao-voltar:hover {
-    background-color: #5a6268;
+    background-color: #f1f5f9;
+    color: var(--secondary-hover);
 }
 
-@media (max-width: 600px) {
-
-    body {
-        padding: 15px 10px;
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 768px) {
+    .pagina-formulario {
+        padding: 40px 16px 24px;
     }
 
     .container {
-        padding: 20px 15px;
+        padding: 28px 20px;
+        border-radius: 12px;
+    }
+
+    .container h1 {
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        row-gap: 12px;
     }
 
     .botoes {
-        flex-direction: column;
+        grid-column: auto;
+        flex-direction: column-reverse; /* Coloca o botão principal acima do botão de voltar */
+        gap: 12px;
     }
 
     .botoes button,
     .botao-voltar {
         width: 100%;
-        text-align: center;
-    }
-
-    img {
-        width: 100%;
-        max-width: 250px;
+        min-width: 0;
     }
 }
