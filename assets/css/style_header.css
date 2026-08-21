@@ -20,26 +20,39 @@ body {
     overflow-x: hidden;
 }
 
+
 /* ===========================
    HEADER
 =========================== */
 
 .header {
     position: fixed;
-    top: 20px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    height: 85px;
+
+    width: 100%;
+    height: 95px;
+
     padding: 0 25px;
+
     background: var(--branco);
-    border-radius: 20px;
-    box-shadow: 0 4px 25px rgba(0,0,0,.25);
+
+    border-radius: 0px;
+
+    box-shadow: 0 4px 25px rgba(0, 0, 0, .25);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     z-index: 100;
 }
+
+
+/* ===========================
+   LOGO
+=========================== */
 
 .logo {
     padding-right: 60px;
@@ -48,6 +61,7 @@ body {
 .logo img {
     height: 80px;
 }
+
 
 /* ===========================
    MENU
@@ -59,41 +73,82 @@ body {
     height: 100%;
 }
 
+
+/* ===========================
+   LINKS DO MENU
+=========================== */
+
 .menu a {
     display: flex;
     align-items: center;
     justify-content: center;
+
     height: 100%;
+
     padding: 0 35px;
+
     font-size: 20px;
+
     color: #000000;
+
     text-decoration: none;
+
     position: relative;
+
     transition: color .3s ease;
 }
+
+
+/* ===========================
+   HOVER DO MENU
+=========================== */
 
 .menu a:hover {
     color: var(--branco);
 }
 
+
+/* ===========================
+   ANIMAÇÃO DO MENU
+=========================== */
+
 .menu a::after {
     content: "";
+
     position: absolute;
+
     bottom: 0;
     left: 0;
+
     width: 100%;
     height: 85%;
+
     background: var(--laranja);
+
     transform: scaleY(.05);
+
     transform-origin: bottom;
+
     border-radius: 15px 15px 0 0;
+
     transition: transform .3s ease;
+
     z-index: -1;
 }
+
+
+/* ===========================
+   HOVER ANIMAÇÃO
+=========================== */
 
 .menu a:hover::after {
     transform: scaleY(1);
 }
+
+
+/* ===========================
+   CORES DOS MENUS
+=========================== */
 
 .menu a:nth-child(2)::after {
     background: var(--verde);
@@ -103,49 +158,148 @@ body {
     background: var(--amarelo);
 }
 
+
 /* ===========================
-   USUÁRIO LOGADO (HEADER)
+   USUÁRIO LOGADO
 =========================== */
 
 .menu-usuario {
     display: flex !important;
+
     align-items: center;
+
     gap: 10px;
+
     padding: 0 20px !important;
 }
+
+
+/* ===========================
+   AVATAR
+=========================== */
 
 .menu-avatar {
     width: 40px;
     height: 40px;
+
     flex-shrink: 0;
+
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--laranja), var(--verde));
+
+    background: linear-gradient(
+        135deg,
+        var(--laranja),
+        var(--verde)
+    );
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     color: var(--branco);
+
     font-size: 16px;
+
     font-weight: 700;
+
     text-transform: uppercase;
+
     overflow: hidden;
 }
+
+
+/* ===========================
+   FOTO DO USUÁRIO
+=========================== */
 
 .menu-avatar img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
+
+/* ===========================
+   INFORMAÇÕES DO USUÁRIO
+=========================== */
+
+.menu-usuario-info {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    line-height: 1.2;
+}
+
+
+/* ===========================
+   NOME DO USUÁRIO
+=========================== */
+
 .menu-usuario-nome {
     font-size: 16px;
+
     font-weight: 600;
+
     color: #000;
+
     white-space: nowrap;
+
     max-width: 140px;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
+
+/* ===========================
+   CARGO / TIPO DE USUÁRIO
+=========================== */
+
+.menu-usuario-cargo {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: var(--cinza);
+
+    text-transform: uppercase;
+
+    margin-top: 3px;
+}
+
+
+/* ===========================
+   ADMINISTRADOR
+=========================== */
+
+.menu-usuario-cargo.admin {
+    color: var(--laranja);
+}
+
+
+/* ===========================
+   MASTER
+=========================== */
+
+.menu-usuario-cargo.master {
+    color: var(--verde);
+}
+
+
+/* ===========================
+   HOVER DO USUÁRIO
+=========================== */
+
 .menu-usuario:hover .menu-usuario-nome {
+    color: var(--branco);
+}
+
+.menu-usuario:hover .menu-usuario-cargo {
     color: var(--branco);
 }
