@@ -1,171 +1,578 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root { 
+    --laranja: #ff3c00; 
+    --verde: #22a645; 
+    --amarelo: #d9d900; 
+    --marrom: #4b2e1a; 
+    --cinza: #555; 
+    --cinza-claro: #666; 
+    --branco: #fff; 
+} 
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Inter', sans-serif; 
+} 
+
+html, 
+body { 
+    width: 100%; 
+    min-height: 100%; 
+    overflow-x: hidden; 
+}
+/* HEADER */
+ 
+.header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 85px;
+    padding: 0 25px;
+    background: var(--branco);
+    border-radius: 20px;
+    box-shadow: 0 4px 25px rgba(0,0,0,.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.logo {
+    padding-right: 60px;
+}
+ 
+.logo img {
+    height: 80px;
+}
+ 
+.menu {
+    display: flex;
+    gap: 50px;
+    height: 100%;
+}
+ 
+.menu > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 35px;
+    font-size: 20px;
+    color: #000;
+    text-decoration: none;
+    position: relative;
+    text-transform: uppercase;
+    transition: color .3s ease;
+    z-index: 1;
+}
+ 
+.menu > a:hover {
+    color: var(--branco);
+}
+ 
+.menu > a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    background-color: var(--laranja);
+
+    transform: scaleY(0);
+    transform-origin: bottom;
+
+    border-radius: 15px 15px 0 0;
+    transition: transform .3s ease;
+
+    z-index: -1;
 }
 
-html, body{
-    width:100%;
-    min-height:100vh;
-    font-family:'Segoe UI', Roboto, Arial, sans-serif;
-    background:#f4f6f8;
-    color:#2c2c2c;
+.menu > a:hover::after {
+    transform: scaleY(1);
+}
+ 
+.menu > a:hover::after {
+    transform: scaleX(1);
 }
 
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:80px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(255,255,255,0.92);
-    backdrop-filter:blur(12px);
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-    z-index:1000;
+.menu a:nth-child(2)::after {
+    background-color: var(--verde);
+} 
+
+.menu a:nth-child(3)::after {
+    background: var(--amarelo);
 }
 
-.header-container{
-    width:100%;
-    max-width:1200px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
+.hero{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.logo h1{
-    font-size:20px;
-    font-weight:700;
-    color:#1a1a1a;
+.hero2{
+    position: relative;
 }
 
-nav{
-    display:flex;
-    gap:25px;
+.hero-bg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-nav a{
-    text-decoration:none;
-    color:#555;
-    font-weight:600;
-    font-size:15px;
-    position:relative;
+.search-box {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 950px;
+    padding: 25px 40px;
+    background: var(--branco);
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    z-index: 10;
 }
 
-nav a:hover{
-    color:#ff5a1f;
+.search-title {
+    font-size: 22px;
+    font-weight: 600;
+   color:#1a2b4b;
+   white-space: nowrap;
+}
+.search-box input {
+    flex: 1;
+   border: none;
+    border-bottom: 2px solid #1a2b4b;
+    background: transparent;
+    outline: none;
+    padding: 8px;
+    font-size: 18px;
+}
+.search-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
 }
 
-nav a::after{
-    content:"";
-    position:absolute;
-    bottom:-6px;
-    left:0;
-    width:100%;
-    height:2px;
-    background:#ff5a1f;
-    transform:scaleX(0);
-    transition:.3s;
-}
 
-nav a:hover::after,
-nav a.ativo::after{
-    transform:scaleX(1);
-}
 
-.banner{
-    width:100%;
-    height:420px;
-    margin-top:80px;
-    background:url("img/banner_gastronomia.jpg") center/cover no-repeat;
-    position:relative;
+.menu-avatar {
+    width: 36px;
+    height: 36px;
+ 
+    flex-shrink: 0;
+ 
+    border-radius: 50%;
+ 
+    background: #3fa65b;
+ 
+    color: #ffffff;
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    overflow: hidden;
+ 
+    font-size: 14px;
+    font-weight: 700;
 }
-
-.banner::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.35);
+ 
+.menu-avatar img {
+    width: 100%;
+    height: 100%;
+ 
+    object-fit: cover;
 }
-
-.titulo{
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:60px 20px 30px;
-    text-align:center;
+ 
+.menu-usuario-nome {
+    color: #3f5746;
+    font-weight: 600;
+ 
+    max-width: 150px;
+ 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
-.titulo h2{
-    font-size:34px;
-    font-weight:700;
+ 
+/* INDICADOR */
+ 
+.indicator {
+    display: none;
 }
-
-.titulo p{
-    margin-top:8px;
-    color:#666;
+ 
+/* BANNER */
+ 
+.banner {
+    width: 100%;
+    height: 420px;
+ 
+    margin-top: 80px;
+ 
+    background: url("../img/imgGastronomia/gastronomia.png") center / cover no-repeat;
+ 
+    position: relative;
 }
-
-.restaurantes{
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 20px 80px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-    gap:20px;
+ 
+.banner::before {
+    content: "";
+ 
+    position: absolute;
+    inset: 0;
+ 
+    background: rgba(20, 80, 40, 0.25);
 }
-
-.card{
-    background:#fff;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    transition:.3s;
-    display:flex;
-    flex-direction:column;
+ 
+/* TÍTULO */
+ 
+.titulo {
+    width: 100%;
+    max-width: 1200px;
+ 
+    margin: 0 auto;
+ 
+    padding: 60px 20px 30px;
+ 
+    text-align: center;
 }
-
-.card:hover{
-    transform:translateY(-8px);
+ 
+.titulo h2 {
+    font-size: 34px;
+    font-weight: 700;
+ 
+    color: #176b38;
 }
-
-.card img{
-    width:100%;
-    height:170px;
-    object-fit:cover;
+ 
+.titulo p {
+    margin-top: 8px;
+ 
+    color: #55705d;
 }
-
-.card h3{
-    margin:12px 14px 4px;
-    font-size:18px;
+ 
+/* BOTÃO CADASTRAR */
+ 
+.botao-cadastro {
+    width: 100%;
+    max-width: 1200px;
+ 
+    margin: 0 auto 35px;
+ 
+    padding: 0 20px;
 }
-
-.card p{
-    margin:3px 14px;
-    font-size:13px;
-    color:#666;
+ 
+.botao-cadastro a {
+    display: inline-block;
+ 
+    background: #f26b38;
+ 
+    color: #ffffff;
+ 
+    padding: 12px 22px;
+ 
+    border-radius: 8px;
+ 
+    text-decoration: none;
+ 
+    font-weight: 600;
+ 
+    box-shadow: 0 4px 10px rgba(242, 107, 56, 0.25);
+ 
+    transition: 0.3s;
 }
-
-.preco{
-    margin:15px auto 20px;
-    background:#2ecc71;
-    color:#fff;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:700;
-    font-size:14px;
+ 
+.botao-cadastro a:hover {
+    background: #d95727;
+ 
+    transform: translateY(-2px);
 }
-
-footer{
-    width:100%;
-    background:#111;
-    color:#aaa;
-    text-align:center;
-    padding:40px 20px;
-    font-size:14px;
-    margin-top:40px;
+ 
+/* RESTAURANTES */
+ 
+.restaurantes {
+    width: 100%;
+    max-width: 1200px;
+ 
+    margin: 0 auto;
+ 
+    padding: 0 20px 80px;
+ 
+    display: grid;
+ 
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+ 
+    gap: 25px;
 }
+ 
+/* CARD */
+ 
+.card {
+    background: #ffffff;
+ 
+    border-radius: 16px;
+ 
+    overflow: hidden;
+ 
+    box-shadow: 0 6px 20px rgba(35, 100, 55, 0.12);
+ 
+    transition: 0.3s;
+ 
+    display: flex;
+ 
+    flex-direction: column;
+ 
+    padding-bottom: 20px;
+ 
+    border-top: 4px solid #3fa65b;
+}
+ 
+.card:hover {
+    transform: translateY(-6px);
+ 
+    box-shadow: 0 12px 28px rgba(35, 100, 55, 0.18);
+}
+ 
+.card img {
+    width: 100%;
+    height: 190px;
+ 
+    object-fit: cover;
+ 
+    display: block;
+}
+ 
+.sem-imagem {
+    width: 100%;
+    height: 190px;
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    background: #dfeee2;
+ 
+    color: #587060;
+ 
+    font-weight: 600;
+}
+ 
+.card h3 {
+    margin: 16px 16px 8px;
+ 
+    font-size: 20px;
+ 
+    color: #176b38;
+}
+ 
+.card p {
+    margin: 5px 16px;
+ 
+    font-size: 14px;
+ 
+    color: #587060;
+}
+ 
+.card p strong {
+    color: #304a38;
+}
+ 
+/* BOTÕES DOS CARDS */
+ 
+.acoes {
+    display: flex;
+ 
+    gap: 10px;
+ 
+    margin: 20px 16px 0;
+ 
+    margin-top: auto;
+}
+ 
+.acoes a {
+    flex: 1;
+ 
+    text-align: center;
+ 
+    padding: 10px 8px;
+ 
+    border-radius: 7px;
+ 
+    text-decoration: none;
+ 
+    font-size: 13px;
+ 
+    font-weight: 600;
+ 
+    transition: 0.3s;
+}
+ 
+/* EDITAR */
+ 
+.btn-editar {
+    background: #3fa65b;
+    color: #ffffff;
+}
+ 
+.btn-editar:hover {
+    background: #2f8748;
+}
+ 
+/* EXCLUIR */
+ 
+.btn-excluir {
+    background: #dc3545;
+    color: #ffffff;
+}
+ 
+.btn-excluir:hover {
+    background: #b02a37;
+}
+ 
+/* NENHUM RESTAURANTE */
+ 
+.nenhum-restaurante {
+    grid-column: 1 / -1;
+ 
+    background: #ffffff;
+ 
+    padding: 50px 20px;
+ 
+    border-radius: 16px;
+ 
+    text-align: center;
+ 
+    box-shadow: 0 6px 20px rgba(35, 100, 55, 0.12);
+}
+ 
+.nenhum-restaurante h3 {
+    color: #176b38;
+ 
+    margin-bottom: 10px;
+}
+ 
+.nenhum-restaurante p {
+    color: #587060;
+}
+ 
+/* RODAPÉ */
+ 
+footer {
+    width: 100%;
+ 
+    background: #14532d;
+ 
+    color: #d9eadf;
+ 
+    text-align: center;
+ 
+    padding: 40px 20px;
+ 
+    font-size: 14px;
+ 
+    border-top: 5px solid #f26b38;
+}
+ 
+/* CELULAR */
+ 
+@media (max-width: 900px) {
+ 
+    .header {
+        padding: 0 20px;
+    }
+ 
+    .menu {
+        gap: 15px;
+    }
+ 
+    .menu > a {
+        font-size: 14px;
+    }
+ 
+    .dropdown-btn {
+        font-size: 14px;
+    }
+ 
+    .logo img {
+        width: 125px;
+    }
+}
+ 
+@media (max-width: 700px) {
+ 
+    .header {
+        height: auto;
+        min-height: 100px;
+ 
+        flex-direction: column;
+ 
+        justify-content: center;
+ 
+        gap: 10px;
+ 
+        padding: 10px 15px;
+    }
+ 
+    .logo img {
+        width: 120px;
+    }
+ 
+    .menu {
+        width: 100%;
+ 
+        justify-content: center;
+ 
+        flex-wrap: wrap;
+ 
+        gap: 10px 14px;
+    }
+ 
+    .menu > a {
+        font-size: 13px;
+    }
+ 
+    .dropdown-btn {
+        font-size: 13px;
+    }
+ 
+    .menu-usuario-nome {
+        max-width: 100px;
+    }
+ 
+    .banner {
+        margin-top: 110px;
+        height: 300px;
+    }
+ 
+    .titulo {
+        padding: 40px 20px 25px;
+    }
+ 
+    .titulo h2 {
+        font-size: 27px;
+    }
+ 
+    .restaurantes {
+        grid-template-columns: 1fr;
+ 
+        padding: 0 15px 60px;
+    }
+ 
+    .acoes {
+        flex-direction: column;
+    }
+ 
+    .dropdown-menu {
+        right: auto;
+        left: 50%;
+ 
+        transform: translateX(-50%);
+    }
+}
+ 

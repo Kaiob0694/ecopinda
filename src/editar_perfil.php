@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-include("../src/conexao.php");
+require_once __DIR__ . "/conexao.php";
 
 $id = $_SESSION['usuario_id'];
 $erros = [];

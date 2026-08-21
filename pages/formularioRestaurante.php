@@ -19,9 +19,9 @@ session_start();
 
         <form action="cadastroRestaurante.php" method="POST" enctype="multipart/form-data">
 
-        <label>Foto do Restaurante:</label><br>
-       <input type="file" name="foto" accept="image/*"><br><br>
-    
+            <label>Foto do Restaurante:</label><br>
+            <input type="file" name="foto" accept="image/*"><br><br>
+
             <label for="nome">Nome:</label><br>
             <input type="text" id="nome" name="nome" required><br><br>
 
@@ -62,16 +62,50 @@ session_start();
             <input type="text" id="horario_funcionamento" name="horario_funcionamento" required><br><br>
 
             <div class="botoes">
+
                 <button type="submit">Cadastrar Restaurante</button>
 
                 <a href="restaurante.php">
                     <button type="button">Voltar</button>
                 </a>
+
             </div>
 
         </form>
 
     </div>
+
+    <!-- API ViaCEP -->
+    <script>
+        document.getElementById('cep').addEventListener('blur', function () {
+
+            let cep = this.value.replace(/\D/g, '');
+
+            if (cep.length !== 8) {
+                alert('Digite um CEP válido.');
+                return;
+            }
+
+            fetch('https://viacep.com.br/ws/' + cep + '/json/')
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.erro) {
+                        alert('CEP não encontrado.');
+                        return;
+                    }
+
+                    document.getElementById('logradouro').value = data.logradouro || '';
+                    document.getElementById('cidade').value = data.localidade || '';
+
+                })
+                .catch(error => {
+                    console.error('Erro ao consultar o ViaCEP:', error);
+                    alert('Erro ao consultar o CEP.');
+                });
+
+        });
+    </script>
 
 </body>
 

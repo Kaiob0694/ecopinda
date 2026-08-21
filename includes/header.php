@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+ 
 $usuarioLogado = isset($_SESSION['usuario_id']);
 $usuarioNome   = $_SESSION['usuario_nome'] ?? '';
 $usuarioFoto   = $_SESSION['usuario_foto'] ?? '';
@@ -34,43 +34,14 @@ if (!function_exists('iniciaisHeader')) {
             <img src="../assets/img2/logo.png" alt="Pinda Eco">
         </a>
     </div>
-
-
-    <!-- MENU -->
+ 
     <nav class="menu">
-
-        <a href="../index.php">
-            Início
-        </a>
-
-        <a href="/pages/cidade.php">
-            Cidade
-        </a>
-
-        <a href="#">
-            Turismo
-        </a>
-
-        <a href="pages/hoteis.php">
-            Hotéis
-        </a>
-
-        <a href="pages/restaurante.php">
-            Restaurantes
-        </a>
-
-
-        <!-- MENU DE USUÁRIOS -->
-        <?php if ($usuarioAdmin): ?>
-
-            <a href="pages/usuarios.php">
-                Usuários
-            </a>
-
-        <?php endif; ?>
-
-
-        <!-- USUÁRIO LOGADO -->
+        <a href="../index.php">Início</a>
+        <a href="/pages/cidade.php">Cidade</a>
+        <a href="#">Turismo</a>
+        <a href="/pages/hoteis.php">Hotéis</a>
+        <a href="/pages/restaurante.php">Restaurantes</a>
+ 
         <?php if ($usuarioLogado): ?>
 
             <a href="pages/profile.php" class="menu-usuario">
@@ -131,15 +102,9 @@ if (!function_exists('iniciaisHeader')) {
 
         <!-- USUÁRIO NÃO LOGADO -->
         <?php else: ?>
-
-            <a href="pages/login.php">
-                Login
-            </a>
-
+            <a href="/pages/login.php">Login</a>
         <?php endif; ?>
-
-
-        <!-- INDICADOR DO MENU -->
+ 
         <span class="indicator"></span>
 
     </nav>

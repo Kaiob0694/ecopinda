@@ -5,8 +5,7 @@ if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit;
 }
-
-include("../src/conexao.php");
+require_once(__DIR__ . "/../src/conexao.php");
 
 $id = $_SESSION['usuario_id'];
 
