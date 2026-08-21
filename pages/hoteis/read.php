@@ -8,182 +8,382 @@ require_once "../../classes/hotel_fotos.php";
 
 $hotel = new Hotel();
 $hotelFoto = new HotelFoto();
+
 $dados = $hotel->listar();
 
 include "../../includes/header.php";
 include "../../includes/head.php";
+
 ?>
 
 <link rel="stylesheet" href="/ecopinda/assets/css/hotel.css">
 
 <div class="hoteis-container">
 
-    <div class="hoteis-painel">
+    <div class="hoteis-conteudo">
+
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
 
         <div class="hoteis-topo">
 
-            <h2 class="hoteis-titulo">
-                Lista de Hotéis
-            </h2>
+            <div>
 
-            <a href="create.php" class="botao-novo">
-                Cadastrar Novo Hotel
-            </a>
+                <h1 class="hoteis-titulo">
+                    Hotéis
+                </h1>
+
+                <p class="hoteis-subtitulo">
+                    Encontre hotéis para sua estadia em
+                    Pindamonhangaba e região.
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="tabela-wrapper">
 
-            <table class="tabela-hoteis">
+        <!-- =====================================================
+             QUANTIDADE DE HOTÉIS
+        ====================================================== -->
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Foto</th>
-                        <th>Nome</th>
-                        <th>Endereço</th>
-                        <th>Cidade</th>
-                        <th>CEP</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
-                        <th>Quantidade de Quartos</th>
-                        <th>Possui Wi-Fi</th>
-                        <th>Possui Estacionamento</th>
-                        <th>Data de Cadastro</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
+        <div class="hoteis-quantidade">
 
-                <tbody>
+            <?php if (!empty($dados)): ?>
 
-                    <?php foreach ($dados as $linha): ?>
+                <?= count($dados) ?>
 
-                        <tr>
+                <?= count($dados) === 1
+                    ? 'hotel encontrado'
+                    : 'hotéis encontrados'
+                ?>
 
-                            <td>
-                                <?= $linha['id'] ?>
-                            </td>
+            <?php else: ?>
 
-                            <td>
-                                <?php
-                                    $fotosHotel = $hotelFoto->listarPorHotel($linha['id']);
-                                    $primeiraFoto = $fotosHotel[0]['caminho'] ?? null;
-                                ?>
+                Nenhum hotel encontrado
 
-                                <?php if ($primeiraFoto): ?>
-                                    <img
-                                        src="/ecopinda/uploads/hoteis/<?= htmlspecialchars($primeiraFoto) ?>"
-                                        alt="Foto do hotel"
-                                        width="70">
-                                <?php else: ?>
-                                    <span class="status-nao">Sem foto</span>
-                                <?php endif; ?>
-                            </td>
+            <?php endif; ?>
 
-                            <td>
-                                <?= $linha['nome'] ?>
-                            </td>
+        </div>
 
-                            <td>
-                                <?= $linha['endereco'] ?>
-                            </td>
 
-                            <td>
-                                <?= $linha['cidade'] ?>
-                            </td>
+        <!-- =====================================================
+             GRID DE HOTÉIS
+        ====================================================== -->
 
-                            <td>
-                                <?= $linha['cep'] ?>
-                            </td>
+        <?php if (!empty($dados)): ?>
 
-                            <td>
-                                <?= $linha['telefone'] ?>
-                            </td>
+            <div class="hoteis-grid">
 
-                            <td>
-                                <?= $linha['email'] ?>
-                            </td>
+                <?php foreach ($dados as $linha): ?>
 
-                            <td>
-                                <?= $linha['quantidade_quartos'] ?>
-                            </td>
+                    <?php
 
-                            <td>
+                    /*
+                     * Busca as fotos do hotel.
+                     * Será utilizada a primeira foto cadastrada.
+                     */
 
-                                <?php if ($linha['possui_wifi']): ?>
+                    $fotosHotel =
+                        $hotelFoto->listarPorHotel($linha['id']);
 
-                                    <span class="status-sim">
-                                        Sim
-                                    </span>
+                    $primeiraFoto =
+                        $fotosHotel[0]['caminho'] ?? null;
 
-                                <?php else: ?>
+                    ?>
 
-                                    <span class="status-nao">
-                                        Não
-                                    </span>
 
-                                <?php endif; ?>
+                    <!-- =================================================
+                         CARD DO HOTEL
+                    ================================================== -->
 
-                            </td>
+                    <article class="hotel-card">
 
-                            <td>
 
-                                <?php if ($linha['possui_estacionamento']): ?>
+                        <!-- =================================================
+                             FOTO
+                        ================================================== -->
 
-                                    <span class="status-sim">
-                                        Sim
-                                    </span>
+                        <div class="hotel-imagem-container">
 
-                                <?php else: ?>
+                            <?php if (!empty($fotosHotel)): ?>
 
-                                    <span class="status-nao">
-                                        Não
-                                    </span>
+                                <div class="hotel-galeria">
 
-                                <?php endif; ?>
+                                    <?php foreach ($fotosHotel as $indice => $foto): ?>
 
-                            </td>
+                                        <img
+                                            class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
+                                            src="/ecopinda/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            alt="<?= htmlspecialchars($linha['nome']) ?>">
 
-                            <td>
-                                <?= $linha['data_cadastro'] ?>
-                            </td>
+                                    <?php endforeach; ?>
 
-                            <td>
 
-                                <div class="acoes">
+                                    <?php if (count($fotosHotel) > 1): ?>
 
-                                    <a
-                                        class="editar"
-                                        href="update.php?id=<?= $linha['id'] ?>"
-                                    >
-                                        Editar
-                                    </a>
+                                        <button
+                                            type="button"
+                                            class="galeria-seta galeria-anterior"
+                                            aria-label="Foto anterior">
+                                            &#10094;
+                                        </button>
 
-                                    <a
-                                        class="excluir"
-                                        href="delete.php?id=<?= $linha['id'] ?>"
-                                        onclick="return confirm('Deseja realmente excluir este hotel?')"
-                                    >
-                                        Excluir
-                                    </a>
+                                        <button
+                                            type="button"
+                                            class="galeria-seta galeria-proxima"
+                                            aria-label="Próxima foto">
+                                            &#10095;
+                                        </button>
+
+                                        <span class="galeria-contador">
+
+                                            <span class="galeria-atual">1</span>
+
+                                            /
+                                            <?= count($fotosHotel) ?>
+
+                                        </span>
+
+                                    <?php endif; ?>
 
                                 </div>
 
-                            </td>
+                            <?php else: ?>
 
-                        </tr>
+                                <div class="hotel-imagem-placeholder">
 
-                    <?php endforeach; ?>
+                                    <span>
+                                        Foto não disponível
+                                    </span>
 
-                </tbody>
+                                </div>
 
-            </table>
+                            <?php endif; ?>
 
-        </div>
+                        </div>
+
+
+                        <!-- =================================================
+                             INFORMAÇÕES DO HOTEL
+                        ================================================== -->
+
+                        <div class="hotel-info">
+
+
+                            <!-- =================================================
+                                 NOME
+                            ================================================== -->
+
+                            <h2 class="hotel-nome">
+
+                                <?= htmlspecialchars($linha['nome']) ?>
+
+                            </h2>
+
+
+                            <!-- =================================================
+                                 CIDADE
+                            ================================================== -->
+
+                            <span class="hotel-cidade">
+
+                                📍
+                                <?= htmlspecialchars($linha['cidade']) ?>
+
+                            </span>
+
+
+                            <!-- =================================================
+                                 ENDEREÇO
+                            ================================================== -->
+
+                            <?php if (!empty($linha['endereco'])): ?>
+
+                                <p class="hotel-localizacao">
+
+                                    <?= htmlspecialchars($linha['endereco']) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+
+                            <!-- =================================================
+                                 TELEFONE
+                            ================================================== -->
+
+                            <?php if (!empty($linha['telefone'])): ?>
+
+                                <p class="hotel-telefone">
+
+                                    📞
+                                    <?= htmlspecialchars($linha['telefone']) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+
+                            <!-- =================================================
+                                 CARACTERÍSTICAS
+                            ================================================== -->
+
+                            <div class="hotel-caracteristicas">
+
+
+                                <!-- WI-FI -->
+
+                                <?php if ($linha['possui_wifi']): ?>
+
+                                    <span class="hotel-caracteristica">
+
+                                        ✓ Wi-Fi
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                                <!-- ESTACIONAMENTO -->
+
+                                <?php if ($linha['possui_estacionamento']): ?>
+
+                                    <span class="hotel-caracteristica">
+
+                                        ✓ Estacionamento
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                                <!-- QUARTOS -->
+
+                                <?php if (!empty($linha['quantidade_quartos'])): ?>
+
+                                    <span class="hotel-caracteristica">
+
+                                        🛏️
+
+                                        <?= htmlspecialchars(
+                                            $linha['quantidade_quartos']
+                                        ) ?>
+
+                                        quartos
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                            </div>
+
+
+                            <!-- =================================================
+                                 RODAPÉ
+                            ================================================== -->
+
+                            <div class="hotel-footer">
+
+
+                                <!-- =================================================
+                                     CONTATO
+                                ================================================== -->
+
+                                <?php if (!empty($linha['telefone'])): ?>
+
+                                    <a
+                                        class="hotel-botao"
+                                        href="tel:<?= htmlspecialchars($linha['telefone']) ?>">
+
+                                        Entrar em contato
+
+                                    </a>
+
+                                <?php endif; ?>
+
+
+                                <!-- =================================================
+                                     AÇÕES DO MASTER
+                                ================================================== -->
+
+                                <?php if ($usuarioMaster): ?>
+
+                                    <div class="hotel-acoes">
+
+                                        <!-- EDITAR -->
+
+                                        <a
+                                            href="update.php?id=<?= (int) $linha['id'] ?>"
+                                            class="hotel-editar">
+
+                                            Editar
+
+                                        </a>
+
+
+                                        <!-- EXCLUIR -->
+
+                                        <a
+                                            href="delete.php?id=<?= (int) $linha['id'] ?>"
+                                            class="hotel-excluir"
+                                            onclick="return confirm('Deseja realmente excluir este hotel?')">
+
+                                            Excluir
+
+                                        </a>
+
+                                    </div>
+
+                                <?php endif; ?>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </article>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        <?php else: ?>
+
+
+            <!-- =====================================================
+                 NENHUM HOTEL CADASTRADO
+            ====================================================== -->
+
+            <div class="hoteis-vazio">
+
+                <h3>
+
+                    Nenhum hotel cadastrado
+
+                </h3>
+
+                <p>
+
+                    No momento não existem hotéis disponíveis
+                    para consulta.
+
+                </p>
+
+            </div>
+
+        <?php endif; ?>
+
 
     </div>
 
 </div>
+
+
+<script src="/ecopinda/assets/js/hoteis.js"></script>
 
 <?php
 
