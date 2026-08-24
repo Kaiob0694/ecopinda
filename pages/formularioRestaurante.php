@@ -6,249 +6,281 @@ session_start();
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <title>Cadastro de Restaurante</title>
-    <link rel="stylesheet" href="/assets/css/formulario.css">
+    <link rel="stylesheet" href="assets/css/formulario.css">
 </head>
 
 <body>
 
-    <div class="container">
+    <?php include "../includes/header.php"; ?>
 
-        <h1>Cadastro de Restaurante</h1>
 
-        <form action="cadastroRestaurante.php" method="POST" enctype="multipart/form-data">
+    <main class="pagina-formulario">
 
-            <label>Foto do Restaurante:</label><br>
-            <input type="file" name="foto" accept="image/*"><br><br>
+        <div class="container">
 
-            <label for="nome">Nome:</label><br>
-            <input
-                type="text"
-                id="nome"
-                name="nome"
-                required
-                minlength="2"
-                maxlength="100"
-                pattern=".*\S.*"
-                title="Digite o nome do restaurante (2 a 100 caracteres)."><br><br>
+            <h1>Cadastro de Restaurante</h1>
 
-            <label for="logradouro">Logradouro:</label><br>
-            <input
-                type="text"
-                id="logradouro"
-                name="logradouro"
-                required
-                minlength="3"
-                maxlength="150"
-                pattern=".*\S.*"
-                title="Digite um logradouro válido."><br><br>
+            <form action="cadastroRestaurante.php" method="POST" enctype="multipart/form-data">
 
-            <label for="numero">Número:</label><br>
-            <input
-                type="number"
-                id="numero"
-                name="numero"
-                required
-                min="1"
-                max="999999"
-                title="Digite um número de endereço válido."><br><br>
+                <label>Foto do Restaurante:</label>
+                <input type="file" name="foto" accept="image/*">
 
-            <label for="cidade">Cidade:</label><br>
-            <input
-                type="text"
-                id="cidade"
-                name="cidade"
-                required
-                minlength="2"
-                maxlength="100"
-                pattern=".*\S.*"
-                title="Digite o nome da cidade."><br><br>
-
-            <label for="cep">CEP:</label><br>
-            <input
-                type="text"
-                id="cep"
-                name="cep"
-                required
-                pattern="[0-9]{5}-?[0-9]{3}"
-                title="Digite um CEP válido (ex: 12345-678)."
-                placeholder="12345-678"><br><br>
-
-            <label for="telefone">Telefone:</label><br>
-            <input
-                type="text"
-                id="telefone"
-                name="telefone"
-                required
-                pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
-                title="Digite um telefone válido (ex: (11) 12345-6789)."
-                placeholder="(11) 12345-6789"><br><br>
-
-            <label for="email">E-mail:</label><br>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                maxlength="150"
-                title="Digite um e-mail válido."
-                placeholder="exemplo@email.com"><br><br>
-
-            <label for="categoria">Categoria:</label><br>
-
-            <select
-                id="categoria"
-                name="categoria"
-                required
-                onchange="mostrarOutraCategoria()">
-                <option value="">Selecione uma categoria</option>
-                <option value="Restaurante">Restaurante</option>
-                <option value="Lanchonete">Lanchonete</option>
-                <option value="Pizzaria">Pizzaria</option>
-                <option value="Cafeteria">Cafeteria</option>
-                <option value="Padaria">Padaria</option>
-                <option value="Outro">Outro</option>
-            </select>
-
-            <br><br>
-
-            <div id="outra_categoria" style="display: none;">
-
-                <label for="categoria_outro">
-                    Digite a categoria:
-                </label><br>
-
+                <label for="nome">Nome:</label>
                 <input
                     type="text"
-                    id="categoria_outro"
-                    name="categoria_outro"
+                    id="nome"
+                    name="nome"
+                    required
                     minlength="2"
-                    maxlength="50"
+                    maxlength="100"
                     pattern=".*\S.*"
-                    title="Digite uma categoria válida.">
+                    title="Digite o nome do restaurante (2 a 100 caracteres).">
 
-                <br><br>
+                <label for="logradouro">Logradouro:</label>
+                <input
+                    type="text"
+                    id="logradouro"
+                    name="logradouro"
+                    required
+                    minlength="3"
+                    maxlength="150"
+                    pattern=".*\S.*"
+                    title="Digite um logradouro válido.">
 
-            </div>
+                <label for="numero">Número:</label>
+                <input
+                    type="number"
+                    id="numero"
+                    name="numero"
+                    required
+                    min="1"
+                    max="999999"
+                    title="Digite um número de endereço válido.">
 
-            <label for="possui_delivery">Possui Delivery?</label><br>
+                <label for="cidade">Cidade:</label>
+                <input
+                    type="text"
+                    id="cidade"
+                    name="cidade"
+                    required
+                    minlength="2"
+                    maxlength="100"
+                    pattern=".*\S.*"
+                    title="Digite o nome da cidade.">
 
-            <select
-                id="possui_delivery"
-                name="possui_delivery"
-                required>
-                <option value="">Selecione</option>
-                <option value="1">Sim</option>
-                <option value="0">Não</option>
-            </select>
+                <label for="cep">CEP:</label>
+                <input
+                    type="text"
+                    id="cep"
+                    name="cep"
+                    required
+                    pattern="[0-9]{5}-?[0-9]{3}"
+                    placeholder="12345-678">
 
-            <br><br>
+                <label for="telefone">Telefone:</label>
+                <input
+                    type="text"
+                    id="telefone"
+                    name="telefone"
+                    required
+                    pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
+                    placeholder="(11) 12345-6789">
 
-            <label for="possui_wifi">Possui Wi-Fi?</label><br>
+                <label for="email">E-mail:</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    maxlength="150"
+                    placeholder="exemplo@email.com">
 
-            <select
-                id="possui_wifi"
-                name="possui_wifi"
-                required>
-                <option value="">Selecione</option>
-                <option value="1">Sim</option>
-                <option value="0">Não</option>
-            </select>
+                <label for="categoria">Categoria:</label>
 
-            <br><br>
+                <select
+                    id="categoria"
+                    name="categoria"
+                    required
+                    onchange="mostrarOutraCategoria()">
 
-            <label for="horario_funcionamento">
-                Horário de Funcionamento:
-            </label><br>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Restaurante">Restaurante</option>
+                    <option value="Lanchonete">Lanchonete</option>
+                    <option value="Pizzaria">Pizzaria</option>
+                    <option value="Cafeteria">Cafeteria</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Outro">Outro</option>
 
-            <select
-                id="horario_funcionamento"
-                name="horario_funcionamento"
-                required>
-                <option value="">Selecione o horário</option>
+                </select>
 
-                <option value="Segunda a sexta, das 08:00 às 18:00">
-                    Segunda a sexta, das 08:00 às 18:00
-                </option>
+                <div id="outra_categoria">
 
-                <option value="Segunda a sábado, das 08:00 às 18:00">
-                    Segunda a sábado, das 08:00 às 18:00
-                </option>
+                    <label for="categoria_outro">
+                        Digite a categoria:
+                    </label>
 
-                <option value="Segunda a sábado, das 08:00 às 22:00">
-                    Segunda a sábado, das 08:00 às 22:00
-                </option>
+                    <input
+                        type="text"
+                        id="categoria_outro"
+                        name="categoria_outro"
+                        minlength="2"
+                        maxlength="50">
 
-                <option value="Todos os dias, das 08:00 às 18:00">
-                    Todos os dias, das 08:00 às 18:00
-                </option>
+                </div>
 
-                <option value="Todos os dias, das 08:00 às 22:00">
-                    Todos os dias, das 08:00 às 22:00
-                </option>
-            </select>
 
-            <br><br>
-            <div class="botoes">
+                <label for="possui_delivery">
+                    Possui Delivery?
+                </label>
 
-                <button type="submit">
-                    Cadastrar Restaurante
-                </button>
+                <select
+                    id="possui_delivery"
+                    name="possui_delivery"
+                    required>
 
-                <a
-                    href="restaurante.php"
-                    class="botao-voltar">
-                    Voltar
-                </a>
+                    <option value="">Selecione</option>
+                    <option value="1">Sim</option>
+                    <option value="0">Não</option>
 
-            </div>
+                </select>
 
-        </form>
 
-    </div>
+                <label for="possui_wifi">
+                    Possui Wi-Fi?
+                </label>
 
-    <!-- JavaScript da Categoria -->
+                <select
+                    id="possui_wifi"
+                    name="possui_wifi"
+                    required>
+
+                    <option value="">Selecione</option>
+                    <option value="1">Sim</option>
+                    <option value="0">Não</option>
+
+                </select>
+
+
+                <label for="horario_funcionamento">
+                    Horário de Funcionamento:
+                </label>
+
+                <select
+                    id="horario_funcionamento"
+                    name="horario_funcionamento"
+                    required>
+
+                    <option value="">
+                        Selecione o horário
+                    </option>
+
+                    <option value="Segunda a sexta, das 08:00 às 18:00">
+                        Segunda a sexta, das 08:00 às 18:00
+                    </option>
+
+                    <option value="Segunda a sábado, das 08:00 às 18:00">
+                        Segunda a sábado, das 08:00 às 18:00
+                    </option>
+
+                    <option value="Segunda a sábado, das 08:00 às 22:00">
+                        Segunda a sábado, das 08:00 às 22:00
+                    </option>
+
+                    <option value="Todos os dias, das 08:00 às 18:00">
+                        Todos os dias, das 08:00 às 18:00
+                    </option>
+
+                    <option value="Todos os dias, das 08:00 às 22:00">
+                        Todos os dias, das 08:00 às 22:00
+                    </option>
+
+                </select>
+
+
+                <div class="botoes">
+
+                    <button type="submit">
+                        Cadastrar Restaurante
+                    </button>
+
+                    <a
+                        href="restaurante.php"
+                        class="botao-voltar">
+                        Voltar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
     <script>
+
         function mostrarOutraCategoria() {
 
-            const categoria = document.getElementById('categoria');
-            const outraCategoria = document.getElementById('outra_categoria');
-            const campoOutro = document.getElementById('categoria_outro');
+            const categoria =
+                document.getElementById('categoria');
+
+            const outraCategoria =
+                document.getElementById('outra_categoria');
+
+            const campoOutro =
+                document.getElementById('categoria_outro');
+
 
             if (categoria.value === 'Outro') {
 
                 outraCategoria.style.display = 'block';
+
                 campoOutro.required = true;
 
             } else {
 
                 outraCategoria.style.display = 'none';
+
                 campoOutro.required = false;
+
                 campoOutro.value = '';
 
             }
+
         }
-    </script>
 
-    <!-- API ViaCEP -->
-    <script>
-        document.getElementById('cep').addEventListener('blur', function() {
 
-            let cep = this.value.replace(/\D/g, '');
+        document.getElementById('cep')
+            .addEventListener('blur', function() {
 
-            if (cep.length !== 8) {
-                alert('Digite um CEP válido.');
-                return;
-            }
+                let cep =
+                    this.value.replace(/\D/g, '');
 
-            fetch('https://viacep.com.br/ws/' + cep + '/json/')
+                if (cep.length !== 8) {
+                    alert('Digite um CEP válido.');
+                    return;
+                }
+
+                fetch(
+                    'https://viacep.com.br/ws/'
+                    + cep +
+                    '/json/'
+                )
+
                 .then(response => response.json())
+
                 .then(data => {
 
                     if (data.erro) {
+
                         alert('CEP não encontrado.');
                         return;
+
                     }
 
                     document.getElementById('logradouro').value =
@@ -258,6 +290,7 @@ session_start();
                         data.localidade || '';
 
                 })
+
                 .catch(error => {
 
                     console.error(
@@ -269,7 +302,8 @@ session_start();
 
                 });
 
-        });
+            });
+
     </script>
 
 </body>

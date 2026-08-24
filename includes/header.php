@@ -31,7 +31,7 @@ if (!function_exists('iniciaisHeader')) {
     <!-- LOGO -->
     <div class="logo">
         <a href="../index.php">
-            <img src="../assets/img2/logo.png" alt="Pinda Eco">
+            <img src="/ecopinda/assets/img2/logo.png" alt="Pinda Eco">
         </a>
     </div>
  
@@ -39,9 +39,9 @@ if (!function_exists('iniciaisHeader')) {
         <a href="../index.php">Início</a>
         <a href="/pages/cidade.php">Cidade</a>
         <a href="#">Turismo</a>
-        <a href="/pages/hoteis.php">Hotéis</a>
-        <a href="/pages/restaurante.php">Restaurantes</a>
- 
+        <a href="pages/hoteis/read.php">Hotéis</a>
+        <a href="pages/restaurante.php">Restaurantes</a>
+
         <?php if ($usuarioLogado): ?>
 
             <a href="pages/profile.php" class="menu-usuario">

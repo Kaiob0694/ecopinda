@@ -170,62 +170,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("O horário deve possuir entre 3 e 100 caracteres.");
     }
 
-    $imagem = $restaurante['imagem'] ?? '';
+  $imagem = $restaurante['imagem'] ?? '';
 
-    if (
-        isset($_FILES['foto']) &&
-        $_FILES['foto']['error'] !== UPLOAD_ERR_NO_FILE
-    ) {
+if (
+    isset($_FILES['foto']) &&
+    $_FILES['foto']['error'] !== UPLOAD_ERR_NO_FILE
+) {
 
-        if ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
-            die("Erro ao enviar a imagem.");
-        }
-
-        if ($_FILES['foto']['size'] > 5 * 1024 * 1024) {
-            die("A imagem deve ter no máximo 5 MB.");
-        }
-
-        $tiposPermitidos = [
-            'image/jpeg' => 'jpg',
-            'image/png' => 'png',
-            'image/webp' => 'webp'
-        ];
-
-        if (class_exists('finfo')) {
-
-            $finfo = new finfo(FILEINFO_MIME_TYPE);
-            $tipoImagem = $finfo->file($_FILES['foto']['tmp_name']);
-
-        } else {
-
-            $tipoImagem = $_FILES['foto']['type'] ?? '';
-        }
-
-        if (!isset($tiposPermitidos[$tipoImagem])) {
-            die("A imagem deve ser JPG, PNG ou WEBP.");
-        }
-
-        $extensao = $tiposPermitidos[$tipoImagem];
-
-        $nomeImagem = uniqid('restaurante_', true) . '.' . $extensao;
-
-        $pasta = __DIR__ . '/../uploads/restaurantes/';
-
-        if (!is_dir($pasta)) {
-            if (!mkdir($pasta, 0755, true)) {
-                die("Não foi possível criar a pasta de imagens.");
-            }
-        }
-
-        if (!move_uploaded_file(
-            $_FILES['foto']['tmp_name'],
-            $pasta . $nomeImagem
-        )) {
-            die("Não foi possível salvar a imagem.");
-        }
-
-        $imagem = $nomeImagem;
+    if ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
+        die("Erro ao enviar a imagem.");
     }
+
+    if ($_FILES['foto']['size'] > 5 * 1024 * 1024) {
+        die("A imagem deve ter no máximo 5 MB.");
+    }
+
+    $tiposPermitidos = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp'
+    ];
+
+    if (class_exists('finfo')) {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $tipoImagem = $finfo->file($_FILES['foto']['tmp_name']);
+    } else {
+        $tipoImagem = $_FILES['foto']['type'] ?? '';
+    }
+
+    if (!isset($tiposPermitidos[$tipoImagem])) {
+        die("A imagem deve ser JPG, PNG ou WEBP.");
+    }
+
+    $extensao = $tiposPermitidos[$tipoImagem];
+
+    $nomeImagem = uniqid('restaurante_', true) . '.' . $extensao;
+
+    $pasta = __DIR__ . '/../uploads/restaurantes/';
+
+    if (!is_dir($pasta)) {
+        if (!mkdir($pasta, 0755, true)) {
+            die("Não foi possível criar a pasta de imagens.");
+        }
+    }
+
+    if (!move_uploaded_file(
+        $_FILES['foto']['tmp_name'],
+        $pasta . $nomeImagem
+    )) {
+        die("Não foi possível salvar a imagem.");
+    }
+
+    $imagemAntiga = $restaurante['imagem'] ?? '';
+
+    $imagem = $nomeImagem;
+
+    if (!empty($imagemAntiga)) {
+        $caminhoImagemAntiga = $pasta . basename($imagemAntiga);
+
+        if (
+            file_exists($caminhoImagemAntiga) &&
+            $imagemAntiga !== $nomeImagem
+        ) {
+            unlink($caminhoImagemAntiga);
+        }
+    }
+}
 
     $sql = "UPDATE restaurante SET
         nome = ?,
