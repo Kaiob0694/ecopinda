@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $horario_funcionamento = mysqli_real_escape_string($conexao, $_POST['horario_funcionamento']);
 
 
-     $imagem = "";
+    $imagem = "";
 
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
 
@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // caminho salvo no banco
             $imagem = "/assets/img/imgGastronomia/" . $nomeImagem;
-
         } else {
 
             echo "Falha no upload";
@@ -47,34 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
     }
-      $sql = "INSERT INTO restaurante
-    (
-        nome,
-        logradouro,
-        numero,
-        cidade,
-        cep,
-        telefone,
-        email,
-        categoria,
-        possui_delivery,
-        possui_wifi,
-        horario_funcionamento
-    )
-    VALUES
-    (
-        '$nome',
-        '$logradouro',
-        '$numero',
-        '$cidade',
-        '$cep',
-        '$telefone',
-        '$email',
-        '$categoria',
-        '$possui_delivery',
-        '$possui_wifi',
-        '$horario_funcionamento'
-    )";
+
 
     if (mysqli_query($conexao, $sql)) {
 
@@ -82,13 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert('Restaurante cadastrado com sucesso!');
                 window.location='restaurante.php';
               </script>";
-
     } else {
 
         echo "Erro ao cadastrar: " . mysqli_error($conexao);
-
     }
 
     mysqli_close($conexao);
 }
-?>

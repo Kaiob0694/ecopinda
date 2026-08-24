@@ -22,7 +22,7 @@ $stmt = mysqli_prepare(
 );
 
 if (!$stmt) {
-    die("Erro ao buscar restaurante.");
+    die("Erro ao preparar consulta.");
 }
 
 mysqli_stmt_bind_param($stmt, "i", $id);
@@ -36,6 +36,8 @@ if (!$resultado || mysqli_num_rows($resultado) === 0) {
 
 $restaurante = mysqli_fetch_assoc($resultado);
 
+mysqli_stmt_close($stmt);
+
 $categorias = [
     'Restaurante',
     'Lanchonete',
@@ -45,7 +47,7 @@ $categorias = [
     'Outro'
 ];
 
-$categoriaBanco = $restaurante['categoria'] ?? '';
+$categoriaBanco = trim($restaurante['categoria'] ?? '');
 
 if (in_array($categoriaBanco, $categorias, true)) {
     $categoriaSelecionada = $categoriaBanco;
@@ -137,7 +139,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Digite a categoria.");
         }
 
-        if (mb_strlen($categoriaOutro) < 2 || mb_strlen($categoriaOutro) > 50) {
+        if (
+            mb_strlen($categoriaOutro) < 2 ||
+            mb_strlen($categoriaOutro) > 50
+        ) {
             die("A categoria deve possuir entre 2 e 50 caracteres.");
         }
 
@@ -170,72 +175,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("O horário deve possuir entre 3 e 100 caracteres.");
     }
 
-  $imagem = $restaurante['imagem'] ?? '';
+    $imagem = $restaurante['imagem'] ?? '';
 
-if (
-    isset($_FILES['foto']) &&
-    $_FILES['foto']['error'] !== UPLOAD_ERR_NO_FILE
-) {
-
-    if ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
-        die("Erro ao enviar a imagem.");
+    if ($imagem !== '') {
+        $imagem = basename($imagem);
     }
 
-    if ($_FILES['foto']['size'] > 5 * 1024 * 1024) {
-        die("A imagem deve ter no máximo 5 MB.");
-    }
+    if (
+        isset($_FILES['foto']) &&
+        $_FILES['foto']['error'] !== UPLOAD_ERR_NO_FILE
+    ) {
 
-    $tiposPermitidos = [
-        'image/jpeg' => 'jpg',
-        'image/png' => 'png',
-        'image/webp' => 'webp'
-    ];
-
-    if (class_exists('finfo')) {
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        $tipoImagem = $finfo->file($_FILES['foto']['tmp_name']);
-    } else {
-        $tipoImagem = $_FILES['foto']['type'] ?? '';
-    }
-
-    if (!isset($tiposPermitidos[$tipoImagem])) {
-        die("A imagem deve ser JPG, PNG ou WEBP.");
-    }
-
-    $extensao = $tiposPermitidos[$tipoImagem];
-
-    $nomeImagem = uniqid('restaurante_', true) . '.' . $extensao;
-
-    $pasta = __DIR__ . '/../uploads/restaurantes/';
-
-    if (!is_dir($pasta)) {
-        if (!mkdir($pasta, 0755, true)) {
-            die("Não foi possível criar a pasta de imagens.");
+        if ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
+            die("Erro ao enviar a imagem.");
         }
-    }
 
-    if (!move_uploaded_file(
-        $_FILES['foto']['tmp_name'],
-        $pasta . $nomeImagem
-    )) {
-        die("Não foi possível salvar a imagem.");
-    }
-
-    $imagemAntiga = $restaurante['imagem'] ?? '';
-
-    $imagem = $nomeImagem;
-
-    if (!empty($imagemAntiga)) {
-        $caminhoImagemAntiga = $pasta . basename($imagemAntiga);
-
-        if (
-            file_exists($caminhoImagemAntiga) &&
-            $imagemAntiga !== $nomeImagem
-        ) {
-            unlink($caminhoImagemAntiga);
+        if ($_FILES['foto']['size'] > 5 * 1024 * 1024) {
+            die("A imagem deve ter no máximo 5 MB.");
         }
+
+        $tiposPermitidos = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp'
+        ];
+
+        if (class_exists('finfo')) {
+
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $tipoImagem = $finfo->file(
+                $_FILES['foto']['tmp_name']
+            );
+
+        } else {
+
+            $tipoImagem = $_FILES['foto']['type'] ?? '';
+        }
+
+        if (!isset($tiposPermitidos[$tipoImagem])) {
+            die("A imagem deve ser JPG, PNG ou WEBP.");
+        }
+
+        $extensao = $tiposPermitidos[$tipoImagem];
+
+        $nomeImagem = uniqid(
+            'restaurante_',
+            true
+        ) . '.' . $extensao;
+
+        $pasta = __DIR__ . "/../assets/img/imgGastronomia/";
+
+        if (!is_dir($pasta)) {
+
+            if (!mkdir($pasta, 0777, true)) {
+                die("Não foi possível criar a pasta de imagens.");
+            }
+        }
+
+        $destino = $pasta . $nomeImagem;
+
+        if (!move_uploaded_file(
+            $_FILES['foto']['tmp_name'],
+            $destino
+        )) {
+            die("Não foi possível salvar a imagem.");
+        }
+
+        $imagem = $nomeImagem;
     }
-}
 
     $sql = "UPDATE restaurante SET
         nome = ?,
@@ -255,12 +262,15 @@ if (
     $stmt = mysqli_prepare($conexao, $sql);
 
     if (!$stmt) {
-        die("Erro ao preparar atualização: " . mysqli_error($conexao));
+        die(
+            "Erro ao preparar atualização: " .
+            mysqli_error($conexao)
+        );
     }
 
     mysqli_stmt_bind_param(
         $stmt,
-        "ssisssssiissi",
+        "ssisssssiiisi",
         $nome,
         $logradouro,
         $numero,
@@ -277,14 +287,26 @@ if (
     );
 
     if (!mysqli_stmt_execute($stmt)) {
-        die("Erro ao editar restaurante: " . mysqli_stmt_error($stmt));
+        die(
+            "Erro ao editar restaurante: " .
+            mysqli_stmt_error($stmt)
+        );
     }
+
+    mysqli_stmt_close($stmt);
 
     header("Location: ../pages/restaurante.php");
     exit();
 }
 
-$horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
+$horarioFuncionamento =
+    $restaurante['horario_funcionamento'] ?? '';
+
+$imagemAtual = $restaurante['imagem'] ?? '';
+
+if ($imagemAtual !== '') {
+    $imagemAtual = basename($imagemAtual);
+}
 
 ?>
 
@@ -297,15 +319,13 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0">
 
     <title>Editar Restaurante</title>
 
     <link
         rel="stylesheet"
-        href="../assets/css/formulario.css"
-    >
+        href="../assets/css/formulario.css">
 
 </head>
 
@@ -317,17 +337,16 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
     <form
         method="POST"
-        enctype="multipart/form-data"
-    >
+        enctype="multipart/form-data">
 
         <label for="foto">
             Foto do Restaurante:
         </label>
 
-        <?php if (!empty($restaurante['imagem'])): ?>
+        <?php if ($imagemAtual !== ''): ?>
 
             <img
-                src="../uploads/restaurantes/<?= htmlspecialchars($restaurante['imagem']) ?>"
+                src="../assets/img/imgGastronomia/<?= htmlspecialchars($imagemAtual, ENT_QUOTES, 'UTF-8') ?>"
                 alt="Foto atual do restaurante"
                 width="250"
             >
@@ -336,14 +355,19 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
                 Escolha uma nova foto para substituir a atual.
             </small>
 
+        <?php else: ?>
+
+            <small>
+                Este restaurante ainda não possui uma foto.
+            </small>
+
         <?php endif; ?>
 
         <input
             type="file"
             id="foto"
             name="foto"
-            accept=".jpg,.jpeg,.png,.webp"
-        >
+            accept=".jpg,.jpeg,.png,.webp">
 
         <label for="nome">
             Nome:
@@ -353,12 +377,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="text"
             id="nome"
             name="nome"
-            value="<?= htmlspecialchars($restaurante['nome'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             minlength="2"
             maxlength="100"
-            placeholder="Nome do restaurante"
-        >
+            placeholder="Nome do restaurante">
 
         <label for="logradouro">
             Logradouro:
@@ -368,12 +391,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="text"
             id="logradouro"
             name="logradouro"
-            value="<?= htmlspecialchars($restaurante['logradouro'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['logradouro'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             minlength="3"
             maxlength="150"
-            placeholder="Rua, avenida..."
-        >
+            placeholder="Rua, avenida...">
 
         <label for="numero">
             Número:
@@ -383,12 +405,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="number"
             id="numero"
             name="numero"
-            value="<?= htmlspecialchars($restaurante['numero'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             min="1"
             max="999999"
-            placeholder="Número"
-        >
+            placeholder="Número">
 
         <label for="cidade">
             Cidade:
@@ -398,12 +419,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="text"
             id="cidade"
             name="cidade"
-            value="<?= htmlspecialchars($restaurante['cidade'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['cidade'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             minlength="2"
             maxlength="100"
-            placeholder="Cidade"
-        >
+            placeholder="Cidade">
 
         <label for="cep">
             CEP:
@@ -413,12 +433,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="text"
             id="cep"
             name="cep"
-            value="<?= htmlspecialchars($restaurante['cep'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['cep'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             maxlength="9"
             pattern="[0-9]{5}-?[0-9]{3}"
-            placeholder="12345-678"
-        >
+            placeholder="12345-678">
 
         <label for="telefone">
             Telefone:
@@ -428,11 +447,10 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="text"
             id="telefone"
             name="telefone"
-            value="<?= htmlspecialchars($restaurante['telefone'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['telefone'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
-            placeholder="(11) 12345-6789"
-        >
+            placeholder="(11) 12345-6789">
 
         <label for="email">
             E-mail:
@@ -442,11 +460,10 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="email"
             id="email"
             name="email"
-            value="<?= htmlspecialchars($restaurante['email'] ?? '') ?>"
+            value="<?= htmlspecialchars($restaurante['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             maxlength="150"
-            placeholder="exemplo@email.com"
-        >
+            placeholder="exemplo@email.com">
 
         <label for="categoria">
             Categoria:
@@ -456,8 +473,7 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             id="categoria"
             name="categoria"
             required
-            onchange="mostrarOutraCategoria()"
-        >
+            onchange="mostrarOutraCategoria()">
 
             <option value="">
                 Selecione uma categoria
@@ -466,10 +482,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             <?php foreach ($categorias as $categoria): ?>
 
                 <option
-                    value="<?= htmlspecialchars($categoria) ?>"
-                    <?= $categoriaSelecionada === $categoria ? 'selected' : '' ?>
-                >
-                    <?= htmlspecialchars($categoria) ?>
+                    value="<?= htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8') ?>"
+                    <?= $categoriaSelecionada === $categoria ? 'selected' : '' ?>>
+
+                    <?= htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8') ?>
+
                 </option>
 
             <?php endforeach; ?>
@@ -478,8 +495,9 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
         <div
             id="outra_categoria"
-            style="<?= $categoriaSelecionada === 'Outro' ? 'display:block;' : 'display:none;' ?>"
-        >
+            style="<?= $categoriaSelecionada === 'Outro'
+                ? 'display:block;'
+                : 'display:none;' ?>">
 
             <label for="categoria_outro">
                 Digite a categoria:
@@ -489,12 +507,13 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
                 type="text"
                 id="categoria_outro"
                 name="categoria_outro"
-                value="<?= htmlspecialchars($categoriaOutro) ?>"
+                value="<?= htmlspecialchars($categoriaOutro, ENT_QUOTES, 'UTF-8') ?>"
                 minlength="2"
                 maxlength="50"
                 placeholder="Digite a categoria"
-                <?= $categoriaSelecionada === 'Outro' ? 'required' : '' ?>
-            >
+                <?= $categoriaSelecionada === 'Outro'
+                    ? 'required'
+                    : '' ?>>
 
         </div>
 
@@ -505,8 +524,7 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
         <select
             id="possui_delivery"
             name="possui_delivery"
-            required
-        >
+            required>
 
             <option value="">
                 Selecione
@@ -514,15 +532,17 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
             <option
                 value="1"
-                <?= (string) $restaurante['possui_delivery'] === '1' ? 'selected' : '' ?>
-            >
+                <?= (string)$restaurante['possui_delivery'] === '1'
+                    ? 'selected'
+                    : '' ?>>
                 Sim
             </option>
 
             <option
                 value="0"
-                <?= (string) $restaurante['possui_delivery'] === '0' ? 'selected' : '' ?>
-            >
+                <?= (string)$restaurante['possui_delivery'] === '0'
+                    ? 'selected'
+                    : '' ?>>
                 Não
             </option>
 
@@ -535,8 +555,7 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
         <select
             id="possui_wifi"
             name="possui_wifi"
-            required
-        >
+            required>
 
             <option value="">
                 Selecione
@@ -544,15 +563,17 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
             <option
                 value="1"
-                <?= (string) $restaurante['possui_wifi'] === '1' ? 'selected' : '' ?>
-            >
+                <?= (string)$restaurante['possui_wifi'] === '1'
+                    ? 'selected'
+                    : '' ?>>
                 Sim
             </option>
 
             <option
                 value="0"
-                <?= (string) $restaurante['possui_wifi'] === '0' ? 'selected' : '' ?>
-            >
+                <?= (string)$restaurante['possui_wifi'] === '0'
+                    ? 'selected'
+                    : '' ?>>
                 Não
             </option>
 
@@ -566,12 +587,11 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
             type="text"
             id="horario_funcionamento"
             name="horario_funcionamento"
-            value="<?= htmlspecialchars($horarioFuncionamento) ?>"
+            value="<?= htmlspecialchars($horarioFuncionamento, ENT_QUOTES, 'UTF-8') ?>"
             required
             minlength="3"
             maxlength="100"
-            placeholder="Ex: Segunda a sábado, das 08:00 às 18:00"
-        >
+            placeholder="Ex: Segunda a sábado, das 08:00 às 18:00">
 
         <div class="botoes">
 
@@ -581,8 +601,7 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
             <a
                 href="../pages/restaurante.php"
-                class="botao-voltar"
-            >
+                class="botao-voltar">
                 Voltar
             </a>
 
@@ -596,34 +615,62 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
 
 function mostrarOutraCategoria() {
 
-    const categoria = document.getElementById('categoria');
-    const outra = document.getElementById('outra_categoria');
-    const campo = document.getElementById('categoria_outro');
+    const categoria =
+        document.getElementById('categoria');
+
+    const outra =
+        document.getElementById('outra_categoria');
+
+    const campo =
+        document.getElementById('categoria_outro');
 
     if (categoria.value === 'Outro') {
+
         outra.style.display = 'block';
+
         campo.required = true;
+
     } else {
+
         outra.style.display = 'none';
+
         campo.required = false;
+
         campo.value = '';
     }
 }
 
-document.getElementById('cep').addEventListener('blur', function () {
+document
+    .getElementById('cep')
+    .addEventListener('blur', function () {
 
-    const cep = this.value.replace(/\D/g, '');
+        const cep =
+            this.value.replace(/\D/g, '');
 
-    if (cep.length !== 8) {
-        return;
-    }
+        if (cep.length !== 8) {
+            return;
+        }
 
-    fetch('https://viacep.com.br/ws/' + cep + '/json/')
-        .then(response => response.json())
-        .then(data => {
+        fetch(
+            'https://viacep.com.br/ws/' +
+            cep +
+            '/json/'
+        )
+        .then(function (response) {
+
+            if (!response.ok) {
+                throw new Error('Erro na consulta.');
+            }
+
+            return response.json();
+
+        })
+        .then(function (data) {
 
             if (data.erro) {
+
                 alert('CEP não encontrado.');
+
                 return;
             }
 
@@ -634,14 +681,18 @@ document.getElementById('cep').addEventListener('blur', function () {
                 data.localidade || '';
 
         })
-        .catch(() => {
+        .catch(function () {
+
             alert('Erro ao consultar o CEP.');
+
         });
-});
+
+    });
 
 mostrarOutraCategoria();
 
 </script>
 
 </body>
+
 </html>
