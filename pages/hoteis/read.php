@@ -115,7 +115,7 @@ include "../../includes/head.php";
 
                                         <img
                                             class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="/ecopinda/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="/ecopinda/assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>

@@ -24,7 +24,7 @@ function salvarFotosHotel($id_hotel, $campo = 'fotos')
 
     $tamanhoMaximo = 5 * 1024 * 1024; // 5 MB por foto
 
-    $pasta = __DIR__ . '/../uploads/hoteis/';
+    $pasta = __DIR__ . '../assets/uploads/hoteis/';
 
     if (!is_dir($pasta)) {
         if (!mkdir($pasta, 0755, true)) {
