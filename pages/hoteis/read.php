@@ -91,8 +91,23 @@ include "../../includes/head.php";
                     $primeiraFoto =
                         $fotosHotel[0]['caminho'] ?? null;
 
-                    ?>
+                    /*
+                     * Prepara o telefone para o WhatsApp.
+                     *
+                     * Remove:
+                     * - espaços
+                     * - parênteses
+                     * - hífens
+                     * - outros caracteres
+                     */
 
+                    $telefoneWhatsApp = preg_replace(
+                        '/\D/',
+                        '',
+                        $linha['telefone'] ?? ''
+                    );
+
+                    ?>
 
                     <!-- =================================================
                          CARD DO HOTEL
@@ -127,19 +142,25 @@ include "../../includes/head.php";
                                             type="button"
                                             class="galeria-seta galeria-anterior"
                                             aria-label="Foto anterior">
+
                                             &#10094;
+
                                         </button>
 
                                         <button
                                             type="button"
                                             class="galeria-seta galeria-proxima"
                                             aria-label="Próxima foto">
+
                                             &#10095;
+
                                         </button>
 
                                         <span class="galeria-contador">
 
-                                            <span class="galeria-atual">1</span>
+                                            <span class="galeria-atual">
+                                                1
+                                            </span>
 
                                             /
                                             <?= count($fotosHotel) ?>
@@ -289,14 +310,16 @@ include "../../includes/head.php";
 
 
                                 <!-- =================================================
-                                     CONTATO
+                                     CONTATO / WHATSAPP
                                 ================================================== -->
 
-                                <?php if (!empty($linha['telefone'])): ?>
+                                <?php if (!empty($telefoneWhatsApp)): ?>
 
                                     <a
                                         class="hotel-botao"
-                                        href="tel:<?= htmlspecialchars($linha['telefone']) ?>">
+                                        href="https://wa.me/55<?= htmlspecialchars($telefoneWhatsApp) ?>"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
 
                                         Entrar em contato
 
@@ -312,6 +335,7 @@ include "../../includes/head.php";
                                 <?php if ($usuarioMaster): ?>
 
                                     <div class="hotel-acoes">
+
 
                                         <!-- EDITAR -->
 
@@ -334,6 +358,7 @@ include "../../includes/head.php";
                                             Excluir
 
                                         </a>
+
 
                                     </div>
 
@@ -383,7 +408,12 @@ include "../../includes/head.php";
 </div>
 
 
+<!-- =====================================================
+     JAVASCRIPT DA GALERIA
+====================================================== -->
+
 <script src="/ecopinda/assets/js/hoteis.js"></script>
+
 
 <?php
 
