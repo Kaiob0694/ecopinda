@@ -30,13 +30,13 @@ if (!function_exists('iniciaisHeader')) {
 
     <!-- LOGO -->
     <div class="logo">
-        <a href="../index.php">
+        <a href="/ecopinda/index.php">
             <img src="/ecopinda/assets/img2/logo.png" alt="Pinda Eco">
         </a>
     </div>
  
     <nav class="menu">
-        <a href="/index.php">Início</a>
+        <a href="/ecopinda/index.php">Início</a>
         <a href="/ecopinda/pages/cidade.php">Cidade</a>
         <a href="#">Turismo</a>
         <a href="/ecopinda/pages/hoteis/read.php">Hotéis</a>
