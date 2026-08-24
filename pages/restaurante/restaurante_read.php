@@ -3,13 +3,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once "../../classes/hoteis.php";
-require_once "../../classes/hotel_fotos.php";
+require_once "../../classes/restaurante.php";
+require_once "../../classes/restaurante_fotos.php";
 
-$hotel = new Hotel();
-$hotelFoto = new HotelFoto();
+$restaurante = new Restaurante();
+$restauranteFoto = new RestauranteFoto();
 
-$dados = $hotel->listar();
+$dados = $restaurante->listar();
 
 include "../../includes/header.php";
 include "../../includes/head.php";
@@ -31,11 +31,11 @@ include "../../includes/head.php";
             <div>
 
                 <h1 class="hoteis-titulo">
-                    Hotéis
+                    Restaurantes
                 </h1>
 
                 <p class="hoteis-subtitulo">
-                    Encontre hotéis para sua estadia em
+                    Encontre os melhores Restaurantes de
                     Pindamonhangaba e região.
                 </p>
 
@@ -61,7 +61,7 @@ include "../../includes/head.php";
 
             <?php else: ?>
 
-                Nenhum hotel encontrado
+                Nenhum Restaurante encontrado
 
             <?php endif; ?>
 
@@ -85,11 +85,11 @@ include "../../includes/head.php";
                      * Será utilizada a primeira foto cadastrada.
                      */
 
-                    $fotosHotel =
-                        $hotelFoto->listarPorHotel($linha['id']);
+                    $fotosRestaurante =
+                        $hotelFoto->listarPorRestaurante($linha['id']);
 
                     $primeiraFoto =
-                        $fotosHotel[0]['caminho'] ?? null;
+                        $fotosRestaurante[0]['caminho'] ?? null;
 
                     ?>
 
@@ -107,21 +107,21 @@ include "../../includes/head.php";
 
                         <div class="hotel-imagem-container">
 
-                            <?php if (!empty($fotosHotel)): ?>
+                            <?php if (!empty($fotosRestaurante)): ?>
 
                                 <div class="hotel-galeria">
 
-                                    <?php foreach ($fotosHotel as $indice => $foto): ?>
+                                    <?php foreach ($fotosRestaurante as $indice => $foto): ?>
 
                                         <img
                                             class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="/ecopinda/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="/ecopinda/uploads/restaurante/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>
 
 
-                                    <?php if (count($fotosHotel) > 1): ?>
+                                    <?php if (count($fotosRestaurante) > 1): ?>
 
                                         <button
                                             type="button"
@@ -142,7 +142,7 @@ include "../../includes/head.php";
                                             <span class="galeria-atual">1</span>
 
                                             /
-                                            <?= count($fotosHotel) ?>
+                                            <?= count($fotosrestaurante) ?>
 
                                         </span>
 
@@ -362,13 +362,13 @@ include "../../includes/head.php";
 
                 <h3>
 
-                    Nenhum hotel cadastrado
+                    Nenhum restaurante cadastrado
 
                 </h3>
 
                 <p>
 
-                    No momento não existem hotéis disponíveis
+                    No momento não existem restaurante disponíveis
                     para consulta.
 
                 </p>
