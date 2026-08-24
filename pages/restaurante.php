@@ -24,7 +24,9 @@ if (!$result) {
 </head>
 
 <body>
-<?php include '../includes/header.php'; ?> 
+
+<?php include '../includes/header.php'; ?>
+<?php include '../includes/head.php'; ?>
 
 <section class="banner"></section>
 
@@ -50,8 +52,8 @@ if (!$result) {
             <?php if (!empty($row['imagem'])): ?>
 
                 <img
-                    src="<?php echo htmlspecialchars($row['imagem']); ?>"
-                    alt="<?php echo htmlspecialchars($row['nome']); ?>"
+                    src="../<?= htmlspecialchars($row['imagem']) ?>"
+                    alt="<?= htmlspecialchars($row['nome']) ?>"
                 >
 
             <?php else: ?>
@@ -63,45 +65,45 @@ if (!$result) {
             <?php endif; ?>
 
             <h3>
-                <?php echo htmlspecialchars($row['nome']); ?>
+                <?= htmlspecialchars($row['nome']) ?>
             </h3>
 
             <p>
                 <strong>Categoria:</strong>
-                <?php echo htmlspecialchars($row['categoria'] ?? 'Não informado'); ?>
+                <?= htmlspecialchars($row['categoria'] ?? 'Não informado') ?>
             </p>
 
             <p>
                 <strong>Cidade:</strong>
-                <?php echo htmlspecialchars($row['cidade'] ?? 'Não informado'); ?>
+                <?= htmlspecialchars($row['cidade'] ?? 'Não informado') ?>
             </p>
 
             <p>
                 <strong>Horário:</strong>
-                <?php echo htmlspecialchars($row['horario_funcionamento'] ?? 'Não informado'); ?>
+                <?= htmlspecialchars($row['horario_funcionamento'] ?? 'Não informado') ?>
             </p>
 
             <p>
                 <strong>Delivery:</strong>
-                <?php echo !empty($row['possui_delivery']) ? 'Sim' : 'Não'; ?>
+                <?= !empty($row['possui_delivery']) ? 'Sim' : 'Não' ?>
             </p>
 
             <p>
                 <strong>Wi-Fi:</strong>
-                <?php echo !empty($row['possui_wifi']) ? 'Sim' : 'Não'; ?>
+                <?= !empty($row['possui_wifi']) ? 'Sim' : 'Não' ?>
             </p>
 
             <div class="acoes">
 
                 <a
-                    href="../src/editarRestaurante.php?id=<?php echo $row['id']; ?>"
+                    href="../src/editarRestaurante.php?id=<?= $row['id'] ?>"
                     class="btn-editar"
                 >
                     Editar
                 </a>
 
                 <a
-                    href="../src/deletarRestaurante.php?id=<?php echo $row['id']; ?>"
+                    href="../src/deletarRestaurante.php?id=<?= $row['id'] ?>"
                     class="btn-excluir"
                     onclick="return confirm('Tem certeza que deseja excluir este restaurante?');"
                 >

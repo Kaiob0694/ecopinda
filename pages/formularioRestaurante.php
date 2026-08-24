@@ -10,18 +10,14 @@ session_start();
     <meta charset="UTF-8">
 
     <title>Cadastro de Restaurante</title>
-
-    <?php include "../includes/head.php"; ?>
-
-    <!-- CSS específico desta página -->
-    <link rel="stylesheet" href="../assets/css/formulario.css">
+    <link rel="stylesheet" href="/ecopinda/assets/css/formulario.css">
 
 </head>
 
 <body>
 
-    <?php include "../includes/header.php"; ?>
-
+    <?php include '../includes/header.php'; ?>
+    <?php include '../includes/head.php'; ?>
 
     <main class="pagina-formulario">
 
@@ -137,7 +133,6 @@ session_start();
 
                 </div>
 
-
                 <label for="possui_delivery">
                     Possui Delivery?
                 </label>
@@ -153,7 +148,6 @@ session_start();
 
                 </select>
 
-
                 <label for="possui_wifi">
                     Possui Wi-Fi?
                 </label>
@@ -168,7 +162,6 @@ session_start();
                     <option value="0">Não</option>
 
                 </select>
-
 
                 <label for="horario_funcionamento">
                     Horário de Funcionamento:
@@ -205,7 +198,6 @@ session_start();
 
                 </select>
 
-
                 <div class="botoes">
 
                     <button type="submit">
@@ -226,9 +218,7 @@ session_start();
 
     </main>
 
-
     <script>
-
         function mostrarOutraCategoria() {
 
             const categoria =
@@ -239,7 +229,6 @@ session_start();
 
             const campoOutro =
                 document.getElementById('categoria_outro');
-
 
             if (categoria.value === 'Outro') {
 
@@ -259,7 +248,6 @@ session_start();
 
         }
 
-
         document.getElementById('cep')
             .addEventListener('blur', function() {
 
@@ -272,43 +260,42 @@ session_start();
                 }
 
                 fetch(
-                    'https://viacep.com.br/ws/'
-                    + cep +
-                    '/json/'
-                )
+                        'https://viacep.com.br/ws/' +
+                        cep +
+                        '/json/'
+                    )
 
-                .then(response => response.json())
+                    .then(response => response.json())
 
-                .then(data => {
+                    .then(data => {
 
-                    if (data.erro) {
+                        if (data.erro) {
 
-                        alert('CEP não encontrado.');
-                        return;
+                            alert('CEP não encontrado.');
+                            return;
 
-                    }
+                        }
 
-                    document.getElementById('logradouro').value =
-                        data.logradouro || '';
+                        document.getElementById('logradouro').value =
+                            data.logradouro || '';
 
-                    document.getElementById('cidade').value =
-                        data.localidade || '';
+                        document.getElementById('cidade').value =
+                            data.localidade || '';
 
-                })
+                    })
 
-                .catch(error => {
+                    .catch(error => {
 
-                    console.error(
-                        'Erro ao consultar o ViaCEP:',
-                        error
-                    );
+                        console.error(
+                            'Erro ao consultar o ViaCEP:',
+                            error
+                        );
 
-                    alert('Erro ao consultar o CEP.');
+                        alert('Erro ao consultar o CEP.');
 
-                });
+                    });
 
             });
-
     </script>
 
 </body>
