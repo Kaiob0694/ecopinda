@@ -1,22 +1,23 @@
 <?php
+
 require_once __DIR__ . "/../config/conexao.php";
 
 class Restaurante
 {
-
     private $conexao;
 
     public function __construct()
     {
-
         $db = new Conexao();
         $this->conexao = $db->conectar();
     }
 
+    // ==========================================
+    // LISTAR RESTAURANTES
+    // ==========================================
     public function listar()
     {
-
-        $sql = "SELECT * FROM restaurante";
+        $sql = "SELECT * FROM restaurante ORDER BY id DESC";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
@@ -24,160 +25,179 @@ class Restaurante
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    // ==========================================
+    // BUSCAR RESTAURANTE POR ID
+    // ==========================================
     public function buscarPorId($id)
     {
-
-        $sql = "SELECT * FROM hotel WHERE id = :id";
+        $sql = "SELECT * FROM restaurante WHERE id = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    // ==========================================
+    // CADASTRAR RESTAURANTE
+    // ==========================================
     public function cadastrar(
         $nome,
-        $endereco,
+        $logradouro,
+        $numero,
         $cidade,
-        $estado,
         $cep,
         $telefone,
         $email,
-        $quantidade_quartos,
+        $categoria,
+        $possui_delivery,
         $possui_wifi,
-        $possui_estacionamento,
-        $data_cadastro
+        $horario_funcionamento
     ) {
 
-        // O select do formulario manda "Sim"/"Nao", mas a coluna no
-        // banco e tinyint(1), entao convertemos para 1/0 antes de gravar.
+        // Converte Sim/Não para 1/0
+        $possui_delivery = ($possui_delivery === 'Sim') ? 1 : 0;
         $possui_wifi = ($possui_wifi === 'Sim') ? 1 : 0;
-        $possui_estacionamento = ($possui_estacionamento === 'Sim') ? 1 : 0;
 
         $sql = "
-            INSERT INTO hotel
+            INSERT INTO restaurante
             (
                 nome,
-                endereco,
+                logradouro,
+                numero,
                 cidade,
-                estado,
                 cep,
                 telefone,
                 email,
-                quantidade_quartos,
+                categoria,
+                possui_delivery,
                 possui_wifi,
-                possui_estacionamento,
-                data_cadastro
+                horario_funcionamento
             )
             VALUES
             (
                 :nome,
-                :endereco,
+                :logradouro,
+                :numero,
                 :cidade,
-                :estado,
                 :cep,
                 :telefone,
                 :email,
-                :quantidade_quartos,
+                :categoria,
+                :possui_delivery,
                 :possui_wifi,
-                :possui_estacionamento,
-                :data_cadastro
+                :horario_funcionamento
             )
         ";
 
         $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':endereco', $endereco);
+        $stmt->bindParam(':logradouro', $logradouro);
+        $stmt->bindParam(':numero', $numero);
         $stmt->bindParam(':cidade', $cidade);
-        $stmt->bindParam(':estado', $estado);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':quantidade_quartos', $quantidade_quartos);
-        $stmt->bindParam(':possui_wifi', $possui_wifi);
-        $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
-        $stmt->bindParam(':data_cadastro', $data_cadastro);
+        $stmt->bindParam(':categoria', $categoria);
+        $stmt->bindParam(':possui_delivery', $possui_delivery, PDO::PARAM_INT);
+        $stmt->bindParam(':possui_wifi', $possui_wifi, PDO::PARAM_INT);
+        $stmt->bindParam(':horario_funcionamento', $horario_funcionamento);
 
         if (!$stmt->execute()) {
             return false;
         }
 
-        // Retorna o id do hotel recém-criado, para poder vincular as fotos.
+        // Retorna o ID do restaurante cadastrado
         return $this->conexao->lastInsertId();
     }
 
+
+    // ==========================================
+    // EDITAR RESTAURANTE
+    // ==========================================
     public function editar(
         $id,
         $nome,
-        $endereco,
+        $logradouro,
+        $numero,
         $cidade,
-        $estado,
         $cep,
         $telefone,
         $email,
-        $quantidade_quartos,
+        $categoria,
+        $possui_delivery,
         $possui_wifi,
-        $possui_estacionamento,
-        $data_cadastro
+        $horario_funcionamento
     ) {
 
+        // Converte Sim/Não para 1/0
+        $possui_delivery = ($possui_delivery === 'Sim') ? 1 : 0;
         $possui_wifi = ($possui_wifi === 'Sim') ? 1 : 0;
-        $possui_estacionamento = ($possui_estacionamento === 'Sim') ? 1 : 0;
 
         $sql = "
-            UPDATE hotel
+            UPDATE restaurante
             SET
                 nome = :nome,
-                endereco = :endereco,
+                logradouro = :logradouro,
+                numero = :numero,
                 cidade = :cidade,
-                estado = :estado,
                 cep = :cep,
                 telefone = :telefone,
                 email = :email,
-                quantidade_quartos = :quantidade_quartos,
+                categoria = :categoria,
+                possui_delivery = :possui_delivery,
                 possui_wifi = :possui_wifi,
-                possui_estacionamento = :possui_estacionamento,
-                data_cadastro = :data_cadastro
+                horario_funcionamento = :horario_funcionamento
             WHERE id = :id
         ";
 
         $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':endereco', $endereco);
+        $stmt->bindParam(':logradouro', $logradouro);
+        $stmt->bindParam(':numero', $numero);
         $stmt->bindParam(':cidade', $cidade);
-        $stmt->bindParam(':estado', $estado);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':quantidade_quartos', $quantidade_quartos);
-        $stmt->bindParam(':possui_wifi', $possui_wifi);
-        $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
-        $stmt->bindParam(':data_cadastro', $data_cadastro);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':categoria', $categoria);
+        $stmt->bindParam(':possui_delivery', $possui_delivery, PDO::PARAM_INT);
+        $stmt->bindParam(':possui_wifi', $possui_wifi, PDO::PARAM_INT);
+        $stmt->bindParam(':horario_funcionamento', $horario_funcionamento);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $stmt->execute();
     }
 
+
+    // ==========================================
+    // EXCLUIR RESTAURANTE
+    // ==========================================
     public function excluir($id)
     {
-
-        $sql = "DELETE FROM hotel WHERE id = :id";
+        $sql = "DELETE FROM restaurante WHERE id = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $stmt->execute();
     }
 
+
+    // ==========================================
+    // BUSCAR TODOS
+    // ==========================================
     public function buscarTodos()
     {
-        $sql = "SELECT * FROM hotel";
+        $sql = "SELECT * FROM restaurante ORDER BY id DESC";
+
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 

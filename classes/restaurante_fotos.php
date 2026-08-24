@@ -1,79 +1,140 @@
 <?php
+
 require_once __DIR__ . "/../config/conexao.php";
 
 class RestauranteFoto
 {
-
     private $conexao;
 
     public function __construct()
     {
-
         $db = new Conexao();
         $this->conexao = $db->conectar();
     }
 
+
+    // ==========================================
+    // ADICIONAR FOTO
+    // ==========================================
     public function adicionar($id_restaurante, $caminho)
     {
-
-        $sql = "INSERT INTO restaurante_foto (id_restaurante, caminho) VALUES (:id_hotel, :caminho)";
+        $sql = "
+            INSERT INTO restaurante_foto
+            (
+                id_restaurante,
+                caminho
+            )
+            VALUES
+            (
+                :id_restaurante,
+                :caminho
+            )
+        ";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id_hotel', $id_restaurante);
+        $stmt->bindParam(
+            ':id_restaurante',
+            $id_restaurante,
+            PDO::PARAM_INT
+        );
+
         $stmt->bindParam(':caminho', $caminho);
 
         return $stmt->execute();
     }
 
+
+    // ==========================================
+    // LISTAR FOTOS DO RESTAURANTE
+    // ==========================================
     public function listarPorRestaurante($id_restaurante)
     {
-
-        $sql = "SELECT * FROM restaurante_foto WHERE id_restaurante = :id_restaurante ORDER BY id ASC";
+        $sql = "
+            SELECT *
+            FROM restaurante_foto
+            WHERE id_restaurante = :id_restaurante
+            ORDER BY id ASC
+        ";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id_restaurante', $id_restaurante);
+        $stmt->bindParam(
+            ':id_restaurante',
+            $id_restaurante,
+            PDO::PARAM_INT
+        );
 
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    // ==========================================
+    // BUSCAR FOTO POR ID
+    // ==========================================
     public function buscarPorId($id)
     {
-
-        $sql = "SELECT * FROM restaurante_foto WHERE id = :id";
+        $sql = "
+            SELECT *
+            FROM restaurante_foto
+            WHERE id = :id
+        ";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(
+            ':id',
+            $id,
+            PDO::PARAM_INT
+        );
 
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    // ==========================================
+    // EXCLUIR FOTO
+    // ==========================================
     public function excluir($id)
     {
-
-        $sql = "DELETE FROM restaurante_foto WHERE id = :id";
+        $sql = "
+            DELETE FROM restaurante_foto
+            WHERE id = :id
+        ";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(
+            ':id',
+            $id,
+            PDO::PARAM_INT
+        );
 
         return $stmt->execute();
     }
 
-    public function excluirPorRestaurante($id_hotel)
-    {
 
-        $sql = "DELETE FROM restaurante_foto WHERE id_restaurante = :id_restaurante";
+    // ==========================================
+    // EXCLUIR TODAS AS FOTOS DO RESTAURANTE
+    // ==========================================
+    public function excluirPorRestaurante($id_restaurante)
+    {
+        $sql = "
+            DELETE FROM restaurante_foto
+            WHERE id_restaurante = :id_restaurante
+        ";
 
         $stmt = $this->conexao->prepare($sql);
 
-        $stmt->bindParam(':id_restaurante', $id_restaurante);
+        $stmt->bindParam(
+            ':id_restaurante',
+            $id_restaurante,
+            PDO::PARAM_INT
+        );
 
         return $stmt->execute();
     }
