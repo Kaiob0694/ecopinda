@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 
 require_once "../../classes/hoteis.php";
 
@@ -7,12 +11,13 @@ $hotel = new Hotel();
 $id = $_GET['id'];
 
 $dados = $hotel->buscarPorId($id);
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {   
     $hotel->editar(
         $id,
         $_POST['nome'],
-        $_POST['endereço'],
+        $_POST['endereco'],
         $_POST['cidade'],
+        $_POST['estado'],
         $_POST['cep'],
         $_POST['telefone'],
         $_POST['email'],
@@ -20,10 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['possui_wifi'],
         $_POST['possui_estacionamento'],
         $_POST['data_cadastro']
+
     );
      
 
-    header("Location: listar.php");
+    header("Location: read.php");
     exit;
 }
 
@@ -49,8 +55,8 @@ include "../../includes/head.php";
         Endereço:<br>
         <input
             type="text"
-            name="endereço"
-            value="<?= $dados['endereço']; ?>"
+            name="endereco"
+            value="<?= $dados['endereco']; ?>"
             required>
     </p>
 
@@ -63,6 +69,14 @@ include "../../includes/head.php";
             required>
     </p>
 
+    <p>
+        Estado:<br>
+        <input
+            type="text"
+            name="estado"
+            value="<?= $dados['estado']; ?>"
+            required>
+    </p>
     <p>
         CEP:<br>
         <input
@@ -99,18 +113,27 @@ include "../../includes/head.php";
     <p>
         Possui Wi-Fi:<br>
         <select name="possui_wifi" required>
-            <option value="Sim" <?= $dados['possui_wifi'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
-            <option value="Não" <?= $dados['possui_wifi'] == 'Não' ? 'selected' : '' ?>>Não</option>
-        </select>
-    </p>
+         <option value="1" <?= $dados['possui_wifi'] == 1 ? 'selected' : '' ?>>
+            Sim
+        </option>
+        <option value="0" <?= $dados['possui_wifi'] == 0 ? 'selected' : '' ?>>
+            Não
+        </option>
+    </select>
+</p>
 
     <p>
         Possui Estacionamento:<br>
         <select name="possui_estacionamento" required>
-            <option value="Sim" <?= $dados['possui_estacionamento'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
-            <option value="Não" <?= $dados['possui_estacionamento'] == 'Não' ? 'selected' : '' ?>>Não</option>
-        </select>
-    </p>
+         <option value="1" <?= $dados['possui_estacionamento'] == 1 ? 'selected' : '' ?>>
+            Sim
+        </option>
+        <option value="0" <?= $dados['possui_estacionamento'] == 0 ? 'selected' : '' ?>>
+            Não
+        </option>
+    </select>
+</p>
+     
 
     <p>
         Data de Cadastro:<br>
@@ -127,92 +150,3 @@ include "../../includes/head.php";
 
 </form>
 
-<?php
-include "../../includes/footer.php";
-?>
-        Nome
-        <input
-            type="text"
-            name="nome"
-            value="<?= $dados['nome']; ?>"
-            required>
-    </p>
-
-    <p>
-        Endereço:<br>
-        <input
-            type="text"
-            name="endereço"
-            value="<?= $dados['endereço']; ?>"
-            required>
-    </p>
-
-    <p>
-        Cidade:<br>
-        <input
-            type="text"
-            name="cidade"
-            value="<?= $dados['cidade']; ?>"
-            required>
-    </p>
-
-    <p>
-        CEP:<br>
-        <input
-            type="text"
-            name="cep"
-            value="<?= $dados['cep']; ?>"
-            required>
-    </p>
-
-    <p>
-        Telefone:<br>
-        <input
-            type="text"
-            name="telefone"
-            value="<?= $dados['telefone']; ?>">
-    </p>
-
-    <p>
-        Email:<br>
-        <input
-            type="email"
-            name="email"
-            value="<?= $dados['email']; ?>">
-    </p>
-
-    <p>
-        Quantidade de Quartos:<br>
-        <input
-            type="number"
-            name="quantidade_quartos"
-            value="<?= $dados['quantidade_quartos']; ?>">
-    </p>
-
-    <p>
-        Possui Wi-Fi:<br>
-        <select name="possui_wifi" required>
-            <option value="Sim" <?= $dados['possui_wifi'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
-            <option value="Não" <?= $dados['possui_wifi'] == 'Não' ? 'selected' : '' ?>>Não</option>
-        </select>
-    </p>
-
-    <p>
-        Possui Estacionamento:<br>
-        <select name="possui_estacionamento" required>
-            <option value="Sim" <?= $dados['possui_estacionamento'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
-            <option value="Não" <?= $dados['possui_estacionamento'] == 'Não' ? 'selected' : '' ?>>Não</option>
-        </select>
-    </p>
-
-    <br>
-
-    <button type="submit">
-        Atualizar
-    </button>
-
-</form>
-
-<?php
-include "../../includes/footer.php";
-?>

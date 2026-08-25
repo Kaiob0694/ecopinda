@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // SQL com prepared statement
     $sql = "INSERT INTO restaurante 
     (nome, logradouro, numero, cidade, cep, telefone, email, categoria, possui_delivery, possui_wifi, horario_funcionamento, imagem)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
     $stmt = mysqli_prepare($conexao, $sql);
 

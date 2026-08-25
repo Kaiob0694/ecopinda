@@ -8,15 +8,16 @@ require_once "../../classes/hoteis.php";
 $hotel = new Hotel();
 $dados = $hotel->listar();
 
-include "../../includes/header.php";
 include "../../includes/head.php";
-?>
+include "../../includes/header.php";
 
-<link rel="stylesheet" href="/ecopinda/assets/css/hotel.css">
+?>
+<link rel="stylesheet" href="../../assets/css/style_hoteis.css">
+<div class="container">
 
 <div class="hoteis-container">
 
-    <div class="hoteis-painel">
+        <h2 class="titulo">Lista de Hotéis</h2>
 
         <div class="hoteis-topo">
 
@@ -24,11 +25,55 @@ include "../../includes/head.php";
                 Lista de Hotéis
             </h2>
 
-            <a href="create.php" class="botao-novo">
-                Cadastrar Novo Hotel
+
+    <table border="1">
+
+        <tr>
+
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>CEP</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Quantidade de Quartos</th>
+            <th>Possui Wi-Fi</th>
+            <th>Possui Estacionamento</th>
+            <th>Data de Cadastro</th>
+
+            </tr>
+
+    <?php foreach ($dados as $linha): ?>
+
+        <tr>
+
+            <td><?= $linha['id'] ?></td>
+            <td><?= $linha['nome'] ?></td>
+            <td><?= $linha['endereco'] ?></td>
+            <td><?= $linha['cidade'] ?></td>
+            <td><?= $linha['estado'] ?></td>
+            <td><?= $linha['cep'] ?></td>
+            <td><?= $linha['telefone'] ?></td>
+            <td><?= $linha['email'] ?></td>
+            <td><?= $linha['quantidade_quartos'] ?></td>
+            <td><?= $linha['possui_wifi'] ? 'Sim' : 'Não' ?></td>
+            <td><?= $linha['possui_estacionamento'] ? 'Sim' : 'Não' ?></td>
+            <td><?= $linha['data_cadastro'] ?></td>
+
+           <td>
+
+         <a class="editar"
+         href="update.php?id=<?= $linha['id'] ?>">
+         Editar
             </a>
 
-        </div>
+         <a class="excluir"
+          href="delete.php?id=<?= $linha['id'] ?>"
+          onclick="return confirm('Deseja realmente excluir este hotel?')">
+         Excluir
+            </a>
 
         <div class="tabela-wrapper">
 

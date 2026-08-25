@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 
 require_once "../../classes/hoteis.php";
@@ -7,10 +10,13 @@ $hotel = new Hotel();
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ 
+
     $hotel->cadastrar(
         $_POST['nome'],
-        $_POST['endereço'],
+        $_POST['endereco'],
         $_POST['cidade'],
+        $_POST['estado'],
         $_POST['cep'],
         $_POST['telefone'],
         $_POST['email'],
@@ -23,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: read.php");
     exit;
 }
+
 
 include "../../includes/header.php";
 include "../../includes/head.php";
@@ -40,18 +47,24 @@ include "../../includes/head.php";
 
   <p>
       Endereço:<br>
-      <input type="text" name="endereço" required>
+      <input type="text" name="endereco" required>
     </p>
 
     <p>
-        Cidade:<br>
-        <input type="text" name="cidade" required>
-    </p>
+    Cidade:<br>
+    <input type="text" name="cidade" required>
+</p>
 
-    <p>
-        CEP:<br>
-        <input type="text" name="cep" required>
-    </p>
+<p>
+    Estado:<br>
+    <input type="text" name="estado" required>
+</p>
+
+<p>
+    CEP:<br>
+    <input type="text" name="cep" required>
+   </p>
+
 
     <p>
         Telefone:<br>
@@ -67,20 +80,20 @@ include "../../includes/head.php";
         Quantidade de Quartos:<br>
         <input type="number" name="quantidade_quartos">
     </p>
-    
+
     <p>
         Possui Wi-Fi:<br>
         <select name="possui_wifi" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
         </select>
     </p>
 
     <p>
         Possui Estacionamento:<br>
         <select name="possui_estacionamento" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
         </select>
     </p>
 
