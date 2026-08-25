@@ -41,6 +41,14 @@ include "../../includes/head.php";
 
             </div>
 
+            <?php if ($usuarioMaster): ?>
+
+                <a href="create.php" class="restaurante-botao-cadastrar">
+                    + Cadastrar Hotel
+                </a>
+
+            <?php endif; ?>
+
         </div>
 
 
@@ -57,7 +65,7 @@ include "../../includes/head.php";
                 <?= count($dados) === 1
                     ? 'hotel encontrado'
                     : 'hotéis encontrados'
-                ?>
+                    ?>
 
             <?php else: ?>
 
@@ -128,8 +136,7 @@ include "../../includes/head.php";
 
                                     <?php foreach ($fotosHotel as $indice => $foto): ?>
 
-                                        <img
-                                            class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
+                                        <img class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
                                             src="/ecopinda/assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
@@ -138,19 +145,13 @@ include "../../includes/head.php";
 
                                     <?php if (count($fotosHotel) > 1): ?>
 
-                                        <button
-                                            type="button"
-                                            class="galeria-seta galeria-anterior"
-                                            aria-label="Foto anterior">
+                                        <button type="button" class="galeria-seta galeria-anterior" aria-label="Foto anterior">
 
                                             &#10094;
 
                                         </button>
 
-                                        <button
-                                            type="button"
-                                            class="galeria-seta galeria-proxima"
-                                            aria-label="Próxima foto">
+                                        <button type="button" class="galeria-seta galeria-proxima" aria-label="Próxima foto">
 
                                             &#10095;
 
@@ -315,11 +316,8 @@ include "../../includes/head.php";
 
                                 <?php if (!empty($telefoneWhatsApp)): ?>
 
-                                    <a
-                                        class="hotel-botao"
-                                        href="https://wa.me/55<?= htmlspecialchars($telefoneWhatsApp) ?>"
-                                        target="_blank"
-                                        rel="noopener noreferrer">
+                                    <a class="hotel-botao" href="https://wa.me/55<?= htmlspecialchars($telefoneWhatsApp) ?>"
+                                        target="_blank" rel="noopener noreferrer">
 
                                         Entrar em contato
 
@@ -339,9 +337,7 @@ include "../../includes/head.php";
 
                                         <!-- EDITAR -->
 
-                                        <a
-                                            href="update.php?id=<?= (int) $linha['id'] ?>"
-                                            class="hotel-editar">
+                                        <a href="update.php?id=<?= (int) $linha['id'] ?>" class="hotel-editar">
 
                                             Editar
 
@@ -350,9 +346,7 @@ include "../../includes/head.php";
 
                                         <!-- EXCLUIR -->
 
-                                        <a
-                                            href="delete.php?id=<?= (int) $linha['id'] ?>"
-                                            class="hotel-excluir"
+                                        <a href="delete.php?id=<?= (int) $linha['id'] ?>" class="hotel-excluir"
                                             onclick="return confirm('Deseja realmente excluir este hotel?')">
 
                                             Excluir

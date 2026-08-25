@@ -806,3 +806,52 @@
     }
 
 }
+
+.restaurante-botao-cadastrar {
+    display: inline-flex;
+    flex-shrink: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--verde),
+            #075c0b
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.restaurante-botao-cadastrar:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 8px 18px
+        rgba(0, 120, 30, 0.20);
+}
+
+.restaurante-botao-cadastrar:active {
+    transform: translateY(0);
+}
