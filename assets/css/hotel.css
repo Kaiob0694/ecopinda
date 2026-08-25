@@ -1,0 +1,383 @@
+/* =========================================================
+   PÁGINA DE HOTÉIS
+========================================================= */
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+   Espaço superior para não ficar atrás do header
+========================================================= */
+
+.hoteis-container {
+    width: 95%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding-top: 160px;
+    padding-bottom: 80px;
+}
+
+
+/* =========================================================
+   PAINEL PRINCIPAL
+========================================================= */
+
+.hoteis-painel {
+    width: 100%;
+
+    background: var(--branco);
+
+    border-radius: 25px;
+
+    padding: 35px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   TOPO DA PÁGINA
+========================================================= */
+
+.hoteis-topo {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.hoteis-titulo {
+    margin: 0;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: var(--marrom);
+}
+
+
+/* =========================================================
+   BOTÃO NOVO HOTEL
+========================================================= */
+
+.botao-novo {
+    display: inline-block;
+
+    padding: 12px 24px;
+
+    background: #009100;
+
+    color: var(--branco);
+
+    text-decoration: none;
+
+    border-radius: 50px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.botao-novo:hover {
+    background: #006d00;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 145, 0, 0.25);
+}
+
+
+/* =========================================================
+   ÁREA DA TABELA
+========================================================= */
+
+.tabela-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 15px;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.tabela-hoteis {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: var(--branco);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+========================================================= */
+
+.tabela-hoteis thead {
+    background: #1a2b4b;
+}
+
+.tabela-hoteis th {
+    padding: 16px 14px;
+
+    color: var(--branco);
+
+    text-align: left;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CORPO DA TABELA
+========================================================= */
+
+.tabela-hoteis td {
+    padding: 15px 14px;
+
+    color: var(--cinza);
+
+    border-bottom: 1px solid #eeeeee;
+
+    vertical-align: middle;
+}
+
+
+/* =========================================================
+   HOVER DAS LINHAS
+========================================================= */
+
+.tabela-hoteis tbody tr {
+    transition: background 0.2s ease;
+}
+
+.tabela-hoteis tbody tr:hover {
+    background: #f7f9f8;
+}
+
+.tabela-hoteis tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   ID
+========================================================= */
+
+.tabela-hoteis td:first-child {
+    font-weight: 600;
+
+    color: #1a2b4b;
+}
+
+
+/* =========================================================
+   STATUS SIM
+========================================================= */
+
+.status-sim {
+    display: inline-block;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    background: #e7f6e7;
+
+    color: #008000;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS NÃO
+========================================================= */
+
+.status-nao {
+    display: inline-block;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    background: #f5eeee;
+
+    color: #b33a3a;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ÁREA DE AÇÕES
+========================================================= */
+
+.acoes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+
+/* =========================================================
+   BOTÃO EDITAR
+========================================================= */
+
+.editar {
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    background: #eef4ff;
+
+    color: #1a5fb4;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.editar:hover {
+    background: #dceaff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO EXCLUIR
+========================================================= */
+
+.excluir {
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    background: #fff0f0;
+
+    color: #c0392b;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.excluir:hover {
+    background: #ffe0e0;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVO - TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .hoteis-container {
+        width: 94%;
+
+        padding-top: 180px;
+
+        padding-bottom: 60px;
+    }
+
+    .hoteis-painel {
+        padding: 25px;
+    }
+
+    .tabela-wrapper {
+        overflow-x: auto;
+    }
+
+    .tabela-hoteis {
+        min-width: 1100px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO - CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .hoteis-container {
+        width: 94%;
+
+        padding-top: 220px;
+
+        padding-bottom: 40px;
+    }
+
+    .hoteis-painel {
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+    .hoteis-topo {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .hoteis-titulo {
+        font-size: 26px;
+
+        text-align: center;
+    }
+
+    .botao-novo {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .tabela-hoteis {
+        min-width: 1100px;
+    }
+}

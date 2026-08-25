@@ -19,7 +19,7 @@ class Conexao
  
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
-            return $pdo;
+             return $pdo;
  
         } catch (PDOException $e) {
  
