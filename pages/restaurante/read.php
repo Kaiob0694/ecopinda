@@ -41,6 +41,20 @@ include "../../includes/head.php";
 
             </div>
 
+
+            <!-- =================================================
+                 CADASTRAR (SOMENTE MASTER)
+            ================================================== -->
+
+            <?php if ($usuarioMaster): ?>
+
+                <a href="create.php" class="restaurante-botao-cadastrar">
+                    + Cadastrar Restaurante
+                </a>
+
+            <?php endif; ?>
+
+
         </div>
 
 

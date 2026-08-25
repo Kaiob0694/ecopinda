@@ -1,6 +1,6 @@
 /* =========================================================
    PINDA ECO TOUR
-   PÁGINA PÚBLICA DE HOTÉIS
+   PÁGINA PÚBLICA DE RESTAURANTES
    ========================================================= */
 
 
@@ -8,7 +8,7 @@
    CONTAINER PRINCIPAL
    ========================================================= */
 
-.hoteis-container {
+.restaurantes-container {
     width: 100%;
     min-height: 100vh;
 
@@ -22,7 +22,7 @@
    CONTEÚDO
    ========================================================= */
 
-.hoteis-conteudo {
+.restaurantes-conteudo {
     width: 100%;
     max-width: 1300px;
 
@@ -34,11 +34,82 @@
    TOPO
    ========================================================= */
 
-.hoteis-topo {
+.restaurantes-topo {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
     margin-bottom: 30px;
 }
 
-.hoteis-titulo {
+
+/* =========================================================
+   BOTÃO CADASTRAR (MASTER)
+   ========================================================= */
+
+.restaurante-botao-cadastrar {
+    display: inline-flex;
+    flex-shrink: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--verde),
+            #075c0b
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.restaurante-botao-cadastrar:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 8px 18px
+        rgba(0, 120, 30, 0.20);
+}
+
+.restaurante-botao-cadastrar:active {
+    transform: translateY(0);
+}
+
+
+@media (max-width: 700px) {
+
+    .restaurante-botao-cadastrar {
+        width: 100%;
+    }
+}
+
+.restaurantes-titulo {
     margin: 0;
 
     color: #222222;
@@ -49,7 +120,7 @@
     line-height: 1.2;
 }
 
-.hoteis-titulo::after {
+.restaurantes-titulo::after {
     content: "";
 
     display: block;
@@ -68,7 +139,7 @@
     );
 }
 
-.hoteis-subtitulo {
+.restaurantes-subtitulo {
     margin: 12px 0 0;
 
     color: #666666;
@@ -83,7 +154,7 @@
    QUANTIDADE
    ========================================================= */
 
-.hoteis-quantidade {
+.restaurantes-quantidade {
     margin-bottom: 20px;
 
     color: #777777;
@@ -96,7 +167,7 @@
    GRID
    ========================================================= */
 
-.hoteis-grid {
+.restaurantes-grid {
     display: grid;
 
     grid-template-columns:
@@ -112,7 +183,7 @@
    CARD
    ========================================================= */
 
-.hotel-card {
+.restaurante-card {
     display: flex;
     flex-direction: column;
 
@@ -134,7 +205,7 @@
         box-shadow 0.25s ease;
 }
 
-.hotel-card:hover {
+.restaurante-card:hover {
     transform: translateY(-5px);
 
     box-shadow:
@@ -146,7 +217,7 @@
    IMAGEM
    ========================================================= */
 
-.hotel-imagem-container {
+.restaurante-imagem-container {
     width: 100%;
     height: 220px;
 
@@ -155,7 +226,7 @@
     background: #f2f2f2;
 }
 
-.hotel-imagem {
+.restaurante-imagem {
     display: block;
 
     width: 100%;
@@ -167,7 +238,7 @@
         transform 0.4s ease;
 }
 
-.hotel-card:hover .hotel-imagem {
+.restaurante-card:hover .restaurante-imagem {
     transform: scale(1.04);
 }
 
@@ -176,7 +247,7 @@
    SEM FOTO
    ========================================================= */
 
-.hotel-imagem-placeholder {
+.restaurante-imagem-placeholder {
     display: flex;
 
     align-items: center;
@@ -202,7 +273,7 @@
    INFORMAÇÕES
    ========================================================= */
 
-.hotel-info {
+.restaurante-info {
     display: flex;
     flex-direction: column;
 
@@ -216,7 +287,7 @@
    NOME
    ========================================================= */
 
-.hotel-nome {
+.restaurante-nome {
     margin: 0;
 
     color: #222222;
@@ -232,7 +303,7 @@
    CIDADE
    ========================================================= */
 
-.hotel-cidade {
+.restaurante-cidade {
     display: inline-flex;
     align-items: center;
 
@@ -258,7 +329,7 @@
    ENDEREÇO
    ========================================================= */
 
-.hotel-localizacao {
+.restaurante-localizacao {
     margin: 13px 0 0;
 
     color: #666666;
@@ -273,7 +344,7 @@
    TELEFONE
    ========================================================= */
 
-.hotel-telefone {
+.restaurante-telefone {
     margin: 9px 0 0;
 
     color: #555555;
@@ -286,7 +357,7 @@
    CARACTERÍSTICAS
    ========================================================= */
 
-.hotel-caracteristicas {
+.restaurante-caracteristicas {
     display: flex;
 
     flex-wrap: wrap;
@@ -296,7 +367,7 @@
     margin-top: 16px;
 }
 
-.hotel-caracteristica {
+.restaurante-caracteristica {
     display: inline-flex;
 
     align-items: center;
@@ -318,7 +389,7 @@
    RODAPÉ DO CARD
    ========================================================= */
 
-.hotel-footer {
+.restaurante-footer {
     display: flex;
 
     flex-direction: column;
@@ -334,7 +405,7 @@
    BOTÃO DE CONTATO
    ========================================================= */
 
-.hotel-botao {
+.restaurante-botao {
     display: inline-flex;
 
     align-items: center;
@@ -367,7 +438,7 @@
         box-shadow 0.2s ease;
 }
 
-.hotel-botao:hover {
+.restaurante-botao:hover {
     transform: translateY(-2px);
 
     filter: brightness(1.05);
@@ -377,7 +448,7 @@
         rgba(0, 120, 30, 0.20);
 }
 
-.hotel-botao:active {
+.restaurante-botao:active {
     transform: translateY(0);
 }
 
@@ -386,7 +457,7 @@
    AÇÕES DO MASTER
    ========================================================= */
 
-.hotel-acoes {
+.restaurante-acoes {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -401,8 +472,8 @@
    BOTÕES EDITAR / EXCLUIR
    ========================================================= */
 
-.hotel-editar,
-.hotel-excluir {
+.restaurante-editar,
+.restaurante-excluir {
     display: inline-flex;
 
     align-items: center;
@@ -430,7 +501,7 @@
    EDITAR
    ========================================================= */
 
-.hotel-editar {
+.restaurante-editar {
     background: #fff7df;
 
     border: 1px solid #f0d27a;
@@ -438,7 +509,7 @@
     color: #806000;
 }
 
-.hotel-editar:hover {
+.restaurante-editar:hover {
     background: #ffedb8;
 
     box-shadow:
@@ -452,7 +523,7 @@
    EXCLUIR
    ========================================================= */
 
-.hotel-excluir {
+.restaurante-excluir {
     background: #fff0f0;
 
     border: 1px solid #efb0b0;
@@ -460,7 +531,7 @@
     color: #b42323;
 }
 
-.hotel-excluir:hover {
+.restaurante-excluir:hover {
     background: #ffdcdc;
 
     box-shadow:
@@ -471,10 +542,10 @@
 
 
 /* =========================================================
-   NENHUM HOTEL
+   NENHUM RESTAURANTE
    ========================================================= */
 
-.hoteis-vazio {
+.restaurantes-vazio {
     display: flex;
 
     flex-direction: column;
@@ -495,7 +566,7 @@
     text-align: center;
 }
 
-.hoteis-vazio h3 {
+.restaurantes-vazio h3 {
     margin: 0 0 8px;
 
     color: #333333;
@@ -503,7 +574,7 @@
     font-size: 20px;
 }
 
-.hoteis-vazio p {
+.restaurantes-vazio p {
     margin: 0;
 
     color: #777777;
@@ -518,14 +589,14 @@
 
 @media (max-width: 1050px) {
 
-    .hoteis-container {
+    .restaurantes-container {
         padding:
             130px
             25px
             60px;
     }
 
-    .hoteis-grid {
+    .restaurantes-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
@@ -538,28 +609,28 @@
 
 @media (max-width: 700px) {
 
-    .hoteis-container {
+    .restaurantes-container {
         padding:
             120px
             16px
             45px;
     }
 
-    .hoteis-titulo {
+    .restaurantes-titulo {
         font-size: 28px;
     }
 
-    .hoteis-subtitulo {
+    .restaurantes-subtitulo {
         font-size: 15px;
     }
 
-    .hoteis-grid {
+    .restaurantes-grid {
         grid-template-columns: 1fr;
 
         gap: 20px;
     }
 
-    .hotel-imagem-container {
+    .restaurante-imagem-container {
         height: 210px;
     }
 }
@@ -571,24 +642,24 @@
 
 @media (max-width: 400px) {
 
-    .hoteis-container {
+    .restaurantes-container {
         padding-left: 12px;
         padding-right: 12px;
     }
 
-    .hoteis-titulo {
+    .restaurantes-titulo {
         font-size: 25px;
     }
 
-    .hotel-info {
+    .restaurante-info {
         padding: 17px;
     }
 
-    .hotel-nome {
+    .restaurante-nome {
         font-size: 18px;
     }
 
-    .hotel-acoes {
+    .restaurante-acoes {
         grid-template-columns: 1fr;
     }
 }
@@ -600,19 +671,19 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    .hotel-card,
-    .hotel-imagem,
-    .hotel-botao,
-    .hotel-editar,
-    .hotel-excluir {
+    .restaurante-card,
+    .restaurante-imagem,
+    .restaurante-botao,
+    .restaurante-editar,
+    .restaurante-excluir {
         transition: none;
     }
 }
 /* =========================================================
-   GALERIA DE FOTOS DOS HOTÉIS
+   GALERIA DE FOTOS DOS RESTAURANTES
    ========================================================= */
 
-.hotel-imagem-container {
+.restaurante-imagem-container {
     position: relative;
     width: 100%;
     height: 220px;
@@ -620,14 +691,14 @@
     background: #f2f2f2;
 }
 
-.hotel-galeria {
+.restaurante-galeria {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-.hotel-galeria .hotel-imagem {
+.restaurante-galeria .restaurante-imagem {
     position: absolute;
 
     top: 0;
@@ -645,7 +716,7 @@
     transition: opacity .35s ease;
 }
 
-.hotel-galeria .hotel-imagem.ativa {
+.restaurante-galeria .restaurante-imagem.ativa {
     opacity: 1;
     pointer-events: auto;
 }
@@ -732,13 +803,13 @@
    DETALHES DE FUNDO
    ========================================================= */
 
-.hoteis-container {
+.restaurantes-container {
     position: relative;
     overflow: hidden;
 }
 
-.hoteis-container::before,
-.hoteis-container::after {
+.restaurantes-container::before,
+.restaurantes-container::after {
     content: "";
 
     position: absolute;
@@ -753,7 +824,7 @@
 }
 
 /* blob verde, canto superior direito */
-.hoteis-container::before {
+.restaurantes-container::before {
     top: -120px;
     right: -100px;
 
@@ -768,7 +839,7 @@
 }
 
 /* blob laranja/amarelo, canto inferior esquerdo */
-.hoteis-container::after {
+.restaurantes-container::after {
     bottom: -140px;
     left: -120px;
 
@@ -783,7 +854,7 @@
 }
 
 /* garante que o conteúdo fique acima dos blobs */
-.hoteis-conteudo {
+.restaurantes-conteudo {
     position: relative;
     z-index: 1;
 }
@@ -791,8 +862,8 @@
 /* some no celular pra não pesar visualmente */
 @media (max-width: 700px) {
 
-    .hoteis-container::before,
-    .hoteis-container::after {
+    .restaurantes-container::before,
+    .restaurantes-container::after {
         display: none;
     }
 
@@ -800,8 +871,8 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    .hoteis-container::before,
-    .hoteis-container::after {
+    .restaurantes-container::before,
+    .restaurantes-container::after {
         filter: blur(60px);
     }
 
