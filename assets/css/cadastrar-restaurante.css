@@ -1,7 +1,7 @@
 /* =========================================================
    PINDA ECO TOUR — CADASTRO DE RESTAURANTE
    Fundo branco
-   Estilo baseado na página de Cadastro de Hotel
+   Estilo baseado na página de Restaurantes
    ========================================================= */
 
 
@@ -10,7 +10,6 @@
 ========================================================= */
 
 .cadastro-restaurante-container {
-
     position: relative;
     z-index: 5;
 
@@ -32,7 +31,6 @@
 ========================================================= */
 
 .cadastro-restaurante-painel {
-
     position: relative;
 
     width: 100%;
@@ -60,7 +58,6 @@
 ========================================================= */
 
 .cadastro-restaurante-painel::before {
-
     content: "";
 
     position: absolute;
@@ -87,18 +84,15 @@
 @keyframes cadastroRestauranteFadeIn {
 
     from {
-
         opacity: 0;
-
         transform: translateY(14px);
     }
 
     to {
-
         opacity: 1;
-
         transform: translateY(0);
     }
+
 }
 
 
@@ -107,7 +101,6 @@
 ========================================================= */
 
 .cadastro-restaurante-topo {
-
     margin-bottom: 30px;
 }
 
@@ -117,7 +110,6 @@
 ========================================================= */
 
 .cadastro-restaurante-titulo {
-
     margin: 0;
 
     color: #222222;
@@ -160,7 +152,6 @@
 ========================================================= */
 
 .formulario-restaurante {
-
     width: 100%;
 }
 
@@ -199,7 +190,6 @@
 ========================================================= */
 
 .campo-restaurante.largo {
-
     grid-column: 1 / -1;
 }
 
@@ -227,7 +217,6 @@
 ========================================================= */
 
 .campo-restaurante .obrigatorio {
-
     color: var(--laranja);
 }
 
@@ -410,7 +399,7 @@
 
 
 /* =========================================================
-   ACTIVE BOTÃO SALVAR
+   ACTIVE
 ========================================================= */
 
 .botao-salvar-restaurante:active {

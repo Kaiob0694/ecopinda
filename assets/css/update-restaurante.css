@@ -1,0 +1,190 @@
+/* =========================================================
+   DICA DO CAMPO DE ARQUIVO
+   ========================================================= */
+
+.campo-restaurante-dica {
+    color: #888888;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   ALERTA DE ERRO (UPLOAD DE FOTOS)
+   ========================================================= */
+
+.alerta-restaurante {
+    margin-bottom: 26px;
+
+    padding: 16px 18px;
+
+    border-radius: 14px;
+}
+
+.alerta-restaurante-erro {
+    background: #fff5f5;
+
+    border: 1px solid #f0b8b8;
+}
+
+.alerta-restaurante-titulo {
+    margin: 0 0 8px;
+
+    color: #b42323;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.alerta-restaurante-lista {
+    margin: 0;
+    padding-left: 20px;
+
+    color: #a33;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOTOS ATUAIS
+   ========================================================= */
+
+.fotos-atuais-restaurante {
+    margin-bottom: 32px;
+
+    padding-bottom: 28px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.fotos-atuais-restaurante-titulo {
+    margin: 0 0 16px;
+
+    color: #222222;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+
+/* =========================================================
+   GALERIA
+   ========================================================= */
+
+.galeria-fotos-restaurante {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(150px, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   ITEM DA GALERIA
+   ========================================================= */
+
+.foto-restaurante-item {
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    border: 1px solid #eeeeee;
+
+    background: #fafafa;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.foto-restaurante-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   IMAGEM
+   ========================================================= */
+
+.foto-restaurante-imagem {
+    display: block;
+
+    width: 100%;
+    height: 120px;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   EXCLUIR FOTO
+   ========================================================= */
+
+.foto-restaurante-excluir {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 6px;
+
+    background: #fff0f0;
+
+    border-top: 1px solid #efb0b0;
+
+    color: #b42323;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        background .2s ease;
+}
+
+.foto-restaurante-excluir:hover {
+    background: #ffdcdc;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .galeria-fotos-restaurante {
+        grid-template-columns:
+            repeat(auto-fill, minmax(120px, 1fr));
+
+        gap: 12px;
+    }
+
+    .foto-restaurante-imagem {
+        height: 100px;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .foto-restaurante-item,
+    .foto-restaurante-excluir {
+        transition: none;
+    }
+}

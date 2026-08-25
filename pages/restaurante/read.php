@@ -18,24 +18,24 @@ include "../../includes/head.php";
 
 <link rel="stylesheet" href="/ecopinda/assets/css/restaurante.css">
 
-<div class="hoteis-container">
+<div class="restaurantes-container">
 
-    <div class="hoteis-conteudo">
+    <div class="restaurantes-conteudo">
 
         <!-- =====================================================
              CABEÇALHO
         ====================================================== -->
 
-        <div class="hoteis-topo">
+        <div class="restaurantes-topo">
 
             <div>
 
-                <h1 class="hoteis-titulo">
+                <h1 class="restaurantes-titulo">
                     Restaurantes
                 </h1>
 
-                <p class="hoteis-subtitulo">
-                    Encontre os melhores Restaurantes de
+                <p class="restaurantes-subtitulo">
+                    Encontre os melhores restaurantes de
                     Pindamonhangaba e região.
                 </p>
 
@@ -45,23 +45,23 @@ include "../../includes/head.php";
 
 
         <!-- =====================================================
-             QUANTIDADE DE HOTÉIS
+             QUANTIDADE DE RESTAURANTES
         ====================================================== -->
 
-        <div class="hoteis-quantidade">
+        <div class="restaurantes-quantidade">
 
             <?php if (!empty($dados)): ?>
 
                 <?= count($dados) ?>
 
                 <?= count($dados) === 1
-                    ? 'hotel encontrado'
-                    : 'hotéis encontrados'
+                    ? 'restaurante encontrado'
+                    : 'restaurantes encontrados'
                 ?>
 
             <?php else: ?>
 
-                Nenhum Restaurante encontrado
+                Nenhum restaurante encontrado
 
             <?php endif; ?>
 
@@ -69,24 +69,24 @@ include "../../includes/head.php";
 
 
         <!-- =====================================================
-             GRID DE HOTÉIS
+             GRID DE RESTAURANTES
         ====================================================== -->
 
         <?php if (!empty($dados)): ?>
 
-            <div class="hoteis-grid">
+            <div class="restaurantes-grid">
 
                 <?php foreach ($dados as $linha): ?>
 
                     <?php
 
                     /*
-                     * Busca as fotos do hotel.
+                     * Busca as fotos do restaurante.
                      * Será utilizada a primeira foto cadastrada.
                      */
 
                     $fotosRestaurante =
-                        $hotelFoto->listarPorRestaurante($linha['id']);
+                        $restauranteFoto->listarPorRestaurante($linha['id']);
 
                     $primeiraFoto =
                         $fotosRestaurante[0]['caminho'] ?? null;
@@ -95,27 +95,27 @@ include "../../includes/head.php";
 
 
                     <!-- =================================================
-                         CARD DO HOTEL
+                         CARD DO RESTAURANTE
                     ================================================== -->
 
-                    <article class="hotel-card">
+                    <article class="restaurante-card">
 
 
                         <!-- =================================================
                              FOTO
                         ================================================== -->
 
-                        <div class="hotel-imagem-container">
+                        <div class="restaurante-imagem-container">
 
                             <?php if (!empty($fotosRestaurante)): ?>
 
-                                <div class="hotel-galeria">
+                                <div class="restaurante-galeria">
 
                                     <?php foreach ($fotosRestaurante as $indice => $foto): ?>
 
                                         <img
-                                            class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="/ecopinda/uploads/restaurante/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            class="restaurante-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
+                                            src="/ecopinda/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>
@@ -142,7 +142,7 @@ include "../../includes/head.php";
                                             <span class="galeria-atual">1</span>
 
                                             /
-                                            <?= count($fotosrestaurante) ?>
+                                            <?= count($fotosRestaurante) ?>
 
                                         </span>
 
@@ -152,7 +152,7 @@ include "../../includes/head.php";
 
                             <?php else: ?>
 
-                                <div class="hotel-imagem-placeholder">
+                                <div class="restaurante-imagem-placeholder">
 
                                     <span>
                                         Foto não disponível
@@ -166,17 +166,17 @@ include "../../includes/head.php";
 
 
                         <!-- =================================================
-                             INFORMAÇÕES DO HOTEL
+                             INFORMAÇÕES DO RESTAURANTE
                         ================================================== -->
 
-                        <div class="hotel-info">
+                        <div class="restaurante-info">
 
 
                             <!-- =================================================
                                  NOME
                             ================================================== -->
 
-                            <h2 class="hotel-nome">
+                            <h2 class="restaurante-nome">
 
                                 <?= htmlspecialchars($linha['nome']) ?>
 
@@ -187,7 +187,7 @@ include "../../includes/head.php";
                                  CIDADE
                             ================================================== -->
 
-                            <span class="hotel-cidade">
+                            <span class="restaurante-cidade">
 
                                 📍
                                 <?= htmlspecialchars($linha['cidade']) ?>
@@ -199,11 +199,15 @@ include "../../includes/head.php";
                                  ENDEREÇO
                             ================================================== -->
 
-                            <?php if (!empty($linha['endereco'])): ?>
+                            <?php if (!empty($linha['logradouro'])): ?>
 
-                                <p class="hotel-localizacao">
+                                <p class="restaurante-localizacao">
 
-                                    <?= htmlspecialchars($linha['endereco']) ?>
+                                    <?= htmlspecialchars($linha['logradouro']) ?>
+
+                                    <?php if (!empty($linha['numero'])): ?>
+                                        , <?= htmlspecialchars($linha['numero']) ?>
+                                    <?php endif; ?>
 
                                 </p>
 
@@ -216,7 +220,7 @@ include "../../includes/head.php";
 
                             <?php if (!empty($linha['telefone'])): ?>
 
-                                <p class="hotel-telefone">
+                                <p class="restaurante-telefone">
 
                                     📞
                                     <?= htmlspecialchars($linha['telefone']) ?>
@@ -230,14 +234,14 @@ include "../../includes/head.php";
                                  CARACTERÍSTICAS
                             ================================================== -->
 
-                            <div class="hotel-caracteristicas">
+                            <div class="restaurante-caracteristicas">
 
 
                                 <!-- WI-FI -->
 
                                 <?php if ($linha['possui_wifi']): ?>
 
-                                    <span class="hotel-caracteristica">
+                                    <span class="restaurante-caracteristica">
 
                                         ✓ Wi-Fi
 
@@ -246,32 +250,43 @@ include "../../includes/head.php";
                                 <?php endif; ?>
 
 
-                                <!-- ESTACIONAMENTO -->
+                                <!-- DELIVERY -->
 
-                                <?php if ($linha['possui_estacionamento']): ?>
+                                <?php if ($linha['possui_delivery']): ?>
 
-                                    <span class="hotel-caracteristica">
+                                    <span class="restaurante-caracteristica">
 
-                                        ✓ Estacionamento
+                                        ✓ Delivery
 
                                     </span>
 
                                 <?php endif; ?>
 
 
-                                <!-- QUARTOS -->
+                                <!-- CATEGORIA -->
 
-                                <?php if (!empty($linha['quantidade_quartos'])): ?>
+                                <?php if (!empty($linha['categoria'])): ?>
 
-                                    <span class="hotel-caracteristica">
+                                    <span class="restaurante-caracteristica">
 
-                                        🛏️
+                                        🍽️
 
-                                        <?= htmlspecialchars(
-                                            $linha['quantidade_quartos']
-                                        ) ?>
+                                        <?= htmlspecialchars($linha['categoria']) ?>
 
-                                        quartos
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                                <!-- HORÁRIO DE FUNCIONAMENTO -->
+
+                                <?php if (!empty($linha['horario_funcionamento'])): ?>
+
+                                    <span class="restaurante-caracteristica">
+
+                                        🕒
+
+                                        <?= htmlspecialchars($linha['horario_funcionamento']) ?>
 
                                     </span>
 
@@ -285,7 +300,7 @@ include "../../includes/head.php";
                                  RODAPÉ
                             ================================================== -->
 
-                            <div class="hotel-footer">
+                            <div class="restaurante-footer">
 
 
                                 <!-- =================================================
@@ -295,7 +310,7 @@ include "../../includes/head.php";
                                 <?php if (!empty($linha['telefone'])): ?>
 
                                     <a
-                                        class="hotel-botao"
+                                        class="restaurante-botao"
                                         href="tel:<?= htmlspecialchars($linha['telefone']) ?>">
 
                                         Entrar em contato
@@ -311,13 +326,13 @@ include "../../includes/head.php";
 
                                 <?php if ($usuarioMaster): ?>
 
-                                    <div class="hotel-acoes">
+                                    <div class="restaurante-acoes">
 
                                         <!-- EDITAR -->
 
                                         <a
                                             href="update.php?id=<?= (int) $linha['id'] ?>"
-                                            class="hotel-editar">
+                                            class="restaurante-editar">
 
                                             Editar
 
@@ -328,8 +343,8 @@ include "../../includes/head.php";
 
                                         <a
                                             href="delete.php?id=<?= (int) $linha['id'] ?>"
-                                            class="hotel-excluir"
-                                            onclick="return confirm('Deseja realmente excluir este hotel?')">
+                                            class="restaurante-excluir"
+                                            onclick="return confirm('Deseja realmente excluir este restaurante?')">
 
                                             Excluir
 
@@ -355,10 +370,10 @@ include "../../includes/head.php";
 
 
             <!-- =====================================================
-                 NENHUM HOTEL CADASTRADO
+                 NENHUM RESTAURANTE CADASTRADO
             ====================================================== -->
 
-            <div class="hoteis-vazio">
+            <div class="restaurantes-vazio">
 
                 <h3>
 
@@ -368,7 +383,7 @@ include "../../includes/head.php";
 
                 <p>
 
-                    No momento não existem restaurante disponíveis
+                    No momento não existem restaurantes disponíveis
                     para consulta.
 
                 </p>
@@ -383,7 +398,7 @@ include "../../includes/head.php";
 </div>
 
 
-<script src="/ecopinda/assets/js/hoteis.js"></script>
+<script src="/ecopinda/assets/js/restaurante.js"></script>
 
 <?php
 

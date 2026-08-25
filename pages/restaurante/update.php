@@ -1,34 +1,35 @@
 <?php
 
-require_once "../../classes/hoteis.php";
-require_once "../../classes/hotel_fotos.php";
-require_once "../../includes/upload_fotos_hotel.php";
+require_once "../../classes/restaurante.php";
+require_once "../../classes/restaurante_fotos.php";
+require_once "../../includes/upload_fotos_restaurante.php";
 
-$hotel = new Hotel();
-$hotelFoto = new HotelFoto();
+$restaurante = new Restaurante();
+$restauranteFoto = new RestauranteFoto();
 $errosFotos = [];
 
 $id = $_GET['id'];
 
-$dados = $hotel->buscarPorId($id);
+$dados = $restaurante->buscarPorId($id);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $hotel->editar(
+    $restaurante->editar(
         $id,
         $_POST['nome'],
-        $_POST['endereco'],
+        $_POST['logradouro'],
+        $_POST['numero'],
         $_POST['cidade'],
-        $_POST['estado'],
         $_POST['cep'],
         $_POST['telefone'],
         $_POST['email'],
-        $_POST['quantidade_quartos'],
+        $_POST['categoria'],
+        $_POST['possui_delivery'],
         $_POST['possui_wifi'],
-        $_POST['possui_estacionamento'],
+        $_POST['horario_funcionamento'],
         $_POST['data_cadastro']
     );
 
-    $errosFotos = salvarFotosHotel($id);
+    $errosFotos = salvarFotosRestaurante($id);
 
     if (empty($errosFotos)) {
         header("Location: read.php");
@@ -36,31 +37,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Recarrega os dados atualizados para exibir o formulário de novo.
-    $dados = $hotel->buscarPorId($id);
+    $dados = $restaurante->buscarPorId($id);
 }
 
-$fotos = $hotelFoto->listarPorHotel($id);
+$fotos = $restauranteFoto->listarPorRestaurante($id);
 
 include "../../includes/head.php";
 include "../../includes/header.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-hotel.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/update-hotel.css">
+<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-restaurante.css">
+<link rel="stylesheet" href="/ecopinda/assets/css/update-restaurante.css">
 
-<div class="cadastro-hotel-container">
+<div class="cadastro-restaurante-container">
 
-    <div class="cadastro-hotel-painel">
+    <div class="cadastro-restaurante-painel">
 
         <!-- =====================================================
              TOPO
         ====================================================== -->
 
-        <div class="cadastro-hotel-topo">
+        <div class="cadastro-restaurante-topo">
 
-            <h1 class="cadastro-hotel-titulo">
-                Editar Hotel
+            <h1 class="cadastro-restaurante-titulo">
+                Editar Restaurante
             </h1>
 
         </div>
@@ -72,14 +73,14 @@ include "../../includes/header.php";
 
         <?php if (!empty($errosFotos)): ?>
 
-            <div class="alerta-hotel alerta-hotel-erro">
+            <div class="alerta-restaurante alerta-restaurante-erro">
 
-                <p class="alerta-hotel-titulo">
-                    O hotel foi atualizado, mas houve problema
+                <p class="alerta-restaurante-titulo">
+                    O restaurante foi atualizado, mas houve problema
                     com algumas fotos:
                 </p>
 
-                <ul class="alerta-hotel-lista">
+                <ul class="alerta-restaurante-lista">
 
                     <?php foreach ($errosFotos as $erro): ?>
 
@@ -100,26 +101,26 @@ include "../../includes/header.php";
 
         <?php if (!empty($fotos)): ?>
 
-            <div class="fotos-atuais-hotel">
+            <div class="fotos-atuais-restaurante">
 
-                <h3 class="fotos-atuais-hotel-titulo">
+                <h3 class="fotos-atuais-restaurante-titulo">
                     Fotos atuais
                 </h3>
 
-                <div class="galeria-fotos-hotel">
+                <div class="galeria-fotos-restaurante">
 
                     <?php foreach ($fotos as $foto): ?>
 
-                        <div class="foto-hotel-item">
+                        <div class="foto-restaurante-item">
 
                             <img
-                                class="foto-hotel-imagem"
-                                src="../../uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
-                                alt="Foto do hotel">
+                                class="foto-restaurante-imagem"
+                                src="../../uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
+                                alt="Foto do restaurante">
 
 
-                            <a href="delete_foto.php?id=<?= $foto['id'] ?>&id_hotel=<?= $id ?>"
-                            class="foto-hotel-excluir"
+                            <a href="delete_foto.php?id=<?= $foto['id'] ?>&id_restaurante=<?= $id ?>"
+                            class="foto-restaurante-excluir"
                             onclick="return confirm('Excluir esta foto?')">
                             Excluir foto
                             </a>
@@ -142,11 +143,11 @@ include "../../includes/header.php";
         <form
             method="POST"
             enctype="multipart/form-data"
-            class="formulario-hotel">
+            class="formulario-restaurante">
 
-            <div class="formulario-hotel-grid">
+            <div class="formulario-restaurante-grid">
 
-                <div class="campo-hotel">
+                <div class="campo-restaurante">
                     <label>Nome <span class="obrigatorio">*</span></label>
                     <input
                         type="text"
@@ -155,7 +156,7 @@ include "../../includes/header.php";
                         required>
                 </div>
 
-                <div class="campo-hotel">
+                <div class="campo-restaurante">
                     <label>Cidade <span class="obrigatorio">*</span></label>
                     <input
                         type="text"
@@ -164,35 +165,32 @@ include "../../includes/header.php";
                         required>
                 </div>
 
-                <div class="campo-hotel largo">
-                    <label>Endereço <span class="obrigatorio">*</span></label>
+                <div class="campo-restaurante largo">
+                    <label>Logradouro <span class="obrigatorio">*</span></label>
                     <input
                         type="text"
-                        name="endereco"
-                        value="<?= htmlspecialchars($dados['endereco']); ?>"
+                        name="logradouro"
+                        value="<?= htmlspecialchars($dados['logradouro']); ?>"
                         required>
                 </div>
 
-                <div class="campo-hotel">
-                    <label>Estado <span class="obrigatorio">*</span></label>
+                <div class="campo-restaurante">
+                    <label>Número</label>
                     <input
-                        type="text"
-                        name="estado"
-                        maxlength="50"
-                        value="<?= htmlspecialchars($dados['estado']); ?>"
-                        required>
+                        type="number"
+                        name="numero"
+                        value="<?= htmlspecialchars($dados['numero']); ?>">
                 </div>
 
-                <div class="campo-hotel">
-                    <label>CEP <span class="obrigatorio">*</span></label>
+                <div class="campo-restaurante">
+                    <label>CEP</label>
                     <input
                         type="text"
                         name="cep"
-                        value="<?= htmlspecialchars($dados['cep']); ?>"
-                        required>
+                        value="<?= htmlspecialchars($dados['cep']); ?>">
                 </div>
 
-                <div class="campo-hotel">
+                <div class="campo-restaurante">
                     <label>Telefone</label>
                     <input
                         type="text"
@@ -200,7 +198,7 @@ include "../../includes/header.php";
                         value="<?= htmlspecialchars($dados['telefone']); ?>">
                 </div>
 
-                <div class="campo-hotel">
+                <div class="campo-restaurante">
                     <label>Email</label>
                     <input
                         type="email"
@@ -208,15 +206,31 @@ include "../../includes/header.php";
                         value="<?= htmlspecialchars($dados['email']); ?>">
                 </div>
 
-                <div class="campo-hotel">
-                    <label>Quantidade de Quartos</label>
+                <div class="campo-restaurante">
+                    <label>Categoria</label>
                     <input
-                        type="number"
-                        name="quantidade_quartos"
-                        value="<?= htmlspecialchars($dados['quantidade_quartos']); ?>">
+                        type="text"
+                        name="categoria"
+                        value="<?= htmlspecialchars($dados['categoria']); ?>">
                 </div>
 
-                <div class="campo-hotel">
+                <div class="campo-restaurante">
+                    <label>Horário de Funcionamento</label>
+                    <input
+                        type="text"
+                        name="horario_funcionamento"
+                        value="<?= htmlspecialchars($dados['horario_funcionamento']); ?>">
+                </div>
+
+                <div class="campo-restaurante">
+                    <label>Possui Delivery <span class="obrigatorio">*</span></label>
+                    <select name="possui_delivery" required>
+                        <option value="Sim" <?= $dados['possui_delivery'] ? 'selected' : '' ?>>Sim</option>
+                        <option value="Não" <?= !$dados['possui_delivery'] ? 'selected' : '' ?>>Não</option>
+                    </select>
+                </div>
+
+                <div class="campo-restaurante">
                     <label>Possui Wi-Fi <span class="obrigatorio">*</span></label>
                     <select name="possui_wifi" required>
                         <option value="Sim" <?= $dados['possui_wifi'] ? 'selected' : '' ?>>Sim</option>
@@ -224,15 +238,7 @@ include "../../includes/header.php";
                     </select>
                 </div>
 
-                <div class="campo-hotel">
-                    <label>Possui Estacionamento <span class="obrigatorio">*</span></label>
-                    <select name="possui_estacionamento" required>
-                        <option value="Sim" <?= $dados['possui_estacionamento'] ? 'selected' : '' ?>>Sim</option>
-                        <option value="Não" <?= !$dados['possui_estacionamento'] ? 'selected' : '' ?>>Não</option>
-                    </select>
-                </div>
-
-                <div class="campo-hotel">
+                <div class="campo-restaurante">
                     <label>Data de Cadastro <span class="obrigatorio">*</span></label>
                     <input
                         type="date"
@@ -241,14 +247,14 @@ include "../../includes/header.php";
                         required>
                 </div>
 
-                <div class="campo-hotel largo">
+                <div class="campo-restaurante largo">
                     <label>Adicionar novas fotos</label>
                     <input
                         type="file"
                         name="fotos[]"
                         accept=".jpg,.jpeg,.png,.webp"
                         multiple>
-                    <small class="campo-hotel-dica">
+                    <small class="campo-restaurante-dica">
                         Você pode selecionar várias fotos de uma vez
                         (JPG, PNG ou WEBP, até 5 MB cada).
                     </small>
@@ -261,13 +267,13 @@ include "../../includes/header.php";
                  AÇÕES
             ====================================================== -->
 
-            <div class="formulario-hotel-acoes">
+            <div class="formulario-restaurante-acoes">
 
-                <a href="read.php" class="botao-voltar-hotel">
+                <a href="read.php" class="botao-voltar-restaurante">
                     Cancelar
                 </a>
 
-                <button type="submit" class="botao-salvar-hotel">
+                <button type="submit" class="botao-salvar-restaurante">
                     Atualizar
                 </button>
 

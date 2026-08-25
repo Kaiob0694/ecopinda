@@ -1,12 +1,7 @@
 <?php
 require_once __DIR__ . "/../classes/hotel_fotos.php";
 
-/**
- * Salva as fotos enviadas em $_FILES['fotos'] (input com "multiple")
- * para o hotel indicado, gravando cada uma na tabela hotel_foto.
- *
- * Retorna um array com mensagens de erro (vazio se tudo correu bem).
- */
+
 function salvarFotosHotel($id_hotel, $campo = 'fotos')
 {
 
