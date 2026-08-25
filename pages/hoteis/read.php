@@ -10,16 +10,16 @@ require_once "../../classes/hoteis.php";
 $hotel = new Hotel();
 $dados = $hotel->listar();
 
-include "../../includes/header.php";
 include "../../includes/head.php";
+include "../../includes/header.php";
 
 ?>
-
+<link rel="stylesheet" href="../../assets/css/style_hoteis.css">
 <div class="container">
 
     <div class="card">
 
-        <h2>Lista de Hotéis</h2>
+        <h2 class="titulo">Lista de Hotéis</h2>
 
         <a href="create.php" class="botao-novo">
             Cadastrar Novo Hotel
@@ -36,6 +36,7 @@ include "../../includes/head.php";
             <th>Nome</th>
             <th>Endereço</th>
             <th>Cidade</th>
+            <th>Estado</th>
             <th>CEP</th>
             <th>Telefone</th>
             <th>Email</th>
@@ -50,10 +51,11 @@ include "../../includes/head.php";
 
         <tr>
 
-            <td><?= $linha['id_hoteis'] ?></td>
+            <td><?= $linha['id'] ?></td>
             <td><?= $linha['nome'] ?></td>
             <td><?= $linha['endereco'] ?></td>
             <td><?= $linha['cidade'] ?></td>
+            <td><?= $linha['estado'] ?></td>
             <td><?= $linha['cep'] ?></td>
             <td><?= $linha['telefone'] ?></td>
             <td><?= $linha['email'] ?></td>
@@ -65,12 +67,12 @@ include "../../includes/head.php";
            <td>
 
          <a class="editar"
-         href="editar.php?id=<?= $linha['id_hoteis'] ?>">
+         href="update.php?id=<?= $linha['id'] ?>">
          Editar
             </a>
 
          <a class="excluir"
-          href="excluir.php?id=<?= $linha['id_hoteis'] ?>"
+          href="delete.php?id=<?= $linha['id'] ?>"
           onclick="return confirm('Deseja realmente excluir este hotel?')">
          Excluir
             </a>

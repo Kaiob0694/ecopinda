@@ -27,7 +27,7 @@ class Hotel
     public function buscarPorId($id)
     {
 
-        $sql = "SELECT * FROM hotel WHERE id_hotel = :id";
+        $sql = "SELECT * FROM hotel WHERE id = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
@@ -42,6 +42,7 @@ class Hotel
         $nome,
         $endereco, 
         $cidade,
+        $estado, 
         $cep,
         $telefone,
         $email,
@@ -57,6 +58,7 @@ class Hotel
                 nome,
                 endereco, 
                 cidade,
+                estado,
                 cep,
                 telefone,
                 email,
@@ -70,6 +72,7 @@ class Hotel
                 :nome,
                 :endereco, 
                 :cidade,
+                :estado,
                 :cep,
                 :telefone,
                 :email,
@@ -81,10 +84,10 @@ class Hotel
         ";
 
         $stmt = $this->conexao->prepare($sql);
-
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':endereco', $endereco);
         $stmt->bindParam(':cidade', $cidade);
+        $stmt->bindParam(':estado', $estado);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
@@ -97,18 +100,20 @@ class Hotel
     }
 
     public function editar(
-        $nome,
-        $endereco,
-        $cidade,
-        $cep,
-        $telefone,
-        $email,
-        $quantidade_quartos,
-        $possui_wifi,
-        $possui_estacionamento,
-        $data_cadastro,
-        $id
-    ) {
+    $id,
+    $nome,
+    $endereco,
+    $cidade,
+    $estado,
+    $cep,
+    $telefone,
+    $email,
+    $quantidade_quartos,
+    $possui_wifi,
+    $possui_estacionamento,
+    $data_cadastro
+) {
+
 
         $sql = "
             UPDATE hotel
@@ -116,6 +121,7 @@ class Hotel
                 nome = :nome,
                 endereco = :endereco,
                 cidade = :cidade,
+                estado = :estado,
                 cep = :cep,
                 telefone = :telefone,
                 email = :email,
@@ -123,14 +129,15 @@ class Hotel
                 possui_wifi = :possui_wifi,
                 possui_estacionamento = :possui_estacionamento,
                 data_cadastro = :data_cadastro
-            WHERE id_hotel = :id
+            WHERE id  = :id
         ";
 
         $stmt = $this->conexao->prepare($sql);
-
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':endereco', $endereco);
         $stmt->bindParam(':cidade', $cidade);
+        $stmt->bindParam(':estado', $estado);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
@@ -138,7 +145,7 @@ class Hotel
         $stmt->bindParam(':possui_wifi', $possui_wifi);
         $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
         $stmt->bindParam(':data_cadastro', $data_cadastro);
-        $stmt->bindParam(':id', $id);
+       
 
         return $stmt->execute();
     }
@@ -146,7 +153,7 @@ class Hotel
     public function excluir($id)
     {
 
-        $sql = "DELETE FROM hotel WHERE id_hotel = :id";
+        $sql = "DELETE FROM hotel WHERE id  = :id";
 
         $stmt = $this->conexao->prepare($sql);
 

@@ -2,11 +2,11 @@
 
 require_once "../../classes/hoteis.php";
 
-$hoteis = new Hotéis();
+$hotel = new Hotel();
 
 $id = $_GET['id'];
 
-$hoteis->excluir($id);
-header("Location: hoteis.php");
-exit;
+$hotel->excluir($id);
 
+header("Location: read.php");
+exit;
