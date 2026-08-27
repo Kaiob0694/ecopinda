@@ -38,7 +38,7 @@ if (!function_exists('iniciaisHeader')) {
     <nav class="menu">
         <a href="../index.php">Início</a>
         <a href="/pages/cidade.php">Cidade</a>
-        <a href="#">Turismo</a>
+        <a href="/pages/turismo.php">Turismo</a>
         <a href="pages/hoteis/read.php">Hotéis</a>
         <a href="pages/restaurante.php">Restaurantes</a>
 
