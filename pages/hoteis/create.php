@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['quantidade_quartos'],
         $_POST['possui_wifi'],
         $_POST['possui_estacionamento'],
-        $_POST['data_cadastro']
+     
     );
 
     header("Location: read.php");
@@ -97,10 +97,7 @@ include "../../includes/head.php";
         </select>
     </p>
 
-    <p>
-        Data de Cadastro:<br>
-        <input type="date" name="data_cadastro" required>
-    </p>
+    
 
     <button type="submit">
         Salvar 

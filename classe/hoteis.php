@@ -110,8 +110,8 @@ class Hotel
     $email,
     $quantidade_quartos,
     $possui_wifi,
-    $possui_estacionamento,
-    $data_cadastro
+    $possui_estacionamento
+ 
 ) {
 
 
@@ -127,8 +127,7 @@ class Hotel
                 email = :email,
                 quantidade_quartos = :quantidade_quartos,
                 possui_wifi = :possui_wifi,
-                possui_estacionamento = :possui_estacionamento,
-                data_cadastro = :data_cadastro
+                possui_estacionamento = :possui_estacionamento
             WHERE id  = :id
         ";
 
@@ -144,7 +143,7 @@ class Hotel
         $stmt->bindParam(':quantidade_quartos', $quantidade_quartos);
         $stmt->bindParam(':possui_wifi', $possui_wifi);
         $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
-        $stmt->bindParam(':data_cadastro', $data_cadastro);
+        
        
 
         return $stmt->execute();

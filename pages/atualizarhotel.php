@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 
-require_once "../../classes/hoteis.php";
+require_once "../classe/hoteis.php";
 
 $hotel = new Hotel();
 
@@ -24,17 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['quantidade_quartos'],
         $_POST['possui_wifi'],
         $_POST['possui_estacionamento'],
-        $_POST['data_cadastro']
+    
 
     );
      
 
-    header("Location: read.php");
+    header("Location: hoteis.php");
     exit;
 }
 
-include "../../includes/header.php";
-include "../../includes/head.php";
+include "../includes/header.php";
+include "../includes/head.php";
 
 ?>
 
@@ -135,14 +135,7 @@ include "../../includes/head.php";
 </p>
      
 
-    <p>
-        Data de Cadastro:<br>
-        <input
-            type="date"
-            name="data_cadastro"
-            value="<?= $dados['data_cadastro']; ?>"
-            required>
-    </p>
+   
 
     <button type="submit">
         Atualizar

@@ -3,19 +3,21 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once "../../classes/hoteis.php";
+require_once "../classe/hoteis.php";
 
 $hotel = new Hotel();
 $dados = $hotel->listar();
 
-include "../../includes/head.php";
-include "../../includes/header.php";
+include "../includes/head.php";
+include "../includes/header.php";
 
 ?>
-<link rel="stylesheet" href="../../assets/css/style_hoteis.css">
+
+<link rel="stylesheet" href="../assets/css/style_hoteis.css">
+
 <div class="container">
 
-<div class="hoteis-container">
+    <div class="hoteis-container">
 
         <h2 class="titulo">Lista de Hotéis</h2>
 
@@ -25,55 +27,7 @@ include "../../includes/header.php";
                 Lista de Hotéis
             </h2>
 
-
-    <table border="1">
-
-        <tr>
-
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Endereço</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>CEP</th>
-            <th>Telefone</th>
-            <th>Email</th>
-            <th>Quantidade de Quartos</th>
-            <th>Possui Wi-Fi</th>
-            <th>Possui Estacionamento</th>
-            <th>Data de Cadastro</th>
-
-            </tr>
-
-    <?php foreach ($dados as $linha): ?>
-
-        <tr>
-
-            <td><?= $linha['id'] ?></td>
-            <td><?= $linha['nome'] ?></td>
-            <td><?= $linha['endereco'] ?></td>
-            <td><?= $linha['cidade'] ?></td>
-            <td><?= $linha['estado'] ?></td>
-            <td><?= $linha['cep'] ?></td>
-            <td><?= $linha['telefone'] ?></td>
-            <td><?= $linha['email'] ?></td>
-            <td><?= $linha['quantidade_quartos'] ?></td>
-            <td><?= $linha['possui_wifi'] ? 'Sim' : 'Não' ?></td>
-            <td><?= $linha['possui_estacionamento'] ? 'Sim' : 'Não' ?></td>
-            <td><?= $linha['data_cadastro'] ?></td>
-
-           <td>
-
-         <a class="editar"
-         href="update.php?id=<?= $linha['id'] ?>">
-         Editar
-            </a>
-
-         <a class="excluir"
-          href="delete.php?id=<?= $linha['id'] ?>"
-          onclick="return confirm('Deseja realmente excluir este hotel?')">
-         Excluir
-            </a>
+        </div>
 
         <div class="tabela-wrapper">
 
@@ -85,13 +39,13 @@ include "../../includes/header.php";
                         <th>Nome</th>
                         <th>Endereço</th>
                         <th>Cidade</th>
+                        <th>Estado</th>
                         <th>CEP</th>
                         <th>Telefone</th>
                         <th>Email</th>
                         <th>Quantidade de Quartos</th>
                         <th>Possui Wi-Fi</th>
                         <th>Possui Estacionamento</th>
-                        <th>Data de Cadastro</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -103,35 +57,39 @@ include "../../includes/header.php";
                         <tr>
 
                             <td>
-                                <?= $linha['id_hoteis'] ?>
+                                <?= htmlspecialchars($linha['id']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['nome'] ?>
+                                <?= htmlspecialchars($linha['nome']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['endereco'] ?>
+                                <?= htmlspecialchars($linha['endereco']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['cidade'] ?>
+                                <?= htmlspecialchars($linha['cidade']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['cep'] ?>
+                                <?= htmlspecialchars($linha['estado']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['telefone'] ?>
+                                <?= htmlspecialchars($linha['cep']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['email'] ?>
+                                <?= htmlspecialchars($linha['telefone']) ?>
                             </td>
 
                             <td>
-                                <?= $linha['quantidade_quartos'] ?>
+                                <?= htmlspecialchars($linha['email']) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($linha['quantidade_quartos']) ?>
                             </td>
 
                             <td>
@@ -171,23 +129,19 @@ include "../../includes/header.php";
                             </td>
 
                             <td>
-                                <?= $linha['data_cadastro'] ?>
-                            </td>
-
-                            <td>
 
                                 <div class="acoes">
 
                                     <a
                                         class="editar"
-                                        href="editar.php?id=<?= $linha['id_hoteis'] ?>"
+                                        href="atualizarhotel.php?id=<?= $linha['id'] ?>"
                                     >
                                         Editar
                                     </a>
 
                                     <a
                                         class="excluir"
-                                        href="excluir.php?id=<?= $linha['id_hoteis'] ?>"
+                                        href="hoteis/delete.php?id=<?= $linha['id'] ?>"
                                         onclick="return confirm('Deseja realmente excluir este hotel?')"
                                     >
                                         Excluir
@@ -213,6 +167,6 @@ include "../../includes/header.php";
 
 <?php
 
-include "../../includes/footer.php";
+include "../includes/footer.php";
 
 ?>

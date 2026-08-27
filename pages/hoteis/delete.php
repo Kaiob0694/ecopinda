@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../classes/hoteis.php";
+require_once "../../classe/hoteis.php";
 
 $hotel = new Hotel();
 
@@ -8,5 +8,5 @@ $id = $_GET['id'];
 
 $hotel->excluir($id);
 
-header("Location: read.php");
+header("Location: ../hoteis.php");
 exit;

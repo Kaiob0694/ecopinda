@@ -39,7 +39,6 @@ CREATE TABLE `hotel` (
   `quantidade_quartos` int NOT NULL,
   `possui_wifi` tinyint(1) DEFAULT '1',
   `possui_estacionamento` tinyint(1) DEFAULT '0',
-  `data_cadastro` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
