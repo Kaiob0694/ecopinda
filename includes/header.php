@@ -52,7 +52,7 @@ if (!function_exists('iniciaisHeader')) {
                     <?php if (!empty($usuarioFoto)): ?>
 
                         <img 
-                            src="../assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>" 
+                            src="/ecopinda/assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>" 
                             alt="Foto de perfil"
                         >
 
