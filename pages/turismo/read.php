@@ -14,7 +14,7 @@ include "../../includes/header.php";
 include "../../includes/head.php";
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/hotel.css">
+<link rel="stylesheet" href="/ecopinda/assets/css/turismo.css">
 
 <div class="hoteis-container">
 
