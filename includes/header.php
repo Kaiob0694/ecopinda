@@ -38,7 +38,7 @@ if (!function_exists('iniciaisHeader')) {
     <nav class="menu">
         <a href="/ecopinda/index.php">Início</a>
         <a href="/ecopinda/pages/cidade.php">Cidade</a>
-        <a href="#">Turismo</a>
+        <a href="/ecopinda/pages/turismo/read.php">Turismo</a>
         <a href="/ecopinda/pages/hoteis/read.php">Hotéis</a>
         <a href="/ecopinda/pages/restaurante/read.php">Restaurantes</a>
 
