@@ -353,3 +353,19 @@ COMMIT;
 ALTER TABLE `usuarios`
   ADD COLUMN `reset_token` VARCHAR(64) DEFAULT NULL,
   ADD COLUMN `reset_token_expira` DATETIME DEFAULT NULL;
+
+
+
+
+
+
+
+CREATE TABLE postagens (
+    id INT NOT NULL AUTO_INCREMENT,
+    usuario_id INT NOT NULL,
+    texto TEXT NOT NULL,
+    imagem VARCHAR(255) DEFAULT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    INDEX (usuario_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

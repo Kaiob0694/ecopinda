@@ -5,7 +5,11 @@
 .feed-page {
     min-height: calc(100vh - 80px);
     background: #f4f7f6;
-    padding: 40px 20px 70px;
+
+    /* espaço para o header fixo */
+    padding: 120px 20px 70px;
+
+    box-sizing: border-box;
 }
 
 .feed-container {
