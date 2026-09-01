@@ -404,13 +404,3 @@ include "../../includes/head.php";
 
 <!-- =====================================================
      JAVASCRIPT DA GALERIA
-====================================================== -->
-
-<script src="/ecopinda/assets/js/hoteis.js"></script>
-
-
-<?php
-
-include "../../includes/footer.php";
-
-?>
