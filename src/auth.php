@@ -44,5 +44,3 @@ if ($row = mysqli_fetch_assoc($resultado)) {
     header("Location: /pages/login.php");
     exit;
 }
-
-//AGORA VAI 

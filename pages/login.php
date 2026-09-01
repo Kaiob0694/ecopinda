@@ -10,6 +10,9 @@ if (!empty($_SESSION['usuario_id'])) {
 $erro = $_SESSION['login_erro'] ?? '';
 unset($_SESSION['login_erro']);
 
+$sucesso = $_SESSION['login_sucesso'] ?? '';
+unset($_SESSION['login_sucesso']);
+
 $email_anterior = $_SESSION['login_email'] ?? '';
 unset($_SESSION['login_email']);
 
@@ -61,6 +64,14 @@ unset($_SESSION['login_email']);
 
         <?php endif; ?>
 
+        <?php if ($sucesso): ?>
+
+            <div class="sucesso">
+                <?= htmlspecialchars($sucesso) ?>
+            </div>
+
+        <?php endif; ?>
+
         <form action="../src/auth.php" method="POST" novalidate>
 
             <div class="field">
@@ -86,6 +97,10 @@ unset($_SESSION['login_email']);
                 >
 
             </div>
+
+            <a href="../pages/recuperar_senha.php" class="link-esqueci">
+                Esqueceu sua senha?
+            </a>
 
             <button type="submit" class="btn-login">
                 Entrar
