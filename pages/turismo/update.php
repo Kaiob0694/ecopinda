@@ -54,187 +54,261 @@ $categorias = [
     'Outro'
 ];
 
-include "../../includes/header.php";
 include "../../includes/head.php";
+include "../../includes/header.php";
 
 ?>
 
-<h2>Editar Ponto Turístico</h2>
+<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-turismo.css">
+<link rel="stylesheet" href="/ecopinda/assets/css/update-turismo.css">
 
-<?php if (!empty($errosFotos)): ?>
-    <div class="erros-upload">
-        <p>O ponto turístico foi atualizado, mas houve problema com algumas fotos:</p>
-        <ul>
-            <?php foreach ($errosFotos as $erro): ?>
-                <li><?= htmlspecialchars($erro) ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-<?php endif; ?>
+<div class="cadastro-turismo-container">
 
-<?php if (!empty($fotos)): ?>
+    <div class="cadastro-turismo-painel">
 
-    <h3>Fotos atuais</h3>
+        <!-- =====================================================
+             TOPO
+        ====================================================== -->
 
-    <div class="galeria-fotos-hotel">
+        <div class="cadastro-turismo-topo">
 
-        <?php foreach ($fotos as $foto): ?>
+            <h1 class="cadastro-turismo-titulo">
+                Editar Ponto Turístico
+            </h1>
 
-            <div class="foto-hotel-item">
+        </div>
 
-                <img
-                    src="../../uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
-                    alt="Foto do ponto turístico"
-                    width="180">
 
-                <br>
+        <!-- =====================================================
+             ERROS DE UPLOAD
+        ====================================================== -->
 
-                <a
-                    href="delete_foto.php?id=<?= $foto['id'] ?>&id_ponto=<?= $id ?>"
-                    onclick="return confirm('Excluir esta foto?')"
-                >
-                    Excluir foto
-                </a>
+        <?php if (!empty($errosFotos)): ?>
+
+            <div class="alerta-turismo alerta-turismo-erro">
+
+                <p class="alerta-turismo-titulo">
+                    O ponto turístico foi atualizado, mas houve problema
+                    com algumas fotos:
+                </p>
+
+                <ul class="alerta-turismo-lista">
+
+                    <?php foreach ($errosFotos as $erro): ?>
+
+                        <li><?= htmlspecialchars($erro) ?></li>
+
+                    <?php endforeach; ?>
+
+                </ul>
 
             </div>
 
-        <?php endforeach; ?>
+        <?php endif; ?>
+
+
+        <!-- =====================================================
+             FOTOS ATUAIS
+        ====================================================== -->
+
+        <?php if (!empty($fotos)): ?>
+
+            <div class="fotos-atuais-turismo">
+
+                <h3 class="fotos-atuais-turismo-titulo">
+                    Fotos atuais
+                </h3>
+
+                <div class="galeria-fotos-turismo">
+
+                    <?php foreach ($fotos as $foto): ?>
+
+                        <div class="foto-turismo-item">
+
+                            <img
+                                class="foto-turismo-imagem"
+                                src="../../uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
+                                alt="Foto do ponto turístico">
+
+
+                            <a href="delete_foto.php?id=<?= $foto['id'] ?>&id_ponto=<?= $id ?>"
+                            class="foto-turismo-excluir"
+                            onclick="return confirm('Excluir esta foto?')">
+                            Excluir foto
+                            </a>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            </div>
+
+        <?php endif; ?>
+
+
+        <!-- =====================================================
+             FORMULÁRIO
+        ====================================================== -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="formulario-turismo">
+
+            <div class="formulario-turismo-grid">
+
+                <div class="campo-turismo largo">
+                    <label>Nome <span class="obrigatorio">*</span></label>
+                    <input
+                        type="text"
+                        name="nome"
+                        value="<?= htmlspecialchars($dados['nome']); ?>"
+                        required>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Descrição</label>
+                    <textarea name="descricao"><?= htmlspecialchars($dados['descricao'] ?? ''); ?></textarea>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Endereço <span class="obrigatorio">*</span></label>
+                    <input
+                        type="text"
+                        name="endereco"
+                        value="<?= htmlspecialchars($dados['endereco']); ?>"
+                        required>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Cidade <span class="obrigatorio">*</span></label>
+                    <input
+                        type="text"
+                        name="cidade"
+                        value="<?= htmlspecialchars($dados['cidade']); ?>"
+                        required>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Estado <span class="obrigatorio">*</span></label>
+                    <input
+                        type="text"
+                        name="estado"
+                        maxlength="50"
+                        value="<?= htmlspecialchars($dados['estado']); ?>"
+                        required>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>CEP</label>
+                    <input
+                        type="text"
+                        name="cep"
+                        value="<?= htmlspecialchars($dados['cep']); ?>">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Telefone</label>
+                    <input
+                        type="text"
+                        name="telefone"
+                        value="<?= htmlspecialchars($dados['telefone']); ?>">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value="<?= htmlspecialchars($dados['email']); ?>">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Categoria <span class="obrigatorio">*</span></label>
+                    <select name="categoria" required>
+                        <?php foreach ($categorias as $categoria): ?>
+                            <option
+                                value="<?= htmlspecialchars($categoria) ?>"
+                                <?= $dados['categoria'] === $categoria ? 'selected' : '' ?>
+                            >
+                                <?= htmlspecialchars($categoria) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Horário de Funcionamento</label>
+                    <input
+                        type="text"
+                        name="horario_funcionamento"
+                        value="<?= htmlspecialchars($dados['horario_funcionamento']); ?>">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Entrada Gratuita <span class="obrigatorio">*</span></label>
+                    <select name="entrada_gratuita" required>
+                        <option value="Sim" <?= $dados['entrada_gratuita'] ? 'selected' : '' ?>>Sim</option>
+                        <option value="Não" <?= !$dados['entrada_gratuita'] ? 'selected' : '' ?>>Não</option>
+                    </select>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Possui Estacionamento <span class="obrigatorio">*</span></label>
+                    <select name="possui_estacionamento" required>
+                        <option value="Sim" <?= $dados['possui_estacionamento'] ? 'selected' : '' ?>>Sim</option>
+                        <option value="Não" <?= !$dados['possui_estacionamento'] ? 'selected' : '' ?>>Não</option>
+                    </select>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Data de Cadastro <span class="obrigatorio">*</span></label>
+                    <input
+                        type="date"
+                        name="data_cadastro"
+                        value="<?= htmlspecialchars(substr($dados['data_cadastro'], 0, 10)); ?>"
+                        required>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Adicionar novas fotos</label>
+                    <input
+                        type="file"
+                        name="fotos[]"
+                        accept=".jpg,.jpeg,.png,.webp"
+                        multiple>
+                    <small class="campo-turismo-dica">
+                        Você pode selecionar várias fotos de uma vez
+                        (JPG, PNG ou WEBP, até 5 MB cada).
+                    </small>
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 AÇÕES
+            ====================================================== -->
+
+            <div class="formulario-turismo-acoes">
+
+                <a href="read.php" class="botao-voltar-turismo">
+                    Cancelar
+                </a>
+
+                <button type="submit" class="botao-salvar-turismo">
+                    Atualizar
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
-<?php endif; ?>
-
-<form method="POST" enctype="multipart/form-data">
-
-    <p>
-        Nome:<br>
-        <input
-            type="text"
-            name="nome"
-            value="<?= htmlspecialchars($dados['nome']); ?>"
-            required>
-    </p>
-
-    <p>
-        Descrição:<br>
-        <textarea name="descricao" rows="4"><?= htmlspecialchars($dados['descricao'] ?? ''); ?></textarea>
-    </p>
-
-    <p>
-        Endereço:<br>
-        <input
-            type="text"
-            name="endereco"
-            value="<?= htmlspecialchars($dados['endereco']); ?>"
-            required>
-    </p>
-
-    <p>
-        Cidade:<br>
-        <input
-            type="text"
-            name="cidade"
-            value="<?= htmlspecialchars($dados['cidade']); ?>"
-            required>
-    </p>
-
-    <p>
-        Estado:<br>
-        <input
-            type="text"
-            name="estado"
-            maxlength="50"
-            value="<?= htmlspecialchars($dados['estado']); ?>"
-            required>
-    </p>
-
-    <p>
-        CEP:<br>
-        <input
-            type="text"
-            name="cep"
-            value="<?= htmlspecialchars($dados['cep']); ?>">
-    </p>
-
-    <p>
-        Telefone:<br>
-        <input
-            type="text"
-            name="telefone"
-            value="<?= htmlspecialchars($dados['telefone']); ?>">
-    </p>
-
-    <p>
-        Email:<br>
-        <input
-            type="email"
-            name="email"
-            value="<?= htmlspecialchars($dados['email']); ?>">
-    </p>
-
-    <p>
-        Categoria:<br>
-        <select name="categoria" required>
-            <?php foreach ($categorias as $categoria): ?>
-                <option
-                    value="<?= htmlspecialchars($categoria) ?>"
-                    <?= $dados['categoria'] === $categoria ? 'selected' : '' ?>
-                >
-                    <?= htmlspecialchars($categoria) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </p>
-
-    <p>
-        Horário de Funcionamento:<br>
-        <input
-            type="text"
-            name="horario_funcionamento"
-            value="<?= htmlspecialchars($dados['horario_funcionamento']); ?>">
-    </p>
-
-    <p>
-        Entrada Gratuita:<br>
-        <select name="entrada_gratuita" required>
-            <option value="Sim" <?= $dados['entrada_gratuita'] ? 'selected' : '' ?>>Sim</option>
-            <option value="Não" <?= !$dados['entrada_gratuita'] ? 'selected' : '' ?>>Não</option>
-        </select>
-    </p>
-
-    <p>
-        Possui Estacionamento:<br>
-        <select name="possui_estacionamento" required>
-            <option value="Sim" <?= $dados['possui_estacionamento'] ? 'selected' : '' ?>>Sim</option>
-            <option value="Não" <?= !$dados['possui_estacionamento'] ? 'selected' : '' ?>>Não</option>
-        </select>
-    </p>
-
-    <p>
-        Data de Cadastro:<br>
-        <input
-            type="date"
-            name="data_cadastro"
-            value="<?= htmlspecialchars($dados['data_cadastro']); ?>"
-            required>
-    </p>
-
-    <p>
-        Adicionar novas fotos:<br>
-        <input
-            type="file"
-            name="fotos[]"
-            accept=".jpg,.jpeg,.png,.webp"
-            multiple>
-        <br>
-        <small>Você pode selecionar várias fotos de uma vez (JPG, PNG ou WEBP, até 5 MB cada).</small>
-    </p>
-
-    <button type="submit">
-        Atualizar
-    </button>
-
-</form>
+</div>
 
 <?php
 include "../../includes/footer.php";

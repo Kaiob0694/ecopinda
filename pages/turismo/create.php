@@ -7,6 +7,7 @@ $ponto = new PontoTuristico();
 $errosFotos = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $id_ponto = $ponto->cadastrar(
         $_POST['nome'],
         $_POST['descricao'],
@@ -36,123 +37,146 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // para a lista.
 }
 
-include "../../includes/header.php";
 include "../../includes/head.php";
+include "../../includes/header.php";
+
+$categorias = [
+    'Trilha',
+    'Cachoeira',
+    'Mirante',
+    'Museu',
+    'Praça',
+    'Histórico',
+    'Religioso',
+    'Outro'
+];
 
 ?>
 
-<h2>Cadastrar Ponto Turístico</h2>
+<!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
+<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-turismo.css?v=<?= time(); ?>">
 
-<?php if (!empty($errosFotos)): ?>
-    <div class="erros-upload">
-        <p>O ponto turístico foi cadastrado, mas houve problema com algumas fotos:</p>
-        <ul>
-            <?php foreach ($errosFotos as $erro): ?>
-                <li><?= htmlspecialchars($erro) ?></li>
-            <?php endforeach; ?>
-        </ul>
-        <p><a href="read.php">Ir para a lista de pontos turísticos</a></p>
+<main class="cadastro-turismo-container">
+    <div class="cadastro-turismo-painel">
+
+        <div class="cadastro-turismo-topo">
+            <h2 class="cadastro-turismo-titulo">Cadastrar Ponto Turístico</h2>
+        </div>
+
+        <?php if (!empty($errosFotos)): ?>
+            <div class="erros-upload">
+                <p>O ponto turístico foi cadastrado, mas houve problema com algumas fotos:</p>
+                <ul>
+                    <?php foreach ($errosFotos as $erro): ?>
+                        <li><?= htmlspecialchars($erro) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <p>
+                    <a href="read.php">Ir para a lista de pontos turísticos</a>
+                </p>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" enctype="multipart/form-data" class="formulario-turismo">
+
+            <div class="formulario-turismo-grid">
+
+                <div class="campo-turismo largo">
+                    <label>Nome <span class="obrigatorio">*</span></label>
+                    <input type="text" name="nome" placeholder="Digite o nome do ponto turístico" required>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Descrição</label>
+                    <textarea name="descricao" placeholder="Descreva o ponto turístico"></textarea>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Endereço <span class="obrigatorio">*</span></label>
+                    <input type="text" name="endereco" placeholder="Ex: Av. Principal, 123" required>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Cidade <span class="obrigatorio">*</span></label>
+                    <input type="text" name="cidade" required>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Estado <span class="obrigatorio">*</span></label>
+                    <input type="text" name="estado" maxlength="50" required>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>CEP</label>
+                    <input type="text" name="cep" placeholder="00000-000">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Telefone</label>
+                    <input type="text" name="telefone" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="contato@pontoturistico.com">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Categoria <span class="obrigatorio">*</span></label>
+                    <select name="categoria" required>
+                        <?php foreach ($categorias as $categoria): ?>
+                            <option value="<?= htmlspecialchars($categoria) ?>">
+                                <?= htmlspecialchars($categoria) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Horário de Funcionamento</label>
+                    <input type="text" name="horario_funcionamento" placeholder="Ex: Todos os dias, das 08:00 às 18:00">
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Entrada Gratuita <span class="obrigatorio">*</span></label>
+                    <select name="entrada_gratuita" required>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Possui Estacionamento <span class="obrigatorio">*</span></label>
+                    <select name="possui_estacionamento" required>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+
+                <div class="campo-turismo">
+                    <label>Data de Cadastro <span class="obrigatorio">*</span></label>
+                    <input type="date" name="data_cadastro" required>
+                </div>
+
+                <div class="campo-turismo largo">
+                    <label>Fotos do Ponto Turístico</label>
+                    <input type="file" name="fotos[]" accept=".jpg,.jpeg,.png,.webp" multiple>
+                    <small>
+                        Você pode selecionar várias fotos de uma vez (JPG, PNG ou WEBP, até 5 MB cada).
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="formulario-turismo-acoes">
+                <a href="read.php" class="botao-voltar-turismo">Voltar</a>
+                <button type="submit" class="botao-salvar-turismo">Salvar</button>
+            </div>
+
+        </form>
+
     </div>
-<?php endif; ?>
-
-<form method="POST" enctype="multipart/form-data">
-
-    <p>
-        Nome:<br>
-        <input type="text" name="nome" required>
-    </p>
-
-    <p>
-        Descrição:<br>
-        <textarea name="descricao" rows="4"></textarea>
-    </p>
-
-    <p>
-        Endereço:<br>
-        <input type="text" name="endereco" required>
-    </p>
-
-    <p>
-        Cidade:<br>
-        <input type="text" name="cidade" required>
-    </p>
-
-    <p>
-        Estado:<br>
-        <input type="text" name="estado" maxlength="50" required>
-    </p>
-
-    <p>
-        CEP:<br>
-        <input type="text" name="cep">
-    </p>
-
-    <p>
-        Telefone:<br>
-        <input type="text" name="telefone">
-    </p>
-
-    <p>
-        Email:<br>
-        <input type="email" name="email">
-    </p>
-
-    <p>
-        Categoria:<br>
-        <select name="categoria" required>
-            <option value="Trilha">Trilha</option>
-            <option value="Cachoeira">Cachoeira</option>
-            <option value="Mirante">Mirante</option>
-            <option value="Museu">Museu</option>
-            <option value="Praça">Praça</option>
-            <option value="Histórico">Histórico</option>
-            <option value="Religioso">Religioso</option>
-            <option value="Outro">Outro</option>
-        </select>
-    </p>
-
-    <p>
-        Horário de Funcionamento:<br>
-        <input type="text" name="horario_funcionamento" placeholder="Ex: Todos os dias, das 08:00 às 18:00">
-    </p>
-
-    <p>
-        Entrada Gratuita:<br>
-        <select name="entrada_gratuita" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select>
-    </p>
-
-    <p>
-        Possui Estacionamento:<br>
-        <select name="possui_estacionamento" required>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-        </select>
-    </p>
-
-    <p>
-        Data de Cadastro:<br>
-        <input type="date" name="data_cadastro" required>
-    </p>
-
-    <p>
-        Fotos do Ponto Turístico:<br>
-        <input
-            type="file"
-            name="fotos[]"
-            accept=".jpg,.jpeg,.png,.webp"
-            multiple>
-        <br>
-        <small>Você pode selecionar várias fotos de uma vez (JPG, PNG ou WEBP, até 5 MB cada).</small>
-    </p>
-
-    <button type="submit">
-        Salvar
-    </button>
-
-</form>
+</main>
 
 <?php
 include "../../includes/footer.php";

@@ -8,177 +8,430 @@ require_once "../../classes/turismo_fotos.php";
 
 $ponto = new PontoTuristico();
 $pontoFoto = new PontoTuristicoFoto();
+
 $dados = $ponto->listar();
 
 include "../../includes/header.php";
 include "../../includes/head.php";
+
 ?>
 
 <link rel="stylesheet" href="/ecopinda/assets/css/turismo.css">
 
-<div class="hoteis-container">
+<div class="turismo-container">
 
-    <div class="hoteis-painel">
+    <div class="turismo-conteudo">
 
-        <div class="hoteis-topo">
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
 
-            <h2 class="hoteis-titulo">
-                Lista de Pontos Turísticos
-            </h2>
+        <div class="turismo-topo">
 
-            <a href="create.php" class="botao-novo">
-                Cadastrar Novo Ponto Turístico
-            </a>
+            <div>
+
+                <h1 class="turismo-titulo">
+                    Pontos Turísticos
+                </h1>
+
+                <p class="turismo-subtitulo">
+                    Descubra trilhas, mirantes e atrações de
+                    Pindamonhangaba e região.
+                </p>
+
+            </div>
+
+            <?php if ($usuarioMaster): ?>
+
+                <a href="create.php" class="turismo-botao-cadastrar">
+                    + Cadastrar Ponto Turístico
+                </a>
+
+            <?php endif; ?>
 
         </div>
 
-        <div class="tabela-wrapper">
 
-            <table class="tabela-hoteis">
+        <!-- =====================================================
+             QUANTIDADE DE PONTOS TURÍSTICOS
+        ====================================================== -->
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Foto</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Endereço</th>
-                        <th>Cidade</th>
-                        <th>Telefone</th>
-                        <th>Horário</th>
-                        <th>Entrada Gratuita</th>
-                        <th>Estacionamento</th>
-                        <th>Data de Cadastro</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
+        <div class="turismo-quantidade">
 
-                <tbody>
+            <?php if (!empty($dados)): ?>
 
-                    <?php foreach ($dados as $linha): ?>
+                <?= count($dados) ?>
 
-                        <tr>
+                <?= count($dados) === 1
+                    ? 'ponto turístico encontrado'
+                    : 'pontos turísticos encontrados'
+                    ?>
 
-                            <td>
-                                <?= $linha['id'] ?>
-                            </td>
+            <?php else: ?>
 
-                            <td>
-                                <?php
-                                    $fotosPonto = $pontoFoto->listarPorPonto($linha['id']);
-                                    $primeiraFoto = $fotosPonto[0]['caminho'] ?? null;
-                                ?>
+                Nenhum ponto turístico encontrado
 
-                                <?php if ($primeiraFoto): ?>
-                                    <img
-                                        src="/ecopinda/uploads/turismo/<?= htmlspecialchars($primeiraFoto) ?>"
-                                        alt="Foto do ponto turístico"
-                                        width="70">
-                                <?php else: ?>
-                                    <span class="status-nao">Sem foto</span>
-                                <?php endif; ?>
-                            </td>
+            <?php endif; ?>
 
-                            <td>
-                                <?= $linha['nome'] ?>
-                            </td>
+        </div>
 
-                            <td>
-                                <?= $linha['categoria'] ?>
-                            </td>
 
-                            <td>
-                                <?= $linha['endereco'] ?>
-                            </td>
+        <!-- =====================================================
+             GRID DE PONTOS TURÍSTICOS
+        ====================================================== -->
 
-                            <td>
-                                <?= $linha['cidade'] ?>
-                            </td>
+        <?php if (!empty($dados)): ?>
 
-                            <td>
-                                <?= $linha['telefone'] ?>
-                            </td>
+            <div class="turismo-grid">
 
-                            <td>
-                                <?= $linha['horario_funcionamento'] ?>
-                            </td>
+                <?php foreach ($dados as $linha): ?>
 
-                            <td>
+                    <?php
 
-                                <?php if ($linha['entrada_gratuita']): ?>
+                    /*
+                     * Busca as fotos do ponto turistico.
+                     * Sera utilizada a primeira foto cadastrada.
+                     */
 
-                                    <span class="status-sim">
-                                        Sim
-                                    </span>
+                    $fotosPonto =
+                        $pontoFoto->listarPorPonto($linha['id']);
 
-                                <?php else: ?>
+                    $primeiraFoto =
+                        $fotosPonto[0]['caminho'] ?? null;
 
-                                    <span class="status-nao">
-                                        Não
-                                    </span>
+                    /*
+                     * Prepara o telefone para o WhatsApp.
+                     *
+                     * Remove:
+                     * - espaços
+                     * - parênteses
+                     * - hífens
+                     * - outros caracteres
+                     */
 
-                                <?php endif; ?>
+                    $telefoneWhatsApp = preg_replace(
+                        '/\D/',
+                        '',
+                        $linha['telefone'] ?? ''
+                    );
 
-                            </td>
+                    ?>
 
-                            <td>
+                    <!-- =================================================
+                         CARD DO PONTO TURÍSTICO
+                    ================================================== -->
 
-                                <?php if ($linha['possui_estacionamento']): ?>
+                    <article class="turismo-card">
 
-                                    <span class="status-sim">
-                                        Sim
-                                    </span>
 
-                                <?php else: ?>
+                        <!-- =================================================
+                             FOTO
+                        ================================================== -->
 
-                                    <span class="status-nao">
-                                        Não
-                                    </span>
+                        <div class="turismo-imagem-container">
 
-                                <?php endif; ?>
+                            <?php if (!empty($fotosPonto)): ?>
 
-                            </td>
+                                <div class="turismo-galeria">
 
-                            <td>
-                                <?= $linha['data_cadastro'] ?>
-                            </td>
+                                    <?php foreach ($fotosPonto as $indice => $foto): ?>
 
-                            <td>
+                                        <img class="turismo-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
+                                            src="/ecopinda/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            alt="<?= htmlspecialchars($linha['nome']) ?>">
 
-                                <div class="acoes">
+                                    <?php endforeach; ?>
 
-                                    <a
-                                        class="editar"
-                                        href="update.php?id=<?= $linha['id'] ?>"
-                                    >
-                                        Editar
-                                    </a>
 
-                                    <a
-                                        class="excluir"
-                                        href="delete.php?id=<?= $linha['id'] ?>"
-                                        onclick="return confirm('Deseja realmente excluir este ponto turístico?')"
-                                    >
-                                        Excluir
-                                    </a>
+                                    <?php if (count($fotosPonto) > 1): ?>
+
+                                        <button type="button" class="galeria-seta galeria-anterior" aria-label="Foto anterior">
+
+                                            &#10094;
+
+                                        </button>
+
+                                        <button type="button" class="galeria-seta galeria-proxima" aria-label="Próxima foto">
+
+                                            &#10095;
+
+                                        </button>
+
+                                        <span class="galeria-contador">
+
+                                            <span class="galeria-atual">
+                                                1
+                                            </span>
+
+                                            /
+                                            <?= count($fotosPonto) ?>
+
+                                        </span>
+
+                                    <?php endif; ?>
 
                                 </div>
 
-                            </td>
+                            <?php else: ?>
 
-                        </tr>
+                                <div class="turismo-imagem-placeholder">
 
-                    <?php endforeach; ?>
+                                    <span>
+                                        Foto não disponível
+                                    </span>
 
-                </tbody>
+                                </div>
 
-            </table>
+                            <?php endif; ?>
 
-        </div>
+                        </div>
+
+
+                        <!-- =================================================
+                             INFORMAÇÕES DO PONTO TURÍSTICO
+                        ================================================== -->
+
+                        <div class="turismo-info">
+
+
+                            <!-- =================================================
+                                 NOME
+                            ================================================== -->
+
+                            <h2 class="turismo-nome">
+
+                                <?= htmlspecialchars($linha['nome']) ?>
+
+                            </h2>
+
+
+                            <!-- =================================================
+                                 CIDADE
+                            ================================================== -->
+
+                            <span class="turismo-cidade">
+
+                                📍
+                                <?= htmlspecialchars($linha['cidade']) ?>
+
+                            </span>
+
+
+                            <!-- =================================================
+                                 DESCRIÇÃO
+                            ================================================== -->
+
+                            <?php if (!empty($linha['descricao'])): ?>
+
+                                <p class="turismo-descricao">
+
+                                    <?= htmlspecialchars($linha['descricao']) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+
+                            <!-- =================================================
+                                 ENDEREÇO
+                            ================================================== -->
+
+                            <?php if (!empty($linha['endereco'])): ?>
+
+                                <p class="turismo-localizacao">
+
+                                    <?= htmlspecialchars($linha['endereco']) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+
+                            <!-- =================================================
+                                 TELEFONE
+                            ================================================== -->
+
+                            <?php if (!empty($linha['telefone'])): ?>
+
+                                <p class="turismo-telefone">
+
+                                    📞
+                                    <?= htmlspecialchars($linha['telefone']) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+
+                            <!-- =================================================
+                                 CARACTERÍSTICAS
+                            ================================================== -->
+
+                            <div class="turismo-caracteristicas">
+
+
+                                <!-- CATEGORIA -->
+
+                                <?php if (!empty($linha['categoria'])): ?>
+
+                                    <span class="turismo-caracteristica">
+
+                                        🏷️
+                                        <?= htmlspecialchars($linha['categoria']) ?>
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                                <!-- HORÁRIO -->
+
+                                <?php if (!empty($linha['horario_funcionamento'])): ?>
+
+                                    <span class="turismo-caracteristica">
+
+                                        🕒
+                                        <?= htmlspecialchars($linha['horario_funcionamento']) ?>
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                                <!-- ENTRADA GRATUITA -->
+
+                                <?php if ($linha['entrada_gratuita']): ?>
+
+                                    <span class="turismo-caracteristica">
+
+                                        ✓ Entrada Gratuita
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                                <!-- ESTACIONAMENTO -->
+
+                                <?php if ($linha['possui_estacionamento']): ?>
+
+                                    <span class="turismo-caracteristica">
+
+                                        ✓ Estacionamento
+
+                                    </span>
+
+                                <?php endif; ?>
+
+
+                            </div>
+
+
+                            <!-- =================================================
+                                 RODAPÉ
+                            ================================================== -->
+
+                            <div class="turismo-footer">
+
+
+                                <!-- =================================================
+                                     CONTATO / WHATSAPP
+                                ================================================== -->
+
+                                <?php if (!empty($telefoneWhatsApp)): ?>
+
+                                    <a class="turismo-botao" href="https://wa.me/55<?= htmlspecialchars($telefoneWhatsApp) ?>"
+                                        target="_blank" rel="noopener noreferrer">
+
+                                        Entrar em contato
+
+                                    </a>
+
+                                <?php endif; ?>
+
+
+                                <!-- =================================================
+                                     AÇÕES DO MASTER
+                                ================================================== -->
+
+                                <?php if ($usuarioMaster): ?>
+
+                                    <div class="turismo-acoes">
+
+
+                                        <!-- EDITAR -->
+
+                                        <a href="update.php?id=<?= (int) $linha['id'] ?>" class="turismo-editar">
+
+                                            Editar
+
+                                        </a>
+
+
+                                        <!-- EXCLUIR -->
+
+                                        <a href="delete.php?id=<?= (int) $linha['id'] ?>" class="turismo-excluir"
+                                            onclick="return confirm('Deseja realmente excluir este ponto turístico?')">
+
+                                            Excluir
+
+                                        </a>
+
+
+                                    </div>
+
+                                <?php endif; ?>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </article>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        <?php else: ?>
+
+
+            <!-- =====================================================
+                 NENHUM PONTO TURÍSTICO CADASTRADO
+            ====================================================== -->
+
+            <div class="turismo-vazio">
+
+                <h3>
+
+                    Nenhum ponto turístico cadastrado
+
+                </h3>
+
+                <p>
+
+                    No momento não existem pontos turísticos disponíveis
+                    para consulta.
+
+                </p>
+
+            </div>
+
+        <?php endif; ?>
+
 
     </div>
 
 </div>
+
+
+<!-- =====================================================
+     JAVASCRIPT DA GALERIA
+====================================================== -->
+
+<script src="/ecopinda/assets/js/turismo.js"></script>
+
 
 <?php
 
