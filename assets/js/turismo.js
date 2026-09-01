@@ -62,4 +62,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+
+    /*
+     * =====================================================
+     * ABRIR PÁGINA DE DETALHES AO CLICAR NO CARD
+     * =====================================================
+     */
+
+    const cardsTurismo = document.querySelectorAll(".turismo-card-clicavel[data-id]");
+
+    cardsTurismo.forEach(function (card) {
+
+        card.addEventListener("click", function (evento) {
+
+            if (evento.target.closest("a, button")) {
+                return;
+            }
+
+            const id = card.getAttribute("data-id");
+
+            window.location.href = "detalhes.php?id=" + id;
+
+        });
+
+    });
+
 });

@@ -121,7 +121,7 @@ include "../../includes/head.php";
                          CARD DO PONTO TURÍSTICO
                     ================================================== -->
 
-                    <article class="turismo-card">
+                    <article class="turismo-card turismo-card-clicavel" data-id="<?= (int) $linha['id'] ?>">
 
 
                         <!-- =================================================

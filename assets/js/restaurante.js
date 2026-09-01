@@ -62,4 +62,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+
+    /*
+     * =====================================================
+     * ABRIR PÁGINA DE DETALHES AO CLICAR NO CARD
+     * =====================================================
+     */
+
+    const cardsRestaurante = document.querySelectorAll(".restaurante-card-clicavel[data-id]");
+
+    cardsRestaurante.forEach(function (card) {
+
+        card.addEventListener("click", function (evento) {
+
+            if (evento.target.closest("a, button")) {
+                return;
+            }
+
+            const id = card.getAttribute("data-id");
+
+            window.location.href = "detalhes.php?id=" + id;
+
+        });
+
+    });
+
 });

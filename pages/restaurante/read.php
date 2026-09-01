@@ -112,7 +112,7 @@ include "../../includes/head.php";
                          CARD DO RESTAURANTE
                     ================================================== -->
 
-                    <article class="restaurante-card">
+                    <article class="restaurante-card restaurante-card-clicavel" data-id="<?= (int) $linha['id'] ?>">
 
 
                         <!-- =================================================
