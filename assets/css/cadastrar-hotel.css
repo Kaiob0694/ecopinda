@@ -1,0 +1,597 @@
+/* =========================================================
+   PINDA ECO TOUR — CADASTRO DE HOTEL
+   Fundo branco
+   Estilo baseado na página de Hotéis
+   ========================================================= */
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
+.cadastro-hotel-container {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 150px 30px 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   PAINEL PRINCIPAL
+========================================================= */
+
+.cadastro-hotel-painel {
+    position: relative;
+
+    width: 100%;
+    max-width: 1100px;
+
+    padding: 38px;
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e6e6;
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.10);
+
+    overflow: hidden;
+
+    animation: cadastroHotelFadeIn .5s ease;
+}
+
+
+/* =========================================================
+   LINHA COLORIDA NO TOPO
+========================================================= */
+
+.cadastro-hotel-painel::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        var(--laranja),
+        var(--verde),
+        var(--amarelo)
+    );
+}
+
+
+/* =========================================================
+   ANIMAÇÃO
+========================================================= */
+
+@keyframes cadastroHotelFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   TOPO
+========================================================= */
+
+.cadastro-hotel-topo {
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.cadastro-hotel-titulo {
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   DETALHE ABAIXO DO TÍTULO
+========================================================= */
+
+.cadastro-hotel-titulo::after {
+
+    content: "";
+
+    display: block;
+
+    width: 55px;
+    height: 3px;
+
+    margin-top: 9px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--laranja),
+        var(--amarelo)
+    );
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.formulario-hotel {
+    width: 100%;
+}
+
+
+/* =========================================================
+   GRID DOS CAMPOS
+========================================================= */
+
+.formulario-hotel-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px 24px;
+}
+
+
+/* =========================================================
+   CAMPO
+========================================================= */
+
+.campo-hotel {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   CAMPO LARGO
+========================================================= */
+
+.campo-hotel.largo {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.campo-hotel label {
+
+    color: #333333;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .04em;
+}
+
+
+/* =========================================================
+   CAMPO OBRIGATÓRIO
+========================================================= */
+
+.campo-hotel .obrigatorio {
+    color: var(--laranja);
+}
+
+
+/* =========================================================
+   INPUT E SELECT
+========================================================= */
+
+.campo-hotel input,
+.campo-hotel select {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 12px 14px;
+
+    border-radius: 11px;
+
+    border: 1px solid #dcdcdc;
+
+    outline: none;
+
+    background: #f8f8f8;
+
+    color: #333333;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.campo-hotel input::placeholder {
+
+    color: #999999;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.campo-hotel select {
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   OPÇÕES DO SELECT
+========================================================= */
+
+.campo-hotel select option {
+
+    background: #ffffff;
+
+    color: #333333;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.campo-hotel input:hover,
+.campo-hotel select:hover {
+
+    background: #ffffff;
+
+    border-color: #c8c8c8;
+}
+
+
+/* =========================================================
+   FOCO
+========================================================= */
+
+.campo-hotel input:focus,
+.campo-hotel select:focus {
+
+    background: #ffffff;
+
+    border-color: var(--verde);
+
+    box-shadow:
+        0 0 0 3px rgba(34, 166, 69, 0.10);
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.formulario-hotel-acoes {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid #eeeeee;
+}
+
+
+/* =========================================================
+   BOTÃO SALVAR
+========================================================= */
+
+.botao-salvar-hotel {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 130px;
+
+    padding: 13px 22px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        var(--verde),
+        #015c07
+    );
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(1, 92, 7, 0.18);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+}
+
+
+/* =========================================================
+   HOVER BOTÃO SALVAR
+========================================================= */
+
+.botao-salvar-hotel:hover {
+
+    transform: translateY(-2px);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 12px 28px rgba(1, 92, 7, 0.25);
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.botao-salvar-hotel:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.botao-voltar-hotel {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 100px;
+
+    padding: 13px 20px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    background: #f5f5f5;
+
+    border: 1px solid #dddddd;
+
+    color: #444444;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+
+/* =========================================================
+   HOVER BOTÃO VOLTAR
+========================================================= */
+
+.botao-voltar-hotel:hover {
+
+    background: #eeeeee;
+
+    border-color: #cccccc;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .cadastro-hotel-container {
+
+        padding:
+            130px
+            18px
+            40px;
+    }
+
+
+    .cadastro-hotel-painel {
+
+        padding: 28px 22px;
+
+        border-radius: 20px;
+    }
+
+
+    .formulario-hotel-grid {
+
+        gap: 20px;
+    }
+}
+
+
+/* =========================================================
+   TABLET / CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .cadastro-hotel-container {
+
+        padding:
+            120px
+            12px
+            35px;
+    }
+
+
+    .cadastro-hotel-painel {
+
+        padding: 24px 16px;
+
+        border-radius: 18px;
+    }
+
+
+    .cadastro-hotel-titulo {
+
+        font-size: 21px;
+    }
+
+
+    .formulario-hotel-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+
+    .campo-hotel.largo {
+
+        grid-column: auto;
+    }
+
+
+    .formulario-hotel-acoes {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .botao-salvar-hotel,
+    .botao-voltar-hotel {
+
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .cadastro-hotel-container {
+
+        padding-left: 8px;
+
+        padding-right: 8px;
+    }
+
+
+    .cadastro-hotel-painel {
+
+        padding: 20px 12px;
+    }
+
+
+    .cadastro-hotel-titulo {
+
+        font-size: 19px;
+    }
+}
+
+
+/* =========================================================
+   REDUZIR ANIMAÇÕES
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cadastro-hotel-painel {
+
+        animation: none;
+    }
+
+
+    .campo-hotel input,
+    .campo-hotel select,
+    .botao-salvar-hotel,
+    .botao-voltar-hotel {
+
+        transition: none;
+    }
+}

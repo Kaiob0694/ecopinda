@@ -14,6 +14,18 @@ $telefone       = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
 $cep            = preg_replace('/\D/', '', $_POST['cep'] ?? '');
 $senha          = trim($_POST['senha'] ?? '');
 $senha_confirma = trim($_POST['senha_confirma'] ?? '');
+$codigo_admin   = trim($_POST['codigo_admin'] ?? '');
+
+// Nível de acesso: só vira "admin" se o código correto for informado.
+// Por padrão, todo cadastro público é criado como "usuario".
+$tipo_usuario = ($codigo_admin !== '' && hash_equals(CODIGO_CADASTRO_ADMIN, $codigo_admin))
+    ? 'admin'
+    : 'usuario';
+
+// Todo cadastro público é sempre criado como "usuario".
+// Só um administrador master pode promover uma conta a admin depois,
+// pelo painel de usuários (pages/usuarios.php).
+$tipo_usuario = 'usuario';
 
 $erros = [];
 
@@ -73,9 +85,9 @@ if (!empty($erros)) {
 // Insere o novo usuário
 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
-$sqlInsert = "INSERT INTO usuarios (nome, cpf, email, senha, telefone, cep) VALUES (?, ?, ?, ?, ?, ?)";
+$sqlInsert = "INSERT INTO usuarios (nome, cpf, email, senha, telefone, cep, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmtInsert = mysqli_prepare($conexao, $sqlInsert);
-mysqli_stmt_bind_param($stmtInsert, "ssssss", $nome, $cpf, $email, $senha_hash, $telefone, $cep);
+mysqli_stmt_bind_param($stmtInsert, "sssssss", $nome, $cpf, $email, $senha_hash, $telefone, $cep, $tipo_usuario);
 
 if (mysqli_stmt_execute($stmtInsert)) {
 
@@ -89,6 +101,7 @@ if (mysqli_stmt_execute($stmtInsert)) {
     $_SESSION['usuario_nome']  = $nome;
     $_SESSION['usuario_email'] = $email;
     $_SESSION['usuario_foto']  = '';
+    $_SESSION['usuario_tipo']  = $tipo_usuario;
 
     header("Location: ../pages/profile.php");
     exit;

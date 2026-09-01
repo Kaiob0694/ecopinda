@@ -51,6 +51,11 @@ class Hotel
         $data_cadastro 
     ) {
 
+        // O select do formulario manda "Sim"/"Nao", mas a coluna no
+        // banco e tinyint(1), entao convertemos para 1/0 antes de gravar.
+        $possui_wifi = ($possui_wifi === 'Sim') ? 1 : 0;
+        $possui_estacionamento = ($possui_estacionamento === 'Sim') ? 1 : 0;
+
         $sql = "
             INSERT INTO hotel
             (
@@ -109,6 +114,9 @@ class Hotel
         $data_cadastro,
         $id
     ) {
+
+        $possui_wifi = ($possui_wifi === 'Sim') ? 1 : 0;
+        $possui_estacionamento = ($possui_estacionamento === 'Sim') ? 1 : 0;
 
         $sql = "
             UPDATE hotel

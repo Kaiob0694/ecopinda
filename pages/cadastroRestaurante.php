@@ -24,11 +24,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $possui_delivery = trim($_POST['possui_delivery']);
     $possui_wifi = trim($_POST['possui_wifi']);
     $horario_funcionamento = trim($_POST['horario_funcionamento']);
+    $imagem = '';
+
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+
+    $pasta = __DIR__ . "/../assets/img/img/Gastronomia/";
+
+    if (!is_dir($pasta)) {
+        mkdir($pasta, 0777, true);
+    }
+
+    $extensao = strtolower(
+        pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION)
+    );
+
+    $nomeArquivo = pathinfo(
+        $_FILES['foto']['name'],
+        PATHINFO_FILENAME
+    );
+
+    $nomeArquivo = preg_replace(
+        '/[^a-zA-Z0-9_-]/',
+        '',
+        $nomeArquivo
+    );
+
+    $nomeArquivo = $nomeArquivo . "." . $extensao;
+
+    $destino = $pasta . $nomeArquivo;
+
+    if (move_uploaded_file($_FILES['foto']['tmp_name'], $destino)) {
+
+        $imagem = "/assets/img/img/Gastronomia/" . $nomeArquivo;
+
+    } else {
+
+        die("Erro ao salvar a imagem.");
+    }
+}
 
     // SQL com prepared statement
     $sql = "INSERT INTO restaurante 
-    (nome, logradouro, numero, cidade, cep, telefone, email, categoria, possui_delivery, possui_wifi, horario_funcionamento)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    (nome, logradouro, numero, cidade, cep, telefone, email, categoria, possui_delivery, possui_wifi, horario_funcionamento, imagem)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conexao, $sql);
 
@@ -36,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         mysqli_stmt_bind_param(
             $stmt,
-            "sssssssssss",
+            "ssssssssssss",
             $nome,
             $logradouro,
             $numero,
@@ -47,7 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $categoria,
             $possui_delivery,
             $possui_wifi,
-            $horario_funcionamento
+            $horario_funcionamento,
+            $imagem
         );
 
         if (mysqli_stmt_execute($stmt)) {

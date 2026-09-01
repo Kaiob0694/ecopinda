@@ -16,15 +16,15 @@ $resultado = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($resultado)) {
 
-    if ($row['senha'] === $senha) {
+    if (password_verify($senha, $row['senha'])) {
 
         $_SESSION['usuario_id']    = $row['id'];
         $_SESSION['usuario_nome']  = $row['nome'];
         $_SESSION['usuario_email'] = $row['email'];
         $_SESSION['usuario_foto']  = $row['foto'] ?? '';
-        $_SESSION['nivel']         = $row['nivel'];
+        $_SESSION['usuario_tipo']  = $row['tipo_usuario'] ?? 'usuario';
 
-        header("Location: ../pages/profile.php");
+        header("Location: /ecopinda/pages/profile.php");
         exit;
 
     } else {
@@ -32,7 +32,7 @@ if ($row = mysqli_fetch_assoc($resultado)) {
         $_SESSION['login_erro']  = "Senha incorreta";
         $_SESSION['login_email'] = $email;
 
-        header("Location: /pages/login.php");
+        header("Location: /ecopinda/pages/login.php");
         exit;
     }
 

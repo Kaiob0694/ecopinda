@@ -1,0 +1,571 @@
+/* =========================================================
+   PINDA ECO TOUR
+   PÁGINA DE DETALHES DO HOTEL (ESTILO AIRBNB)
+   ========================================================= */
+
+
+/* =========================================================
+   CARD CLICÁVEL NA LISTAGEM
+   ========================================================= */
+
+.turismo-card-clicavel {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.turismo-detalhes-container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 140px 30px 70px;
+
+    background: #ffffff;
+}
+
+.turismo-detalhes-conteudo {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   VOLTAR
+   ========================================================= */
+
+.turismo-detalhes-voltar {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 20px;
+
+    color: #222222;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.turismo-detalhes-voltar:hover {
+    color: var(--laranja);
+}
+
+
+/* =========================================================
+   TÍTULO
+   ========================================================= */
+
+.turismo-detalhes-topo {
+    margin-bottom: 20px;
+}
+
+.turismo-detalhes-titulo {
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+.turismo-detalhes-local {
+    display: inline-flex;
+    align-items: center;
+
+    margin-top: 10px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(0, 120, 30, 0.08);
+
+    color: var(--verde);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   GALERIA ESTILO AIRBNB
+   ========================================================= */
+
+.turismo-detalhes-galeria {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 8px;
+
+    width: 100%;
+    height: 460px;
+
+    margin-bottom: 40px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+}
+
+.turismo-detalhes-foto {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+
+    background: #f2f2f2;
+
+    cursor: pointer;
+
+    overflow: hidden;
+}
+
+.turismo-detalhes-foto img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.35s ease, filter 0.25s ease;
+}
+
+.turismo-detalhes-foto:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.92);
+}
+
+.turismo-detalhes-foto-principal {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+/* Quando só existe 1 foto, ela ocupa toda a área */
+.turismo-detalhes-galeria.total-1 {
+    grid-template-columns: 1fr;
+}
+
+.turismo-detalhes-galeria.total-1 .turismo-detalhes-foto-principal {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+/* Quando não há fotos */
+.turismo-detalhes-galeria.sem-fotos {
+    grid-template-columns: 1fr;
+}
+
+.turismo-detalhes-galeria .turismo-imagem-placeholder {
+    grid-column: 1;
+    grid-row: 1 / 3;
+
+    border-radius: 0;
+}
+
+.turismo-detalhes-mais-fotos {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.turismo-detalhes-ver-todas {
+    position: absolute;
+
+    right: 16px;
+    bottom: 16px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 16px;
+
+    border: 1.5px solid #222222;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #222222;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+.turismo-detalhes-ver-todas:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CORPO
+   ========================================================= */
+
+.turismo-detalhes-corpo {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 60px;
+
+    align-items: start;
+}
+
+.turismo-detalhes-bloco h2 {
+    margin: 0 0 14px;
+
+    color: #222222;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.turismo-detalhes-endereco {
+    margin: 0;
+
+    color: #444444;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+.turismo-detalhes-cep {
+    margin: 6px 0 0;
+
+    color: #777777;
+
+    font-size: 13px;
+}
+
+.turismo-detalhes-separador {
+    margin: 28px 0;
+
+    border: none;
+    border-top: 1px solid #eeeeee;
+}
+
+.turismo-detalhes-comodidades {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px 20px;
+
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.turismo-detalhes-comodidades li {
+    color: #333333;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.turismo-detalhes-comodidades li.indisponivel {
+    color: #aaaaaa;
+
+    text-decoration: line-through;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   DESCRIÇÃO
+   ========================================================= */
+
+.turismo-detalhes-descricao {
+    margin: 0;
+
+    color: #444444;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MAPA (GOOGLE MAPS)
+   ========================================================= */
+
+.turismo-detalhes-mapa {
+    width: 100%;
+    height: 320px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    border: 1px solid #eeeeee;
+}
+
+.turismo-detalhes-mapa iframe {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+.turismo-detalhes-mapa-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 14px;
+
+    color: var(--verde);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.turismo-detalhes-mapa-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   CARD LATERAL
+   ========================================================= */
+
+.turismo-detalhes-lateral {
+    position: sticky;
+    top: 120px;
+}
+
+.turismo-detalhes-card-contato {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 24px;
+
+    border: 1px solid #eeeeee;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.turismo-detalhes-card-contato h3 {
+    margin: 0 0 6px;
+
+    color: #222222;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.turismo-detalhes-contato-item {
+    margin: 0;
+
+    color: #444444;
+
+    font-size: 14px;
+}
+
+.turismo-detalhes-botao-whatsapp {
+    margin-top: 10px;
+}
+
+.turismo-detalhes-acoes {
+    margin-top: 14px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+.turismo-lightbox {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    z-index: 1000;
+}
+
+.turismo-lightbox.aberto {
+    display: flex;
+}
+
+.turismo-lightbox-imagem {
+    max-width: 85%;
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+.turismo-lightbox-fechar {
+    position: absolute;
+
+    top: 24px;
+    right: 28px;
+
+    background: none;
+    border: none;
+
+    color: #ffffff;
+
+    font-size: 34px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.turismo-lightbox-seta {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 46px;
+    height: 46px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.turismo-lightbox-seta:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.turismo-lightbox-anterior {
+    left: 24px;
+}
+
+.turismo-lightbox-proxima {
+    right: 24px;
+}
+
+.turismo-lightbox-contador {
+    position: absolute;
+
+    bottom: 24px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .turismo-detalhes-galeria {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+
+        height: auto;
+    }
+
+    .turismo-detalhes-galeria .turismo-detalhes-foto {
+        display: none;
+
+        height: 280px;
+    }
+
+    .turismo-detalhes-galeria .turismo-detalhes-foto-principal {
+        display: block;
+
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .turismo-detalhes-galeria .turismo-imagem-placeholder {
+        height: 280px;
+    }
+
+    .turismo-detalhes-corpo {
+        grid-template-columns: 1fr;
+    }
+
+    .turismo-detalhes-lateral {
+        position: static;
+    }
+
+    .turismo-detalhes-comodidades {
+        grid-template-columns: 1fr;
+    }
+
+    .turismo-detalhes-mapa {
+        height: 240px;
+    }
+
+}
