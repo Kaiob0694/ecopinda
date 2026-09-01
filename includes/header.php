@@ -41,6 +41,7 @@ if (!function_exists('iniciaisHeader')) {
         <a href="/ecopinda/pages/turismo/read.php">Turismo</a>
         <a href="/ecopinda/pages/hoteis/read.php">Hotéis</a>
         <a href="/ecopinda/pages/restaurante/read.php">Restaurantes</a>
+        <a href="/ecopinda/pages/restaurante/read.php">ECo+</a>
 
         <?php if ($usuarioLogado): ?>
 

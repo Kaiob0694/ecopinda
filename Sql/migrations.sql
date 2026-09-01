@@ -343,3 +343,13 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+-- Adiciona suporte a "esqueci minha senha" na tabela usuarios.
+-- Execute este script uma vez no banco (phpMyAdmin ou linha de comando).
+
+ALTER TABLE `usuarios`
+  ADD COLUMN `reset_token` VARCHAR(64) DEFAULT NULL,
+  ADD COLUMN `reset_token_expira` DATETIME DEFAULT NULL;
