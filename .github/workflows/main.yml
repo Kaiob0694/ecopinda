@@ -13,6 +13,12 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v6
 
+      - name: 🔎 Test FTP DNS
+        run: |
+          echo "Testando DNS do InfinityFree..."
+          getent hosts ftpupload.net
+          nslookup ftpupload.net
+
       - name: 📂 FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
