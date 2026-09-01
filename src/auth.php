@@ -16,7 +16,7 @@ $resultado = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($resultado)) {
 
-    if ($row['senha'] === $senha) {
+    if (password_verify($senha, $row['senha'])) {
 
         $_SESSION['usuario_id']    = $row['id'];
         $_SESSION['usuario_nome']  = $row['nome'];
@@ -44,3 +44,5 @@ if ($row = mysqli_fetch_assoc($resultado)) {
     header("Location: /pages/login.php");
     exit;
 }
+
+//AGORA VAI 
