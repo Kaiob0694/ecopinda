@@ -121,7 +121,7 @@ include "../../includes/head.php";
                          CARD DO HOTEL
                     ================================================== -->
 
-                    <article class="hotel-card">
+                    <article class="hotel-card hotel-card-clicavel" data-id="<?= (int) $linha['id'] ?>">
 
 
                         <!-- =================================================

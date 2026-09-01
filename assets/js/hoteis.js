@@ -62,4 +62,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+
+    /*
+     * =====================================================
+     * ABRIR PÁGINA DE DETALHES AO CLICAR NO CARD
+     *
+     * O clique no card leva para a página com todas as
+     * informações do hotel (estilo Airbnb), exceto quando o
+     * clique acontece em um link ou botão interno do card
+     * (setas da galeria, contato, editar, excluir).
+     * =====================================================
+     */
+
+    const cardsHotel = document.querySelectorAll(".hotel-card-clicavel[data-id]");
+
+    cardsHotel.forEach(function (card) {
+
+        card.addEventListener("click", function (evento) {
+
+            if (evento.target.closest("a, button")) {
+                return;
+            }
+
+            const id = card.getAttribute("data-id");
+
+            window.location.href = "detalhes.php?id=" + id;
+
+        });
+
+    });
+
 });
