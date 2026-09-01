@@ -10,17 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚚 Checkout
-        uses: actions/checkout@v4
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v6
 
       - name: 📂 FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ftpupload.net
-          username: if0_42297225
-          password: zgbGSOdQNMrhcud
-
-          
+          username: if0_42806347
+          password: INJAAAKy48b
+          protocol: ftp
+          port: 21
           server-dir: /htdocs/
-
           dangerous-clean-slate: true
