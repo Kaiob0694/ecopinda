@@ -15,7 +15,7 @@ EcoPinda Tour – Plataforma de turismo inteligente para divulgação de trilhas
 Estudantes, moradores e turistas interessados em conhecer melhor os pontos turísticos e naturais de Pindamonhangaba e região  
 
 **Nome dos docentes:** 
-André e Tainá
+André Silva e Tainá Couto
 
 ---
 
