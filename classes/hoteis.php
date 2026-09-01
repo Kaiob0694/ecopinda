@@ -27,7 +27,7 @@ class Hotel
     public function buscarPorId($id)
     {
 
-        $sql = "SELECT * FROM hotel WHERE id = :id";
+        $sql = "SELECT * FROM hotel WHERE id_hotel = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
@@ -40,16 +40,15 @@ class Hotel
 
     public function cadastrar(
         $nome,
-        $endereco,
+        $endereco, 
         $cidade,
-        $estado,
         $cep,
         $telefone,
         $email,
         $quantidade_quartos,
         $possui_wifi,
         $possui_estacionamento,
-        $data_cadastro
+        $data_cadastro 
     ) {
 
         // O select do formulario manda "Sim"/"Nao", mas a coluna no
@@ -61,9 +60,8 @@ class Hotel
             INSERT INTO hotel
             (
                 nome,
-                endereco,
+                endereco, 
                 cidade,
-                estado,
                 cep,
                 telefone,
                 email,
@@ -75,9 +73,8 @@ class Hotel
             VALUES
             (
                 :nome,
-                :endereco,
+                :endereco, 
                 :cidade,
-                :estado,
                 :cep,
                 :telefone,
                 :email,
@@ -93,7 +90,6 @@ class Hotel
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':endereco', $endereco);
         $stmt->bindParam(':cidade', $cidade);
-        $stmt->bindParam(':estado', $estado);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
@@ -102,27 +98,21 @@ class Hotel
         $stmt->bindParam(':possui_estacionamento', $possui_estacionamento);
         $stmt->bindParam(':data_cadastro', $data_cadastro);
 
-        if (!$stmt->execute()) {
-            return false;
-        }
-
-        // Retorna o id do hotel recém-criado, para poder vincular as fotos.
-        return $this->conexao->lastInsertId();
+        return $stmt->execute();
     }
 
     public function editar(
-        $id,
         $nome,
         $endereco,
         $cidade,
-        $estado,
         $cep,
         $telefone,
         $email,
         $quantidade_quartos,
         $possui_wifi,
         $possui_estacionamento,
-        $data_cadastro
+        $data_cadastro,
+        $id
     ) {
 
         $possui_wifi = ($possui_wifi === 'Sim') ? 1 : 0;
@@ -134,7 +124,6 @@ class Hotel
                 nome = :nome,
                 endereco = :endereco,
                 cidade = :cidade,
-                estado = :estado,
                 cep = :cep,
                 telefone = :telefone,
                 email = :email,
@@ -142,7 +131,7 @@ class Hotel
                 possui_wifi = :possui_wifi,
                 possui_estacionamento = :possui_estacionamento,
                 data_cadastro = :data_cadastro
-            WHERE id = :id
+            WHERE id_hotel = :id
         ";
 
         $stmt = $this->conexao->prepare($sql);
@@ -150,7 +139,6 @@ class Hotel
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':endereco', $endereco);
         $stmt->bindParam(':cidade', $cidade);
-        $stmt->bindParam(':estado', $estado);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':telefone', $telefone);
         $stmt->bindParam(':email', $email);
@@ -166,7 +154,7 @@ class Hotel
     public function excluir($id)
     {
 
-        $sql = "DELETE FROM hotel WHERE id = :id";
+        $sql = "DELETE FROM hotel WHERE id_hotel = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
@@ -175,8 +163,8 @@ class Hotel
         return $stmt->execute();
     }
 
-    public function buscarTodos()
-    {
+   public function buscarTodos()
+{
         $sql = "SELECT * FROM hotel";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
