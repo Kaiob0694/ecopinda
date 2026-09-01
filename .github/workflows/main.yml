@@ -18,7 +18,7 @@ jobs:
         with:
           server: ftpupload.net
           username: if0_42806347
-          password: SUA_NOVA_SENHA
+          password: INJAAAKy48b
           protocol: ftp
           port: 21
           server-dir: /htdocs/
