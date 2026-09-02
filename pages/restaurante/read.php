@@ -11,8 +11,8 @@ $restauranteFoto = new RestauranteFoto();
 
 $dados = $restaurante->listar();
 
-include "/includes/header.php";
-include "/includes/head.php";
+include "../../includes/header.php";
+include "../../includes/head.php";
 
 ?>
 
