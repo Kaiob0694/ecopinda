@@ -1,3 +1,4 @@
+```php
 <?php
 
 class Conexao
@@ -5,7 +6,7 @@ class Conexao
     private $host = "sql303.infinityfree.com";
     private $dbname = "if0_42806347_pindaeco";
     private $usuario = "if0_42806347";
-    private $senha = "INJAAAKy48";
+    private $senha = "INJAAAKy48b";
 
     public function conectar()
     {
@@ -31,7 +32,9 @@ class Conexao
 
         } catch (PDOException $erro) {
 
-            die("Erro na conexão com o banco de dados.");
+            die("ERRO: " . $erro->getMessage());
+
         }
     }
 }
+```
