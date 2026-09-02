@@ -1,17 +1,15 @@
-```php
 <?php
 
 class Conexao
 {
-    private $host = "sql303.infinityfree.com";
-    private $dbname = "if0_42806347_pindaeco";
-    private $usuario = "if0_42806347";
-    private $senha = "INJAAAKy48b";
+    private $host = "localhost";
+    private $dbname = "pindaeco";
+    private $usuario = "root";
+    private $senha = "1234";
 
     public function conectar()
     {
         try {
-
             $conexao = new PDO(
                 "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4",
                 $this->usuario,
@@ -23,17 +21,10 @@ class Conexao
                 PDO::ERRMODE_EXCEPTION
             );
 
-            $conexao->setAttribute(
-                PDO::ATTR_DEFAULT_FETCH_MODE,
-                PDO::FETCH_ASSOC
-            );
-
             return $conexao;
 
         } catch (PDOException $erro) {
-
-            die("ERRO: " . $erro->getMessage());
-
+            die("Erro na conexão: " . $erro->getMessage());
         }
     }
 }
