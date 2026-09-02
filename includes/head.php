@@ -2,6 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$baseUrl = 'https://pindaeco.rf.gd';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -10,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pinda Eco</title>
-    <link rel="stylesheet" href="../assets/css/style_header.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style_header.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
