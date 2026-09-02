@@ -6,6 +6,9 @@ ini_set('display_errors', 1);
 require_once "../../classes/restaurante.php";
 require_once "../../classes/restaurante_fotos.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
+
 $restaurante = new Restaurante();
 $restauranteFoto = new RestauranteFoto();
 
@@ -16,7 +19,7 @@ include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/../assets/css/restaurante.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/restaurante.css">
 
 <div class="restaurantes-container">
 
@@ -129,7 +132,7 @@ include "../../includes/head.php";
 
                                         <img
                                             class="restaurante-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="/ecopinda/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="href="<?= $baseUrl ?>/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>
