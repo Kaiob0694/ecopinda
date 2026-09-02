@@ -31,7 +31,7 @@ if (!function_exists('iniciaisHeader')) {
     <!-- LOGO -->
     <div class="logo">
         <a href="/ecopinda/index.php">
-            <img src="/ecopinda/assets/img2/logo.png" alt="Pinda Eco">
+            <img src="/../assets/img2/logo.png" alt="Pinda Eco">
         </a>
     </div>
  
