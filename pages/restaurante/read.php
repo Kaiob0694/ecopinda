@@ -11,12 +11,12 @@ $restauranteFoto = new RestauranteFoto();
 
 $dados = $restaurante->listar();
 
-include "../../includes/header.php";
-include "../../includes/head.php";
+include "../includes/header.php";
+include "../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/restaurante.css">
+<link rel="stylesheet" href="/../assets/css/restaurante.css">
 
 <div class="restaurantes-container">
 
