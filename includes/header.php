@@ -36,16 +36,16 @@ if (!function_exists('iniciaisHeader')) {
     </div>
  
     <nav class="menu">
-        <a href="/ecopinda/index.php">Início</a>
-        <a href="/ecopinda/pages/cidade.php">Cidade</a>
-        <a href="/ecopinda/pages/turismo/read.php">Turismo</a>
-        <a href="/ecopinda/pages/hoteis/read.php">Hotéis</a>
-        <a href="/ecopinda/pages/restaurante/read.php">Restaurantes</a>
-        <a href="/ecopinda/pages/feed.php">+PINDA</a>
+        <a href="/../index.php">Início</a>
+        <a href="/../pages/cidade.php">Cidade</a>
+        <a href="/../pages/turismo/read.php">Turismo</a>
+        <a href="/../pages/hoteis/read.php">Hotéis</a>
+        <a href="/../pages/restaurante/read.php">Restaurantes</a>
+        <a href="/../pages/feed.php">+PINDA</a>
 
         <?php if ($usuarioLogado): ?>
 
-            <a href="/ecopinda/pages/profile.php" class="menu-usuario">
+            <a href="/../pages/profile.php" class="menu-usuario">
 
                 <!-- FOTO / INICIAIS -->
                 <span class="menu-avatar">
