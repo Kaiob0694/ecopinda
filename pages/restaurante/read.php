@@ -132,7 +132,7 @@ include "../../includes/head.php";
 
                                         <img
                                             class="restaurante-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="href="<?= $baseUrl ?>/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="<?= $baseUrl ?>/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>
