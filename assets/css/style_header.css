@@ -27,13 +27,13 @@ body {
 
 .header {
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
 
     width: 100%;
-    min-height: 95px;
+    height: 95px;
 
-    padding: 0 clamp(12px, 3vw, 25px);
+    padding: 0 25px;
 
     background: var(--branco);
 
@@ -44,7 +44,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
 
     z-index: 100;
 }
@@ -55,12 +54,11 @@ body {
 =========================== */
 
 .logo {
-    padding-right: clamp(15px, 4vw, 60px);
+    padding-right: 60px;
 }
 
 .logo img {
-    height: clamp(50px, 8vw, 80px);
-    display: block;
+    height: 80px;
 }
 
 
@@ -70,10 +68,7 @@ body {
 
 .menu {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(10px, 3vw, 50px);
+    gap: 50px;
     height: 100%;
 }
 
@@ -89,15 +84,13 @@ body {
 
     height: 100%;
 
-    padding: 10px clamp(12px, 2.5vw, 35px);
+    padding: 0 35px;
 
-    font-size: clamp(14px, 1.6vw, 20px);
+    font-size: 20px;
 
     color: #000000;
 
     text-decoration: none;
-
-    white-space: nowrap;
 
     position: relative;
 
@@ -176,7 +169,7 @@ body {
 
     gap: 10px;
 
-    padding: 0 clamp(10px, 2vw, 20px) !important;
+    padding: 0 20px !important;
 }
 
 
@@ -312,65 +305,41 @@ body {
 
 
 /* ===========================
-   RESPONSIVO - TABLET
+   RESPONSIVO (apenas ajuste
+   de escala em telas menores,
+   sem alterar o layout original)
 =========================== */
 
 @media (max-width: 992px) {
 
-    .header {
-        height: auto;
-        padding: 12px 15px;
+    .menu {
+        gap: 25px;
     }
+
+    .menu a {
+        padding: 0 18px;
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 768px) {
 
     .logo {
         padding-right: 20px;
     }
 
-    .menu {
-        gap: 8px;
-    }
-
-    .menu a {
-        padding: 8px 14px;
-        font-size: 15px;
-    }
-
-}
-
-
-/* ===========================
-   RESPONSIVO - MOBILE
-=========================== */
-
-@media (max-width: 600px) {
-
-    .header {
-        flex-direction: column;
-        padding: 10px;
-        gap: 8px;
-    }
-
-    .logo {
-        padding-right: 0;
-    }
-
     .logo img {
-        height: 50px;
+        height: 55px;
     }
 
     .menu {
-        width: 100%;
-        justify-content: space-around;
-        gap: 4px;
+        gap: 12px;
     }
 
     .menu a {
-        padding: 6px 10px;
+        padding: 0 10px;
         font-size: 13px;
-    }
-
-    .menu-usuario-nome {
-        max-width: 90px;
     }
 
 }
