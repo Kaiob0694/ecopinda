@@ -54,7 +54,7 @@ $categorias = [
 ?>
 
 <!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-turismo.css?v=<?= time(); ?>">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-turismo.css?v=<?= time(); ?>">
 
 <main class="cadastro-turismo-container">
     <div class="cadastro-turismo-painel">

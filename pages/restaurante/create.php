@@ -3,6 +3,8 @@
 require_once "../../classes/restaurante.php";
 require_once "../../includes/upload_fotos_restaurante.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $restaurante = new Restaurante();
 $errosFotos = [];
 
@@ -38,7 +40,7 @@ include "../../includes/header.php";
 ?>
 
 <!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-restaurante.css?v=<?= time(); ?>">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-restaurante.css?v=<?= time(); ?>">
 
 <main class="cadastro-restaurante-container">
     <div class="cadastro-restaurante-painel">

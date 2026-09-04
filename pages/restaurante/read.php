@@ -415,7 +415,7 @@ include "../../includes/head.php";
 </div>
 
 
-<script src="/ecopinda/assets/js/restaurante.js"></script>
+<script src="<?= $baseUrl ?>/assets/js/restaurante.js"></script>
 
 <?php
 

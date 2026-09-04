@@ -47,8 +47,8 @@ include "../../includes/header.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-restaurante.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/update-restaurante.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-restaurante.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/update-restaurante.css">
 
 <div class="cadastro-restaurante-container">
 

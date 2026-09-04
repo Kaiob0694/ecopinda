@@ -4,6 +4,8 @@ require_once "../../classes/hoteis.php";
 require_once "../../classes/hotel_fotos.php";
 require_once "../../includes/upload_fotos_hotel.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $hotel = new Hotel();
 $hotelFoto = new HotelFoto();
 $errosFotos = [];
@@ -46,8 +48,8 @@ include "../../includes/header.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-hotel.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/update-hotel.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-hotel.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/update-hotel.css">
 
 <div class="cadastro-hotel-container">
 

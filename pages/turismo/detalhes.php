@@ -6,6 +6,8 @@ ini_set('display_errors', 1);
 require_once "../../classes/turismo.php";
 require_once "../../classes/turismo_fotos.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $ponto = new PontoTuristico();
 $pontoFoto = new PontoTuristicoFoto();
 
@@ -18,8 +20,8 @@ include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/turismo.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/turismo-detalhes.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/turismo.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/turismo-detalhes.css">
 
 <?php if (!$dados): ?>
 
@@ -59,9 +61,9 @@ include "../../includes/head.php";
 
     $enderecoCompleto = trim(
         ($dados['endereco'] ?? '')
-        . ', ' . $dados['cidade']
-        . (!empty($dados['estado']) ? ' - ' . $dados['estado'] : '')
-        . (!empty($dados['cep']) ? ', ' . $dados['cep'] : '')
+            . ', ' . $dados['cidade']
+            . (!empty($dados['estado']) ? ' - ' . $dados['estado'] : '')
+            . (!empty($dados['cep']) ? ', ' . $dados['cep'] : '')
     );
 
     ?>
@@ -118,7 +120,7 @@ include "../../includes/head.php";
                             class="turismo-detalhes-foto <?= $indice === 0 ? 'turismo-detalhes-foto-principal' : '' ?>"
                             data-indice="<?= $indice ?>">
 
-                            <img src="/ecopinda/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
+                            <img src="<?= $baseUrl ?>/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="<?= htmlspecialchars($dados['nome']) ?>">
 
                             <?php if ($indice === 4 && $totalFotos > 5): ?>
@@ -329,12 +331,12 @@ include "../../includes/head.php";
     </div>
 
     <script>
-        window.turismoFotos = <?= json_encode(array_map(function ($f) {
-            return "/ecopinda/uploads/turismo/" . $f['caminho'];
+        window.turismoFotos = <?= json_encode(array_map(function ($f) use ($baseUrl) {
+               return $baseUrl . "/uploads/turismo/" . $f['caminho'];
         }, $fotosPonto)) ?>;
     </script>
 
-    <script src="/ecopinda/assets/js/turismo-detalhes.js"></script>
+    <script src="<?= $baseUrl ?>/assets/js/turismo-detalhes.js"></script>
 
 <?php endif; ?>
 

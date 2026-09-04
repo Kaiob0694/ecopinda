@@ -6,6 +6,8 @@ ini_set('display_errors', 1);
 require_once "../../classes/hoteis.php";
 require_once "../../classes/hotel_fotos.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $hotel = new Hotel();
 $hotelFoto = new HotelFoto();
 
@@ -18,8 +20,8 @@ include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/hotel.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/hotel-detalhes.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/hotel.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/hotel-detalhes.css">
 
 <?php if (!$dados): ?>
 
@@ -118,7 +120,7 @@ include "../../includes/head.php";
                             class="hotel-detalhes-foto <?= $indice === 0 ? 'hotel-detalhes-foto-principal' : '' ?>"
                             data-indice="<?= $indice ?>">
 
-                            <img src="/ecopinda/assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                            <img src="<?= $baseUrl ?>/assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="<?= htmlspecialchars($dados['nome']) ?>">
 
                             <?php if ($indice === 4 && $totalFotos > 5): ?>
@@ -314,7 +316,7 @@ include "../../includes/head.php";
         }, $fotosHotel)) ?>;
     </script>
 
-    <script src="/ecopinda/assets/js/hotel-detalhes.js"></script>
+    <script src="<?= $baseUrl ?>/assets/js/hotel-detalhes.js"></script>
 
 <?php endif; ?>
 

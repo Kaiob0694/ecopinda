@@ -29,10 +29,10 @@ include_once(__DIR__ . "/../includes/head.php");
     <title>Gastronomia - PindaEco Tour</title>
 
     <!-- CSS principal do header -->
-    <link rel="stylesheet" href="/ecopinda/assets/css/header.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/header.css">
 
     <!-- CSS desta página -->
-    <link rel="stylesheet" href="/ecopinda/assets/css/styleGastronomia.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/styleGastronomia.css">
 
 </head>
 

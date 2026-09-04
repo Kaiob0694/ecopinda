@@ -16,7 +16,7 @@ include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/turismo.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/turismo.css">
 
 <div class="turismo-container">
 
@@ -137,7 +137,7 @@ include "../../includes/head.php";
                                     <?php foreach ($fotosPonto as $indice => $foto): ?>
 
                                         <img class="turismo-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="/ecopinda/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="<?= $baseUrl ?>/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>
@@ -430,7 +430,7 @@ include "../../includes/head.php";
      JAVASCRIPT DA GALERIA
 ====================================================== -->
 
-<script src="/ecopinda/assets/js/turismo.js"></script>
+<script src="<?= $baseUrl ?>/assets/js/turismo.js"></script>
 
 
 <?php

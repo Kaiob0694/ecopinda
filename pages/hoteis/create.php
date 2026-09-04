@@ -3,6 +3,8 @@
 require_once "../../classes/hoteis.php";
 require_once "../../includes/upload_fotos_hotel.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $hotel = new Hotel();
 $errosFotos = [];
 
@@ -37,7 +39,7 @@ include "../../includes/header.php";
 ?>
 
 <!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-hotel.css?v=<?= time(); ?>">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-hotel.css?v=<?= time(); ?>">
 
 <main class="cadastro-hotel-container">
     <div class="cadastro-hotel-painel">

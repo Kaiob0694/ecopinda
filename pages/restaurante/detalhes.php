@@ -6,6 +6,8 @@ ini_set('display_errors', 1);
 require_once "../../classes/restaurante.php";
 require_once "../../classes/restaurante_fotos.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $restaurante = new Restaurante();
 $restauranteFoto = new RestauranteFoto();
 
@@ -18,8 +20,8 @@ include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/restaurante.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/restaurante-detalhes.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/restaurante.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/restaurante-detalhes.css">
 
 <?php if (!$dados): ?>
 
@@ -116,7 +118,7 @@ include "../../includes/head.php";
                             class="restaurante-detalhes-foto <?= $indice === 0 ? 'restaurante-detalhes-foto-principal' : '' ?>"
                             data-indice="<?= $indice ?>">
 
-                            <img src="/ecopinda/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
+                            <img src="<?= $baseUrl ?>/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="<?= htmlspecialchars($dados['nome']) ?>">
 
                             <?php if ($indice === 4 && $totalFotos > 5): ?>
@@ -316,7 +318,7 @@ include "../../includes/head.php";
         }, $fotosRestaurante)) ?>;
     </script>
 
-    <script src="/ecopinda/assets/js/restaurante-detalhes.js"></script>
+    <script src="<?= $baseUrl ?>/assets/js/restaurante-detalhes.js"></script>
 
 <?php endif; ?>
 
