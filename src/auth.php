@@ -1,46 +1,64 @@
 <?php
 
 session_start();
+
 require_once(__DIR__ . "/../config/conexao.php");
 
 $email = trim($_POST['email'] ?? '');
 $senha = trim($_POST['senha'] ?? '');
 
-$sql = "SELECT * FROM usuarios WHERE email = ?";
-$stmt = mysqli_prepare($conexao, $sql);
+try {
 
-mysqli_stmt_bind_param($stmt, "s", $email);
-mysqli_stmt_execute($stmt);
+    // Cria a conexão PDO
+    $pdo = new Conexao();
+    $pdo = $pdo->conectar();
 
-$resultado = mysqli_stmt_get_result($stmt);
+    // Busca o usuário pelo e-mail
+    $sql = "SELECT * FROM usuarios WHERE email = :email LIMIT 1";
 
-if ($row = mysqli_fetch_assoc($resultado)) {
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':email' => $email
+    ]);
 
-    if (password_verify($senha, $row['senha'])) {
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $_SESSION['usuario_id']    = $row['id'];
-        $_SESSION['usuario_nome']  = $row['nome'];
-        $_SESSION['usuario_email'] = $row['email'];
-        $_SESSION['usuario_foto']  = $row['foto'] ?? '';
-        $_SESSION['usuario_tipo']  = $row['tipo_usuario'] ?? 'usuario';
+    if ($row) {
 
-        header("Location: /ecopinda/pages/profile.php");
-        exit;
+        // Verifica a senha
+        if (password_verify($senha, $row['senha'])) {
+
+            $_SESSION['usuario_id']    = $row['id'];
+            $_SESSION['usuario_nome']  = $row['nome'];
+            $_SESSION['usuario_email'] = $row['email'];
+            $_SESSION['usuario_foto']  = $row['foto'] ?? '';
+            $_SESSION['usuario_tipo']  = $row['tipo_usuario'] ?? 'usuario';
+
+            header("Location: /ecopinda/pages/profile.php");
+            exit;
+
+        } else {
+
+            $_SESSION['login_erro']  = "Senha incorreta";
+            $_SESSION['login_email'] = $email;
+
+            header("Location: /ecopinda/pages/login.php");
+            exit;
+        }
 
     } else {
 
-        $_SESSION['login_erro']  = "Senha incorreta";
+        $_SESSION['login_erro']  = "Usuário não encontrado";
         $_SESSION['login_email'] = $email;
 
         header("Location: /ecopinda/pages/login.php");
         exit;
     }
 
-} else {
+} catch (PDOException $e) {
 
-    $_SESSION['login_erro']  = "Usuário não encontrado";
-    $_SESSION['login_email'] = $email;
+    $_SESSION['login_erro'] = "Erro ao conectar ao banco de dados.";
 
-    header("Location: /pages/login.php");
+    header("Location: /ecopinda/pages/login.php");
     exit;
 }
