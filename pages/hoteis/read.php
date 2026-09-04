@@ -404,5 +404,11 @@ include "../../includes/head.php";
 </div>
 
 
-<!-- =====================================================
-     JAVASCRIPT DA GALERIA
+     <script src="<?= $baseUrl ?>/assets/js/hoteis.js"></script>
+
+
+<?php
+
+include "../../includes/footer.php";
+
+?>
