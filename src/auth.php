@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once(__DIR__ . "/../src/conexao.php");
+require_once(__DIR__ . "/../config/conexao.php");
 
 $email = trim($_POST['email'] ?? '');
 $senha = trim($_POST['senha'] ?? '');
