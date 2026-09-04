@@ -6,6 +6,8 @@ ini_set('display_errors', 1);
 require_once "../../classes/hoteis.php";
 require_once "../../classes/hotel_fotos.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $hotel = new Hotel();
 $hotelFoto = new HotelFoto();
 
@@ -16,7 +18,7 @@ include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/hotel.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/hotel.css">
 
 <div class="hoteis-container">
 
