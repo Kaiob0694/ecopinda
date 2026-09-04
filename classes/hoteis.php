@@ -27,7 +27,7 @@ class Hotel
     public function buscarPorId($id)
     {
 
-        $sql = "SELECT * FROM hotel WHERE id_hotel = :id";
+        $sql = "SELECT * FROM hotel WHERE id = :id";
 
         $stmt = $this->conexao->prepare($sql);
 
