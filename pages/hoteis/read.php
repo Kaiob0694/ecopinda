@@ -139,7 +139,7 @@ include "../../includes/head.php";
                                     <?php foreach ($fotosHotel as $indice => $foto): ?>
 
                                         <img class="hotel-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="/ecopinda/assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="<?= $baseUrl ?>/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>
