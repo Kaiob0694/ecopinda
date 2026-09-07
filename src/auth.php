@@ -2,6 +2,8 @@
 
 session_start();
 
+
+$baseUrl = 'https://pindaeco.rf.gd';
 require_once(__DIR__ . "/../config/conexao.php");
 
 $email = trim($_POST['email'] ?? '');
@@ -34,7 +36,7 @@ try {
             $_SESSION['usuario_foto']  = $row['foto'] ?? '';
             $_SESSION['usuario_tipo']  = $row['tipo_usuario'] ?? 'usuario';
 
-            header("Location: /ecopinda/pages/profile.php");
+            header("Location:  " . $baseUrl . "/pages/profile.php");
             exit;
 
         } else {
@@ -42,7 +44,7 @@ try {
             $_SESSION['login_erro']  = "Senha incorreta";
             $_SESSION['login_email'] = $email;
 
-            header("Location: /ecopinda/pages/login.php");
+            header("Location:  " . $baseUrl . "/pages/login.php");
             exit;
         }
 
@@ -51,7 +53,7 @@ try {
         $_SESSION['login_erro']  = "Usuário não encontrado";
         $_SESSION['login_email'] = $email;
 
-        header("Location: /ecopinda/pages/login.php");
+        header("Location:  " . $baseUrl . "/pages/login.php");
         exit;
     }
 
@@ -59,6 +61,6 @@ try {
 
     $_SESSION['login_erro'] = "Erro ao conectar ao banco de dados.";
 
-    header("Location: /ecopinda/pages/login.php");
+    header("Location:  " . $baseUrl . "/pages/login.php");
     exit;
 }
