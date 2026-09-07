@@ -1,4 +1,6 @@
 <?php
+
+$baseUrl = 'https://pindaeco.rf.gd';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -30,7 +32,7 @@ if (!function_exists('iniciaisHeader')) {
 
     <!-- LOGO -->
     <div class="logo">
-        <a href="/ecopinda/index.php">
+        <a href="<?= $baseUrl ?>/index.php">
             <img src="/../assets/img2/logo.png" alt="Pinda Eco">
         </a>
     </div>
