@@ -105,7 +105,7 @@ if (!function_exists('iniciaisHeader')) {
 
         <!-- USUÁRIO NÃO LOGADO -->
         <?php else: ?>
-            <a href="/../pages/login.php">Login</a>
+            <a href="../pages/login.php">Login</a>
         <?php endif; ?>
  
         <span class="indicator"></span>
