@@ -149,12 +149,65 @@ body {
    CORES DOS MENUS
 =========================== */
 
-.menu a:nth-child(2)::after {
+.menu > a:nth-child(2)::after {
     background: var(--verde);
 }
 
-.menu a:nth-child(3)::after {
+.menu-dropdown > a::after {
     background: var(--amarelo);
+}
+
+
+/* ===========================
+   SUBMENU / DROPDOWN
+=========================== */
+
+.menu-dropdown {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.menu-dropdown > a {
+    height: 100%;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 95px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--branco);
+    min-width: 200px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 101;
+}
+
+.submenu a {
+    height: auto !important;
+    padding: 14px 20px !important;
+    font-size: 16px !important;
+    color: #000000 !important;
+    text-align: center;
+    white-space: nowrap;
+    transition: background .3s ease, color .3s ease;
+}
+
+.submenu a::after {
+    display: none !important;
+}
+
+.submenu a:hover {
+    background: var(--amarelo);
+    color: var(--marrom) !important;
+}
+
+.menu-dropdown:hover .submenu {
+    display: block;
 }
 
 
@@ -305,9 +358,7 @@ body {
 
 
 /* ===========================
-   RESPONSIVO (apenas ajuste
-   de escala em telas menores,
-   sem alterar o layout original)
+   RESPONSIVO
 =========================== */
 
 @media (max-width: 992px) {

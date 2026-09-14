@@ -40,7 +40,15 @@ if (!function_exists('iniciaisHeader')) {
     <nav class="menu">
         <a href="/../index.php">Início</a>
         <a href="/../pages/cidade.php">Cidade</a>
-        <a href="/../pages/turismo/read.php">Turismo</a>
+
+        <!-- ITEM COM SUBMENU (TURISMO) -->
+        <div class="menu-dropdown">
+            <a href="/../pages/turismo/read.php">Turismo</a>
+            <div class="submenu">
+                <a href="/../pages/guia-turistico/read.php">Guia Turístico</a>
+            </div>
+        </div>
+
         <a href="/../pages/hoteis/read.php">Hotéis</a>
         <a href="/../pages/restaurante/read.php">Restaurantes</a>
         <a href="/../pages/feed.php">+PINDA</a>
