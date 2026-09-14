@@ -3,7 +3,7 @@ session_start();
 require_once(__DIR__ . "/../config/conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: ../pages/cadastro.php");
+    header("Location: " . $baseUrl . "/pages/cadastro.php");
     exit;
 }
 
@@ -78,7 +78,7 @@ if (empty($erros)) {
 
 if (!empty($erros)) {
     $_SESSION['cadastro_erros'] = $erros;
-    header("Location: ../pages/cadastro.php");
+    header("Location: " . $baseUrl . "/pages/cadastro.php");
     exit;
 }
 
