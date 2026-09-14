@@ -14,7 +14,7 @@ $baseUrl = 'https://pindaeco.rf.gd';
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style_header.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 
 <body>
