@@ -45,7 +45,7 @@ if (!function_exists('iniciaisHeader')) {
         <div class="menu-dropdown">
             <a href="/../pages/turismo/read.php">Turismo</a>
             <div class="submenu">
-                <a href="/../pages/guia-turistico/read.php">Guia Turístico</a>
+                <a href="/../pages/guia/read.php">Guia Turístico</a>
             </div>
         </div>
 
