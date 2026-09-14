@@ -2,16 +2,36 @@
 
 class Conexao
 {
-    private $host = "sql303.infinityfree.com";
-    private $usuario = "if0_42806347";
-    private $senha = "INJAAAKy48b";
-    private $banco = "if0_42806347_pindaeco";
+    
+    private $host = "localhost";
+    private $usuario = "root";
+    private $senha = "1234";
+    private $banco = "pindaeco";
+    private $porta = 3306;
+
+    public function __construct()
+    {
+        $servidor = strtolower($_SERVER['SERVER_NAME'] ?? 'localhost');
+
+        // Configuração ONLINE - InfinityFree
+        if (in_array($servidor, [
+            'pindaeco.rf.gd',
+            'www.pindaeco.rf.gd'
+        ], true)) {
+
+            $this->host = "sql303.infinityfree.com";
+            $this->usuario = "if0_42806347";
+            $this->senha = "INJAAAKy48b";
+            $this->banco = "if0_42806347_pindaeco";
+        }
+    }
 
     public function conectar()
     {
         try {
+
             $pdo = new PDO(
-                "mysql:host={$this->host};dbname={$this->banco};charset=utf8mb4",
+                "mysql:host={$this->host};port={$this->porta};dbname={$this->banco};charset=utf8mb4",
                 $this->usuario,
                 $this->senha,
                 [
@@ -24,7 +44,11 @@ class Conexao
             return $pdo;
 
         } catch (PDOException $erro) {
-            die("Erro na conexão com o banco de dados: " . $erro->getMessage());
+
+            die(
+                "Erro na conexão com o banco de dados: " .
+                $erro->getMessage()
+            );
         }
     }
 }
