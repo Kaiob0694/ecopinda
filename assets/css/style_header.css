@@ -171,30 +171,53 @@ body {
 
 .menu-dropdown > a {
     height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Seta indicando que existe submenu */
+.menu-dropdown > a::before {
+    content: "▾";
+    font-size: 13px;
+    line-height: 1;
+    transition: transform .3s ease;
+}
+
+.menu-dropdown:hover > a::before {
+    transform: rotate(180deg);
 }
 
 .submenu {
-    display: none;
     position: absolute;
     top: 95px;
     left: 50%;
-    transform: translateX(-50%);
-    background: var(--branco);
     min-width: 200px;
+
+    background: var(--branco);
+    border-top: 3px solid var(--amarelo);
     border-radius: 0 0 12px 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
     overflow: hidden;
     z-index: 101;
+
+    /* estado escondido */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-8px);
+    transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
 }
 
 .submenu a {
+    display: block;
     height: auto !important;
     padding: 14px 20px !important;
     font-size: 16px !important;
     color: #000000 !important;
     text-align: center;
     white-space: nowrap;
-    transition: background .3s ease, color .3s ease;
+    transition: background .25s ease, color .25s ease;
 }
 
 .submenu a::after {
@@ -207,7 +230,10 @@ body {
 }
 
 .menu-dropdown:hover .submenu {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
 }
 
 
