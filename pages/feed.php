@@ -7,9 +7,12 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-require_once(__DIR__ . "/../src/conexao.php");
+require_once(__DIR__ . "/../config/conexao.php");
 
 $usuarioId = $_SESSION['usuario_id'];
+
+$pdo = new Conexao();
+$conexao = $pdo->conectar();
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +34,10 @@ $sql = "
     ORDER BY p.criado_em DESC
 ";
 
-$resultado = mysqli_query($conexao, $sql);
+$stmt = $conexao->prepare($sql);
+$stmt->execute();
 
+$postagens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 /*
 |--------------------------------------------------------------------------
@@ -61,13 +66,11 @@ function iniciaisFeed($nome)
 
 <?php include '../includes/header.php'; ?>
 
-
 <main class="feed-page">
 
     <div class="feed-container">
 
         <!-- TÍTULO -->
-
         <div class="feed-title">
 
             <h1>
@@ -81,9 +84,7 @@ function iniciaisFeed($nome)
 
         </div>
 
-
         <!-- CRIAR POSTAGEM -->
-
         <div class="post-create">
 
             <div class="post-create-header">
@@ -108,6 +109,7 @@ function iniciaisFeed($nome)
                 </div>
 
                 <div>
+
                     <strong>
                         <?= htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuário') ?>
                     </strong>
@@ -115,10 +117,10 @@ function iniciaisFeed($nome)
                     <span>
                         Criar uma postagem
                     </span>
+
                 </div>
 
             </div>
-
 
             <form
                 action="../src/criar_postagem.php"
@@ -133,13 +135,11 @@ function iniciaisFeed($nome)
                     required
                 ></textarea>
 
-
                 <div class="post-create-footer">
 
                     <label class="upload-image">
 
                         <i class="fa-solid fa-image"></i>
-
                         Adicionar imagem
 
                         <input
@@ -150,11 +150,9 @@ function iniciaisFeed($nome)
 
                     </label>
 
-
                     <button type="submit">
 
                         <i class="fa-solid fa-paper-plane"></i>
-
                         Publicar
 
                     </button>
@@ -165,12 +163,10 @@ function iniciaisFeed($nome)
 
         </div>
 
-
         <!-- FEED -->
-
         <div class="posts">
 
-            <?php if (mysqli_num_rows($resultado) === 0): ?>
+            <?php if (count($postagens) === 0): ?>
 
                 <div class="empty-feed">
 
@@ -187,12 +183,11 @@ function iniciaisFeed($nome)
             <?php endif; ?>
 
 
-            <?php while ($post = mysqli_fetch_assoc($resultado)): ?>
+            <?php foreach ($postagens as $post): ?>
 
                 <article class="post">
 
                     <!-- CABEÇALHO -->
-
                     <div class="post-header">
 
                         <div class="post-avatar">
@@ -224,7 +219,7 @@ function iniciaisFeed($nome)
                             <span>
 
                                 <?= date(
-                                    'd/m/Y \à\s H:i',
+                                    'd/m/Y \à\s H\:i',
                                     strtotime($post['criado_em'])
                                 ) ?>
 
@@ -265,7 +260,6 @@ function iniciaisFeed($nome)
 
 
                     <!-- TEXTO -->
-
                     <div class="post-text">
 
                         <?= nl2br(
@@ -276,7 +270,6 @@ function iniciaisFeed($nome)
 
 
                     <!-- IMAGEM -->
-
                     <?php if (!empty($post['imagem'])): ?>
 
                         <div class="post-image">
@@ -292,13 +285,12 @@ function iniciaisFeed($nome)
 
                 </article>
 
-            <?php endwhile; ?>
+            <?php endforeach; ?>
 
         </div>
 
     </div>
 
 </main>
-
 
 <?php include '../includes/footer.php'; ?>
