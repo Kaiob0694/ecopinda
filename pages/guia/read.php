@@ -1,17 +1,22 @@
 <?php
-$baseUrl = 'https://pindaeco.rf.gd';
 
-require_once $baseUrl . 'config/conexao.php';
-require_once $baseUrl . 'classes/guiasTuristicos.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-$guiasTuristicos = new GuiasTuristicos($pdo);
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../../classes/guiasTuristicos.php';
+
+$guiasTuristicos = new GuiasTuristicos();
 $guias = $guiasTuristicos->listar();
 
 $pageTitle = 'Guia Turístico';
-require_once $prefixo . 'includes/header.php';
+
+require_once __DIR__ . '/../../includes/header.php';
+
 ?>
 
-<link rel="stylesheet" href="<?= $prefixo ?>assets/css/guia-turistico.css">
+<link rel="stylesheet" href="/assets/css/guia-turistico.css">
 
 <main class="guia-container">
 
@@ -36,15 +41,19 @@ require_once $prefixo . 'includes/header.php';
                 $categorias = $guiasTuristicos->listarCategorias($guia['id']);
 
                 $fotoPerfil = !empty($guia['foto_perfil'])
-                    ? $prefixo . 'assets/uploads/guias/' . htmlspecialchars($guia['foto_perfil'])
-                    : $prefixo . 'assets/img2/sem-foto.png';
+                    ? '/assets/uploads/guias/' . htmlspecialchars($guia['foto_perfil'])
+                    : '/assets/img2/sem-foto.png';
+
             ?>
 
                 <div class="guia-card">
 
                     <!-- FOTO DE PERFIL -->
                     <div class="guia-foto">
-                        <img src="<?= $fotoPerfil ?>" alt="Foto de <?= htmlspecialchars($guia['nome']) ?>">
+                        <img
+                            src="<?= $fotoPerfil ?>"
+                            alt="Foto de <?= htmlspecialchars($guia['nome']) ?>"
+                        >
                     </div>
 
                     <div class="guia-info">
@@ -69,46 +78,66 @@ require_once $prefixo . 'includes/header.php';
                             </p>
                         <?php endif; ?>
 
+
                         <!-- CATEGORIAS -->
                         <?php if (!empty($categorias)): ?>
                             <div class="guia-categorias">
+
                                 <?php foreach ($categorias as $categoria): ?>
                                     <span class="guia-tag">
                                         <?= htmlspecialchars($categoria['nome']) ?>
                                     </span>
                                 <?php endforeach; ?>
+
                             </div>
                         <?php endif; ?>
+
 
                         <!-- GALERIA DE FOTOS -->
                         <?php if (!empty($fotos)): ?>
                             <div class="guia-galeria">
+
                                 <?php foreach (array_slice($fotos, 0, 4) as $foto): ?>
                                     <img
-                                        src="<?= $prefixo ?>assets/uploads/guias/<?= htmlspecialchars($foto['foto']) ?>"
+                                        src="/assets/uploads/guias/<?= htmlspecialchars($foto['foto']) ?>"
                                         alt="<?= htmlspecialchars($foto['descricao'] ?? 'Foto do guia') ?>"
                                     >
                                 <?php endforeach; ?>
+
                             </div>
                         <?php endif; ?>
+
 
                         <!-- CONTATO -->
                         <div class="guia-contato">
 
                             <?php if (!empty($guia['telefone'])): ?>
-                                <a href="https://wa.me/55<?= preg_replace('/\D/', '', $guia['telefone']) ?>" target="_blank" class="guia-btn whatsapp">
+                                <a
+                                    href="https://wa.me/55<?= preg_replace('/\D/', '', $guia['telefone']) ?>"
+                                    target="_blank"
+                                    class="guia-btn whatsapp"
+                                >
                                     WhatsApp
                                 </a>
                             <?php endif; ?>
 
+
                             <?php if (!empty($guia['instagram'])): ?>
-                                <a href="https://instagram.com/<?= ltrim(htmlspecialchars($guia['instagram']), '@') ?>" target="_blank" class="guia-btn instagram">
+                                <a
+                                    href="https://instagram.com/<?= ltrim($guia['instagram'], '@') ?>"
+                                    target="_blank"
+                                    class="guia-btn instagram"
+                                >
                                     Instagram
                                 </a>
                             <?php endif; ?>
 
+
                             <?php if (!empty($guia['email'])): ?>
-                                <a href="mailto:<?= htmlspecialchars($guia['email']) ?>" class="guia-btn email">
+                                <a
+                                    href="mailto:<?= htmlspecialchars($guia['email']) ?>"
+                                    class="guia-btn email"
+                                >
                                     E-mail
                                 </a>
                             <?php endif; ?>
@@ -127,4 +156,4 @@ require_once $prefixo . 'includes/header.php';
 
 </main>
 
-<?php require_once $prefixo . 'includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
