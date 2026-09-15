@@ -1,9 +1,12 @@
-```php
 <?php
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../../classes/guiasTuristicos.php';
@@ -20,6 +23,24 @@ $guiasTuristicos = new GuiasTuristicos($pdo);
 // Busca os guias
 $guias = $guiasTuristicos->listar();
 
+// Verifica se o usuário logado é master
+$usuarioMaster = ($_SESSION['usuario_tipo'] ?? '') === 'master';
+
+// Mensagens de feedback (vindas de create/update/delete)
+$sucesso = $_GET['sucesso'] ?? '';
+$erro = $_GET['erro'] ?? '';
+
+$mensagensSucesso = [
+    'cadastrado' => 'Guia cadastrado com sucesso!',
+    'atualizado' => 'Guia atualizado com sucesso!',
+    'excluido'   => 'Guia excluído com sucesso!',
+];
+
+$mensagensErro = [
+    'nao_encontrado' => 'Guia não encontrado.',
+    'sem_permissao'  => 'Você não tem permissão para acessar essa área.',
+];
+
 $pageTitle = 'Guia Turístico';
 
 include __DIR__ . '/../../includes/header.php';
@@ -34,7 +55,23 @@ include __DIR__ . '/../../includes/head.php';
     <div class="guia-topo">
         <h1>Guia Turístico</h1>
         <p>Conheça quem pode te guiar pela cidade</p>
+
+        <?php if ($usuarioMaster): ?>
+            <a href="create.php" class="guia-btn salvar">+ Novo Guia</a>
+        <?php endif; ?>
     </div>
+
+    <?php if ($sucesso && isset($mensagensSucesso[$sucesso])): ?>
+        <div class="guia-alerta sucesso">
+            <?= htmlspecialchars($mensagensSucesso[$sucesso]) ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($erro && isset($mensagensErro[$erro])): ?>
+        <div class="guia-alerta erro">
+            <?= htmlspecialchars($mensagensErro[$erro]) ?>
+        </div>
+    <?php endif; ?>
 
     <?php if (empty($guias)): ?>
 
@@ -156,7 +193,7 @@ include __DIR__ . '/../../includes/head.php';
                                 );
                                 ?>
 
-                                <a
+                                
                                     href="https://wa.me/55<?= $telefone ?>"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -176,7 +213,7 @@ include __DIR__ . '/../../includes/head.php';
                                 );
                                 ?>
 
-                                <a
+                                
                                     href="https://instagram.com/<?= htmlspecialchars($instagram) ?>"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -189,7 +226,7 @@ include __DIR__ . '/../../includes/head.php';
 
                             <?php if (!empty($guia['email'])): ?>
 
-                                <a
+                                
                                     href="mailto:<?= htmlspecialchars($guia['email']) ?>"
                                     class="guia-btn email"
                                 >
@@ -199,6 +236,26 @@ include __DIR__ . '/../../includes/head.php';
                             <?php endif; ?>
 
                         </div>
+
+                        <?php if ($usuarioMaster): ?>
+
+                            <div class="guia-admin-acoes">
+
+                                <a href="update.php?id=<?= (int) $guia['id'] ?>" class="guia-btn editar">
+                                    Editar
+                                </a>
+
+                                
+                                    href="delete.php?id=<?= (int) $guia['id'] ?>"
+                                    class="guia-btn excluir"
+                                    onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');"
+                                >
+                                    Excluir
+                                </a>
+
+                            </div>
+
+                        <?php endif; ?>
 
                     </div>
 
@@ -213,4 +270,3 @@ include __DIR__ . '/../../includes/head.php';
 </main>
 
 <?php require_once __DIR__ . '/../../includes/footer.php'; ?>
-```
