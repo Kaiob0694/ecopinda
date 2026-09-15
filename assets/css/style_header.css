@@ -27,7 +27,7 @@ body {
 
 .header {
     position: fixed;
-    top: 0px;
+    top: 0;
     left: 0;
 
     width: 100%;
@@ -37,7 +37,7 @@ body {
 
     background: var(--branco);
 
-    border-radius: 0px;
+    border-radius: 0;
 
     box-shadow: 0 4px 25px rgba(0, 0, 0, .25);
 
@@ -164,23 +164,34 @@ body {
 
 .menu-dropdown {
     position: relative;
+
     height: 100%;
+
     display: flex;
     align-items: center;
 }
 
 .menu-dropdown > a {
     height: 100%;
+
     display: flex;
     align-items: center;
+
     gap: 6px;
 }
 
-/* Seta indicando que existe submenu */
+
+/* ===========================
+   SETA DO SUBMENU
+=========================== */
+
 .menu-dropdown > a::before {
     content: "▾";
+
     font-size: 13px;
+
     line-height: 1;
+
     transition: transform .3s ease;
 }
 
@@ -188,52 +199,102 @@ body {
     transform: rotate(180deg);
 }
 
+
+/* ===========================
+   SUBMENU
+=========================== */
+
 .submenu {
     position: absolute;
+
     top: 95px;
     left: 50%;
+
     min-width: 200px;
 
     background: var(--branco);
+
     border-top: 3px solid var(--amarelo);
+
     border-radius: 0 0 12px 12px;
+
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+
     overflow: hidden;
+
     z-index: 101;
 
-    /* estado escondido */
     opacity: 0;
     visibility: hidden;
+
     pointer-events: none;
-    transform: translateX(-50%) translateY(-8px);
-    transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+
+    transform:
+        translateX(-50%)
+        translateY(-8px);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility .25s ease;
 }
+
+
+/* ===========================
+   LINKS DO SUBMENU
+=========================== */
 
 .submenu a {
     display: block;
+
     height: auto !important;
+
     padding: 14px 20px !important;
+
     font-size: 16px !important;
+
     color: #000000 !important;
+
     text-align: center;
+
     white-space: nowrap;
-    transition: background .25s ease, color .25s ease;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
 }
+
+
+/* Remove animação do submenu */
 
 .submenu a::after {
     display: none !important;
 }
 
+
+/* Hover submenu */
+
 .submenu a:hover {
     background: var(--amarelo);
+
     color: var(--marrom) !important;
 }
 
+
+/* ===========================
+   MOSTRAR SUBMENU
+=========================== */
+
 .menu-dropdown:hover .submenu {
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+
+    transform:
+        translateX(-50%)
+        translateY(0);
 }
 
 
@@ -249,6 +310,12 @@ body {
     gap: 10px;
 
     padding: 0 20px !important;
+
+    /*
+       Impede que o bloco do usuário
+       seja comprimido e corte as coins.
+    */
+    flex-shrink: 0;
 }
 
 
@@ -311,24 +378,41 @@ body {
     justify-content: center;
 
     line-height: 1.2;
+
+    min-width: 0;
 }
 
 
 /* ===========================
-   NOME DO USUÁRIO
+   NOME + PINDACOINS
 =========================== */
 
 .menu-usuario-nome {
     display: flex;
+
     align-items: center;
+
     gap: 7px;
 
     font-size: 16px;
+
     font-weight: 600;
 
     color: #000;
 
     white-space: nowrap;
+
+    /*
+       IMPORTANTE:
+       não limitar a largura.
+    */
+    max-width: none;
+
+    width: auto;
+
+    overflow: visible;
+
+    text-overflow: unset;
 }
 
 
@@ -338,6 +422,8 @@ body {
 
 .nome-usuario {
     white-space: nowrap;
+
+    flex-shrink: 0;
 }
 
 
@@ -349,6 +435,7 @@ body {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 3px;
@@ -362,9 +449,16 @@ body {
     color: #9a7200;
 
     font-size: 11px;
+
     font-weight: 800;
 
     white-space: nowrap;
+
+    /*
+       Impede que o contador
+       seja comprimido.
+    */
+    flex-shrink: 0;
 
     line-height: 1;
 }
@@ -419,7 +513,18 @@ body {
 
 
 /* ===========================
-   RESPONSIVO
+   HOVER DAS PINDACOINS
+=========================== */
+
+.menu-usuario:hover .menu-pindacoins {
+    background: #fff4c2;
+
+    color: #9a7200;
+}
+
+
+/* ===========================
+   RESPONSIVO - TABLET
 =========================== */
 
 @media (max-width: 992px) {
@@ -430,10 +535,30 @@ body {
 
     .menu a {
         padding: 0 18px;
+
         font-size: 16px;
     }
 
+    .menu-usuario {
+        padding: 0 12px !important;
+    }
+
+    .menu-usuario-nome {
+        font-size: 14px;
+    }
+
+    .menu-pindacoins {
+        font-size: 10px;
+
+        padding: 3px 6px;
+    }
+
 }
+
+
+/* ===========================
+   RESPONSIVO - CELULAR
+=========================== */
 
 @media (max-width: 768px) {
 
@@ -451,7 +576,37 @@ body {
 
     .menu a {
         padding: 0 10px;
+
         font-size: 13px;
+    }
+
+    .menu-usuario {
+        gap: 6px;
+
+        padding: 0 8px !important;
+    }
+
+    .menu-avatar {
+        width: 34px;
+        height: 34px;
+
+        font-size: 13px;
+    }
+
+    .menu-usuario-nome {
+        font-size: 13px;
+
+        gap: 5px;
+    }
+
+    .menu-pindacoins {
+        font-size: 9px;
+
+        padding: 3px 5px;
+    }
+
+    .menu-usuario-cargo {
+        font-size: 9px;
     }
 
 }
