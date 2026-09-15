@@ -7,7 +7,13 @@ ini_set('display_startup_errors', 1);
 require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../../classes/guiasTuristicos.php';
 
-$guiasTuristicos = new GuiasTuristicos();
+// Cria a conexão
+$db = new Conexao();
+$pdo = $db->conectar();
+
+// Passa o PDO para a classe
+$guiasTuristicos = new GuiasTuristicos($pdo);
+
 $guias = $guiasTuristicos->listar();
 
 $pageTitle = 'Guia Turístico';
@@ -48,7 +54,6 @@ require_once __DIR__ . '/../../includes/header.php';
 
                 <div class="guia-card">
 
-                    <!-- FOTO DE PERFIL -->
                     <div class="guia-foto">
                         <img
                             src="<?= $fotoPerfil ?>"
@@ -78,8 +83,6 @@ require_once __DIR__ . '/../../includes/header.php';
                             </p>
                         <?php endif; ?>
 
-
-                        <!-- CATEGORIAS -->
                         <?php if (!empty($categorias)): ?>
                             <div class="guia-categorias">
 
@@ -92,23 +95,21 @@ require_once __DIR__ . '/../../includes/header.php';
                             </div>
                         <?php endif; ?>
 
-
-                        <!-- GALERIA DE FOTOS -->
                         <?php if (!empty($fotos)): ?>
                             <div class="guia-galeria">
 
                                 <?php foreach (array_slice($fotos, 0, 4) as $foto): ?>
+
                                     <img
                                         src="/assets/uploads/guias/<?= htmlspecialchars($foto['foto']) ?>"
                                         alt="<?= htmlspecialchars($foto['descricao'] ?? 'Foto do guia') ?>"
                                     >
+
                                 <?php endforeach; ?>
 
                             </div>
                         <?php endif; ?>
 
-
-                        <!-- CONTATO -->
                         <div class="guia-contato">
 
                             <?php if (!empty($guia['telefone'])): ?>
@@ -121,17 +122,15 @@ require_once __DIR__ . '/../../includes/header.php';
                                 </a>
                             <?php endif; ?>
 
-
                             <?php if (!empty($guia['instagram'])): ?>
                                 <a
-                                    href="https://instagram.com/<?= ltrim($guia['instagram'], '@') ?>"
+                                    href="https://instagram.com/<?= ltrim(htmlspecialchars($guia['instagram']), '@') ?>"
                                     target="_blank"
                                     class="guia-btn instagram"
                                 >
                                     Instagram
                                 </a>
                             <?php endif; ?>
-
 
                             <?php if (!empty($guia['email'])): ?>
                                 <a
