@@ -3,7 +3,8 @@
 ================================================================ */
 
 .mural-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 95px);
+    padding: 95px 0 3rem;
 
     /* Base da cortiça */
     background-color: #a96f3f;
