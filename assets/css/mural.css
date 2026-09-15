@@ -3,8 +3,9 @@
 ================================================================ */
 
 .mural-container {
-    width: 100%;
     min-height: 100vh;
+    padding: 0 0 3rem;
+    position: relative;
 
     /* Base da cortiça */
     background-color: #a96f3f;
@@ -78,7 +79,7 @@
         0 0 0 2px rgba(30, 15, 5, 0.5),
         0 12px 35px rgba(0, 0, 0, 0.45);
 
-    z-index: 20;
+    z-index: 30;
 }
 
 
@@ -116,14 +117,10 @@
 
 .mural-conteudo {
     position: relative;
-
-    z-index: 2;
-
+    z-index: 30;
     max-width: 1200px;
-
     margin: 0 auto;
-
-    padding: 0 2rem;
+    padding: 115px 2rem 0;
 }
 
 
