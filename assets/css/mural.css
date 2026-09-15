@@ -1,43 +1,75 @@
 /* ================================================================
-   MURAL - QUADRO DE CORTIÇA (versão realista)
+   MURAL - QUADRO DE CORTIÇA COM POLAROIDS
+================================================================ */
+
+
+/* ================================================================
+   RESET
+================================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* ================================================================
+   MURAL
 ================================================================ */
 
 .mural-container {
-    min-height: 100vh;
-    padding: 3rem 0;
     position: relative;
 
-    /* Base da cortiça - tom mais quente e menos "chapado" */
-    background-color: #b07a44;
+    min-height: calc(100vh - 95px);
 
-    /* Textura da cortiça: manchas orgânicas + grão fino via ruído SVG */
+    /* Espaço para o header fixo */
+    margin-top: 95px;
+
+    padding: 3rem 0 5rem;
+
+    overflow: hidden;
+
+    /* Cortiça */
+    background-color: #a96f3f;
+
     background-image:
-        /* manchas grandes de tonalidade, orgânicas */
-        radial-gradient(ellipse 220px 160px at 12% 18%, rgba(255, 224, 180, 0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 260px 180px at 82% 12%, rgba(70, 35, 12, 0.16) 0%, transparent 60%),
-        radial-gradient(ellipse 300px 220px at 30% 78%, rgba(60, 30, 10, 0.14) 0%, transparent 55%),
-        radial-gradient(ellipse 240px 200px at 92% 82%, rgba(255, 224, 180, 0.14) 0%, transparent 55%),
-        radial-gradient(ellipse 200px 160px at 55% 45%, rgba(255, 224, 180, 0.08) 0%, transparent 60%),
+        radial-gradient(
+            ellipse at 15% 20%,
+            rgba(255, 220, 170, 0.16) 0%,
+            transparent 25%
+        ),
+        radial-gradient(
+            ellipse at 80% 30%,
+            rgba(75, 38, 15, 0.14) 0%,
+            transparent 30%
+        ),
+        radial-gradient(
+            ellipse at 35% 80%,
+            rgba(70, 35, 10, 0.12) 0%,
+            transparent 28%
+        ),
+        radial-gradient(
+            ellipse at 90% 85%,
+            rgba(255, 220, 170, 0.12) 0%,
+            transparent 25%
+        ),
+        repeating-linear-gradient(
+            15deg,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 2px,
+            transparent 2px,
+            transparent 8px
+        ),
+        repeating-linear-gradient(
+            95deg,
+            rgba(70, 35, 10, 0.025) 0px,
+            rgba(70, 35, 10, 0.025) 1px,
+            transparent 1px,
+            transparent 6px
+        );
 
-        /* grão de cortiça: milhares de pontos irregulares via ruído fractal */
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.25  0 0 0 0 0.14  0 0 0 0 0.06  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
-
-        /* fibras direcionais sutis */
-        repeating-linear-gradient(12deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 5px),
-        repeating-linear-gradient(100deg, rgba(60, 30, 10, 0.03) 0px, rgba(60, 30, 10, 0.03) 1px, transparent 1px, transparent 4px);
-
-    background-size:
-        auto, auto, auto, auto, auto,
-        180px 180px,
-        auto, auto;
-
-    position: relative;
-
-    /* Profundidade do quadro: sombra mais rica e desigual */
     box-shadow:
-        inset 0 0 130px rgba(45, 22, 8, 0.5),
-        inset 0 0 45px rgba(45, 22, 8, 0.35),
-        inset 0 2px 10px rgba(0, 0, 0, 0.25);
+        inset 0 0 100px rgba(50, 25, 10, 0.45),
+        inset 0 0 30px rgba(50, 25, 10, 0.3);
 }
 
 
@@ -47,58 +79,51 @@
 
 .mural-container::before {
     content: "";
+
     position: absolute;
+
     inset: 0;
+
     pointer-events: none;
 
-    border: 18px solid transparent;
-    border-image: repeating-linear-gradient(
-        100deg,
-        #6b3f24 0px,
-        #5a351e 6px,
-        #75452a 11px,
-        #4a2a17 16px,
-        #6b3f24 22px
-    ) 18;
+    border: 18px solid #5a351e;
 
     box-shadow:
-        inset 0 0 0 3px rgba(30, 15, 5, 0.6),
-        inset 0 0 0 6px #8a5631,
-        inset 0 0 0 9px #3e2415,
-        inset 0 2px 4px rgba(255, 200, 140, 0.15),
+        inset 0 0 0 5px #8a5631,
+        inset 0 0 0 8px #3e2415,
         0 0 0 2px rgba(30, 15, 5, 0.5),
-        0 12px 40px rgba(0, 0, 0, 0.5);
+        0 12px 35px rgba(0, 0, 0, 0.45);
 
-    z-index: 30;
+    z-index: 20;
 }
 
 
-/* Textura da madeira: veios + brilho de verniz */
+/* ================================================================
+   TEXTURA DA MADEIRA
+================================================================ */
 
 .mural-container::after {
     content: "";
+
     position: absolute;
+
     inset: 0;
+
     pointer-events: none;
 
     background:
         repeating-linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.04) 0px,
-            rgba(255, 235, 210, 0.02) 3px,
-            transparent 6px,
-            transparent 16px
-        ),
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.05) 0%,
-            transparent 15%,
-            transparent 85%,
-            rgba(0, 0, 0, 0.1) 100%
+            rgba(255, 255, 255, 0.035) 0px,
+            rgba(255, 255, 255, 0.035) 2px,
+            transparent 2px,
+            transparent 15px
         );
 
     mix-blend-mode: overlay;
-    opacity: 0.6;
+
+    opacity: 0.5;
+
     z-index: 21;
 }
 
@@ -109,10 +134,14 @@
 
 .mural-conteudo {
     position: relative;
+
     z-index: 30;
+
     max-width: 1200px;
+
     margin: 0 auto;
-    padding: 115px 2rem 0;
+
+    padding: 0 2rem;
 }
 
 
@@ -122,10 +151,15 @@
 
 .mural-topo {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     margin-bottom: 2rem;
+
     flex-wrap: wrap;
+
     gap: 1rem;
 }
 
@@ -135,21 +169,33 @@
 ================================================================ */
 
 .mural-titulo {
-    font-size: 2.5rem;
-    color: #fff;
     margin: 0;
+
+    font-size: 2.5rem;
+
     font-weight: 700;
+
+    color: #ffffff;
+
     text-shadow:
         0 2px 3px rgba(0, 0, 0, 0.5),
         0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 
+/* ================================================================
+   SUBTÍTULO
+================================================================ */
+
 .mural-subtitulo {
-    color: rgba(255, 255, 255, 0.85);
     margin: 0.5rem 0 0;
+
     font-size: 1rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+    color: rgba(255, 255, 255, 0.85);
+
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -158,42 +204,61 @@
 ================================================================ */
 
 .mural-botao-novo {
-    background: linear-gradient(135deg, #d95f4f, #b83e31);
-    color: white;
-    border: none;
     padding: 0.75rem 1.5rem;
+
+    border: none;
+
     border-radius: 6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d95f4f,
+            #b83e31
+        );
+
+    color: #ffffff;
+
     font-size: 1rem;
+
     font-weight: 600;
+
     cursor: pointer;
+
     transition: all 0.3s ease;
+
     box-shadow:
         0 4px 10px rgba(0, 0, 0, 0.35),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-
 .mural-botao-novo:hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.4);
+
+    box-shadow:
+        0 7px 15px rgba(0, 0, 0, 0.4);
 }
 
 
 /* ================================================================
-   MENSAGENS
+   MENSAGEM
 ================================================================ */
 
 .mural-mensagem {
     padding: 1rem;
-    border-radius: 6px;
+
     margin-bottom: 1.5rem;
+
+    border-radius: 6px;
+
     font-weight: 500;
+
     background: rgba(255, 255, 255, 0.9);
 }
 
-
 .mural-mensagem.sucesso {
     color: #2e7d32;
+
     border-left: 4px solid #4caf50;
 }
 
@@ -203,23 +268,35 @@
 ================================================================ */
 
 .mural-quantidade {
-    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 1.5rem;
+
+    color: rgba(255, 255, 255, 0.8);
+
     font-size: 0.9rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 
 /* ================================================================
-   GRID POLAROID
+   ÁREA DAS FOTOS
 ================================================================ */
 
 .mural-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 3.5rem 2.5rem;
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+
+    /*
+        Espaço vertical grande para permitir
+        que as Polaroids fiquem espalhadas.
+    */
+    min-height: 900px;
+
     margin-bottom: 3rem;
-    align-items: start;
 }
 
 
@@ -228,94 +305,165 @@
 ================================================================ */
 
 .polaroid-card {
-    position: relative;
-    /* papel levemente creme, não branco puro, como um polaroid real */
-    background: #f6f3ea;
-    padding: 12px 12px 28px;
+    position: absolute;
+
+    width: 250px;
+
+    padding: 12px 12px 25px;
+
+    background: #ffffff;
+
+    border-radius: 1px;
+
     cursor: pointer;
 
-    /* sombra em duas camadas: contato + projetada, simulando luz vindo de cima */
+    overflow: visible;
+
     box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.3),
-        0 8px 12px rgba(0, 0, 0, 0.22),
-        0 20px 30px rgba(0, 0, 0, 0.28);
+        0 5px 10px rgba(0, 0, 0, 0.25),
+        0 15px 25px rgba(0, 0, 0, 0.18);
 
     transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.35s ease,
         box-shadow 0.35s ease;
 
-    transform: rotate(-1.5deg);
-    border-radius: 1px;
-    overflow: visible;
     z-index: 1;
 }
 
 
-/* Grão do papel + leve amarelado nas bordas, dando aspecto de foto revelada */
+/* ================================================================
+   POSIÇÕES DAS POLAROIDS
+================================================================ */
 
-.polaroid-card::before {
-    content: none;
-}
 
-.polaroid-card .polaroid-imagem {
-    position: relative;
-}
+/* FOTO 1 */
 
-.polaroid-card .polaroid-imagem::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    /* leve reflexo/glare, como plástico ou acabamento fosco da foto */
-    background: linear-gradient(
-        125deg,
-        rgba(255, 255, 255, 0.18) 0%,
-        rgba(255, 255, 255, 0.05) 18%,
-        transparent 35%,
-        transparent 100%
-    );
-    mix-blend-mode: overlay;
-}
+.polaroid-card:nth-child(1) {
+    top: 30px;
 
-.polaroid-card .polaroid-imagem::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    /* vinheta quente sutil, como fotografia antiga */
-    box-shadow: inset 0 0 18px rgba(60, 35, 15, 0.25);
+    left: 3%;
+
+    transform: rotate(-5deg);
+
+    z-index: 5;
 }
 
 
-/* Variações naturais de cor entre as fotos, como polaroids reais nunca são idênticas */
+/* FOTO 2 */
 
-.polaroid-card:nth-child(2n) .polaroid-imagem img { filter: saturate(0.95) contrast(1.02) sepia(0.04); }
-.polaroid-card:nth-child(3n) .polaroid-imagem img { filter: saturate(1.05) contrast(0.98) brightness(1.02); }
-.polaroid-card:nth-child(4n) .polaroid-imagem img { filter: saturate(0.9) sepia(0.06) brightness(0.98); }
-.polaroid-card:nth-child(5n) .polaroid-imagem img { filter: contrast(1.04) brightness(1.03); }
+.polaroid-card:nth-child(2) {
+    top: 180px;
 
+    left: 27%;
 
-/* pequena curvatura no canto inferior, sugerida por sombra interna */
+    transform: rotate(4deg);
 
-.polaroid-conteudo::after {
-    content: "";
-    position: absolute;
-    left: 6px;
-    right: 6px;
-    bottom: 6px;
-    height: 14px;
-    pointer-events: none;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.06), transparent);
+    z-index: 7;
 }
 
 
-/* Variações das fotos */
+/* FOTO 3 */
 
-.polaroid-card:nth-child(2n) { transform: rotate(1.5deg); }
-.polaroid-card:nth-child(3n) { transform: rotate(-2deg); }
-.polaroid-card:nth-child(4n) { transform: rotate(2deg); }
-.polaroid-card:nth-child(5n) { transform: rotate(-0.8deg); }
+.polaroid-card:nth-child(3) {
+    top: 45px;
+
+    left: 55%;
+
+    transform: rotate(-3deg);
+
+    z-index: 4;
+}
+
+
+/* FOTO 4 */
+
+.polaroid-card:nth-child(4) {
+    top: 270px;
+
+    left: 74%;
+
+    transform: rotate(6deg);
+
+    z-index: 6;
+}
+
+
+/* FOTO 5 */
+
+.polaroid-card:nth-child(5) {
+    top: 420px;
+
+    left: 7%;
+
+    transform: rotate(3deg);
+
+    z-index: 8;
+}
+
+
+/* FOTO 6 */
+
+.polaroid-card:nth-child(6) {
+    top: 490px;
+
+    left: 34%;
+
+    transform: rotate(-6deg);
+
+    z-index: 10;
+}
+
+
+/* FOTO 7 */
+
+.polaroid-card:nth-child(7) {
+    top: 390px;
+
+    left: 60%;
+
+    transform: rotate(4deg);
+
+    z-index: 5;
+}
+
+
+/* FOTO 8 */
+
+.polaroid-card:nth-child(8) {
+    top: 650px;
+
+    left: 18%;
+
+    transform: rotate(-4deg);
+
+    z-index: 9;
+}
+
+
+/* FOTO 9 */
+
+.polaroid-card:nth-child(9) {
+    top: 670px;
+
+    left: 50%;
+
+    transform: rotate(5deg);
+
+    z-index: 6;
+}
+
+
+/* FOTO 10 */
+
+.polaroid-card:nth-child(10) {
+    top: 760px;
+
+    left: 75%;
+
+    transform: rotate(-3deg);
+
+    z-index: 8;
+}
 
 
 /* ================================================================
@@ -323,55 +471,82 @@
 ================================================================ */
 
 .polaroid-card:hover {
-    transform: translateY(-14px) rotate(0deg) scale(1.03);
+    transform:
+        translateY(-15px)
+        scale(1.06)
+        rotate(0deg) !important;
+
     box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        0 12px 20px rgba(0, 0, 0, 0.28),
-        0 32px 50px rgba(0, 0, 0, 0.4);
-    z-index: 10;
+        0 10px 20px rgba(0, 0, 0, 0.3),
+        0 25px 45px rgba(0, 0, 0, 0.4);
+
+    z-index: 100;
 }
 
 
 /* ================================================================
-   ALFINETE (metal com luz e reflexo mais realistas)
+   PREGO / PINO
 ================================================================ */
 
 .polaroid-card::before {
     content: "";
+
     position: absolute;
-    top: -10px;
+
+    top: -9px;
+
     left: 50%;
-    width: 18px;
-    height: 18px;
+
+    width: 16px;
+
+    height: 16px;
+
     transform: translateX(-50%);
+
     border-radius: 50%;
 
     background:
-        radial-gradient(circle at 32% 28%, #ffffff 0%, #f0f0f0 12%, #b8b8b8 32%, #7a7a7a 55%, #4a4a4a 78%, #2a2a2a 100%);
+        radial-gradient(
+            circle at 35% 30%,
+            #eeeeee 0%,
+            #999999 30%,
+            #555555 70%,
+            #333333 100%
+        );
 
     box-shadow:
-        0 3px 5px rgba(0, 0, 0, 0.5),
-        0 1px 1px rgba(0, 0, 0, 0.6),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.85),
-        inset -2px -2px 3px rgba(0, 0, 0, 0.35);
+        0 3px 4px rgba(0, 0, 0, 0.45),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.7);
 
     z-index: 20;
 }
 
 
-/* Sombra abaixo do alfinete, projetada na foto (luz vindo de cima-esquerda) */
+/* ================================================================
+   SOMBRA DO PREGO
+================================================================ */
 
 .polaroid-card::after {
     content: "";
+
     position: absolute;
-    top: 6px;
-    left: calc(50% + 3px);
-    width: 15px;
-    height: 9px;
+
+    top: 4px;
+
+    left: 50%;
+
+    width: 13px;
+
+    height: 8px;
+
     transform: translateX(-50%);
+
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.22);
+
+    background: rgba(0, 0, 0, 0.18);
+
     filter: blur(3px);
+
     z-index: 5;
 }
 
@@ -382,33 +557,40 @@
 
 .polaroid-imagem {
     width: 100%;
+
     aspect-ratio: 1 / 1;
+
     overflow: hidden;
-    background: #e8e5dc;
+
+    background: #eeeeee;
 }
 
 
 .polaroid-imagem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
 }
 
 
 /* ================================================================
-   PARTE BRANCA (creme, com leve textura de papel)
+   CONTEÚDO DA POLAROID
 ================================================================ */
 
 .polaroid-conteudo {
-    position: relative;
-    padding: 14px 7px 0;
-    min-height: 125px;
     display: flex;
+
     flex-direction: column;
-    background:
-        radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.02) 0%, transparent 60%),
-        #f6f3ea;
+
+    min-height: 125px;
+
+    padding: 14px 7px 0;
+
+    background: #ffffff;
 }
 
 
@@ -417,26 +599,39 @@
 ================================================================ */
 
 .polaroid-descricao {
-    margin: 0 0 12px;
-    color: #3a342c;
-    font-family: "Comic Sans MS", "Segoe Print", cursive;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    word-wrap: break-word;
     flex: 1;
+
+    margin: 0 0 12px;
+
+    color: #333333;
+
+    font-family:
+        "Comic Sans MS",
+        "Segoe Print",
+        cursive;
+
+    font-size: 0.9rem;
+
+    line-height: 1.4;
+
+    word-wrap: break-word;
 }
 
 
 /* ================================================================
-   RODAPÉ
+   FOOTER DA POLAROID
 ================================================================ */
 
 .polaroid-footer {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
-    margin-bottom: 7px;
+
     min-height: 30px;
+
+    margin-bottom: 7px;
 }
 
 
@@ -446,40 +641,78 @@
 
 .polaroid-usuario {
     display: flex;
+
     align-items: center;
+
     gap: 0.5rem;
+
+    min-width: 0;
 }
 
+
+/* ================================================================
+   AVATAR
+================================================================ */
 
 .polaroid-avatar {
     width: 28px;
+
     height: 28px;
+
+    flex-shrink: 0;
+
     border-radius: 50%;
+
     object-fit: cover;
-    border: 1px solid #ddd;
+
+    border: 1px solid #dddddd;
 }
 
+
+/* ================================================================
+   AVATAR PLACEHOLDER
+================================================================ */
 
 .polaroid-avatar-placeholder {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #e5e5e5;
-    color: #555;
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    font-weight: 700;
+
+    width: 28px;
+
+    height: 28px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #e5e5e5;
+
+    color: #555555;
+
     font-size: 0.8rem;
+
+    font-weight: 700;
 }
 
 
+/* ================================================================
+   NOME
+================================================================ */
+
 .polaroid-nome {
-    color: #444;
-    font-size: 0.8rem;
-    font-weight: 600;
-    white-space: nowrap;
     overflow: hidden;
+
+    color: #444444;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
     text-overflow: ellipsis;
 }
 
@@ -490,28 +723,44 @@
 
 .polaroid-acoes {
     display: flex;
+
     gap: 0.5rem;
 }
 
 
+/* ================================================================
+   BOTÃO DELETAR
+================================================================ */
+
 .polaroid-deletar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(220, 60, 50, 0.1);
-    color: #d94b3f;
-    cursor: pointer;
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
+    width: 28px;
+
+    height: 28px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(220, 60, 50, 0.1);
+
+    color: #d94b3f;
+
     font-size: 1rem;
+
+    cursor: pointer;
+
     transition: all 0.2s ease;
 }
 
-
 .polaroid-deletar:hover {
     background: rgba(220, 60, 50, 0.25);
+
     transform: scale(1.1);
 }
 
@@ -521,36 +770,44 @@
 ================================================================ */
 
 .polaroid-data {
-    color: #999;
-    font-size: 0.7rem;
-    font-style: italic;
-    text-align: center;
     padding-top: 8px;
-    border-top: 1px solid #eee;
+
+    border-top: 1px solid #eeeeee;
+
+    color: #999999;
+
+    font-size: 0.7rem;
+
+    font-style: italic;
+
+    text-align: center;
 }
 
 
 /* ================================================================
-   ESTADO VAZIO
+   MURAL VAZIO
 ================================================================ */
 
 .mural-vazio {
-    text-align: center;
     padding: 3rem 1.5rem;
-    color: rgba(255, 255, 255, 0.8);
-}
 
+    color: rgba(255, 255, 255, 0.8);
+
+    text-align: center;
+}
 
 .mural-vazio h3 {
-    font-size: 2rem;
-    color: white;
     margin-bottom: 1rem;
+
+    color: #ffffff;
+
+    font-size: 2rem;
 }
 
-
 .mural-vazio p {
-    font-size: 1.1rem;
     margin-bottom: 2rem;
+
+    font-size: 1.1rem;
 }
 
 
@@ -560,33 +817,46 @@
 
 .mural-paginacao {
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     gap: 1rem;
+
     margin-top: 2rem;
+
     flex-wrap: wrap;
 }
 
 
 .paginacao-link {
-    color: white;
-    text-decoration: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+
     border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border-radius: 4px;
+
     background: rgba(80, 40, 15, 0.25);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
     transition: all 0.2s ease;
 }
 
 
 .paginacao-link:hover {
     background: rgba(80, 40, 15, 0.45);
-    border-color: white;
+
+    border-color: #ffffff;
 }
 
 
 .paginacao-info {
     color: rgba(255, 255, 255, 0.8);
+
     font-size: 0.9rem;
 }
 
@@ -597,52 +867,100 @@
 
 .modal {
     display: none;
+
     position: fixed;
+
     z-index: 1000;
-    left: 0;
+
     top: 0;
+
+    left: 0;
+
     width: 100%;
+
     height: 100%;
+
     background-color: rgba(0, 0, 0, 0.75);
+
     backdrop-filter: blur(5px);
 }
 
 
 .modal.ativo {
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     animation: fadeIn 0.3s ease;
 }
 
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-
 /* ================================================================
-   MODAL CONTEÚDO
+   ANIMAÇÃO MODAL
 ================================================================ */
 
-.modal-conteudo {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 107, 107, 0.2);
-    animation: slideUp 0.3s ease;
-    max-height: 90vh;
-    overflow-y: auto;
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
 
 @keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+
+    from {
+        transform: translateY(30px);
+
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+
+        opacity: 1;
+    }
+
+}
+
+
+/* ================================================================
+   CONTEÚDO MODAL
+================================================================ */
+
+.modal-conteudo {
+    width: 90%;
+
+    max-width: 500px;
+
+    max-height: 90vh;
+
+    padding: 2rem;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1a1a2e,
+            #16213e
+        );
+
+    border: 1px solid rgba(255, 107, 107, 0.2);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.6);
+
+    animation: slideUp 0.3s ease;
 }
 
 
@@ -652,11 +970,16 @@
 
 .modal-fechar {
     float: right;
-    font-size: 2rem;
-    cursor: pointer;
+
     color: rgba(255, 255, 255, 0.6);
-    transition: color 0.2s ease;
+
+    font-size: 2rem;
+
     line-height: 1;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
 }
 
 
@@ -665,55 +988,82 @@
 }
 
 
+/* ================================================================
+   TÍTULO MODAL
+================================================================ */
+
 .modal-conteudo h2 {
-    color: white;
-    margin-bottom: 1.5rem;
     margin-top: 0;
+
+    margin-bottom: 1.5rem;
+
+    color: #ffffff;
 }
 
 
 /* ================================================================
-   FORMULÁRIO DE UPLOAD
+   FORMULÁRIO
 ================================================================ */
 
 .upload-form {
     display: flex;
+
     flex-direction: column;
+
     gap: 1.5rem;
 }
 
 
+/* ================================================================
+   SEÇÃO UPLOAD
+================================================================ */
+
 .upload-secao {
     display: flex;
+
     flex-direction: column;
+
     gap: 0.5rem;
 }
 
 
+/* ================================================================
+   LABEL
+================================================================ */
+
 .upload-label {
     color: rgba(255, 255, 255, 0.8);
-    font-weight: 600;
+
     font-size: 0.9rem;
+
+    font-weight: 600;
 }
 
 
 /* ================================================================
-   ÁREA DE UPLOAD
+   ÁREA UPLOAD
 ================================================================ */
 
 .upload-area {
-    border: 2px dashed rgba(255, 107, 107, 0.4);
-    border-radius: 8px;
     padding: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
+
+    border: 2px dashed rgba(255, 107, 107, 0.4);
+
+    border-radius: 8px;
+
     background: rgba(255, 107, 107, 0.05);
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
 }
 
 
 .upload-area:hover {
     border-color: #ff6b6b;
+
     background: rgba(255, 107, 107, 0.1);
 }
 
@@ -725,7 +1075,9 @@
 
 .upload-area p {
     margin: 0;
+
     color: rgba(255, 255, 255, 0.6);
+
     font-size: 0.9rem;
 }
 
@@ -736,30 +1088,44 @@
 
 .preview-container {
     position: relative;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 1rem;
 }
 
 
 .preview-container img {
     width: 100%;
+
     height: auto;
+
     max-height: 300px;
+
     object-fit: contain;
+
     border-radius: 8px;
 }
 
 
 .preview-container button {
-    background: rgba(255, 107, 107, 0.1);
-    color: #ff6b6b;
-    border: 1px solid #ff6b6b;
     padding: 0.5rem 1rem;
+
+    border: 1px solid #ff6b6b;
+
     border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+
+    background: rgba(255, 107, 107, 0.1);
+
+    color: #ff6b6b;
+
     font-size: 0.9rem;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
 }
 
 
@@ -773,20 +1139,29 @@
 ================================================================ */
 
 #descricao {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
     padding: 0.75rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
     border-radius: 4px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: #ffffff;
+
     font-family: inherit;
+
     resize: vertical;
+
     transition: all 0.2s ease;
 }
 
 
 #descricao:focus {
     outline: none;
+
     border-color: #ff6b6b;
+
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -796,8 +1171,13 @@
 }
 
 
+/* ================================================================
+   CONTADOR
+================================================================ */
+
 #charCount {
     color: rgba(255, 255, 255, 0.5);
+
     font-size: 0.8rem;
 }
 
@@ -808,7 +1188,9 @@
 
 .upload-botoes {
     display: flex;
+
     gap: 1rem;
+
     margin-top: 1rem;
 }
 
@@ -816,20 +1198,33 @@
 .botao-cancelar,
 .botao-enviar {
     flex: 1;
+
     padding: 0.75rem;
+
     border: none;
+
     border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+
     font-size: 0.95rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
 }
 
 
+/* ================================================================
+   CANCELAR
+================================================================ */
+
 .botao-cancelar {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: rgba(255, 255, 255, 0.8);
 }
 
 
@@ -838,60 +1233,267 @@
 }
 
 
+/* ================================================================
+   ENVIAR
+================================================================ */
+
 .botao-enviar {
-    background: linear-gradient(135deg, #d95f4f, #b83e31);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background:
+        linear-gradient(
+            135deg,
+            #d95f4f,
+            #b83e31
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 
 .botao-enviar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.4);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.4);
 }
 
 
 .botao-enviar:disabled {
     opacity: 0.5;
+
     cursor: not-allowed;
+
     transform: none;
 }
 
 
 /* ================================================================
-   RESPONSIVIDADE
+   RESPONSIVO - TABLET
 ================================================================ */
 
-@media (max-width: 768px) {
-    .mural-container { padding: 2rem 0; }
-    .mural-container::before { border-width: 10px; }
-    .mural-conteudo { padding: 0 1.5rem; }
-    .mural-titulo { font-size: 1.8rem; }
-    .mural-topo { flex-direction: column; align-items: flex-start; }
-    .mural-botao-novo { width: 100%; }
+@media (max-width: 992px) {
+
     .mural-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 2.5rem 1.5rem;
+        min-height: 1000px;
     }
-    .polaroid-imagem { aspect-ratio: 1 / 1; }
-    .modal-conteudo { width: 95%; padding: 1.5rem; }
-    .upload-area { padding: 1.5rem; }
+
+
+    .polaroid-card {
+        width: 230px;
+    }
+
+
+    .polaroid-card:nth-child(1) {
+        left: 2%;
+    }
+
+
+    .polaroid-card:nth-child(2) {
+        left: 25%;
+    }
+
+
+    .polaroid-card:nth-child(3) {
+        left: 52%;
+    }
+
+
+    .polaroid-card:nth-child(4) {
+        left: 70%;
+    }
+
+
+    .polaroid-card:nth-child(5) {
+        left: 5%;
+    }
+
+
+    .polaroid-card:nth-child(6) {
+        left: 31%;
+    }
+
+
+    .polaroid-card:nth-child(7) {
+        left: 57%;
+    }
+
+
+    .polaroid-card:nth-child(8) {
+        left: 15%;
+    }
+
+
+    .polaroid-card:nth-child(9) {
+        left: 48%;
+    }
+
 }
 
 
 /* ================================================================
-   CELULAR
+   RESPONSIVO - CELULAR
+================================================================ */
+
+@media (max-width: 768px) {
+
+    .mural-container {
+        min-height: calc(100vh - 95px);
+
+        margin-top: 95px;
+
+        padding: 2rem 0 3rem;
+    }
+
+
+    .mural-container::before {
+        border-width: 10px;
+    }
+
+
+    .mural-conteudo {
+        padding: 0 1.5rem;
+    }
+
+
+    .mural-titulo {
+        font-size: 1.8rem;
+    }
+
+
+    .mural-topo {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .mural-botao-novo {
+        width: 100%;
+    }
+
+
+    /*
+        No celular abandonamos
+        o posicionamento absoluto.
+    */
+
+    .mural-grid {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 2.5rem;
+
+        min-height: auto;
+    }
+
+
+    .polaroid-card {
+        position: relative;
+
+        top: auto !important;
+
+        left: auto !important;
+
+        width: min(280px, 90vw);
+    }
+
+
+    .polaroid-card:nth-child(odd) {
+        transform: rotate(-3deg);
+    }
+
+
+    .polaroid-card:nth-child(even) {
+        transform: rotate(3deg);
+    }
+
+
+    .polaroid-card:hover {
+        transform:
+            translateY(-10px)
+            scale(1.03)
+            rotate(0deg) !important;
+    }
+
+
+    .modal-conteudo {
+        width: 95%;
+
+        padding: 1.5rem;
+    }
+
+
+    .upload-area {
+        padding: 1.5rem;
+    }
+
+}
+
+
+/* ================================================================
+   RESPONSIVO - CELULAR PEQUENO
 ================================================================ */
 
 @media (max-width: 480px) {
-    .mural-container { padding: 1.5rem 0; }
-    .mural-container::before { border-width: 7px; }
-    .mural-conteudo { padding: 0 1rem; }
-    .mural-titulo { font-size: 1.5rem; }
-    .mural-grid { grid-template-columns: 1fr; gap: 3rem 1rem; }
-    .polaroid-card { max-width: 330px; width: 100%; margin: 0 auto; }
-    .mural-paginacao { gap: 0.5rem; }
-    .paginacao-link { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
-    .modal-conteudo { width: 98%; padding: 1rem; }
-    .upload-botoes { flex-direction: column; }
+
+    .mural-container {
+        margin-top: 95px;
+
+        padding: 1.5rem 0 3rem;
+    }
+
+
+    .mural-container::before {
+        border-width: 7px;
+    }
+
+
+    .mural-conteudo {
+        padding: 0 1rem;
+    }
+
+
+    .mural-titulo {
+        font-size: 1.5rem;
+    }
+
+
+    .mural-grid {
+        gap: 2.5rem;
+    }
+
+
+    .polaroid-card {
+        width: min(300px, 90vw);
+    }
+
+
+    .mural-paginacao {
+        gap: 0.5rem;
+    }
+
+
+    .paginacao-link {
+        padding: 0.4rem 0.8rem;
+
+        font-size: 0.85rem;
+    }
+
+
+    .modal-conteudo {
+        width: 98%;
+
+        padding: 1rem;
+    }
+
+
+    .upload-botoes {
+        flex-direction: column;
+    }
+
 }
