@@ -57,7 +57,7 @@ include "../../includes/head.php";
         ====================================================== -->
         <div class="mural-topo">
             <div>
-                <h1 class="mural-titulo">📸 Mural de Fotos</h1>
+                <h1 class="mural-titulo">Mural de Fotos</h1>
                 <p class="mural-subtitulo">
                     Compartilhe seus melhores momentos em Pindamonhangaba
                 </p>
