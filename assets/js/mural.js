@@ -1,181 +1,318 @@
-/* ================================================================
-   MURAL - JAVASCRIPT
-================================================================ */
+document.addEventListener("DOMContentLoaded", function () {
 
-const modal = document.getElementById('uploadModal');
-const fotoInput = document.getElementById('fotoInput');
-const uploadArea = document.getElementById('uploadArea');
-const formUpload = document.getElementById('formUpload');
-const descricao = document.getElementById('descricao');
-const charCount = document.getElementById('charCount');
-const previewContainer = document.getElementById('previewContainer');
-const fotoPreview = document.getElementById('fotoPreview');
+    const uploadModal = document.getElementById("uploadModal");
+    const fotoInput = document.getElementById("fotoInput");
+    const uploadArea = document.getElementById("uploadArea");
+    const formUpload = document.getElementById("formUpload");
+    const descricao = document.getElementById("descricao");
+    const charCount = document.getElementById("charCount");
+    const previewContainer = document.getElementById("previewContainer");
+    const fotoPreview = document.getElementById("fotoPreview");
 
-/* ================================================================
-   ABRIR/FECHAR MODAL
-================================================================ */
+    // =========================================================
+    // ABRIR MODAL
+    // =========================================================
 
-function abrirUpload() {
-    modal.classList.add('ativo');
-    fotoInput.value = '';
-    previewContainer.style.display = 'none';
-    formUpload.reset();
-    charCount.textContent = '0/500';
-}
-
-function fecharUpload() {
-    modal.classList.remove('ativo');
-}
-
-// Fechar ao clicar fora do modal
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        fecharUpload();
-    }
-});
-
-/* ================================================================
-   UPLOAD AREA - DRAG AND DROP
-================================================================ */
-
-uploadArea.addEventListener('click', () => {
-    fotoInput.click();
-});
-
-uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    uploadArea.style.borderColor = '#ff6b6b';
-    uploadArea.style.background = 'rgba(255, 107, 107, 0.15)';
-});
-
-uploadArea.addEventListener('dragleave', () => {
-    uploadArea.style.borderColor = 'rgba(255, 107, 107, 0.4)';
-    uploadArea.style.background = 'rgba(255, 107, 107, 0.05)';
-});
-
-uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadArea.style.borderColor = 'rgba(255, 107, 107, 0.4)';
-    uploadArea.style.background = 'rgba(255, 107, 107, 0.05)';
-    
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-        fotoInput.files = files;
-        processarFoto();
-    }
-});
-
-/* ================================================================
-   INPUT DE FOTO
-================================================================ */
-
-fotoInput.addEventListener('change', processarFoto);
-
-function processarFoto() {
-    const file = fotoInput.files[0];
-    
-    if (!file) {
-        previewContainer.style.display = 'none';
-        return;
+    function abrirModal() {
+        if (uploadModal) {
+            uploadModal.style.display = "flex";
+        }
     }
 
-    // Validar tipo
-    const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    if (!tiposPermitidos.includes(file.type)) {
-        alert('Tipo de arquivo não permitido. Use JPG, PNG, WEBP ou GIF');
-        fotoInput.value = '';
-        previewContainer.style.display = 'none';
-        return;
-    }
+    // =========================================================
+    // FECHAR MODAL
+    // =========================================================
 
-    // Validar tamanho (5MB)
-    const tamanhoMaximo = 5 * 1024 * 1024;
-    if (file.size > tamanhoMaximo) {
-        alert('Arquivo muito grande. Máximo 5MB');
-        fotoInput.value = '';
-        previewContainer.style.display = 'none';
-        return;
-    }
-
-    // Mostrar preview
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        fotoPreview.src = e.target.result;
-        previewContainer.style.display = 'flex';
-    };
-    reader.readAsDataURL(file);
-}
-
-function limparFoto() {
-    fotoInput.value = '';
-    previewContainer.style.display = 'none';
-}
-
-/* ================================================================
-   DESCRIÇÃO - CONTADOR DE CARACTERES
-================================================================ */
-
-descricao.addEventListener('input', () => {
-    const total = descricao.value.length;
-    charCount.textContent = `${total}/500`;
-});
-
-/* ================================================================
-   ENVIAR FORMULÁRIO
-================================================================ */
-
-formUpload.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const file = fotoInput.files[0];
-    if (!file) {
-        alert('Selecione uma foto');
-        return;
-    }
-
-    // Desabilitar botão
-    const btnEnviar = formUpload.querySelector('.botao-enviar');
-    btnEnviar.disabled = true;
-    const textOriginal = btnEnviar.textContent;
-    btnEnviar.textContent = 'Enviando...';
-
-    // Criar FormData
-    const formData = new FormData();
-    formData.append('foto', file);
-    formData.append('descricao', descricao.value);
-
-    try {
-        const response = await fetch('upload.php', {
-            method: 'POST',
-            body: formData
-        });
-
-        const resultado = await response.json();
-
-        if (resultado.sucesso) {
-            // Sucesso
-            fecharUpload();
-            window.location.href = 'read.php?sucesso=1';
-        } else {
-            alert('Erro: ' + resultado.mensagem);
-            btnEnviar.disabled = false;
-            btnEnviar.textContent = textOriginal;
+    function fecharModal() {
+        if (uploadModal) {
+            uploadModal.style.display = "none";
         }
 
-    } catch (erro) {
-        console.error('Erro:', erro);
-        alert('Erro ao enviar foto: ' + erro.message);
-        btnEnviar.disabled = false;
-        btnEnviar.textContent = textOriginal;
-    }
-});
+        if (formUpload) {
+            formUpload.reset();
+        }
 
-/* ================================================================
-   FECHAR MODAL COM ESC
-================================================================ */
+        if (previewContainer) {
+            previewContainer.style.display = "none";
+        }
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('ativo')) {
-        fecharUpload();
+        if (fotoPreview) {
+            fotoPreview.src = "";
+        }
     }
+
+    // Disponibiliza globalmente caso seu HTML use onclick
+    window.abrirModal = abrirModal;
+    window.fecharModal = fecharModal;
+
+    // =========================================================
+    // CONTADOR DA DESCRIÇÃO
+    // =========================================================
+
+    if (descricao && charCount) {
+        descricao.addEventListener("input", function () {
+            charCount.textContent = this.value.length;
+        });
+    }
+
+    // =========================================================
+    // SELECIONAR FOTO
+    // =========================================================
+
+    if (fotoInput) {
+        fotoInput.addEventListener("change", function () {
+            validarFoto(this.files[0]);
+        });
+    }
+
+    // =========================================================
+    // DRAG AND DROP
+    // =========================================================
+
+    if (uploadArea) {
+
+        uploadArea.addEventListener("dragover", function (e) {
+            e.preventDefault();
+            uploadArea.classList.add("dragover");
+        });
+
+        uploadArea.addEventListener("dragleave", function () {
+            uploadArea.classList.remove("dragover");
+        });
+
+        uploadArea.addEventListener("drop", function (e) {
+            e.preventDefault();
+
+            uploadArea.classList.remove("dragover");
+
+            const arquivo = e.dataTransfer.files[0];
+
+            if (arquivo) {
+                fotoInput.files = e.dataTransfer.files;
+                validarFoto(arquivo);
+            }
+        });
+
+        uploadArea.addEventListener("click", function () {
+            if (fotoInput) {
+                fotoInput.click();
+            }
+        });
+    }
+
+    // =========================================================
+    // VALIDAR FOTO
+    // =========================================================
+
+    function validarFoto(arquivo) {
+
+        if (!arquivo) {
+            return;
+        }
+
+        const tiposPermitidos = [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/gif"
+        ];
+
+        const tamanhoMaximo = 5 * 1024 * 1024; // 5 MB
+
+        if (!tiposPermitidos.includes(arquivo.type)) {
+            mostrarMensagem(
+                "Formato de imagem não permitido. Use JPG, PNG, WEBP ou GIF.",
+                "erro"
+            );
+
+            fotoInput.value = "";
+            return;
+        }
+
+        if (arquivo.size > tamanhoMaximo) {
+            mostrarMensagem(
+                "A imagem deve ter no máximo 5 MB.",
+                "erro"
+            );
+
+            fotoInput.value = "";
+            return;
+        }
+
+        // =====================================================
+        // PREVIEW
+        // =====================================================
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+
+            if (fotoPreview) {
+                fotoPreview.src = e.target.result;
+            }
+
+            if (previewContainer) {
+                previewContainer.style.display = "block";
+            }
+        };
+
+        reader.readAsDataURL(arquivo);
+    }
+
+    // =========================================================
+    // ENVIO DO FORMULÁRIO
+    // =========================================================
+
+    if (formUpload) {
+
+        formUpload.addEventListener("submit", async function (e) {
+
+            e.preventDefault();
+
+            const arquivo = fotoInput.files[0];
+
+            if (!arquivo) {
+                mostrarMensagem(
+                    "Selecione uma foto antes de publicar.",
+                    "erro"
+                );
+                return;
+            }
+
+            const formData = new FormData();
+
+            formData.append("foto", arquivo);
+            formData.append(
+                "descricao",
+                descricao ? descricao.value : ""
+            );
+
+            // Desabilita o botão durante o envio
+            const botao = formUpload.querySelector(
+                'button[type="submit"]'
+            );
+
+            if (botao) {
+                botao.disabled = true;
+                botao.textContent = "Publicando...";
+            }
+
+            try {
+
+                const resposta = await fetch("upload.php", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await resposta.json();
+
+                if (data.sucesso) {
+
+                    // Fecha o modal
+                    fecharModal();
+
+                    // Mostra mensagem
+                    mostrarMensagem(
+                        data.mensagem ||
+                        "🎉 Foto publicada com sucesso! Você ganhou +10 PindaCoins!",
+                        "sucesso"
+                    );
+
+                    // Opcional:
+                    // adiciona a nova foto no mural sem recarregar
+                    // caso você queira implementar depois.
+
+                } else {
+
+                    mostrarMensagem(
+                        data.mensagem ||
+                        "Não foi possível publicar a foto.",
+                        "erro"
+                    );
+                }
+
+            } catch (erro) {
+
+                console.error("Erro no upload:", erro);
+
+                mostrarMensagem(
+                    "Ocorreu um erro ao enviar a foto. Tente novamente.",
+                    "erro"
+                );
+
+            } finally {
+
+                if (botao) {
+                    botao.disabled = false;
+                    botao.textContent = "Publicar";
+                }
+            }
+        });
+    }
+
+    // =========================================================
+    // MENSAGEM
+    // =========================================================
+
+    function mostrarMensagem(mensagem, tipo = "sucesso") {
+
+        // Remove mensagem anterior
+        const mensagemAnterior =
+            document.querySelector(".mensagem-mural");
+
+        if (mensagemAnterior) {
+            mensagemAnterior.remove();
+        }
+
+        const mensagemDiv =
+            document.createElement("div");
+
+        mensagemDiv.className =
+            `mensagem-mural mensagem-${tipo}`;
+
+        mensagemDiv.innerHTML = `
+            <span>${mensagem}</span>
+
+            <button type="button" class="fechar-mensagem">
+                ×
+            </button>
+        `;
+
+        document.body.appendChild(mensagemDiv);
+
+        // Botão fechar
+        const botaoFechar =
+            mensagemDiv.querySelector(".fechar-mensagem");
+
+        if (botaoFechar) {
+            botaoFechar.addEventListener("click", function () {
+                mensagemDiv.remove();
+            });
+        }
+
+        // Remove automaticamente depois de 5 segundos
+        setTimeout(function () {
+
+            if (mensagemDiv.parentElement) {
+                mensagemDiv.remove();
+            }
+
+        }, 5000);
+    }
+
+    // =========================================================
+    // FECHAR MODAL CLICANDO FORA
+    // =========================================================
+
+    if (uploadModal) {
+
+        uploadModal.addEventListener("click", function (e) {
+
+            if (e.target === uploadModal) {
+                fecharModal();
+            }
+
+        });
+    }
+
 });
