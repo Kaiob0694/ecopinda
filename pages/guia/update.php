@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-require_once __DIR__ . '/../../includes/verifica_master.php';
+require_once __DIR__ . '/../../includes/exigir_master.php';
 require_once __DIR__ . '/../../classes/guiasTuristicos.php';
 
 $baseUrl = 'https://pindaeco.rf.gd';
