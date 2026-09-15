@@ -1,8 +1,8 @@
 <?php
-$prefixo = '../../';
+$baseUrl = 'https://pindaeco.rf.gd';
 
-require_once $prefixo . 'config/conexao.php';
-require_once $prefixo . 'classes/guiasTuristicos.php';
+require_once $baseUrl . 'config/conexao.php';
+require_once $baseUrl . 'classes/guiasTuristicos.php';
 
 $guiasTuristicos = new GuiasTuristicos($pdo);
 $guias = $guiasTuristicos->listar();
