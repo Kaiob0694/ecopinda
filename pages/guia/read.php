@@ -169,11 +169,10 @@ include __DIR__ . '/../../includes/header.php';
                                     Editar
                                 </a>
 
-                                href="delete.php?id=<?= (int) $guia['id'] ?>"
-                                class="guia-btn excluir"
-                                onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');"
-                                >
-                                Excluir
+                                <a href="delete.php?id=<?= (int) $guia['id'] ?>"
+                                    class="guia-btn excluir"
+                                    onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');">
+                                    Excluir
                                 </a>
                             </div>
                         <?php endif; ?>
