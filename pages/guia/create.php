@@ -1,15 +1,22 @@
 <?php
-$prefixo = '../../';
 
-require_once $prefixo . 'includes/verifica_master.php';
-require_once $prefixo . 'includes/conexao.php';
-require_once $prefixo . 'classes/GuiasTuristicos.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+require_once __DIR__ . '/../../includes/verifica_master.php';
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../../classes/guiasTuristicos.php';
+
+$baseUrl = 'https://pindaeco.rf.gd';
+
+$db = new Conexao();
+$pdo = $db->conectar();
 
 $guiasTuristicos = new GuiasTuristicos($pdo);
 $categorias = $guiasTuristicos->listarTodasCategorias();
 
 $erro = '';
-$sucesso = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -21,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $nomeFoto = null;
 
-        // UPLOAD DA FOTO DE PERFIL
         if (!empty($_FILES['foto_perfil']['name']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
 
             $permitidos = ['image/jpeg', 'image/png', 'image/webp'];
@@ -35,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ext = pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION);
                 $nomeFoto = 'guia_' . uniqid('', true) . '.' . strtolower($ext);
 
-                $destino = $prefixo . 'assets/uploads/guias/' . $nomeFoto;
+                $destino = __DIR__ . '/../../assets/uploads/guias/' . $nomeFoto;
 
                 if (!move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $destino)) {
                     $erro = 'Falha ao enviar a imagem.';
@@ -63,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $guiaId = $pdo->lastInsertId();
 
-                // CATEGORIAS SELECIONADAS
                 foreach (($_POST['categorias'] ?? []) as $categoriaId) {
                     $guiasTuristicos->adicionarCategoria($guiaId, (int) $categoriaId);
                 }
@@ -77,10 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require_once $prefixo . 'includes/header.php';
+$pageTitle = 'Cadastrar Guia';
+
+include __DIR__ . '/../../includes/header.php';
+include __DIR__ . '/../../includes/head.php';
+
 ?>
 
-<link rel="stylesheet" href="<?= $prefixo ?>assets/css/guia-turistico.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/guia-turistico.css">
 
 <main class="guia-container">
 
@@ -158,4 +167,4 @@ require_once $prefixo . 'includes/header.php';
 
 </main>
 
-<?php require_once $prefixo . 'includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>

@@ -1,9 +1,11 @@
 <?php
-$prefixo = '../../';
 
-require_once $prefixo . 'includes/verifica_master.php';
-require_once $prefixo . 'includes/conexao.php';
-require_once $prefixo . 'classes/GuiasTuristicos.php';
+require_once __DIR__ . '/../../includes/verifica_master.php';
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../../classes/guiasTuristicos.php';
+
+$db = new Conexao();
+$pdo = $db->conectar();
 
 $guiasTuristicos = new GuiasTuristicos($pdo);
 
@@ -15,24 +17,21 @@ if (!$guia) {
     exit;
 }
 
-// remove fotos da galeria do disco e do banco
 foreach ($guiasTuristicos->listarFotos($id) as $foto) {
-    $caminho = $prefixo . 'assets/uploads/guias/' . $foto['foto'];
+    $caminho = __DIR__ . '/../../assets/uploads/guias/' . $foto['foto'];
     if (is_file($caminho)) {
         unlink($caminho);
     }
     $guiasTuristicos->excluirFoto($foto['id']);
 }
 
-// remove foto de perfil
 if (!empty($guia['foto_perfil'])) {
-    $caminho = $prefixo . 'assets/uploads/guias/' . $guia['foto_perfil'];
+    $caminho = __DIR__ . '/../../assets/uploads/guias/' . $guia['foto_perfil'];
     if (is_file($caminho)) {
         unlink($caminho);
     }
 }
 
-// remove vínculos de categoria
 foreach ($guiasTuristicos->listarCategorias($id) as $categoria) {
     $guiasTuristicos->removerCategoria($id, $categoria['id']);
 }

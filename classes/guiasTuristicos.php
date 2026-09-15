@@ -175,6 +175,16 @@ class GuiasTuristicos
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function listarTodasCategorias()
+    {
+        $sql = "SELECT * FROM categorias_turismo WHERE status = 1 ORDER BY nome ASC";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function adicionarFoto($guiaId, $foto, $descricao = null)
     {
         $sql = "INSERT INTO guia_fotos

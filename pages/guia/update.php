@@ -1,9 +1,17 @@
 <?php
-$prefixo = '../../';
 
-require_once $prefixo . 'includes/verifica_master.php';
-require_once $prefixo . 'includes/conexao.php';
-require_once $prefixo . 'classes/GuiasTuristicos.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+require_once __DIR__ . '/../../includes/verifica_master.php';
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../../classes/guiasTuristicos.php';
+
+$baseUrl = 'https://pindaeco.rf.gd';
+
+$db = new Conexao();
+$pdo = $db->conectar();
 
 $guiasTuristicos = new GuiasTuristicos($pdo);
 
@@ -17,7 +25,6 @@ if (!$guia) {
 
 $categorias = $guiasTuristicos->listarTodasCategorias();
 $categoriasDoGuia = array_column($guiasTuristicos->listarCategorias($id), 'id');
-$fotos = $guiasTuristicos->listarFotos($id);
 
 $erro = '';
 
@@ -31,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $nomeFoto = $guia['foto_perfil'];
 
-        // NOVA FOTO DE PERFIL (substitui a anterior)
         if (!empty($_FILES['foto_perfil']['name']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
 
             $permitidos = ['image/jpeg', 'image/png', 'image/webp'];
@@ -45,11 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ext = pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION);
                 $novoNome = 'guia_' . uniqid('', true) . '.' . strtolower($ext);
 
-                if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $prefixo . 'assets/uploads/guias/' . $novoNome)) {
+                if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], __DIR__ . '/../../assets/uploads/guias/' . $novoNome)) {
 
-                    // apaga a foto antiga do disco
                     if (!empty($guia['foto_perfil'])) {
-                        $antiga = $prefixo . 'assets/uploads/guias/' . $guia['foto_perfil'];
+                        $antiga = __DIR__ . '/../../assets/uploads/guias/' . $guia['foto_perfil'];
                         if (is_file($antiga)) {
                             unlink($antiga);
                         }
@@ -78,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($guiasTuristicos->atualizar($id, $dados)) {
 
-                // SINCRONIZA CATEGORIAS
                 $novasCategorias = array_map('intval', $_POST['categorias'] ?? []);
 
                 foreach (array_diff($novasCategorias, $categoriasDoGuia) as $add) {
@@ -98,10 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require_once $prefixo . 'includes/header.php';
+$pageTitle = 'Editar Guia';
+
+include __DIR__ . '/../../includes/header.php';
+include __DIR__ . '/../../includes/head.php';
+
 ?>
 
-<link rel="stylesheet" href="<?= $prefixo ?>assets/css/guia-turistico.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/guia-turistico.css">
 
 <main class="guia-container">
 
@@ -117,7 +125,7 @@ require_once $prefixo . 'includes/header.php';
 
         <?php if (!empty($guia['foto_perfil'])): ?>
             <div class="guia-form-preview">
-                <img src="<?= $prefixo ?>assets/uploads/guias/<?= htmlspecialchars($guia['foto_perfil']) ?>" alt="Foto atual">
+                <img src="<?= $baseUrl ?>/assets/uploads/guias/<?= rawurlencode($guia['foto_perfil']) ?>" alt="Foto atual">
             </div>
         <?php endif; ?>
 
@@ -192,4 +200,4 @@ require_once $prefixo . 'includes/header.php';
 
 </main>
 
-<?php require_once $prefixo . 'includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
