@@ -1,345 +1,310 @@
-/* ================================================================
-   MURAL - QUADRO DE CORTIÇA COM POLAROIDS
-================================================================ */
+/* =========================================================
+   PINDA ECO TOUR
+   PÁGINA PÚBLICA DO MURAL
+   ========================================================= */
 
 
-/* ================================================================
-   RESET
-================================================================ */
-
-* {
-    box-sizing: border-box;
-}
-
-
-/* ================================================================
-   MURAL
-================================================================ */
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
 
 .mural-container {
+
     position: relative;
+
+    width: 100%;
 
     min-height: calc(100vh - 95px);
 
-    /* Espaço para o header fixo */
     margin-top: 95px;
 
-    padding: 3rem 0 5rem;
+    padding: 40px 30px 80px;
 
     overflow: hidden;
 
-    /* Cortiça */
-    background-color: #a96f3f;
-
-    background-image:
-        radial-gradient(
-            ellipse at 15% 20%,
-            rgba(255, 220, 170, 0.16) 0%,
-            transparent 25%
-        ),
-        radial-gradient(
-            ellipse at 80% 30%,
-            rgba(75, 38, 15, 0.14) 0%,
-            transparent 30%
-        ),
-        radial-gradient(
-            ellipse at 35% 80%,
-            rgba(70, 35, 10, 0.12) 0%,
-            transparent 28%
-        ),
-        radial-gradient(
-            ellipse at 90% 85%,
-            rgba(255, 220, 170, 0.12) 0%,
-            transparent 25%
-        ),
-        repeating-linear-gradient(
-            15deg,
-            rgba(255, 255, 255, 0.025) 0px,
-            rgba(255, 255, 255, 0.025) 2px,
-            transparent 2px,
-            transparent 8px
-        ),
-        repeating-linear-gradient(
-            95deg,
-            rgba(70, 35, 10, 0.025) 0px,
-            rgba(70, 35, 10, 0.025) 1px,
-            transparent 1px,
-            transparent 6px
-        );
-
-    box-shadow:
-        inset 0 0 100px rgba(50, 25, 10, 0.45),
-        inset 0 0 30px rgba(50, 25, 10, 0.3);
+    background: #ffffff;
 }
 
 
-/* ================================================================
-   MOLDURA DE MADEIRA
-================================================================ */
-
-.mural-container::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    border: 18px solid #5a351e;
-
-    box-shadow:
-        inset 0 0 0 5px #8a5631,
-        inset 0 0 0 8px #3e2415,
-        0 0 0 2px rgba(30, 15, 5, 0.5),
-        0 12px 35px rgba(0, 0, 0, 0.45);
-
-    z-index: 20;
-}
-
-
-/* ================================================================
-   TEXTURA DA MADEIRA
-================================================================ */
-
-.mural-container::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.035) 0px,
-            rgba(255, 255, 255, 0.035) 2px,
-            transparent 2px,
-            transparent 15px
-        );
-
-    mix-blend-mode: overlay;
-
-    opacity: 0.5;
-
-    z-index: 21;
-}
-
-
-/* ================================================================
+/* =========================================================
    CONTEÚDO
-================================================================ */
+   ========================================================= */
 
 .mural-conteudo {
+
     position: relative;
 
-    z-index: 30;
+    z-index: 1;
 
-    max-width: 1200px;
+    width: 100%;
+
+    max-width: 1300px;
 
     margin: 0 auto;
 
-    padding: 0 2rem;
+    padding: 0 20px;
 }
 
 
-/* ================================================================
+/* =========================================================
    TOPO
-================================================================ */
+   ========================================================= */
 
 .mural-topo {
-    display: flex;
 
-    justify-content: space-between;
+    display: flex;
 
     align-items: center;
 
-    margin-bottom: 2rem;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
 
     flex-wrap: wrap;
-
-    gap: 1rem;
 }
 
 
-/* ================================================================
+/* =========================================================
    TÍTULO
-================================================================ */
+   ========================================================= */
 
 .mural-titulo {
+
     margin: 0;
 
-    font-size: 2.5rem;
+    color: #222222;
+
+    font-size: 34px;
 
     font-weight: 700;
 
-    color: #ffffff;
-
-    text-shadow:
-        0 2px 3px rgba(0, 0, 0, 0.5),
-        0 3px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
 }
 
 
-/* ================================================================
+/* =========================================================
+   LINHA DO TÍTULO
+   ========================================================= */
+
+.mural-titulo::after {
+
+    content: "";
+
+    display: block;
+
+    width: 60px;
+
+    height: 4px;
+
+    margin-top: 12px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--laranja),
+            var(--amarelo)
+        );
+}
+
+
+/* =========================================================
    SUBTÍTULO
-================================================================ */
+   ========================================================= */
 
 .mural-subtitulo {
-    margin: 0.5rem 0 0;
 
-    font-size: 1rem;
+    margin: 12px 0 0;
 
-    color: rgba(255, 255, 255, 0.85);
+    color: #666666;
 
-    text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.4);
+    font-size: 16px;
+
+    line-height: 1.6;
 }
 
 
-/* ================================================================
+/* =========================================================
    BOTÃO NOVO
-================================================================ */
+   ========================================================= */
 
 .mural-botao-novo {
-    padding: 0.75rem 1.5rem;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    min-height: 44px;
+
+    padding: 12px 22px;
 
     border: none;
 
-    border-radius: 6px;
+    border-radius: 10px;
 
     background:
         linear-gradient(
             135deg,
-            #d95f4f,
-            #b83e31
+            var(--laranja),
+            #c52e00
         );
 
     color: #ffffff;
 
-    font-size: 1rem;
+    text-decoration: none;
 
-    font-weight: 600;
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
 
     cursor: pointer;
 
-    transition: all 0.3s ease;
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
 
     box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        0 5px 15px rgba(0, 0, 0, 0.12);
 }
+
 
 .mural-botao-novo:hover {
+
     transform: translateY(-2px);
 
+    filter: brightness(1.05);
+
     box-shadow:
-        0 7px 15px rgba(0, 0, 0, 0.4);
+        0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 
-/* ================================================================
+.mural-botao-novo:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
    MENSAGEM
-================================================================ */
+   ========================================================= */
 
 .mural-mensagem {
-    padding: 1rem;
 
-    margin-bottom: 1.5rem;
+    padding: 14px 18px;
 
-    border-radius: 6px;
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #fafafa;
+
+    color: #555555;
+
+    font-size: 14px;
 
     font-weight: 500;
 
-    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #eeeeee;
 }
 
+
 .mural-mensagem.sucesso {
+
     color: #2e7d32;
 
     border-left: 4px solid #4caf50;
 }
 
 
-/* ================================================================
+/* =========================================================
    QUANTIDADE
-================================================================ */
+   ========================================================= */
 
 .mural-quantidade {
-    margin-bottom: 1.5rem;
 
-    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
 
-    font-size: 0.9rem;
+    color: #777777;
 
-    text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
 }
 
 
-/* ================================================================
-   ÁREA DAS FOTOS
-================================================================ */
+/* =========================================================
+   ÁREA DAS POLAROIDS
+   ========================================================= */
 
 .mural-grid {
-    position: relative;
 
-    display: block;
+    position: relative;
 
     width: 100%;
 
-    /*
-        Espaço vertical grande para permitir
-        que as Polaroids fiquem espalhadas.
-    */
-    min-height: 900px;
+    min-height: 950px;
 
-    margin-bottom: 3rem;
+    margin-top: 10px;
+
+    margin-bottom: 30px;
 }
 
 
-/* ================================================================
+/* =========================================================
    POLAROID
-================================================================ */
+   ========================================================= */
 
 .polaroid-card {
+
     position: absolute;
 
     width: 250px;
+
+    min-width: 0;
 
     padding: 12px 12px 25px;
 
     background: #ffffff;
 
-    border-radius: 1px;
+    border: 1px solid #eeeeee;
 
-    cursor: pointer;
+    border-radius: 2px;
 
     overflow: visible;
 
+    cursor: pointer;
+
     box-shadow:
-        0 5px 10px rgba(0, 0, 0, 0.25),
-        0 15px 25px rgba(0, 0, 0, 0.18);
+        0 5px 12px rgba(0, 0, 0, 0.15),
+        0 15px 30px rgba(0, 0, 0, 0.10);
 
     transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 
-    z-index: 1;
+    transform-origin: center center;
 }
 
 
-/* ================================================================
+/* =========================================================
    POSIÇÕES DAS POLAROIDS
-================================================================ */
+   ========================================================= */
 
 
 /* FOTO 1 */
 
 .polaroid-card:nth-child(1) {
-    top: 30px;
+
+    top: 20px;
 
     left: 3%;
 
@@ -352,22 +317,24 @@
 /* FOTO 2 */
 
 .polaroid-card:nth-child(2) {
-    top: 180px;
+
+    top: 170px;
 
     left: 27%;
 
     transform: rotate(4deg);
 
-    z-index: 7;
+    z-index: 8;
 }
 
 
 /* FOTO 3 */
 
 .polaroid-card:nth-child(3) {
-    top: 45px;
 
-    left: 55%;
+    top: 30px;
+
+    left: 53%;
 
     transform: rotate(-3deg);
 
@@ -378,35 +345,38 @@
 /* FOTO 4 */
 
 .polaroid-card:nth-child(4) {
-    top: 270px;
 
-    left: 74%;
+    top: 260px;
+
+    left: 73%;
 
     transform: rotate(6deg);
 
-    z-index: 6;
+    z-index: 7;
 }
 
 
 /* FOTO 5 */
 
 .polaroid-card:nth-child(5) {
+
     top: 420px;
 
-    left: 7%;
+    left: 6%;
 
     transform: rotate(3deg);
 
-    z-index: 8;
+    z-index: 9;
 }
 
 
 /* FOTO 6 */
 
 .polaroid-card:nth-child(6) {
-    top: 490px;
 
-    left: 34%;
+    top: 470px;
+
+    left: 32%;
 
     transform: rotate(-6deg);
 
@@ -417,145 +387,84 @@
 /* FOTO 7 */
 
 .polaroid-card:nth-child(7) {
+
     top: 390px;
 
-    left: 60%;
+    left: 59%;
 
     transform: rotate(4deg);
 
-    z-index: 5;
+    z-index: 6;
 }
 
 
 /* FOTO 8 */
 
 .polaroid-card:nth-child(8) {
+
     top: 650px;
 
-    left: 18%;
+    left: 17%;
 
     transform: rotate(-4deg);
 
-    z-index: 9;
+    z-index: 11;
 }
 
 
 /* FOTO 9 */
 
 .polaroid-card:nth-child(9) {
-    top: 670px;
 
-    left: 50%;
+    top: 680px;
+
+    left: 49%;
 
     transform: rotate(5deg);
 
-    z-index: 6;
+    z-index: 7;
 }
 
 
 /* FOTO 10 */
 
 .polaroid-card:nth-child(10) {
-    top: 760px;
 
-    left: 75%;
+    top: 720px;
+
+    left: 74%;
 
     transform: rotate(-3deg);
 
-    z-index: 8;
+    z-index: 9;
 }
 
 
-/* ================================================================
-   HOVER POLAROID
-================================================================ */
+/* =========================================================
+   HOVER
+   ========================================================= */
 
 .polaroid-card:hover {
+
     transform:
-        translateY(-15px)
+        translateY(-12px)
         scale(1.06)
         rotate(0deg) !important;
 
     box-shadow:
-        0 10px 20px rgba(0, 0, 0, 0.3),
-        0 25px 45px rgba(0, 0, 0, 0.4);
+        0 10px 20px rgba(0, 0, 0, 0.20),
+        0 25px 45px rgba(0, 0, 0, 0.20);
 
     z-index: 100;
 }
 
 
-/* ================================================================
-   PREGO / PINO
-================================================================ */
-
-.polaroid-card::before {
-    content: "";
-
-    position: absolute;
-
-    top: -9px;
-
-    left: 50%;
-
-    width: 16px;
-
-    height: 16px;
-
-    transform: translateX(-50%);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #eeeeee 0%,
-            #999999 30%,
-            #555555 70%,
-            #333333 100%
-        );
-
-    box-shadow:
-        0 3px 4px rgba(0, 0, 0, 0.45),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.7);
-
-    z-index: 20;
-}
-
-
-/* ================================================================
-   SOMBRA DO PREGO
-================================================================ */
-
-.polaroid-card::after {
-    content: "";
-
-    position: absolute;
-
-    top: 4px;
-
-    left: 50%;
-
-    width: 13px;
-
-    height: 8px;
-
-    transform: translateX(-50%);
-
-    border-radius: 50%;
-
-    background: rgba(0, 0, 0, 0.18);
-
-    filter: blur(3px);
-
-    z-index: 5;
-}
-
-
-/* ================================================================
+/* =========================================================
    IMAGEM
-================================================================ */
+   ========================================================= */
 
 .polaroid-imagem {
+
     width: 100%;
 
     aspect-ratio: 1 / 1;
@@ -567,6 +476,7 @@
 
 
 .polaroid-imagem img {
+
     display: block;
 
     width: 100%;
@@ -577,11 +487,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    CONTEÚDO DA POLAROID
-================================================================ */
+   ========================================================= */
 
 .polaroid-conteudo {
+
     display: flex;
 
     flex-direction: column;
@@ -594,11 +505,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    DESCRIÇÃO
-================================================================ */
+   ========================================================= */
 
 .polaroid-descricao {
+
     flex: 1;
 
     margin: 0 0 12px;
@@ -618,16 +530,17 @@
 }
 
 
-/* ================================================================
-   FOOTER DA POLAROID
-================================================================ */
+/* =========================================================
+   RODAPÉ DA POLAROID
+   ========================================================= */
 
 .polaroid-footer {
+
     display: flex;
 
-    justify-content: space-between;
-
     align-items: center;
+
+    justify-content: space-between;
 
     min-height: 30px;
 
@@ -635,26 +548,28 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    USUÁRIO
-================================================================ */
+   ========================================================= */
 
 .polaroid-usuario {
+
     display: flex;
 
     align-items: center;
 
-    gap: 0.5rem;
+    gap: 8px;
 
     min-width: 0;
 }
 
 
-/* ================================================================
+/* =========================================================
    AVATAR
-================================================================ */
+   ========================================================= */
 
 .polaroid-avatar {
+
     width: 28px;
 
     height: 28px;
@@ -669,11 +584,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    AVATAR PLACEHOLDER
-================================================================ */
+   ========================================================= */
 
 .polaroid-avatar-placeholder {
+
     display: flex;
 
     align-items: center;
@@ -698,11 +614,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    NOME
-================================================================ */
+   ========================================================= */
 
 .polaroid-nome {
+
     overflow: hidden;
 
     color: #444444;
@@ -717,22 +634,24 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    AÇÕES
-================================================================ */
+   ========================================================= */
 
 .polaroid-acoes {
+
     display: flex;
 
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 
-/* ================================================================
-   BOTÃO DELETAR
-================================================================ */
+/* =========================================================
+   BOTÃO EXCLUIR
+   ========================================================= */
 
 .polaroid-deletar {
+
     display: flex;
 
     align-items: center;
@@ -747,7 +666,7 @@
 
     border-radius: 50%;
 
-    background: rgba(220, 60, 50, 0.1);
+    background: rgba(220, 60, 50, 0.08);
 
     color: #d94b3f;
 
@@ -755,21 +674,26 @@
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
+
 .polaroid-deletar:hover {
-    background: rgba(220, 60, 50, 0.25);
+
+    background: rgba(220, 60, 50, 0.20);
 
     transform: scale(1.1);
 }
 
 
-/* ================================================================
+/* =========================================================
    DATA
-================================================================ */
+   ========================================================= */
 
 .polaroid-data {
+
     padding-top: 8px;
 
     border-top: 1px solid #eeeeee;
@@ -784,43 +708,65 @@
 }
 
 
-/* ================================================================
-   MURAL VAZIO
-================================================================ */
+/* =========================================================
+   NENHUMA FOTO
+   ========================================================= */
 
 .mural-vazio {
-    padding: 3rem 1.5rem;
 
-    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 250px;
+
+    padding: 40px;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 18px;
+
+    background: #fafafa;
 
     text-align: center;
 }
 
+
 .mural-vazio h3 {
-    margin-bottom: 1rem;
 
-    color: #ffffff;
+    margin: 0 0 8px;
 
-    font-size: 2rem;
+    color: #333333;
+
+    font-size: 20px;
 }
+
 
 .mural-vazio p {
-    margin-bottom: 2rem;
 
-    font-size: 1.1rem;
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 14px;
 }
 
 
-/* ================================================================
+/* =========================================================
    PAGINAÇÃO
-================================================================ */
+   ========================================================= */
 
 .mural-paginacao {
+
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
+
+    justify-content: center;
 
     gap: 1rem;
 
@@ -831,41 +777,49 @@
 
 
 .paginacao-link {
-    padding: 0.5rem 1rem;
 
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 8px 16px;
 
-    border-radius: 4px;
+    border: 1px solid #dddddd;
 
-    background: rgba(80, 40, 15, 0.25);
+    border-radius: 8px;
 
-    color: #ffffff;
+    background: #ffffff;
+
+    color: #555555;
 
     text-decoration: none;
 
-    transition: all 0.2s ease;
+    font-size: 13px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 
 .paginacao-link:hover {
-    background: rgba(80, 40, 15, 0.45);
 
-    border-color: #ffffff;
+    background: #f5f5f5;
+
+    transform: translateY(-1px);
 }
 
 
 .paginacao-info {
-    color: rgba(255, 255, 255, 0.8);
 
-    font-size: 0.9rem;
+    color: #777777;
+
+    font-size: 13px;
 }
 
 
-/* ================================================================
+/* =========================================================
    MODAL
-================================================================ */
+   ========================================================= */
 
 .modal {
+
     display: none;
 
     position: fixed;
@@ -887,6 +841,7 @@
 
 
 .modal.ativo {
+
     display: flex;
 
     align-items: center;
@@ -897,9 +852,9 @@
 }
 
 
-/* ================================================================
-   ANIMAÇÃO MODAL
-================================================================ */
+/* =========================================================
+   ANIMAÇÃO
+   ========================================================= */
 
 @keyframes fadeIn {
 
@@ -910,7 +865,6 @@
     to {
         opacity: 1;
     }
-
 }
 
 
@@ -918,24 +872,22 @@
 
     from {
         transform: translateY(30px);
-
         opacity: 0;
     }
 
     to {
         transform: translateY(0);
-
         opacity: 1;
     }
-
 }
 
 
-/* ================================================================
-   CONTEÚDO MODAL
-================================================================ */
+/* =========================================================
+   CONTEÚDO DO MODAL
+   ========================================================= */
 
 .modal-conteudo {
+
     width: 90%;
 
     max-width: 500px;
@@ -964,11 +916,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    FECHAR MODAL
-================================================================ */
+   ========================================================= */
 
 .modal-fechar {
+
     float: right;
 
     color: rgba(255, 255, 255, 0.6);
@@ -984,15 +937,17 @@
 
 
 .modal-fechar:hover {
+
     color: #ff6b6b;
 }
 
 
-/* ================================================================
+/* =========================================================
    TÍTULO MODAL
-================================================================ */
+   ========================================================= */
 
 .modal-conteudo h2 {
+
     margin-top: 0;
 
     margin-bottom: 1.5rem;
@@ -1001,11 +956,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    FORMULÁRIO
-================================================================ */
+   ========================================================= */
 
 .upload-form {
+
     display: flex;
 
     flex-direction: column;
@@ -1014,11 +970,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    SEÇÃO UPLOAD
-================================================================ */
+   ========================================================= */
 
 .upload-secao {
+
     display: flex;
 
     flex-direction: column;
@@ -1027,11 +984,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    LABEL
-================================================================ */
+   ========================================================= */
 
 .upload-label {
+
     color: rgba(255, 255, 255, 0.8);
 
     font-size: 0.9rem;
@@ -1040,11 +998,12 @@
 }
 
 
-/* ================================================================
-   ÁREA UPLOAD
-================================================================ */
+/* =========================================================
+   ÁREA DE UPLOAD
+   ========================================================= */
 
 .upload-area {
+
     padding: 2rem;
 
     border: 2px dashed rgba(255, 107, 107, 0.4);
@@ -1062,6 +1021,7 @@
 
 
 .upload-area:hover {
+
     border-color: #ff6b6b;
 
     background: rgba(255, 107, 107, 0.1);
@@ -1069,11 +1029,13 @@
 
 
 .upload-area input {
+
     display: none;
 }
 
 
 .upload-area p {
+
     margin: 0;
 
     color: rgba(255, 255, 255, 0.6);
@@ -1082,11 +1044,12 @@
 }
 
 
-/* ================================================================
+/* =========================================================
    PREVIEW
-================================================================ */
+   ========================================================= */
 
 .preview-container {
+
     position: relative;
 
     display: flex;
@@ -1098,6 +1061,7 @@
 
 
 .preview-container img {
+
     width: 100%;
 
     height: auto;
@@ -1111,6 +1075,7 @@
 
 
 .preview-container button {
+
     padding: 0.5rem 1rem;
 
     border: 1px solid #ff6b6b;
@@ -1124,21 +1089,21 @@
     font-size: 0.9rem;
 
     cursor: pointer;
-
-    transition: all 0.2s ease;
 }
 
 
 .preview-container button:hover {
+
     background: rgba(255, 107, 107, 0.2);
 }
 
 
-/* ================================================================
+/* =========================================================
    DESCRIÇÃO
-================================================================ */
+   ========================================================= */
 
 #descricao {
+
     padding: 0.75rem;
 
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1152,41 +1117,41 @@
     font-family: inherit;
 
     resize: vertical;
-
-    transition: all 0.2s ease;
 }
 
 
 #descricao:focus {
+
     outline: none;
 
     border-color: #ff6b6b;
-
-    background: rgba(255, 255, 255, 0.1);
 }
 
 
 #descricao::placeholder {
+
     color: rgba(255, 255, 255, 0.4);
 }
 
 
-/* ================================================================
+/* =========================================================
    CONTADOR
-================================================================ */
+   ========================================================= */
 
 #charCount {
+
     color: rgba(255, 255, 255, 0.5);
 
     font-size: 0.8rem;
 }
 
 
-/* ================================================================
-   BOTÕES DO FORMULÁRIO
-================================================================ */
+/* =========================================================
+   BOTÕES
+   ========================================================= */
 
 .upload-botoes {
+
     display: flex;
 
     gap: 1rem;
@@ -1197,6 +1162,7 @@
 
 .botao-cancelar,
 .botao-enviar {
+
     flex: 1;
 
     padding: 0.75rem;
@@ -1210,16 +1176,11 @@
     font-weight: 600;
 
     cursor: pointer;
-
-    transition: all 0.2s ease;
 }
 
 
-/* ================================================================
-   CANCELAR
-================================================================ */
-
 .botao-cancelar {
+
     border: 1px solid rgba(255, 255, 255, 0.2);
 
     background: rgba(255, 255, 255, 0.1);
@@ -1229,20 +1190,18 @@
 
 
 .botao-cancelar:hover {
+
     background: rgba(255, 255, 255, 0.15);
 }
 
 
-/* ================================================================
-   ENVIAR
-================================================================ */
-
 .botao-enviar {
+
     background:
         linear-gradient(
             135deg,
-            #d95f4f,
-            #b83e31
+            var(--laranja),
+            #c52e00
         );
 
     color: #ffffff;
@@ -1253,6 +1212,7 @@
 
 
 .botao-enviar:hover {
+
     transform: translateY(-2px);
 
     box-shadow:
@@ -1261,6 +1221,7 @@
 
 
 .botao-enviar:disabled {
+
     opacity: 0.5;
 
     cursor: not-allowed;
@@ -1269,24 +1230,35 @@
 }
 
 
-/* ================================================================
-   RESPONSIVO - TABLET
-================================================================ */
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-@media (max-width: 992px) {
+@media (max-width: 1050px) {
+
+    .mural-container {
+
+        padding:
+            35px
+            25px
+            70px;
+    }
+
 
     .mural-grid {
-        min-height: 1000px;
+
+        min-height: 1050px;
     }
 
 
     .polaroid-card {
-        width: 230px;
+
+        width: 225px;
     }
 
 
     .polaroid-card:nth-child(1) {
-        left: 2%;
+        left: 1%;
     }
 
 
@@ -1296,7 +1268,7 @@
 
 
     .polaroid-card:nth-child(3) {
-        left: 52%;
+        left: 50%;
     }
 
 
@@ -1306,122 +1278,136 @@
 
 
     .polaroid-card:nth-child(5) {
-        left: 5%;
+        left: 3%;
     }
 
 
     .polaroid-card:nth-child(6) {
-        left: 31%;
+        left: 28%;
     }
 
 
     .polaroid-card:nth-child(7) {
-        left: 57%;
+        left: 55%;
     }
 
 
     .polaroid-card:nth-child(8) {
-        left: 15%;
+        left: 12%;
     }
 
 
     .polaroid-card:nth-child(9) {
-        left: 48%;
+        left: 45%;
     }
 
 }
 
 
-/* ================================================================
-   RESPONSIVO - CELULAR
-================================================================ */
+/* =========================================================
+   CELULAR
+   ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
 
     .mural-container {
-        min-height: calc(100vh - 95px);
 
         margin-top: 95px;
 
-        padding: 2rem 0 3rem;
-    }
-
-
-    .mural-container::before {
-        border-width: 10px;
+        padding:
+            30px
+            16px
+            50px;
     }
 
 
     .mural-conteudo {
-        padding: 0 1.5rem;
+
+        padding: 0;
     }
 
 
     .mural-titulo {
-        font-size: 1.8rem;
+
+        font-size: 28px;
+    }
+
+
+    .mural-subtitulo {
+
+        font-size: 15px;
     }
 
 
     .mural-topo {
-        flex-direction: column;
 
         align-items: flex-start;
+
+        flex-direction: column;
     }
 
 
     .mural-botao-novo {
+
         width: 100%;
     }
 
 
     /*
-        No celular abandonamos
-        o posicionamento absoluto.
+       No celular as fotos deixam
+       de ser absolutas para evitar
+       que saiam da tela.
     */
 
     .mural-grid {
+
         display: flex;
 
         flex-direction: column;
 
         align-items: center;
 
-        gap: 2.5rem;
+        gap: 35px;
 
         min-height: auto;
     }
 
 
     .polaroid-card {
+
         position: relative;
 
         top: auto !important;
 
         left: auto !important;
 
-        width: min(280px, 90vw);
+        width: min(290px, 90vw);
     }
 
 
     .polaroid-card:nth-child(odd) {
+
         transform: rotate(-3deg);
     }
 
 
     .polaroid-card:nth-child(even) {
+
         transform: rotate(3deg);
     }
 
 
     .polaroid-card:hover {
+
         transform:
-            translateY(-10px)
+            translateY(-8px)
             scale(1.03)
             rotate(0deg) !important;
     }
 
 
     .modal-conteudo {
+
         width: 95%;
 
         padding: 1.5rem;
@@ -1429,71 +1415,60 @@
 
 
     .upload-area {
+
         padding: 1.5rem;
     }
-
 }
 
 
-/* ================================================================
-   RESPONSIVO - CELULAR PEQUENO
-================================================================ */
+/* =========================================================
+   CELULAR PEQUENO
+   ========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
 
     .mural-container {
-        margin-top: 95px;
 
-        padding: 1.5rem 0 3rem;
-    }
+        padding-left: 12px;
 
-
-    .mural-container::before {
-        border-width: 7px;
-    }
-
-
-    .mural-conteudo {
-        padding: 0 1rem;
+        padding-right: 12px;
     }
 
 
     .mural-titulo {
-        font-size: 1.5rem;
-    }
 
-
-    .mural-grid {
-        gap: 2.5rem;
+        font-size: 25px;
     }
 
 
     .polaroid-card {
+
         width: min(300px, 90vw);
     }
 
 
-    .mural-paginacao {
-        gap: 0.5rem;
-    }
+    .polaroid-conteudo {
 
-
-    .paginacao-link {
-        padding: 0.4rem 0.8rem;
-
-        font-size: 0.85rem;
-    }
-
-
-    .modal-conteudo {
-        width: 98%;
-
-        padding: 1rem;
+        padding: 13px 6px 0;
     }
 
 
     .upload-botoes {
+
         flex-direction: column;
     }
+}
 
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .polaroid-card,
+    .mural-botao-novo {
+
+        transition: none;
+    }
 }
