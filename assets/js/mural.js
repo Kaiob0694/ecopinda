@@ -1,4 +1,3 @@
-```javascript
 document.addEventListener("DOMContentLoaded", function () {
 
     const uploadModal = document.getElementById("uploadModal");
@@ -525,15 +524,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-});
-```
-
-**Importante:** esse JS espera que o seu `header.php` tenha exatamente:
-
-```html
-<span class="menu-pindacoins" id="pindacoins">
-    🪙 10
-</span>
-```
-
-Assim, depois do upload, o valor é atualizado diretamente no header.
+})
