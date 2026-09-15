@@ -1,0 +1,595 @@
+/* ================================================================
+   MURAL - ESTILOS GERAIS
+================================================================ */
+
+.mural-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 2rem 0;
+}
+
+.mural-conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ================================================================
+   TOPO - CABEÇALHO
+================================================================ */
+
+.mural-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.mural-titulo {
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 0;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mural-subtitulo {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.5rem 0 0 0;
+    font-size: 1rem;
+}
+
+.mural-botao-novo {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.mural-botao-novo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+/* ================================================================
+   MENSAGENS
+================================================================ */
+
+.mural-mensagem {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.mural-mensagem.sucesso {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    border-left: 4px solid #4caf50;
+}
+
+/* ================================================================
+   QUANTIDADE
+================================================================ */
+
+.mural-quantidade {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* ================================================================
+   GRID POLAROID
+================================================================ */
+
+.mural-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* ================================================================
+   CARD POLAROID
+================================================================ */
+
+.polaroid-card {
+    perspective: 1000px;
+    cursor: default;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.polaroid-card:hover {
+    transform: translateY(-10px) rotateZ(2deg);
+    filter: drop-shadow(0 10px 30px rgba(255, 107, 107, 0.3));
+}
+
+.polaroid-card {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================================================================
+   IMAGEM POLAROID
+================================================================ */
+
+.polaroid-imagem {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.polaroid-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ================================================================
+   CONTEÚDO POLAROID
+================================================================ */
+
+.polaroid-conteudo {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    min-height: 140px;
+}
+
+/* ================================================================
+   DESCRIÇÃO
+================================================================ */
+
+.polaroid-descricao {
+    margin: 0 0 0.8rem 0;
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    flex: 1;
+}
+
+/* ================================================================
+   RODAPÉ POLAROID
+================================================================ */
+
+.polaroid-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    min-height: 35px;
+}
+
+.polaroid-usuario {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.polaroid-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f0f0f0;
+}
+
+.polaroid-avatar-placeholder {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.polaroid-nome {
+    color: #333;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.polaroid-acoes {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.polaroid-deletar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 107, 107, 0.1);
+    color: #ff6b6b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.polaroid-deletar:hover {
+    background: rgba(255, 107, 107, 0.3);
+    transform: scale(1.1);
+}
+
+/* ================================================================
+   DATA
+================================================================ */
+
+.polaroid-data {
+    color: #999;
+    font-size: 0.75rem;
+    font-style: italic;
+    text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ================================================================
+   VAZIO
+================================================================ */
+
+.mural-vazio {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mural-vazio h3 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.mural-vazio p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* ================================================================
+   PAGINAÇÃO
+================================================================ */
+
+.mural-paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.paginacao-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    transition: all 0.2s ease;
+}
+
+.paginacao-link:hover {
+    background: rgba(255, 107, 107, 0.1);
+    border-color: #ff6b6b;
+}
+
+.paginacao-info {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+/* ================================================================
+   MODAL
+================================================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.modal.ativo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-conteudo {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    animation: slideUp 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-fechar {
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.modal-fechar:hover {
+    color: #ff6b6b;
+}
+
+.modal-conteudo h2 {
+    color: white;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+}
+
+/* ================================================================
+   UPLOAD
+================================================================ */
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.upload-secao {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.upload-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.upload-area {
+    border: 2px dashed rgba(255, 107, 107, 0.4);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 107, 107, 0.05);
+}
+
+.upload-area:hover {
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.upload-area input {
+    display: none;
+}
+
+.upload-area p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.preview-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.preview-container img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.preview-container button {
+    background: rgba(255, 107, 107, 0.1);
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.preview-container button:hover {
+    background: rgba(255, 107, 107, 0.2);
+}
+
+#descricao {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+}
+
+#descricao:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#descricao::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+#charCount {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+.upload-botoes {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.botao-cancelar,
+.botao-enviar {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.botao-cancelar {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.botao-cancelar:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.botao-enviar {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.botao-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+.botao-enviar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ================================================================
+   RESPONSIVIDADE
+================================================================ */
+
+@media (max-width: 768px) {
+    .mural-titulo {
+        font-size: 1.8rem;
+    }
+
+    .mural-topo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mural-botao-novo {
+        width: 100%;
+    }
+
+    .mural-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .polaroid-imagem {
+        height: 200px;
+    }
+
+    .modal-conteudo {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .upload-area {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mural-titulo {
+        font-size: 1.5rem;
+    }
+
+    .mural-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .mural-paginacao {
+        gap: 0.5rem;
+    }
+
+    .paginacao-link {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .modal-conteudo {
+        width: 98%;
+        padding: 1rem;
+    }
+
+    .upload-botoes {
+        flex-direction: column;
+    }
+}

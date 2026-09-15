@@ -55,6 +55,9 @@ if (!function_exists('iniciaisHeader')) {
 
         <?php if ($usuarioLogado): ?>
 
+            <!-- MURAL (APENAS LOGADOS) -->
+            <a href="/../pages/mural/read.php">📸 Mural</a>
+
             <a href="/../pages/profile.php" class="menu-usuario">
 
                 <!-- FOTO / INICIAIS -->
