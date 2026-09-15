@@ -34,7 +34,7 @@ include "../../includes/head.php";
             <div>
 
                 <h1 class="restaurantes-titulo">
-                    Restaurantes
+                    Restaurantes(AGORA VAI!!)
                 </h1>
 
                 <p class="restaurantes-subtitulo">
