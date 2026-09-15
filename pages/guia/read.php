@@ -20,11 +20,12 @@ $guias = $guiasTuristicos->listar();
 
 $pageTitle = 'Guia Turístico';
 
-require_once __DIR__ . '/../../includes/header.php';
+include "../../includes/header.php";
+include "../../includes/head.php";
 
 ?>
 
-<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/hotel.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/guia-turistico.css">
 
 <main class="guia-container">
 
