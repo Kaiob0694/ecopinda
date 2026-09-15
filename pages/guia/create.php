@@ -5,15 +5,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 require_once __DIR__ . '/../../includes/verifica_master.php';
-require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../../classes/guiasTuristicos.php';
 
 $baseUrl = 'https://pindaeco.rf.gd';
 
-$db = new Conexao();
-$pdo = $db->conectar();
-
-$guiasTuristicos = new GuiasTuristicos($pdo);
+$guiasTuristicos = new GuiasTuristicos();
 $categorias = $guiasTuristicos->listarTodasCategorias();
 
 $erro = '';
@@ -65,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status'      => isset($_POST['status']) ? 1 : 0,
             ];
 
-            if ($guiasTuristicos->cadastrar($dados)) {
+            $guiaId = $guiasTuristicos->cadastrar($dados);
 
-                $guiaId = $pdo->lastInsertId();
+            if ($guiaId) {
 
                 foreach (($_POST['categorias'] ?? []) as $categoriaId) {
                     $guiasTuristicos->adicionarCategoria($guiaId, (int) $categoriaId);
@@ -84,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Cadastrar Guia';
 
-include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../includes/head.php';
+include __DIR__ . '/../../includes/header.php';
 
 ?>
 

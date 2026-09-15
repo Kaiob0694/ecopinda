@@ -1,19 +1,22 @@
 <?php
+require_once __DIR__ . "/../config/conexao.php";
 
 class GuiasTuristicos
 {
-    private $pdo;
 
-    public function __construct($pdo)
+    private $conexao;
+
+    public function __construct()
     {
-        $this->pdo = $pdo;
+        $db = new Conexao();
+        $this->conexao = $db->conectar();
     }
 
     public function listar()
     {
         $sql = "SELECT * FROM guias_turisticos WHERE status = 1 ORDER BY nome ASC";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -23,8 +26,8 @@ class GuiasTuristicos
     {
         $sql = "SELECT * FROM guias_turisticos WHERE id = :id LIMIT 1";
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -59,7 +62,7 @@ class GuiasTuristicos
                     :status
                 )";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindValue(':usuario_id', $dados['usuario_id'] ?? null, PDO::PARAM_INT);
         $stmt->bindValue(':nome', $dados['nome']);
@@ -72,7 +75,9 @@ class GuiasTuristicos
         $stmt->bindValue(':instagram', $dados['instagram'] ?? null);
         $stmt->bindValue(':status', $dados['status'] ?? 1, PDO::PARAM_INT);
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return $this->conexao->lastInsertId();
     }
 
     public function atualizar($id, $dados)
@@ -89,7 +94,7 @@ class GuiasTuristicos
                     status = :status
                 WHERE id = :id";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':nome', $dados['nome']);
@@ -109,8 +114,8 @@ class GuiasTuristicos
     {
         $sql = "DELETE FROM guias_turisticos WHERE id = :id";
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindParam(':id', $id);
 
         return $stmt->execute();
     }
@@ -121,7 +126,7 @@ class GuiasTuristicos
                 SET status = :status
                 WHERE id = :id";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':status', $status, PDO::PARAM_INT);
@@ -136,7 +141,7 @@ class GuiasTuristicos
                 VALUES
                 (:guia_id, :categoria_id)";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindValue(':guia_id', $guiaId, PDO::PARAM_INT);
         $stmt->bindValue(':categoria_id', $categoriaId, PDO::PARAM_INT);
@@ -150,7 +155,7 @@ class GuiasTuristicos
                 WHERE guia_id = :guia_id
                 AND categoria_id = :categoria_id";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindValue(':guia_id', $guiaId, PDO::PARAM_INT);
         $stmt->bindValue(':categoria_id', $categoriaId, PDO::PARAM_INT);
@@ -168,7 +173,7 @@ class GuiasTuristicos
                 AND c.status = 1
                 ORDER BY c.nome ASC";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(':guia_id', $guiaId, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -179,7 +184,7 @@ class GuiasTuristicos
     {
         $sql = "SELECT * FROM categorias_turismo WHERE status = 1 ORDER BY nome ASC";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -192,7 +197,7 @@ class GuiasTuristicos
                 VALUES
                 (:guia_id, :foto, :descricao)";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
 
         $stmt->bindValue(':guia_id', $guiaId, PDO::PARAM_INT);
         $stmt->bindValue(':foto', $foto);
@@ -208,7 +213,7 @@ class GuiasTuristicos
                 WHERE guia_id = :guia_id
                 ORDER BY id DESC";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(':guia_id', $guiaId, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -219,8 +224,8 @@ class GuiasTuristicos
     {
         $sql = "DELETE FROM guia_fotos WHERE id = :id";
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindParam(':id', $id);
 
         return $stmt->execute();
     }

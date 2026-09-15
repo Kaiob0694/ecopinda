@@ -5,15 +5,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 require_once __DIR__ . '/../../includes/verifica_master.php';
-require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../../classes/guiasTuristicos.php';
 
 $baseUrl = 'https://pindaeco.rf.gd';
 
-$db = new Conexao();
-$pdo = $db->conectar();
-
-$guiasTuristicos = new GuiasTuristicos($pdo);
+$guiasTuristicos = new GuiasTuristicos();
 
 $id = (int) ($_GET['id'] ?? 0);
 $guia = $guiasTuristicos->buscarPorId($id);
@@ -104,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Editar Guia';
 
-include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../includes/head.php';
+include __DIR__ . '/../../includes/header.php';
 
 ?>
 
