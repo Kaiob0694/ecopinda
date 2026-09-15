@@ -94,8 +94,7 @@ include __DIR__ . '/../../includes/header.php';
                     <div class="guia-foto">
                         <img
                             src="<?= htmlspecialchars($fotoPerfil) ?>"
-                            alt="Foto de <?= htmlspecialchars($guia['nome']) ?>"
-                        >
+                            alt="Foto de <?= htmlspecialchars($guia['nome']) ?>">
                     </div>
 
                     <div class="guia-info">
@@ -135,8 +134,7 @@ include __DIR__ . '/../../includes/header.php';
                                 <?php foreach (array_slice($fotos, 0, 4) as $foto): ?>
                                     <img
                                         src="<?= $baseUrl ?>/assets/uploads/guias/<?= rawurlencode($foto['foto']) ?>"
-                                        alt="<?= htmlspecialchars($foto['descricao'] ?? 'Foto do guia') ?>"
-                                    >
+                                        alt="<?= htmlspecialchars($foto['descricao'] ?? 'Foto do guia') ?>">
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
@@ -170,12 +168,12 @@ include __DIR__ . '/../../includes/header.php';
                                 <a href="update.php?id=<?= (int) $guia['id'] ?>" class="guia-btn editar">
                                     Editar
                                 </a>
-                                
-                                    href="delete.php?id=<?= (int) $guia['id'] ?>"
-                                    class="guia-btn excluir"
-                                    onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');"
+
+                                href="delete.php?id=<?= (int) $guia['id'] ?>"
+                                class="guia-btn excluir"
+                                onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');"
                                 >
-                                    Excluir
+                                Excluir
                                 </a>
                             </div>
                         <?php endif; ?>
