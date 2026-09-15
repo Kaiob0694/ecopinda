@@ -1,171 +1,114 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================================================
-       ELEMENTOS
-    ========================================================= */
-
-    const modal = document.getElementById("uploadModal");
-    const abrirModal = document.getElementById("abrirModalUpload");
-    const fecharModalBtn = document.getElementById("fecharModalUpload");
-
-    const form = document.getElementById("formUpload");
-
+    const uploadModal = document.getElementById("uploadModal");
     const fotoInput = document.getElementById("fotoInput");
     const uploadArea = document.getElementById("uploadArea");
-
+    const formUpload = document.getElementById("formUpload");
+    const descricao = document.getElementById("descricao");
+    const charCount = document.getElementById("charCount");
     const previewContainer = document.getElementById("previewContainer");
     const fotoPreview = document.getElementById("fotoPreview");
 
-    const descricao = document.getElementById("descricao");
-    const charCount = document.getElementById("charCount");
+    // =========================================================
+    // ABRIR MODAL
+    // =========================================================
 
-    const botaoPublicar = document.getElementById("botaoPublicar");
-
-    const mensagemCoin = document.getElementById("mensagemCoin");
-
-
-    /* =========================================================
-       ABRIR MODAL
-    ========================================================= */
-
-    if (abrirModal) {
-
-        abrirModal.addEventListener("click", function () {
-
-            modal.classList.add("ativo");
-
-        });
-
+    function abrirModal() {
+        if (uploadModal) {
+            uploadModal.style.display = "flex";
+        }
     }
 
-
-    /* =========================================================
-       FECHAR MODAL
-    ========================================================= */
+    // =========================================================
+    // FECHAR MODAL
+    // =========================================================
 
     function fecharModal() {
+        if (uploadModal) {
+            uploadModal.style.display = "none";
+        }
 
-        modal.classList.remove("ativo");
+        if (formUpload) {
+            formUpload.reset();
+        }
 
-        form.reset();
+        if (previewContainer) {
+            previewContainer.style.display = "none";
+        }
 
-        previewContainer.classList.remove("ativo");
-
-        fotoPreview.src = "";
-
-        charCount.textContent = "0";
-
-        botaoPublicar.disabled = false;
-
-        botaoPublicar.textContent = "📸 Publicar foto";
-
+        if (fotoPreview) {
+            fotoPreview.src = "";
+        }
     }
 
+    // Disponibiliza globalmente caso seu HTML use onclick
+    window.abrirModal = abrirModal;
+    window.fecharModal = fecharModal;
 
-    if (fecharModalBtn) {
+    // =========================================================
+    // CONTADOR DA DESCRIÇÃO
+    // =========================================================
 
-        fecharModalBtn.addEventListener("click", function () {
-
-            fecharModal();
-
+    if (descricao && charCount) {
+        descricao.addEventListener("input", function () {
+            charCount.textContent = this.value.length;
         });
-
     }
 
+    // =========================================================
+    // SELECIONAR FOTO
+    // =========================================================
 
-    /* =========================================================
-       FECHAR CLICANDO FORA
-    ========================================================= */
-
-    if (modal) {
-
-        modal.addEventListener("click", function (event) {
-
-            if (event.target === modal) {
-
-                fecharModal();
-
-            }
-
-        });
-
-    }
-
-
-    /* =========================================================
-       SELECIONAR FOTO
-    ========================================================= */
-
-    if (uploadArea && fotoInput) {
-
-        uploadArea.addEventListener("click", function () {
-
-            fotoInput.click();
-
-        });
-
-
+    if (fotoInput) {
         fotoInput.addEventListener("change", function () {
-
-            if (this.files && this.files.length > 0) {
-
-                mostrarPreview(this.files[0]);
-
-            }
-
+            validarFoto(this.files[0]);
         });
-
     }
 
-
-    /* =========================================================
-       DRAG AND DROP
-    ========================================================= */
+    // =========================================================
+    // DRAG AND DROP
+    // =========================================================
 
     if (uploadArea) {
 
-        uploadArea.addEventListener("dragover", function (event) {
-
-            event.preventDefault();
-
-            uploadArea.classList.add("arrastando");
-
+        uploadArea.addEventListener("dragover", function (e) {
+            e.preventDefault();
+            uploadArea.classList.add("dragover");
         });
-
 
         uploadArea.addEventListener("dragleave", function () {
-
-            uploadArea.classList.remove("arrastando");
-
+            uploadArea.classList.remove("dragover");
         });
 
+        uploadArea.addEventListener("drop", function (e) {
+            e.preventDefault();
 
-        uploadArea.addEventListener("drop", function (event) {
+            uploadArea.classList.remove("dragover");
 
-            event.preventDefault();
+            const arquivo = e.dataTransfer.files[0];
 
-            uploadArea.classList.remove("arrastando");
-
-            const arquivos = event.dataTransfer.files;
-
-            if (arquivos.length > 0) {
-
-                fotoInput.files = arquivos;
-
-                mostrarPreview(arquivos[0]);
-
+            if (arquivo) {
+                fotoInput.files = e.dataTransfer.files;
+                validarFoto(arquivo);
             }
-
         });
 
+        uploadArea.addEventListener("click", function () {
+            if (fotoInput) {
+                fotoInput.click();
+            }
+        });
     }
 
+    // =========================================================
+    // VALIDAR FOTO
+    // =========================================================
 
-    /* =========================================================
-       PREVIEW
-    ========================================================= */
+    function validarFoto(arquivo) {
 
-    function mostrarPreview(arquivo) {
+        if (!arquivo) {
+            return;
+        }
 
         const tiposPermitidos = [
             "image/jpeg",
@@ -174,229 +117,110 @@ document.addEventListener("DOMContentLoaded", function () {
             "image/gif"
         ];
 
-        if (!tiposPermitidos.includes(arquivo.type)) {
+        const tamanhoMaximo = 5 * 1024 * 1024; // 5 MB
 
+        if (!tiposPermitidos.includes(arquivo.type)) {
             mostrarMensagem(
-                "Tipo de arquivo não permitido. Use JPG, PNG, WEBP ou GIF.",
+                "Formato de imagem não permitido. Use JPG, PNG, WEBP ou GIF.",
                 "erro"
             );
 
             fotoInput.value = "";
-
             return;
-
         }
-
-
-        const tamanhoMaximo = 5 * 1024 * 1024;
 
         if (arquivo.size > tamanhoMaximo) {
-
             mostrarMensagem(
-                "A imagem é muito grande. O tamanho máximo é 5MB.",
+                "A imagem deve ter no máximo 5 MB.",
                 "erro"
             );
 
             fotoInput.value = "";
-
             return;
-
         }
 
+        // =====================================================
+        // PREVIEW
+        // =====================================================
 
-        const leitor = new FileReader();
+        const reader = new FileReader();
 
+        reader.onload = function (e) {
 
-        leitor.onload = function (event) {
+            if (fotoPreview) {
+                fotoPreview.src = e.target.result;
+            }
 
-            fotoPreview.src = event.target.result;
-
-            previewContainer.classList.add("ativo");
-
+            if (previewContainer) {
+                previewContainer.style.display = "block";
+            }
         };
 
-
-        leitor.readAsDataURL(arquivo);
-
+        reader.readAsDataURL(arquivo);
     }
 
+    // =========================================================
+    // ENVIO DO FORMULÁRIO
+    // =========================================================
 
-    /* =========================================================
-       CONTADOR DE CARACTERES
-    ========================================================= */
+    if (formUpload) {
 
-    if (descricao) {
+        formUpload.addEventListener("submit", async function (e) {
 
-        descricao.addEventListener("input", function () {
+            e.preventDefault();
 
-            charCount.textContent = this.value.length;
+            const arquivo = fotoInput.files[0];
 
-        });
-
-    }
-
-
-    /* =========================================================
-       ENVIO DO FORMULÁRIO
-    ========================================================= */
-
-    if (form) {
-
-        form.addEventListener("submit", async function (event) {
-
-            event.preventDefault();
-
-
-            /* Verifica foto */
-
-            if (!fotoInput.files || fotoInput.files.length === 0) {
-
+            if (!arquivo) {
                 mostrarMensagem(
                     "Selecione uma foto antes de publicar.",
                     "erro"
                 );
-
                 return;
-
             }
-
-
-            const arquivo = fotoInput.files[0];
-
-
-            /* Verifica tamanho */
-
-            if (arquivo.size > 5 * 1024 * 1024) {
-
-                mostrarMensagem(
-                    "A imagem é muito grande. O tamanho máximo é 5MB.",
-                    "erro"
-                );
-
-                return;
-
-            }
-
-
-            /* Desabilita botão */
-
-            botaoPublicar.disabled = true;
-
-            botaoPublicar.textContent = "Enviando...";
-
 
             const formData = new FormData();
 
             formData.append("foto", arquivo);
-
             formData.append(
                 "descricao",
-                descricao.value
+                descricao ? descricao.value : ""
             );
 
+            // Desabilita o botão durante o envio
+            const botao = formUpload.querySelector(
+                'button[type="submit"]'
+            );
+
+            if (botao) {
+                botao.disabled = true;
+                botao.textContent = "Publicando...";
+            }
 
             try {
 
-                const resposta = await fetch(
-                    "upload.php",
-                    {
-                        method: "POST",
-                        body: formData
-                    }
-                );
+                const resposta = await fetch("upload.php", {
+                    method: "POST",
+                    body: formData
+                });
 
-
-                /*
-                 * Pegamos primeiro como texto.
-                 * Isso evita que um erro PHP transforme
-                 * o JSON em um erro obscuro.
-                 */
-
-                const texto = await resposta.text();
-
-                console.log("Resposta do upload:", texto);
-
-
-                let data;
-
-
-                try {
-
-                    data = JSON.parse(texto);
-
-                } catch (erroJson) {
-
-                    console.error(
-                        "Resposta não é JSON:",
-                        texto
-                    );
-
-                    throw new Error(
-                        "O servidor não retornou uma resposta válida."
-                    );
-
-                }
-
-
-                console.log(
-                    "Dados recebidos:",
-                    data
-                );
-
-
-                /* =================================================
-                   SUCESSO
-                ================================================= */
+                const data = await resposta.json();
 
                 if (data.sucesso) {
 
+                    // Fecha o modal
                     fecharModal();
 
-
-                    const moedas =
-                        data.pindacoins_ganhos ?? 10;
-
-
+                    // Mostra mensagem
                     mostrarMensagem(
-                        `🎉 Foto publicada com sucesso! Você ganhou +${moedas} PindaCoins!`,
+                        data.mensagem ||
+                        "🎉 Foto publicada com sucesso! Você ganhou +10 PindaCoins!",
                         "sucesso"
                     );
 
-
-                    /*
-                     * Atualiza a quantidade de coins no header,
-                     * caso exista um elemento com este ID.
-                     */
-
-                    const contadorCoins =
-                        document.getElementById("pindacoins");
-
-                    if (contadorCoins) {
-
-                        const valorAtual =
-                            parseInt(
-                                contadorCoins.textContent
-                            ) || 0;
-
-                        contadorCoins.textContent =
-                            valorAtual + moedas;
-
-                    }
-
-
-                    /*
-                     * Recarrega apenas depois de 5 segundos.
-                     *
-                     * Se você NÃO quiser recarregar a página,
-                     * pode apagar este setTimeout.
-                     */
-
-                    setTimeout(function () {
-
-                        window.location.reload();
-
-                    }, 5000);
-
+                    // Opcional:
+                    // adiciona a nova foto no mural sem recarregar
+                    // caso você queira implementar depois.
 
                 } else {
 
@@ -405,150 +229,90 @@ document.addEventListener("DOMContentLoaded", function () {
                         "Não foi possível publicar a foto.",
                         "erro"
                     );
-
-
-                    botaoPublicar.disabled = false;
-
-                    botaoPublicar.textContent =
-                        "📸 Publicar foto";
-
                 }
-
 
             } catch (erro) {
 
-                console.error(
-                    "Erro no upload:",
-                    erro
-                );
-
+                console.error("Erro no upload:", erro);
 
                 mostrarMensagem(
-                    erro.message ||
-                    "Erro ao enviar a foto.",
+                    "Ocorreu um erro ao enviar a foto. Tente novamente.",
                     "erro"
                 );
 
+            } finally {
 
-                botaoPublicar.disabled = false;
-
-                botaoPublicar.textContent =
-                    "📸 Publicar foto";
-
+                if (botao) {
+                    botao.disabled = false;
+                    botao.textContent = "Publicar";
+                }
             }
-
         });
-
     }
 
+    // =========================================================
+    // MENSAGEM
+    // =========================================================
 
-    /* =========================================================
-       MENSAGEM
-    ========================================================= */
+    function mostrarMensagem(mensagem, tipo = "sucesso") {
 
-    function mostrarMensagem(texto, tipo) {
+        // Remove mensagem anterior
+        const mensagemAnterior =
+            document.querySelector(".mensagem-mural");
 
-        if (!mensagemCoin) {
-
-            console.error(
-                "Elemento #mensagemCoin não encontrado."
-            );
-
-            return;
-
+        if (mensagemAnterior) {
+            mensagemAnterior.remove();
         }
 
+        const mensagemDiv =
+            document.createElement("div");
 
-        mensagemCoin.className = "mensagem-coin";
+        mensagemDiv.className =
+            `mensagem-mural mensagem-${tipo}`;
 
+        mensagemDiv.innerHTML = `
+            <span>${mensagem}</span>
 
-        if (tipo === "sucesso") {
-
-            mensagemCoin.classList.add(
-                "mensagem-sucesso"
-            );
-
-        } else {
-
-            mensagemCoin.classList.add(
-                "mensagem-erro"
-            );
-
-        }
-
-
-        mensagemCoin.innerHTML = `
-            <div class="mensagem-coin-icone">
-                ${tipo === "sucesso" ? "🎉" : "⚠️"}
-            </div>
-
-            <div class="mensagem-coin-conteudo">
-                ${texto}
-            </div>
-
-            <button
-                type="button"
-                class="mensagem-coin-fechar"
-                aria-label="Fechar mensagem"
-            >
+            <button type="button" class="fechar-mensagem">
                 ×
             </button>
         `;
 
+        document.body.appendChild(mensagemDiv);
 
-        /*
-         * Força o navegador a reconhecer a alteração
-         * antes de adicionar a classe visível.
-         */
-
-        requestAnimationFrame(function () {
-
-            mensagemCoin.classList.add("mostrar");
-
-        });
-
-
+        // Botão fechar
         const botaoFechar =
-            mensagemCoin.querySelector(
-                ".mensagem-coin-fechar"
-            );
-
+            mensagemDiv.querySelector(".fechar-mensagem");
 
         if (botaoFechar) {
-
-            botaoFechar.addEventListener(
-                "click",
-                function () {
-
-                    esconderMensagem();
-
-                }
-            );
-
+            botaoFechar.addEventListener("click", function () {
+                mensagemDiv.remove();
+            });
         }
 
-
-        /*
-         * Remove automaticamente depois de 5 segundos.
-         */
-
+        // Remove automaticamente depois de 5 segundos
         setTimeout(function () {
 
-            esconderMensagem();
+            if (mensagemDiv.parentElement) {
+                mensagemDiv.remove();
+            }
 
         }, 5000);
-
     }
 
+    // =========================================================
+    // FECHAR MODAL CLICANDO FORA
+    // =========================================================
 
-    function esconderMensagem() {
+    if (uploadModal) {
 
-        if (!mensagemCoin) {
-            return;
-        }
+        uploadModal.addEventListener("click", function (e) {
 
-        mensagemCoin.classList.remove("mostrar");
+            if (e.target === uploadModal) {
+                fecharModal();
+            }
 
+        });
     }
 
 });
