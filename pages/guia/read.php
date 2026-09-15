@@ -96,12 +96,10 @@ include __DIR__ . '/../../includes/head.php';
                     $fotoPerfil =
                         $baseUrl . '/assets/uploads/guias/' .
                         rawurlencode($guia['foto_perfil']);
-
                 } else {
 
                     $fotoPerfil =
                         $baseUrl . '/assets/img2/sem-foto.png';
-
                 }
 
                 ?>
@@ -112,8 +110,7 @@ include __DIR__ . '/../../includes/head.php';
 
                         <img
                             src="<?= htmlspecialchars($fotoPerfil) ?>"
-                            alt="Foto de <?= htmlspecialchars($guia['nome']) ?>"
-                        >
+                            alt="Foto de <?= htmlspecialchars($guia['nome']) ?>">
 
                     </div>
 
@@ -172,8 +169,7 @@ include __DIR__ . '/../../includes/head.php';
 
                                     <img
                                         src="<?= $baseUrl ?>/assets/uploads/guias/<?= rawurlencode($foto['foto']) ?>"
-                                        alt="<?= htmlspecialchars($foto['descricao'] ?? 'Foto do guia') ?>"
-                                    >
+                                        alt="<?= htmlspecialchars($foto['descricao'] ?? 'Foto do guia') ?>">
 
                                 <?php endforeach; ?>
 
@@ -186,19 +182,10 @@ include __DIR__ . '/../../includes/head.php';
                             <?php if (!empty($guia['telefone'])): ?>
 
                                 <?php
-                                $telefone = preg_replace(
-                                    '/\D/',
-                                    '',
-                                    $guia['telefone']
-                                );
+                                $telefone = preg_replace('/\D/', '', $guia['telefone']);
                                 ?>
 
-                                
-                                    href="https://wa.me/55<?= $telefone ?>"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="guia-btn whatsapp"
-                                >
+                                <a href="https://wa.me/55<?= $telefone ?>" target="_blank" rel="noopener noreferrer" class="guia-btn whatsapp">
                                     WhatsApp
                                 </a>
 
@@ -207,18 +194,10 @@ include __DIR__ . '/../../includes/head.php';
                             <?php if (!empty($guia['instagram'])): ?>
 
                                 <?php
-                                $instagram = ltrim(
-                                    $guia['instagram'],
-                                    '@'
-                                );
+                                $instagram = ltrim($guia['instagram'], '@');
                                 ?>
 
-                                
-                                    href="https://instagram.com/<?= htmlspecialchars($instagram) ?>"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="guia-btn instagram"
-                                >
+                                <a href="https://instagram.com/<?= htmlspecialchars($instagram) ?>" target="_blank" rel="noopener noreferrer" class="guia-btn instagram">
                                     Instagram
                                 </a>
 
@@ -226,10 +205,7 @@ include __DIR__ . '/../../includes/head.php';
 
                             <?php if (!empty($guia['email'])): ?>
 
-                                
-                                    href="mailto:<?= htmlspecialchars($guia['email']) ?>"
-                                    class="guia-btn email"
-                                >
+                                <a href="mailto:<?= htmlspecialchars($guia['email']) ?>" class="guia-btn email">
                                     E-mail
                                 </a>
 
@@ -245,11 +221,7 @@ include __DIR__ . '/../../includes/head.php';
                                     Editar
                                 </a>
 
-                                
-                                    href="delete.php?id=<?= (int) $guia['id'] ?>"
-                                    class="guia-btn excluir"
-                                    onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');"
-                                >
+                                <a href="delete.php?id=<?= (int) $guia['id'] ?>" class="guia-btn excluir" onclick="return confirm('Excluir o guia <?= htmlspecialchars($guia['nome'], ENT_QUOTES) ?>?');">
                                     Excluir
                                 </a>
 
