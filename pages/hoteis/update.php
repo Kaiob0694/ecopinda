@@ -116,7 +116,7 @@ include "../../includes/header.php";
 
                             <img
                                 class="foto-hotel-imagem"
-                                src="../../uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                                src="../../assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="Foto do hotel">
 
 
