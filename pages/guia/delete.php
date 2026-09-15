@@ -1,25 +1,43 @@
 <?php
+$prefixo = '../../';
 
-require_once "../../classes/hoteis.php";
-require_once "../../classes/hotel_fotos.php";
+require_once $prefixo . 'includes/verifica_master.php';
+require_once $prefixo . 'includes/conexao.php';
+require_once $prefixo . 'classes/GuiasTuristicos.php';
 
-$hotel = new Hotel();
-$hotelFoto = new HotelFoto();
+$guiasTuristicos = new GuiasTuristicos($pdo);
 
-$id = $_GET['id'];
+$id = (int) ($_GET['id'] ?? 0);
+$guia = $guiasTuristicos->buscarPorId($id);
 
-// Remove as fotos (arquivos + registros) antes de remover o hotel.
-$fotos = $hotelFoto->listarPorHotel($id);
+if (!$guia) {
+    header('Location: read.php?erro=nao_encontrado');
+    exit;
+}
 
-foreach ($fotos as $foto) {
-    $caminhoArquivo = __DIR__ . "/../../uploads/hoteis/" . $foto['caminho'];
-    if (file_exists($caminhoArquivo)) {
-        unlink($caminhoArquivo);
+// remove fotos da galeria do disco e do banco
+foreach ($guiasTuristicos->listarFotos($id) as $foto) {
+    $caminho = $prefixo . 'assets/uploads/guias/' . $foto['foto'];
+    if (is_file($caminho)) {
+        unlink($caminho);
+    }
+    $guiasTuristicos->excluirFoto($foto['id']);
+}
+
+// remove foto de perfil
+if (!empty($guia['foto_perfil'])) {
+    $caminho = $prefixo . 'assets/uploads/guias/' . $guia['foto_perfil'];
+    if (is_file($caminho)) {
+        unlink($caminho);
     }
 }
 
-$hotelFoto->excluirPorHotel($id);
-$hotel->excluir($id);
+// remove vínculos de categoria
+foreach ($guiasTuristicos->listarCategorias($id) as $categoria) {
+    $guiasTuristicos->removerCategoria($id, $categoria['id']);
+}
 
-header("Location: read.php");
+$guiasTuristicos->excluir($id);
+
+header('Location: read.php?sucesso=excluido');
 exit;

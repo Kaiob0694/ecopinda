@@ -264,3 +264,144 @@
     }
 
 }
+
+/* ===========================
+   FORMULÁRIO ADMIN
+=========================== */
+
+.guia-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--branco);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .10);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.guia-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--marrom);
+}
+
+.guia-form input[type="text"],
+.guia-form input[type="email"],
+.guia-form input[type="file"],
+.guia-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    transition: border-color .3s ease;
+}
+
+.guia-form input:focus,
+.guia-form textarea:focus {
+    outline: none;
+    border-color: var(--verde);
+}
+
+.guia-form-categorias {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.guia-form-categorias legend {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--marrom);
+    text-transform: uppercase;
+    padding: 0 6px;
+}
+
+.guia-check {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+}
+
+.guia-form-preview img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.guia-form-acoes {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+
+/* ===========================
+   BOTÕES ADMIN
+=========================== */
+
+.guia-admin-acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.guia-btn.salvar {
+    background: var(--verde);
+    color: var(--branco);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.guia-btn.editar {
+    background: var(--amarelo);
+    color: var(--marrom);
+}
+
+.guia-btn.excluir {
+    background: var(--laranja);
+    color: var(--branco);
+}
+
+.guia-btn.cancelar {
+    background: #eee;
+    color: var(--cinza);
+}
+
+
+/* ===========================
+   ALERTAS
+=========================== */
+
+.guia-alerta {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.guia-alerta.erro {
+    background: rgba(255, 60, 0, .12);
+    color: var(--laranja);
+}
+
+.guia-alerta.sucesso {
+    background: rgba(34, 166, 69, .12);
+    color: var(--verde);
+}

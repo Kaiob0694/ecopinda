@@ -1,152 +1,161 @@
 <?php
+$prefixo = '../../';
 
-require_once "../../classes/hoteis.php";
-require_once "../../includes/upload_fotos_hotel.php";
+require_once $prefixo . 'includes/verifica_master.php';
+require_once $prefixo . 'includes/conexao.php';
+require_once $prefixo . 'classes/GuiasTuristicos.php';
 
-$baseUrl = 'https://pindaeco.rf.gd';
+$guiasTuristicos = new GuiasTuristicos($pdo);
+$categorias = $guiasTuristicos->listarTodasCategorias();
 
-$hotel = new Hotel();
-$errosFotos = [];
+$erro = '';
+$sucesso = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $id_hotel = $hotel->cadastrar(
-        $_POST['nome'],
-        $_POST['endereco'],
-        $_POST['cidade'],
-        $_POST['estado'],
-        $_POST['cep'],
-        $_POST['telefone'],
-        $_POST['email'],
-        $_POST['quantidade_quartos'],
-        $_POST['possui_wifi'],
-        $_POST['possui_estacionamento'],
-        $_POST['data_cadastro']
-    );
+    $nome = trim($_POST['nome'] ?? '');
 
-    if ($id_hotel) {
-        $errosFotos = salvarFotosHotel($id_hotel);
-    }
+    if ($nome === '') {
+        $erro = 'O nome do guia é obrigatório.';
+    } else {
 
-    if (empty($errosFotos)) {
-        header("Location: read.php");
-        exit;
+        $nomeFoto = null;
+
+        // UPLOAD DA FOTO DE PERFIL
+        if (!empty($_FILES['foto_perfil']['name']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+
+            $permitidos = ['image/jpeg', 'image/png', 'image/webp'];
+            $tipo = mime_content_type($_FILES['foto_perfil']['tmp_name']);
+
+            if (!in_array($tipo, $permitidos, true)) {
+                $erro = 'Formato de imagem inválido. Use JPG, PNG ou WEBP.';
+            } elseif ($_FILES['foto_perfil']['size'] > 3 * 1024 * 1024) {
+                $erro = 'A imagem deve ter no máximo 3MB.';
+            } else {
+                $ext = pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION);
+                $nomeFoto = 'guia_' . uniqid('', true) . '.' . strtolower($ext);
+
+                $destino = $prefixo . 'assets/uploads/guias/' . $nomeFoto;
+
+                if (!move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $destino)) {
+                    $erro = 'Falha ao enviar a imagem.';
+                    $nomeFoto = null;
+                }
+            }
+        }
+
+        if ($erro === '') {
+
+            $dados = [
+                'usuario_id'  => !empty($_POST['usuario_id']) ? (int) $_POST['usuario_id'] : null,
+                'nome'        => $nome,
+                'foto_perfil' => $nomeFoto,
+                'descricao'   => trim($_POST['descricao'] ?? ''),
+                'experiencia' => trim($_POST['experiencia'] ?? ''),
+                'cidade'      => trim($_POST['cidade'] ?? ''),
+                'telefone'    => trim($_POST['telefone'] ?? ''),
+                'email'       => trim($_POST['email'] ?? ''),
+                'instagram'   => trim($_POST['instagram'] ?? ''),
+                'status'      => isset($_POST['status']) ? 1 : 0,
+            ];
+
+            if ($guiasTuristicos->cadastrar($dados)) {
+
+                $guiaId = $pdo->lastInsertId();
+
+                // CATEGORIAS SELECIONADAS
+                foreach (($_POST['categorias'] ?? []) as $categoriaId) {
+                    $guiasTuristicos->adicionarCategoria($guiaId, (int) $categoriaId);
+                }
+
+                header('Location: read.php?sucesso=cadastrado');
+                exit;
+            }
+
+            $erro = 'Erro ao cadastrar o guia.';
+        }
     }
 }
 
-include "../../includes/head.php";
-include "../../includes/header.php";
+require_once $prefixo . 'includes/header.php';
 ?>
 
-<!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
-<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-hotel.css?v=<?= time(); ?>">
+<link rel="stylesheet" href="<?= $prefixo ?>assets/css/guia-turistico.css">
 
-<main class="cadastro-hotel-container">
-    <div class="cadastro-hotel-painel">
-        
-        <div class="cadastro-hotel-topo">
-            <h2 class="cadastro-hotel-titulo">Cadastrar Hotel</h2>
+<main class="guia-container">
+
+    <div class="guia-topo">
+        <h1>Cadastrar Guia</h1>
+    </div>
+
+    <?php if ($erro): ?>
+        <div class="guia-alerta erro"><?= htmlspecialchars($erro) ?></div>
+    <?php endif; ?>
+
+    <form class="guia-form" method="POST" enctype="multipart/form-data">
+
+        <label>
+            Nome *
+            <input type="text" name="nome" required maxlength="150">
+        </label>
+
+        <label>
+            Foto de perfil
+            <input type="file" name="foto_perfil" accept="image/*">
+        </label>
+
+        <label>
+            Cidade
+            <input type="text" name="cidade" maxlength="100" value="Pindamonhangaba">
+        </label>
+
+        <label>
+            Descrição
+            <textarea name="descricao" rows="4"></textarea>
+        </label>
+
+        <label>
+            Experiência
+            <textarea name="experiencia" rows="2"></textarea>
+        </label>
+
+        <label>
+            Telefone
+            <input type="text" name="telefone" maxlength="30">
+        </label>
+
+        <label>
+            E-mail
+            <input type="email" name="email" maxlength="150">
+        </label>
+
+        <label>
+            Instagram
+            <input type="text" name="instagram" maxlength="150" placeholder="@usuario">
+        </label>
+
+        <fieldset class="guia-form-categorias">
+            <legend>Categorias</legend>
+            <?php foreach ($categorias as $categoria): ?>
+                <label class="guia-check">
+                    <input type="checkbox" name="categorias[]" value="<?= (int) $categoria['id'] ?>">
+                    <?= htmlspecialchars($categoria['nome']) ?>
+                </label>
+            <?php endforeach; ?>
+        </fieldset>
+
+        <label class="guia-check">
+            <input type="checkbox" name="status" checked>
+            Guia ativo (visível no site)
+        </label>
+
+        <div class="guia-form-acoes">
+            <button type="submit" class="guia-btn salvar">Cadastrar</button>
+            <a href="read.php" class="guia-btn cancelar">Cancelar</a>
         </div>
 
-        <?php if (!empty($errosFotos)): ?>
-            <div class="erros-upload">
-                <p>O hotel foi cadastrado, mas houve problema com algumas fotos:</p>
-                <ul>
-                    <?php foreach ($errosFotos as $erro): ?>
-                        <li><?= htmlspecialchars($erro) ?></li>
-                    <?php endforeach; ?>
-                </ul>
-                <p>
-                    <a href="read.php">Ir para a lista de hotéis</a>
-                </p>
-            </div>
-        <?php endif; ?>
+    </form>
 
-        <form method="POST" enctype="multipart/form-data" class="formulario-hotel">
-            
-            <div class="formulario-hotel-grid">
-
-                <div class="campo-hotel largo">
-                    <label>Nome <span class="obrigatorio">*</span></label>
-                    <input type="text" name="nome" placeholder="Digite o nome do hotel" required>
-                </div>
-
-                <div class="campo-hotel largo">
-                    <label>Endereço <span class="obrigatorio">*</span></label>
-                    <input type="text" name="endereco" placeholder="Ex: Av. Principal, 123" required>
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Cidade <span class="obrigatorio">*</span></label>
-                    <input type="text" name="cidade" required>
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Estado <span class="obrigatorio">*</span></label>
-                    <input type="text" name="estado" maxlength="50" required>
-                </div>
-
-                <div class="campo-hotel">
-                    <label>CEP <span class="obrigatorio">*</span></label>
-                    <input type="text" name="cep" placeholder="00000-000" required>
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Telefone</label>
-                    <input type="text" name="telefone" placeholder="(00) 00000-0000">
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="contato@hotel.com">
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Quantidade de Quartos</label>
-                    <input type="number" name="quantidade_quartos" min="1">
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Possui Wi-Fi <span class="obrigatorio">*</span></label>
-                    <select name="possui_wifi" required>
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
-                    </select>
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Possui Estacionamento <span class="obrigatorio">*</span></label>
-                    <select name="possui_estacionamento" required>
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
-                    </select>
-                </div>
-
-                <div class="campo-hotel">
-                    <label>Data de Cadastro <span class="obrigatorio">*</span></label>
-                    <input type="date" name="data_cadastro" required>
-                </div>
-
-                <div class="campo-hotel largo">
-                    <label>Fotos do Hotel</label>
-                    <input type="file" name="fotos[]" accept=".jpg,.jpeg,.png,.webp" multiple>
-                    <small>
-                        Você pode selecionar várias fotos de uma vez (JPG, PNG ou WEBP, até 5 MB cada).
-                    </small>
-                </div>
-
-            </div>
-
-            <div class="formulario-hotel-acoes">
-                <a href="read.php" class="botao-voltar-hotel">Voltar</a>
-                <button type="submit" class="botao-salvar-hotel">Salvar</button>
-            </div>
-
-        </form>
-
-    </div>
 </main>
 
-<?php
-include "../../includes/footer.php";
-?>
+<?php require_once $prefixo . 'includes/footer.php'; ?>
