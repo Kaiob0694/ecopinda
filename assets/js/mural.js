@@ -1,3 +1,4 @@
+```javascript
 document.addEventListener("DOMContentLoaded", function () {
 
     const uploadModal = document.getElementById("uploadModal");
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // =========================================================
 
     function fecharModal() {
+
         if (uploadModal) {
             uploadModal.style.display = "none";
         }
@@ -39,31 +41,46 @@ document.addEventListener("DOMContentLoaded", function () {
         if (fotoPreview) {
             fotoPreview.src = "";
         }
+
+        if (charCount) {
+            charCount.textContent = "0";
+        }
     }
 
-    // Disponibiliza globalmente caso seu HTML use onclick
+    // Disponibiliza globalmente caso o HTML use onclick
     window.abrirModal = abrirModal;
     window.fecharModal = fecharModal;
+
 
     // =========================================================
     // CONTADOR DA DESCRIÇÃO
     // =========================================================
 
     if (descricao && charCount) {
+
         descricao.addEventListener("input", function () {
+
             charCount.textContent = this.value.length;
+
         });
+
     }
+
 
     // =========================================================
     // SELECIONAR FOTO
     // =========================================================
 
     if (fotoInput) {
+
         fotoInput.addEventListener("change", function () {
+
             validarFoto(this.files[0]);
+
         });
+
     }
+
 
     // =========================================================
     // DRAG AND DROP
@@ -72,33 +89,52 @@ document.addEventListener("DOMContentLoaded", function () {
     if (uploadArea) {
 
         uploadArea.addEventListener("dragover", function (e) {
+
             e.preventDefault();
+
             uploadArea.classList.add("dragover");
+
         });
+
 
         uploadArea.addEventListener("dragleave", function () {
+
             uploadArea.classList.remove("dragover");
+
         });
 
+
         uploadArea.addEventListener("drop", function (e) {
+
             e.preventDefault();
 
             uploadArea.classList.remove("dragover");
 
             const arquivo = e.dataTransfer.files[0];
 
-            if (arquivo) {
+            if (arquivo && fotoInput) {
+
                 fotoInput.files = e.dataTransfer.files;
+
                 validarFoto(arquivo);
+
             }
+
         });
 
+
         uploadArea.addEventListener("click", function () {
+
             if (fotoInput) {
+
                 fotoInput.click();
+
             }
+
         });
+
     }
+
 
     // =========================================================
     // VALIDAR FOTO
@@ -119,25 +155,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const tamanhoMaximo = 5 * 1024 * 1024; // 5 MB
 
+
+        // Verifica formato
         if (!tiposPermitidos.includes(arquivo.type)) {
+
             mostrarMensagem(
                 "Formato de imagem não permitido. Use JPG, PNG, WEBP ou GIF.",
                 "erro"
             );
 
-            fotoInput.value = "";
+            if (fotoInput) {
+                fotoInput.value = "";
+            }
+
             return;
         }
 
+
+        // Verifica tamanho
         if (arquivo.size > tamanhoMaximo) {
+
             mostrarMensagem(
                 "A imagem deve ter no máximo 5 MB.",
                 "erro"
             );
 
-            fotoInput.value = "";
+            if (fotoInput) {
+                fotoInput.value = "";
+            }
+
             return;
         }
+
 
         // =====================================================
         // PREVIEW
@@ -148,16 +197,22 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.onload = function (e) {
 
             if (fotoPreview) {
+
                 fotoPreview.src = e.target.result;
+
             }
 
             if (previewContainer) {
+
                 previewContainer.style.display = "block";
+
             }
+
         };
 
         reader.readAsDataURL(arquivo);
     }
+
 
     // =========================================================
     // ENVIO DO FORMULÁRIO
@@ -169,136 +224,285 @@ document.addEventListener("DOMContentLoaded", function () {
 
             e.preventDefault();
 
-            const arquivo = fotoInput.files[0];
+
+            // Verifica se existe arquivo
+            const arquivo = fotoInput
+                ? fotoInput.files[0]
+                : null;
+
 
             if (!arquivo) {
+
                 mostrarMensagem(
                     "Selecione uma foto antes de publicar.",
                     "erro"
                 );
+
                 return;
             }
+
+
+            // =====================================================
+            // FORM DATA
+            // =====================================================
 
             const formData = new FormData();
 
             formData.append("foto", arquivo);
+
             formData.append(
                 "descricao",
                 descricao ? descricao.value : ""
             );
 
-            // Desabilita o botão durante o envio
+
+            // =====================================================
+            // BOTÃO
+            // =====================================================
+
             const botao = formUpload.querySelector(
                 'button[type="submit"]'
             );
 
+
             if (botao) {
+
                 botao.disabled = true;
+
                 botao.textContent = "Publicando...";
+
             }
+
+
+            // =====================================================
+            // ENVIO
+            // =====================================================
 
             try {
 
                 const resposta = await fetch("upload.php", {
+
                     method: "POST",
+
                     body: formData
+
                 });
+
+
+                // Verifica se a resposta HTTP foi válida
+                if (!resposta.ok) {
+
+                    throw new Error(
+                        `Erro HTTP ${resposta.status}`
+                    );
+
+                }
+
 
                 const data = await resposta.json();
 
+
+                // =================================================
+                // SUCESSO
+                // =================================================
+
                 if (data.sucesso) {
+
 
                     // Fecha o modal
                     fecharModal();
 
-                    // Mostra mensagem
+
+                    // =================================================
+                    // ATUALIZA PINDACOINS NO HEADER
+                    // =================================================
+
+                    const elementoCoins =
+                        document.getElementById("pindacoins");
+
+
+                    if (
+                        elementoCoins &&
+                        data.pindacoins_ganhos
+                    ) {
+
+                        // Pega o saldo atual exibido no header
+                        const textoAtual =
+                            elementoCoins.textContent;
+
+
+                        const saldoAtual =
+                            parseInt(
+                                textoAtual.replace(/\D/g, ""),
+                                10
+                            ) || 0;
+
+
+                        // Soma as novas moedas
+                        const novoSaldo =
+                            saldoAtual +
+                            parseInt(
+                                data.pindacoins_ganhos,
+                                10
+                            );
+
+
+                        // Atualiza o header
+                        elementoCoins.textContent =
+                            `🪙 ${novoSaldo}`;
+
+                    }
+
+
+                    // =================================================
+                    // MENSAGEM DE SUCESSO
+                    // =================================================
+
                     mostrarMensagem(
-                        data.mensagem ||
-                        "🎉 Foto publicada com sucesso! Você ganhou +10 PindaCoins!",
+                        "🎉 Foto publicada com sucesso!",
                         "sucesso"
                     );
 
-                    // Opcional:
-                    // adiciona a nova foto no mural sem recarregar
-                    // caso você queira implementar depois.
 
                 } else {
+
+
+                    // =================================================
+                    // ERRO RETORNADO PELO PHP
+                    // =================================================
 
                     mostrarMensagem(
                         data.mensagem ||
                         "Não foi possível publicar a foto.",
                         "erro"
                     );
+
                 }
+
 
             } catch (erro) {
 
-                console.error("Erro no upload:", erro);
+                console.error(
+                    "Erro no upload:",
+                    erro
+                );
+
 
                 mostrarMensagem(
                     "Ocorreu um erro ao enviar a foto. Tente novamente.",
                     "erro"
                 );
 
+
             } finally {
 
+
+                // =================================================
+                // RESTAURA BOTÃO
+                // =================================================
+
                 if (botao) {
+
                     botao.disabled = false;
+
                     botao.textContent = "Publicar";
+
                 }
+
             }
+
         });
+
     }
+
 
     // =========================================================
     // MENSAGEM
     // =========================================================
 
-    function mostrarMensagem(mensagem, tipo = "sucesso") {
+    function mostrarMensagem(
+        mensagem,
+        tipo = "sucesso"
+    ) {
 
         // Remove mensagem anterior
         const mensagemAnterior =
             document.querySelector(".mensagem-mural");
 
+
         if (mensagemAnterior) {
+
             mensagemAnterior.remove();
+
         }
 
+
+        // Cria mensagem
         const mensagemDiv =
             document.createElement("div");
+
 
         mensagemDiv.className =
             `mensagem-mural mensagem-${tipo}`;
 
+
         mensagemDiv.innerHTML = `
             <span>${mensagem}</span>
 
-            <button type="button" class="fechar-mensagem">
+            <button
+                type="button"
+                class="fechar-mensagem"
+            >
                 ×
             </button>
         `;
 
-        document.body.appendChild(mensagemDiv);
 
-        // Botão fechar
+        document.body.appendChild(
+            mensagemDiv
+        );
+
+
+        // =====================================================
+        // BOTÃO FECHAR
+        // =====================================================
+
         const botaoFechar =
-            mensagemDiv.querySelector(".fechar-mensagem");
+            mensagemDiv.querySelector(
+                ".fechar-mensagem"
+            );
+
 
         if (botaoFechar) {
-            botaoFechar.addEventListener("click", function () {
-                mensagemDiv.remove();
-            });
+
+            botaoFechar.addEventListener(
+                "click",
+                function () {
+
+                    mensagemDiv.remove();
+
+                }
+            );
+
         }
 
-        // Remove automaticamente depois de 5 segundos
+
+        // =====================================================
+        // REMOVE AUTOMATICAMENTE
+        // =====================================================
+
         setTimeout(function () {
 
             if (mensagemDiv.parentElement) {
+
                 mensagemDiv.remove();
+
             }
 
         }, 5000);
+
     }
+
 
     // =========================================================
     // FECHAR MODAL CLICANDO FORA
@@ -306,13 +510,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (uploadModal) {
 
-        uploadModal.addEventListener("click", function (e) {
+        uploadModal.addEventListener(
+            "click",
+            function (e) {
 
-            if (e.target === uploadModal) {
-                fecharModal();
+                if (e.target === uploadModal) {
+
+                    fecharModal();
+
+                }
+
             }
+        );
 
-        });
     }
 
 });
+```
+
+**Importante:** esse JS espera que o seu `header.php` tenha exatamente:
+
+```html
+<span class="menu-pindacoins" id="pindacoins">
+    🪙 10
+</span>
+```
+
+Assim, depois do upload, o valor é atualizado diretamente no header.

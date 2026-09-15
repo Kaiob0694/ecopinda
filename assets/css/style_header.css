@@ -319,19 +319,54 @@ body {
 =========================== */
 
 .menu-usuario-nome {
-    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
 
+    font-size: 16px;
     font-weight: 600;
 
     color: #000;
 
     white-space: nowrap;
+}
 
-    max-width: 140px;
 
-    overflow: hidden;
+/* ===========================
+   NOME DO USUÁRIO
+=========================== */
 
-    text-overflow: ellipsis;
+.nome-usuario {
+    white-space: nowrap;
+}
+
+
+/* ===========================
+   PINDACOINS
+=========================== */
+
+.menu-pindacoins {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    padding: 3px 7px;
+
+    border-radius: 12px;
+
+    background: #fff4c2;
+
+    color: #9a7200;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    line-height: 1;
 }
 
 
