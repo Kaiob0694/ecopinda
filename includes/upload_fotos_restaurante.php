@@ -24,7 +24,7 @@ function salvarFotosRestaurante($id_restaurante, $campo = 'fotos')
 
     $tamanhoMaximo = 5 * 1024 * 1024; // 5 MB por foto
 
-    $pasta = __DIR__ . '/../uploads/restaurantes/';
+    $pasta = __DIR__ . '/../assets/uploads/restaurantes/';
 
     if (!is_dir($pasta)) {
         if (!mkdir($pasta, 0755, true)) {
