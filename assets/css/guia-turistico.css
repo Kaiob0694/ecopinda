@@ -1,0 +1,266 @@
+/* ===========================
+   VARIÁVEIS (caso não herdem do global)
+=========================== */
+
+:root {
+    --laranja: #ff3c00;
+    --verde: #22a645;
+    --amarelo: #d9d900;
+    --marrom: #4b2e1a;
+    --cinza: #555;
+    --cinza-claro: #666;
+    --branco: #fff;
+}
+
+
+/* ===========================
+   CONTAINER GERAL
+=========================== */
+
+.guia-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 140px 25px 80px;
+}
+
+
+/* ===========================
+   TOPO / TÍTULO
+=========================== */
+
+.guia-topo {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.guia-topo h1 {
+    font-size: 36px;
+    color: var(--marrom);
+    margin-bottom: 10px;
+}
+
+.guia-topo p {
+    font-size: 16px;
+    color: var(--cinza-claro);
+}
+
+
+/* ===========================
+   ESTADO VAZIO
+=========================== */
+
+.guia-vazio {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--cinza);
+    font-size: 16px;
+}
+
+
+/* ===========================
+   GRID DE CARDS
+=========================== */
+
+.guia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+
+/* ===========================
+   CARD
+=========================== */
+
+.guia-card {
+    background: var(--branco);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .10);
+    transition: transform .3s ease, box-shadow .3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.guia-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+}
+
+
+/* ===========================
+   FOTO DE PERFIL
+=========================== */
+
+.guia-foto {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.guia-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.guia-card:hover .guia-foto img {
+    transform: scale(1.06);
+}
+
+
+/* ===========================
+   INFORMAÇÕES
+=========================== */
+
+.guia-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.guia-info h2 {
+    font-size: 20px;
+    color: var(--marrom);
+}
+
+
+/* ===========================
+   CIDADE / EXPERIÊNCIA
+=========================== */
+
+.guia-cidade,
+.guia-experiencia {
+    font-size: 13px;
+    color: var(--cinza-claro);
+    font-weight: 600;
+}
+
+
+/* ===========================
+   DESCRIÇÃO
+=========================== */
+
+.guia-descricao {
+    font-size: 14px;
+    color: var(--cinza);
+    line-height: 1.5;
+    margin-top: 4px;
+}
+
+
+/* ===========================
+   CATEGORIAS / TAGS
+=========================== */
+
+.guia-categorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.guia-tag {
+    background: rgba(217, 217, 0, 0.15);
+    color: var(--marrom);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+
+/* ===========================
+   GALERIA DE FOTOS
+=========================== */
+
+.guia-galeria {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.guia-galeria img {
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform .3s ease;
+}
+
+.guia-galeria img:hover {
+    transform: scale(1.08);
+}
+
+
+/* ===========================
+   CONTATO / BOTÕES
+=========================== */
+
+.guia-contato {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.guia-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity .3s ease, transform .2s ease;
+}
+
+.guia-btn:hover {
+    opacity: .85;
+    transform: translateY(-2px);
+}
+
+.guia-btn.whatsapp {
+    background: var(--verde);
+    color: var(--branco);
+}
+
+.guia-btn.instagram {
+    background: linear-gradient(135deg, var(--laranja), #d900a0);
+    color: var(--branco);
+}
+
+.guia-btn.email {
+    background: var(--marrom);
+    color: var(--branco);
+}
+
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width: 768px) {
+
+    .guia-container {
+        padding: 120px 16px 60px;
+    }
+
+    .guia-topo h1 {
+        font-size: 28px;
+    }
+
+    .guia-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .guia-galeria {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}

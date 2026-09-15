@@ -7,6 +7,8 @@ ini_set('display_startup_errors', 1);
 require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../../classes/guiasTuristicos.php';
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 // Cria a conexão
 $db = new Conexao();
 $pdo = $db->conectar();
@@ -22,7 +24,7 @@ require_once __DIR__ . '/../../includes/header.php';
 
 ?>
 
-<link rel="stylesheet" href="/assets/css/guia-turistico.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/hotel.css">
 
 <main class="guia-container">
 
