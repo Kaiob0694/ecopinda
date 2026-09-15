@@ -118,7 +118,7 @@ include "../../includes/head.php";
                             class="restaurante-detalhes-foto <?= $indice === 0 ? 'restaurante-detalhes-foto-principal' : '' ?>"
                             data-indice="<?= $indice ?>">
 
-                            <img src="<?= $baseUrl ?>/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
+                            <img src="<?= $baseUrl ?>/assets/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="<?= htmlspecialchars($dados['nome']) ?>">
 
                             <?php if ($indice === 4 && $totalFotos > 5): ?>

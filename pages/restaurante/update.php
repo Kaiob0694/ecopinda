@@ -115,7 +115,7 @@ include "../../includes/header.php";
 
                             <img
                                 class="foto-restaurante-imagem"
-                                src="../../uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
+                                src="../../assets/uploads/restaurantes/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="Foto do restaurante">
 
 

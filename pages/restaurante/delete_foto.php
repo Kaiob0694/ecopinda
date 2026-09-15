@@ -11,7 +11,7 @@ $foto = $restauranteFoto->buscarPorId($id);
 
 if ($foto) {
 
-    $caminhoArquivo = __DIR__ . "/../../uploads/restaurantes/" . $foto['caminho'];
+    $caminhoArquivo = __DIR__ . "/../../assets/uploads/restaurantes/" . $foto['caminho'];
 
     if (file_exists($caminhoArquivo)) {
         unlink($caminhoArquivo);

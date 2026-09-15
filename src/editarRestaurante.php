@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $nomeImagem = uniqid('restaurante_', true) . '.' . $extensao;
 
-        $pasta = __DIR__ . '/../uploads/restaurantes/';
+        $pasta = __DIR__ . '/../assets/uploads/restaurantes/';
 
         if (!is_dir($pasta)) {
             if (!mkdir($pasta, 0755, true)) {
@@ -317,7 +317,7 @@ $horarioFuncionamento = $restaurante['horario_funcionamento'] ?? '';
         <?php if (!empty($restaurante['imagem'])): ?>
 
             <img
-                src="../uploads/restaurantes/<?= htmlspecialchars($restaurante['imagem']) ?>"
+                src="../assets/uploads/restaurantes/<?= htmlspecialchars($restaurante['imagem']) ?>"
                 alt="Foto atual do restaurante"
                 width="250"
             >

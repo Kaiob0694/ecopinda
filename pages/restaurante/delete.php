@@ -12,7 +12,7 @@ $id = $_GET['id'];
 $fotos = $restauranteFoto->listarPorRestaurante($id);
 
 foreach ($fotos as $foto) {
-    $caminhoArquivo = __DIR__ . "/../../uploads/restaurantes/" . $foto['caminho'];
+    $caminhoArquivo = __DIR__ . "/../../assets/uploads/restaurantes/" . $foto['caminho'];
     if (file_exists($caminhoArquivo)) {
         unlink($caminhoArquivo);
     }
