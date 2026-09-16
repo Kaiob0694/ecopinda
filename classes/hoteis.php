@@ -110,7 +110,12 @@ class Hotel
         $stmt->bindValue(':possui_estacionamento', $possui_estacionamento, PDO::PARAM_INT);
         $stmt->bindValue(':data_cadastro', $data_cadastro);
 
-        return $stmt->execute();
+        // ✅ FIX: Retorna o ID inserido, não apenas true/false
+        if ($stmt->execute()) {
+            return $this->conexao->lastInsertId();
+        } else {
+            return false;
+        }
     }
 
     // =========================================================
