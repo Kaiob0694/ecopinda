@@ -94,15 +94,18 @@ session_start();
                     required
                     pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
                     placeholder="(11) 12345-6789">
-
-                <label for="email">E-mail:</label>
+                
+                    <label for="email">E-mail:</label>
                 <input
                     type="email"
                     id="email"
                     name="email"
                     required
                     maxlength="150"
-                    placeholder="exemplo@email.com">
+                    placeholder="exemplo@email.com"
+                    pattern=".*\S.*"
+                    title="Digite um e-mail válido.">
+
 
                 <label for="categoria">Categoria:</label>
 
@@ -228,7 +231,6 @@ session_start();
 
 
     <script>
-
         function mostrarOutraCategoria() {
 
             const categoria =
@@ -272,43 +274,42 @@ session_start();
                 }
 
                 fetch(
-                    'https://viacep.com.br/ws/'
-                    + cep +
-                    '/json/'
-                )
+                        'https://viacep.com.br/ws/' +
+                        cep +
+                        '/json/'
+                    )
 
-                .then(response => response.json())
+                    .then(response => response.json())
 
-                .then(data => {
+                    .then(data => {
 
-                    if (data.erro) {
+                        if (data.erro) {
 
-                        alert('CEP não encontrado.');
-                        return;
+                            alert('CEP não encontrado.');
+                            return;
 
-                    }
+                        }
 
-                    document.getElementById('logradouro').value =
-                        data.logradouro || '';
+                        document.getElementById('logradouro').value =
+                            data.logradouro || '';
 
-                    document.getElementById('cidade').value =
-                        data.localidade || '';
+                        document.getElementById('cidade').value =
+                            data.localidade || '';
 
-                })
+                    })
 
-                .catch(error => {
+                    .catch(error => {
 
-                    console.error(
-                        'Erro ao consultar o ViaCEP:',
-                        error
-                    );
+                        console.error(
+                            'Erro ao consultar o ViaCEP:',
+                            error
+                        );
 
-                    alert('Erro ao consultar o CEP.');
+                        alert('Erro ao consultar o CEP.');
 
-                });
+                    });
 
             });
-
     </script>
 
 </body>
