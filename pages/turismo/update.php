@@ -129,7 +129,7 @@ include "../../includes/header.php";
 
                             <img
                                 class="foto-turismo-imagem"
-                                src="../../uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
+                                src="../../assets/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="Foto do ponto turístico">
 
 
