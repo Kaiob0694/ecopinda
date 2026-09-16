@@ -1,14 +1,13 @@
 <?php
-require_once __DIR__ . "/../classes/turismo_fotos.php";
+require_once __DIR__ . "/../classes/hotel_fotos.php";
 
 /**
  * Salva as fotos enviadas em $_FILES['fotos'] (input com "multiple")
- * para o ponto turistico indicado, gravando cada uma na tabela
- * ponto_turistico_foto.
+ * para o hotel indicado, gravando cada uma na tabela hotel_foto.
  *
  * Retorna um array com mensagens de erro (vazio se tudo correu bem).
  */
-function salvarFotosTurismo($id_ponto_turistico, $campo = 'fotos')
+function salvarFotosHotel($id_hotel, $campo = 'fotos')
 {
 
     $erros = [];
@@ -25,7 +24,7 @@ function salvarFotosTurismo($id_ponto_turistico, $campo = 'fotos')
 
     $tamanhoMaximo = 5 * 1024 * 1024; // 5 MB por foto
 
-    $pasta = __DIR__ . '/../uploads/turismo/';
+    $pasta = __DIR__ . '/../assets/uploads/hoteis/';
 
     if (!is_dir($pasta)) {
         if (!mkdir($pasta, 0755, true)) {
@@ -34,7 +33,7 @@ function salvarFotosTurismo($id_ponto_turistico, $campo = 'fotos')
         }
     }
 
-    $pontoFoto = new PontoTuristicoFoto();
+    $hotelFoto = new HotelFoto();
 
     $totalFotos = count($_FILES[$campo]['name']);
 
@@ -67,7 +66,7 @@ function salvarFotosTurismo($id_ponto_turistico, $campo = 'fotos')
         }
 
         $extensao = $tiposPermitidos[$tipo];
-        $nomeArquivo = uniqid('turismo_', true) . '.' . $extensao;
+        $nomeArquivo = uniqid('hotel_', true) . '.' . $extensao;
         $destino = $pasta . $nomeArquivo;
 
         if (!move_uploaded_file($_FILES[$campo]['tmp_name'][$i], $destino)) {
@@ -75,7 +74,7 @@ function salvarFotosTurismo($id_ponto_turistico, $campo = 'fotos')
             continue;
         }
 
-        $pontoFoto->adicionar($id_ponto_turistico, $nomeArquivo);
+        $hotelFoto->adicionar($id_hotel, $nomeArquivo);
     }
 
     return $erros;
