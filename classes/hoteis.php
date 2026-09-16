@@ -13,12 +13,12 @@ class Hotel
     }
 
     // =========================================================
-    // LISTAR TODOS
+    // LISTAR
     // =========================================================
 
     public function listar()
     {
-        $sql = "SELECT * FROM hotel ORDER BY id_hotel DESC";
+        $sql = "SELECT * FROM hotel ORDER BY id DESC";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
@@ -32,10 +32,12 @@ class Hotel
 
     public function buscarPorId($id)
     {
-        $sql = "SELECT * FROM hotel WHERE id_hotel = :id";
+        $sql = "SELECT * FROM hotel WHERE id = :id";
 
         $stmt = $this->conexao->prepare($sql);
+
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -148,7 +150,7 @@ class Hotel
                 possui_wifi = :possui_wifi,
                 possui_estacionamento = :possui_estacionamento,
                 data_cadastro = :data_cadastro
-            WHERE id_hotel = :id
+            WHERE id = :id
         ";
 
         $stmt = $this->conexao->prepare($sql);
@@ -175,9 +177,10 @@ class Hotel
 
     public function excluir($id)
     {
-        $sql = "DELETE FROM hotel WHERE id_hotel = :id";
+        $sql = "DELETE FROM hotel WHERE id = :id";
 
         $stmt = $this->conexao->prepare($sql);
+
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $stmt->execute();
@@ -189,7 +192,7 @@ class Hotel
 
     public function buscarTodos()
     {
-        $sql = "SELECT * FROM hotel ORDER BY id_hotel DESC";
+        $sql = "SELECT * FROM hotel ORDER BY id DESC";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();

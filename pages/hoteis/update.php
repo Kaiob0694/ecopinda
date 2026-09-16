@@ -12,7 +12,7 @@ $hotelFoto = new HotelFoto();
 $errosFotos = [];
 
 // =========================================================
-// VERIFICA ID
+// VERIFICA O ID DO HOTEL
 // =========================================================
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -23,7 +23,7 @@ if (!$id) {
 }
 
 // =========================================================
-// BUSCA HOTEL
+// BUSCA OS DADOS DO HOTEL
 // =========================================================
 
 $dados = $hotel->buscarPorId($id);
@@ -34,7 +34,7 @@ if (!$dados) {
 }
 
 // =========================================================
-// ATUALIZA HOTEL
+// ATUALIZAÇÃO
 // =========================================================
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -51,7 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $possui_estacionamento = $_POST['possui_estacionamento'] ?? 'Não';
     $data_cadastro = $_POST['data_cadastro'] ?? '';
 
-    // Atualiza os dados do hotel
+    // =====================================================
+    // EDITA OS DADOS DO HOTEL
+    // =====================================================
+
     $hotel->editar(
         $nome,
         $endereco,
@@ -74,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $errosFotos = salvarFotosHotel($id);
 
     // =====================================================
-    // REDIRECIONA SE DEU TUDO CERTO
+    // SE NÃO HOUVE ERRO, VOLTA PARA LISTAGEM
     // =====================================================
 
     if (empty($errosFotos)) {
@@ -87,13 +90,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // =========================================================
-// BUSCA FOTOS
+// BUSCA AS FOTOS DO HOTEL
 // =========================================================
 
 $fotos = $hotelFoto->listarPorHotel($id);
 
 // =========================================================
-// HTML
+// HEADER
 // =========================================================
 
 include "../../includes/head.php";
@@ -411,7 +414,7 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- DATA -->
+                <!-- DATA DE CADASTRO -->
 
                 <div class="campo-hotel">
 
@@ -429,7 +432,7 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- FOTOS -->
+                <!-- NOVAS FOTOS -->
 
                 <div class="campo-hotel largo">
 
