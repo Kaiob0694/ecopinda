@@ -62,7 +62,7 @@ include "../../includes/header.php";
 ?>
 
 <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-turismo.css">
-<link rel="stylesheet" href="<?= $baseUrl ?>assets/css/update-turismo.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/update-turismo.css">
 
 <div class="cadastro-turismo-container">
 
