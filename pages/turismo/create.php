@@ -1,4 +1,3 @@
-```php
 <?php
 
 require_once "../../classes/turismo.php";
@@ -53,19 +52,24 @@ $categorias = [
 
 ?>
 
-<!-- Tag do CSS com parâmetro para ignorar o cache do navegador -->
 <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-turismo.css">
 
 <main class="cadastro-turismo-container">
     <div class="cadastro-turismo-painel">
 
         <div class="cadastro-turismo-topo">
-            <h2 class="cadastro-turismo-titulo">Cadastrar Ponto Turístico</h2>
+            <h2 class="cadastro-turismo-titulo">
+                Cadastrar Ponto Turístico
+            </h2>
         </div>
 
         <?php if (!empty($errosFotos)): ?>
             <div class="erros-upload">
-                <p>O ponto turístico foi cadastrado, mas houve problema com algumas fotos:</p>
+
+                <p>
+                    O ponto turístico foi cadastrado, mas houve problema
+                    com algumas fotos:
+                </p>
 
                 <ul>
                     <?php foreach ($errosFotos as $erro): ?>
@@ -74,12 +78,19 @@ $categorias = [
                 </ul>
 
                 <p>
-                    <a href="read.php">Ir para a lista de pontos turísticos</a>
+                    <a href="read.php">
+                        Ir para a lista de pontos turísticos
+                    </a>
                 </p>
+
             </div>
         <?php endif; ?>
 
-        <form method="POST" enctype="multipart/form-data" class="formulario-turismo">
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="formulario-turismo"
+        >
 
             <div class="formulario-turismo-grid">
 
@@ -181,11 +192,9 @@ $categorias = [
                     <select name="categoria" required>
 
                         <?php foreach ($categorias as $categoria): ?>
-
                             <option value="<?= htmlspecialchars($categoria) ?>">
                                 <?= htmlspecialchars($categoria) ?>
                             </option>
-
                         <?php endforeach; ?>
 
                     </select>
@@ -255,7 +264,10 @@ $categorias = [
 
             <div class="formulario-turismo-acoes">
 
-                <a href="read.php" class="botao-voltar-turismo">
+                <a
+                    href="read.php"
+                    class="botao-voltar-turismo"
+                >
                     Voltar
                 </a>
 
@@ -276,4 +288,3 @@ $categorias = [
 <?php
 include "../../includes/footer.php";
 ?>
-```
