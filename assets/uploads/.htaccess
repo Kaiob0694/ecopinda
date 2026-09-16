@@ -1,0 +1,13 @@
+# Bloqueia qualquer execução de código nesta pasta — só serve arquivos estáticos (imagens)
+<FilesMatch "\.(php|php5|phtml|pl|py|jsp|asp|aspx|cgi|sh|exe)$">
+    Require all denied
+</FilesMatch>
+# Fallback para Apache 2.2
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(php|php5|phtml|pl|py|jsp|asp|aspx|cgi|sh|exe)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+php_flag engine off
+

@@ -192,7 +192,7 @@ if (!function_exists('iniciaisHeader')) {
                             class="menu-pindacoins"
                             id="pindacoins"
                         >
-                            PindaCOINS <?= $pindaCoins ?>
+                            PindaCOINS: <?= $pindaCoins ?>
                         </span>
 
                     </span>

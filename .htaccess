@@ -1,0 +1,2 @@
+# Bloqueia acesso à pasta .git pelo navegador (evita vazamento do código-fonte e senhas)
+RedirectMatch 404 /\.git
