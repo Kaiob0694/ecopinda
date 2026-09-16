@@ -1,15 +1,15 @@
 <?php
-require_once __DIR__ . "/../classes/hotel_fotos.php";
+
+require_once __DIR__ . "/../classes/turismo_fotos.php";
 
 /**
- * Salva as fotos enviadas em $_FILES['fotos'] (input com "multiple")
- * para o hotel indicado, gravando cada uma na tabela hotel_foto.
+ * Salva as fotos enviadas em $_FILES['fotos']
+ * para o ponto turístico indicado.
  *
- * Retorna um array com mensagens de erro (vazio se tudo correu bem).
+ * Retorna um array com mensagens de erro.
  */
-function salvarFotosHotel($id_hotel, $campo = 'fotos')
+function salvarFotosTurismo($id_ponto_turistico, $campo = 'fotos')
 {
-
     $erros = [];
 
     if (!isset($_FILES[$campo]) || empty($_FILES[$campo]['name'][0])) {
@@ -18,13 +18,13 @@ function salvarFotosHotel($id_hotel, $campo = 'fotos')
 
     $tiposPermitidos = [
         'image/jpeg' => 'jpg',
-        'image/png' => 'png',
+        'image/png'  => 'png',
         'image/webp' => 'webp',
     ];
 
     $tamanhoMaximo = 5 * 1024 * 1024; // 5 MB por foto
 
-    $pasta = __DIR__ . '/../assets/uploads/hoteis/';
+    $pasta = __DIR__ . '/../assets/uploads/turismo/';
 
     if (!is_dir($pasta)) {
         if (!mkdir($pasta, 0755, true)) {
@@ -33,7 +33,7 @@ function salvarFotosHotel($id_hotel, $campo = 'fotos')
         }
     }
 
-    $hotelFoto = new HotelFoto();
+    $turismoFoto = new PontoTuristicoFoto();
 
     $totalFotos = count($_FILES[$campo]['name']);
 
@@ -66,15 +66,23 @@ function salvarFotosHotel($id_hotel, $campo = 'fotos')
         }
 
         $extensao = $tiposPermitidos[$tipo];
-        $nomeArquivo = uniqid('hotel_', true) . '.' . $extensao;
+
+        $nomeArquivo = uniqid('turismo_', true) . '.' . $extensao;
+
         $destino = $pasta . $nomeArquivo;
 
-        if (!move_uploaded_file($_FILES[$campo]['tmp_name'][$i], $destino)) {
+        if (!move_uploaded_file(
+            $_FILES[$campo]['tmp_name'][$i],
+            $destino
+        )) {
             $erros[] = "Não foi possível salvar a foto \"{$_FILES[$campo]['name'][$i]}\".";
             continue;
         }
 
-        $hotelFoto->adicionar($id_hotel, $nomeArquivo);
+        $turismoFoto->adicionar(
+            $id_ponto_turistico,
+            $nomeArquivo
+        );
     }
 
     return $erros;
