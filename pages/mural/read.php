@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 require_once "../../config/conexao.php";
 require_once "../../classes/mural_fotos.php";
+require_once "../../classes/mural_stickers.php";
 
 $baseUrl = 'https://pindaeco.rf.gd';
 
@@ -23,6 +24,7 @@ $conexao = new Conexao();
 $pdo = $conexao->conectar();
 
 $mural = new MuralFotos($pdo);
+$muralStickers = new MuralStickers($pdo);
 
 $itensPorPagina = 12;
 
@@ -43,6 +45,10 @@ $totalFotos = $mural->contar();
 $totalPaginas = $totalFotos > 0
     ? ceil($totalFotos / $itensPorPagina)
     : 1;
+
+// Busca todos os adesivos das fotos desta página de uma só vez
+$idsDasFotos = array_column($fotos, 'id');
+$stickersPorFoto = $muralStickers->listarPorFotos($idsDasFotos);
 
 $mensagem = '';
 
@@ -134,7 +140,30 @@ include "../../includes/head.php";
 
                 <?php foreach ($fotos as $foto): ?>
 
-                    <article class="polaroid-card">
+                    <article
+                        class="polaroid-card"
+                        data-foto-id="<?= (int) $foto['id'] ?>"
+                    >
+
+                        <!-- ADESIVOS COLADOS NESTA FOTO -->
+
+                        <div class="polaroid-stickers">
+
+                            <?php foreach (($stickersPorFoto[$foto['id']] ?? []) as $sticker): ?>
+
+                                <div
+                                    class="mural-sticker<?= $usuarioId == $sticker['usuario_id'] ? ' sticker-proprio' : '' ?>"
+                                    style="top: <?= (float) $sticker['posicao_top'] ?>%; left: <?= (float) $sticker['posicao_left'] ?>%; transform: rotate(<?= (int) $sticker['rotacao'] ?>deg);"
+                                    data-sticker-id="<?= (int) $sticker['id'] ?>"
+                                    <?php if ($usuarioId == $sticker['usuario_id']): ?>
+                                    title="Clique para remover seu adesivo"
+                                    <?php endif; ?>
+                                ><?= htmlspecialchars($sticker['emoji']) ?></div>
+
+                            <?php endforeach; ?>
+
+                        </div>
+
 
                         <div class="polaroid-imagem">
 
@@ -221,6 +250,21 @@ include "../../includes/head.php";
 
                                 <?php endif; ?>
 
+
+                            </div>
+
+
+                            <!-- COLAR ADESIVO -->
+
+                            <div class="polaroid-sticker-acao">
+
+                                <button
+                                    type="button"
+                                    class="botao-colar-adesivo"
+                                    onclick="abrirSeletorAdesivo(this, <?= (int) $foto['id'] ?>)"
+                                >
+                                    🏷️ Colar adesivo
+                                </button>
 
                             </div>
 

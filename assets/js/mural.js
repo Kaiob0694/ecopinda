@@ -625,4 +625,343 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
+    /* =========================================================
+       ADESIVOS (STICKERS)
+       ========================================================= */
+
+    /*
+     * Precisa bater com a lista de emojis permitidos
+     * em classes/mural_stickers.php. O servidor sempre
+     * revalida, isso aqui é só pra montar o seletor.
+     */
+    const EMOJIS_ADESIVOS = [
+        "❤️", "😍", "👏", "🔥", "😂", "🌟"
+    ];
+
+    let popoverAdesivo = null;
+    let fotoIdSelecionada = null;
+
+
+    function criarPopoverAdesivo() {
+
+        const popover =
+            document.createElement("div");
+
+        popover.className = "adesivo-popover";
+
+        EMOJIS_ADESIVOS.forEach(function (emoji) {
+
+            const botao =
+                document.createElement("button");
+
+            botao.type = "button";
+            botao.textContent = emoji;
+
+            botao.addEventListener(
+                "click",
+                function (e) {
+
+                    e.stopPropagation();
+
+                    if (fotoIdSelecionada) {
+                        enviarAdesivo(
+                            fotoIdSelecionada,
+                            emoji
+                        );
+                    }
+
+                    fecharPopoverAdesivo();
+
+                }
+            );
+
+            popover.appendChild(botao);
+
+        });
+
+        document.body.appendChild(popover);
+
+        return popover;
+    }
+
+
+    function abrirSeletorAdesivo(botao, fotoId) {
+
+        if (!popoverAdesivo) {
+            popoverAdesivo = criarPopoverAdesivo();
+        }
+
+        fotoIdSelecionada = fotoId;
+
+        const rect =
+            botao.getBoundingClientRect();
+
+        popoverAdesivo.style.top =
+            `${rect.bottom + 8}px`;
+
+        popoverAdesivo.style.left =
+            `${Math.max(8, rect.left - 60)}px`;
+
+        popoverAdesivo.classList.add("ativo");
+    }
+
+
+    function fecharPopoverAdesivo() {
+
+        if (popoverAdesivo) {
+            popoverAdesivo.classList.remove("ativo");
+        }
+
+        fotoIdSelecionada = null;
+    }
+
+
+    window.abrirSeletorAdesivo = abrirSeletorAdesivo;
+
+
+    document.addEventListener(
+        "click",
+        function (e) {
+
+            if (
+                popoverAdesivo &&
+                popoverAdesivo.classList.contains("ativo") &&
+                !popoverAdesivo.contains(e.target) &&
+                !e.target.closest(".botao-colar-adesivo")
+            ) {
+
+                fecharPopoverAdesivo();
+
+            }
+
+        }
+    );
+
+
+    async function enviarAdesivo(fotoId, emoji) {
+
+        try {
+
+            const resposta =
+                await fetch(
+                    "sticker.php",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            acao: "adicionar",
+                            foto_id: fotoId,
+                            emoji: emoji
+                        })
+                    }
+                );
+
+            const data =
+                await resposta.json();
+
+            if (data.sucesso) {
+
+                renderizarAdesivo(
+                    data.sticker,
+                    true
+                );
+
+            } else {
+
+                mostrarMensagem(
+                    data.mensagem ||
+                    "Não foi possível colar o adesivo.",
+                    "erro"
+                );
+
+            }
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao colar adesivo:",
+                erro
+            );
+
+            mostrarMensagem(
+                "Ocorreu um erro ao colar o adesivo.",
+                "erro"
+            );
+
+        }
+
+    }
+
+
+    function renderizarAdesivo(sticker, animar) {
+
+        const card =
+            document.querySelector(
+                `.polaroid-card[data-foto-id="${sticker.foto_id}"]`
+            );
+
+        if (!card) {
+            return;
+        }
+
+        const container =
+            card.querySelector(".polaroid-stickers");
+
+        if (!container) {
+            return;
+        }
+
+        const elemento =
+            document.createElement("div");
+
+        elemento.className =
+            "mural-sticker sticker-proprio";
+
+        elemento.dataset.stickerId = sticker.id;
+        elemento.textContent = sticker.emoji;
+
+        elemento.style.top =
+            `${sticker.posicao_top}%`;
+
+        elemento.style.left =
+            `${sticker.posicao_left}%`;
+
+        elemento.title =
+            "Clique para remover seu adesivo";
+
+        elemento.addEventListener(
+            "click",
+            function () {
+
+                removerAdesivo(
+                    elemento,
+                    sticker.id
+                );
+
+            }
+        );
+
+        if (animar) {
+
+            elemento.style.opacity = "0";
+
+            elemento.style.transform =
+                `rotate(${sticker.rotacao}deg) scale(0)`;
+
+            container.appendChild(elemento);
+
+            requestAnimationFrame(function () {
+
+                elemento.style.opacity = "1";
+
+                elemento.style.transform =
+                    `rotate(${sticker.rotacao}deg) scale(1)`;
+
+            });
+
+        } else {
+
+            elemento.style.transform =
+                `rotate(${sticker.rotacao}deg)`;
+
+            container.appendChild(elemento);
+
+        }
+
+    }
+
+
+    async function removerAdesivo(elemento, stickerId) {
+
+        if (!confirm("Remover este adesivo?")) {
+            return;
+        }
+
+        try {
+
+            const resposta =
+                await fetch(
+                    "sticker.php",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            acao: "remover",
+                            sticker_id: stickerId
+                        })
+                    }
+                );
+
+            const data =
+                await resposta.json();
+
+            if (data.sucesso) {
+
+                elemento.style.opacity = "0";
+
+                elemento.style.transform +=
+                    " scale(0)";
+
+                setTimeout(
+                    function () {
+                        elemento.remove();
+                    },
+                    250
+                );
+
+            } else {
+
+                mostrarMensagem(
+                    data.mensagem ||
+                    "Não foi possível remover o adesivo.",
+                    "erro"
+                );
+
+            }
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao remover adesivo:",
+                erro
+            );
+
+            mostrarMensagem(
+                "Ocorreu um erro ao remover o adesivo.",
+                "erro"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Ativa o clique de remoção nos adesivos que já
+     * vieram renderizados pelo servidor no carregamento
+     * da página (os do próprio usuário).
+     */
+    document
+        .querySelectorAll(".mural-sticker.sticker-proprio")
+        .forEach(function (elemento) {
+
+            elemento.addEventListener(
+                "click",
+                function () {
+
+                    removerAdesivo(
+                        elemento,
+                        elemento.dataset.stickerId
+                    );
+
+                }
+            );
+
+        });
+
 });
