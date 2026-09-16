@@ -533,28 +533,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* ÁREA DO STICKER */
-    width: 125px;
-    height: 125px;
-
-    /* TAMANHO DO EMOJI */
-    font-size: 65px;
-
+    width: 95px;
+    height: 95px;
+    font-size: 42px;
     line-height: 1;
     pointer-events: auto;
     user-select: none;
-
-    filter:
-        drop-shadow(0 3px 6px rgba(0, 0, 0, 0.30));
-
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
     transition:
         transform 0.3s ease,
         opacity 0.3s ease;
-}
-
-.mural-sticker.sticker-proprio {
-    cursor: pointer;
 }
 
 .mural-sticker.sticker-proprio:hover {
