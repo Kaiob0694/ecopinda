@@ -4,6 +4,8 @@ require_once "../../classes/turismo.php";
 require_once "../../classes/turismo_fotos.php";
 require_once "../../includes/upload_fotos_turismo.php";
 
+$baseUrl = 'https://pindaeco.rf.gd';
+
 $ponto = new PontoTuristico();
 $pontoFoto = new PontoTuristicoFoto();
 $errosFotos = [];
@@ -59,8 +61,8 @@ include "../../includes/header.php";
 
 ?>
 
-<link rel="stylesheet" href="/ecopinda/assets/css/cadastrar-turismo.css">
-<link rel="stylesheet" href="/ecopinda/assets/css/update-turismo.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-turismo.css">
+<link rel="stylesheet" href="<?= $baseUrl ?>assets/css/update-turismo.css">
 
 <div class="cadastro-turismo-container">
 
