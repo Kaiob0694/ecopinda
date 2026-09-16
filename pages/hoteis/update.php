@@ -4,27 +4,11 @@ require_once "../../classes/hoteis.php";
 require_once "../../classes/hotel_fotos.php";
 require_once "../../includes/upload_fotos_hotel.php";
 
-$baseUrl = 'https://pindaeco.rf.gd';
-
 $hotel = new Hotel();
 $hotelFoto = new HotelFoto();
-
 $errosFotos = [];
 
-// =========================================================
-// VERIFICA O ID DO HOTEL
-// =========================================================
-
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
-if (!$id) {
-    header("Location: read.php");
-    exit;
-}
-
-// =========================================================
-// BUSCA OS DADOS DO HOTEL
-// =========================================================
+$id = $_GET['id'];
 
 $dados = $hotel->buscarPorId($id);
 
@@ -33,52 +17,24 @@ if (!$dados) {
     exit;
 }
 
-// =========================================================
-// ATUALIZAÇÃO
-// =========================================================
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    $nome = trim($_POST['nome'] ?? '');
-    $endereco = trim($_POST['endereco'] ?? '');
-    $cidade = trim($_POST['cidade'] ?? '');
-    $estado = trim($_POST['estado'] ?? '');
-    $cep = trim($_POST['cep'] ?? '');
-    $telefone = trim($_POST['telefone'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $quantidade_quartos = $_POST['quantidade_quartos'] ?? 0;
-    $possui_wifi = $_POST['possui_wifi'] ?? 'Não';
-    $possui_estacionamento = $_POST['possui_estacionamento'] ?? 'Não';
-    $data_cadastro = $_POST['data_cadastro'] ?? '';
-
-    // =====================================================
-    // EDITA OS DADOS DO HOTEL
-    // =====================================================
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $hotel->editar(
-        $nome,
-        $endereco,
-        $cidade,
-        $estado,
-        $cep,
-        $telefone,
-        $email,
-        $quantidade_quartos,
-        $possui_wifi,
-        $possui_estacionamento,
-        $data_cadastro,
+        $_POST['nome'],
+        $_POST['endereco'],
+        $_POST['cidade'],
+        $_POST['estado'],
+        $_POST['cep'],
+        $_POST['telefone'],
+        $_POST['email'],
+        $_POST['quantidade_quartos'],
+        $_POST['possui_wifi'],
+        $_POST['possui_estacionamento'],
+        $_POST['data_cadastro'],
         $id
     );
 
-    // =====================================================
-    // SALVA NOVAS FOTOS
-    // =====================================================
-
     $errosFotos = salvarFotosHotel($id);
-
-    // =====================================================
-    // SE NÃO HOUVE ERRO, VOLTA PARA LISTAGEM
-    // =====================================================
 
     if (empty($errosFotos)) {
         header("Location: read.php");
@@ -89,15 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dados = $hotel->buscarPorId($id);
 }
 
-// =========================================================
-// BUSCA AS FOTOS DO HOTEL
-// =========================================================
-
 $fotos = $hotelFoto->listarPorHotel($id);
-
-// =========================================================
-// HEADER
-// =========================================================
 
 include "../../includes/head.php";
 include "../../includes/header.php";
@@ -106,7 +54,6 @@ include "../../includes/header.php";
 
 <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/cadastrar-hotel.css">
 <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/update-hotel.css">
-
 
 <div class="cadastro-hotel-container">
 
@@ -175,7 +122,7 @@ include "../../includes/header.php";
 
                             <img
                                 class="foto-hotel-imagem"
-                                src="<?= $baseUrl ?>/assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
+                                src="../../assets/uploads/hoteis/<?= htmlspecialchars($foto['caminho']) ?>"
                                 alt="Foto do hotel"
                             >
 
@@ -210,7 +157,6 @@ include "../../includes/header.php";
 
             <div class="formulario-hotel-grid">
 
-                <!-- NOME -->
 
                 <div class="campo-hotel">
 
@@ -228,8 +174,6 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- CIDADE -->
-
                 <div class="campo-hotel">
 
                     <label>
@@ -245,8 +189,6 @@ include "../../includes/header.php";
 
                 </div>
 
-
-                <!-- ENDEREÇO -->
 
                 <div class="campo-hotel largo">
 
@@ -264,8 +206,6 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- ESTADO -->
-
                 <div class="campo-hotel">
 
                     <label>
@@ -275,15 +215,12 @@ include "../../includes/header.php";
                     <input
                         type="text"
                         name="estado"
-                        maxlength="50"
                         value="<?= htmlspecialchars($dados['estado'] ?? '') ?>"
                         required
                     >
 
                 </div>
 
-
-                <!-- CEP -->
 
                 <div class="campo-hotel">
 
@@ -301,8 +238,6 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- TELEFONE -->
-
                 <div class="campo-hotel">
 
                     <label>
@@ -317,8 +252,6 @@ include "../../includes/header.php";
 
                 </div>
 
-
-                <!-- EMAIL -->
 
                 <div class="campo-hotel">
 
@@ -335,8 +268,6 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- QUANTIDADE DE QUARTOS -->
-
                 <div class="campo-hotel">
 
                     <label>
@@ -352,8 +283,6 @@ include "../../includes/header.php";
 
                 </div>
 
-
-                <!-- WI-FI -->
 
                 <div class="campo-hotel">
 
@@ -382,12 +311,11 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- ESTACIONAMENTO -->
-
                 <div class="campo-hotel">
 
                     <label>
-                        Possui Estacionamento <span class="obrigatorio">*</span>
+                        Possui Estacionamento
+                        <span class="obrigatorio">*</span>
                     </label>
 
                     <select
@@ -414,12 +342,11 @@ include "../../includes/header.php";
                 </div>
 
 
-                <!-- DATA DE CADASTRO -->
-
                 <div class="campo-hotel">
 
                     <label>
-                        Data de Cadastro <span class="obrigatorio">*</span>
+                        Data de Cadastro
+                        <span class="obrigatorio">*</span>
                     </label>
 
                     <input
@@ -431,8 +358,6 @@ include "../../includes/header.php";
 
                 </div>
 
-
-                <!-- NOVAS FOTOS -->
 
                 <div class="campo-hotel largo">
 
@@ -484,7 +409,6 @@ include "../../includes/header.php";
     </div>
 
 </div>
-
 
 <?php
 
