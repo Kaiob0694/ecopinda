@@ -3,7 +3,6 @@
    PÁGINA PÚBLICA DO MURAL
    ========================================================= */
 
-
 /* =========================================================
    CONTAINER PRINCIPAL
    ========================================================= */
@@ -18,7 +17,6 @@
     background: #ffffff;
 }
 
-
 /* =========================================================
    CONTEÚDO
    ========================================================= */
@@ -32,7 +30,6 @@
     padding: 0 20px;
 }
 
-
 /* =========================================================
    TOPO
    ========================================================= */
@@ -45,7 +42,6 @@
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
-
 
 /* =========================================================
    TÍTULO
@@ -73,7 +69,6 @@
     );
 }
 
-
 /* =========================================================
    SUBTÍTULO
    ========================================================= */
@@ -84,7 +79,6 @@
     font-size: 16px;
     line-height: 1.6;
 }
-
 
 /* =========================================================
    BOTÃO NOVO
@@ -99,25 +93,21 @@
     padding: 12px 22px;
     border: none;
     border-radius: 10px;
-
     background: linear-gradient(
         135deg,
         var(--laranja),
         #c52e00
     );
-
     color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
     white-space: nowrap;
     cursor: pointer;
-
     transition:
         transform 0.2s ease,
         filter 0.2s ease,
         box-shadow 0.2s ease;
-
     box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.12);
 }
@@ -125,7 +115,6 @@
 .mural-botao-novo:hover {
     transform: translateY(-2px);
     filter: brightness(1.05);
-
     box-shadow:
         0 8px 20px rgba(0, 0, 0, 0.18);
 }
@@ -134,7 +123,6 @@
     transform: translateY(0);
 }
 
-
 /* =========================================================
    MENSAGEM INTERNA DO MURAL
    ========================================================= */
@@ -142,14 +130,11 @@
 .mural-mensagem {
     padding: 14px 18px;
     margin-bottom: 20px;
-
     border-radius: 10px;
     background: #fafafa;
-
     color: #555555;
     font-size: 14px;
     font-weight: 500;
-
     border: 1px solid #eeeeee;
 }
 
@@ -158,39 +143,28 @@
     border-left: 4px solid #4caf50;
 }
 
-
 /* =========================================================
    MENSAGEM DE SUCESSO / ERRO DO UPLOAD
    ========================================================= */
 
 .mensagem-mural {
     position: fixed;
-
     top: 110px;
     right: 30px;
-
     z-index: 99999;
-
     display: flex;
     align-items: center;
     gap: 18px;
-
     max-width: 420px;
     min-width: 280px;
-
     padding: 16px 18px;
-
     border-radius: 10px;
-
     color: #ffffff;
-
     font-size: 14px;
     font-weight: 600;
     line-height: 1.4;
-
     box-shadow:
         0 8px 25px rgba(0, 0, 0, 0.20);
-
     animation:
         mensagemEntrar 0.35s ease;
 }
@@ -198,7 +172,6 @@
 .mensagem-mural span {
     flex: 1;
 }
-
 
 /* =========================================================
    MENSAGEM SUCESSO
@@ -208,7 +181,6 @@
     background: #2e7d32;
 }
 
-
 /* =========================================================
    MENSAGEM ERRO
    ========================================================= */
@@ -216,7 +188,6 @@
 .mensagem-mural.mensagem-erro {
     background: #c62828;
 }
-
 
 /* =========================================================
    BOTÃO FECHAR DA MENSAGEM
@@ -226,26 +197,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 28px;
     height: 28px;
-
     flex-shrink: 0;
-
     padding: 0;
-
     border: none;
     border-radius: 50%;
-
     background: rgba(255, 255, 255, 0.15);
-
     color: #ffffff;
-
     font-size: 20px;
     line-height: 1;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -256,13 +218,11 @@
     transform: scale(1.08);
 }
 
-
 /* =========================================================
    ANIMAÇÃO DA MENSAGEM
    ========================================================= */
 
 @keyframes mensagemEntrar {
-
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -274,7 +234,6 @@
     }
 }
 
-
 /* =========================================================
    QUANTIDADE
    ========================================================= */
@@ -284,7 +243,6 @@
     color: #777777;
     font-size: 14px;
 }
-
 
 /* =========================================================
    ÁREA DAS POLAROIDS
@@ -298,39 +256,28 @@
     margin-bottom: 30px;
 }
 
-
 /* =========================================================
    POLAROID
    ========================================================= */
 
 .polaroid-card {
     position: absolute;
-
     width: 250px;
     min-width: 0;
-
     padding: 12px 12px 25px;
-
     background: #ffffff;
-
     border: 1px solid #eeeeee;
     border-radius: 2px;
-
     overflow: visible;
-
     cursor: pointer;
-
     box-shadow:
         0 5px 12px rgba(0, 0, 0, 0.15),
         0 15px 30px rgba(0, 0, 0, 0.10);
-
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
-
     transform-origin: center center;
 }
-
 
 /* =========================================================
    POSIÇÕES DAS POLAROIDS
@@ -406,7 +353,6 @@
     z-index: 9;
 }
 
-
 /* =========================================================
    HOVER
    ========================================================= */
@@ -416,14 +362,11 @@
         translateY(-12px)
         scale(1.06)
         rotate(0deg) !important;
-
     box-shadow:
         0 10px 20px rgba(0, 0, 0, 0.20),
         0 25px 45px rgba(0, 0, 0, 0.20);
-
     z-index: 100;
 }
-
 
 /* =========================================================
    IMAGEM
@@ -432,20 +375,16 @@
 .polaroid-imagem {
     width: 100%;
     aspect-ratio: 1 / 1;
-
     overflow: hidden;
     background: #eeeeee;
 }
 
 .polaroid-imagem img {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
-
 
 /* =========================================================
    CONTEÚDO DA POLAROID
@@ -454,14 +393,10 @@
 .polaroid-conteudo {
     display: flex;
     flex-direction: column;
-
     min-height: 125px;
-
     padding: 14px 7px 0;
-
     background: #ffffff;
 }
-
 
 /* =========================================================
    DESCRIÇÃO
@@ -469,22 +404,16 @@
 
 .polaroid-descricao {
     flex: 1;
-
     margin: 0 0 12px;
-
     color: #333333;
-
     font-family:
         "Comic Sans MS",
         "Segoe Print",
         cursive;
-
     font-size: 0.9rem;
     line-height: 1.4;
-
     word-wrap: break-word;
 }
-
 
 /* =========================================================
    RODAPÉ DA POLAROID
@@ -494,11 +423,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     min-height: 30px;
     margin-bottom: 7px;
 }
-
 
 /* =========================================================
    USUÁRIO
@@ -507,11 +434,9 @@
 .polaroid-usuario {
     display: flex;
     align-items: center;
-
     gap: 8px;
     min-width: 0;
 }
-
 
 /* =========================================================
    AVATAR
@@ -520,16 +445,11 @@
 .polaroid-avatar {
     width: 28px;
     height: 28px;
-
     flex-shrink: 0;
-
     border-radius: 50%;
-
     object-fit: cover;
-
     border: 1px solid #dddddd;
 }
-
 
 /* =========================================================
    AVATAR PLACEHOLDER
@@ -539,21 +459,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 28px;
     height: 28px;
-
     flex-shrink: 0;
-
     border-radius: 50%;
-
     background: #e5e5e5;
     color: #555555;
-
     font-size: 0.8rem;
     font-weight: 700;
 }
-
 
 /* =========================================================
    NOME
@@ -561,16 +475,12 @@
 
 .polaroid-nome {
     overflow: hidden;
-
     color: #444444;
-
     font-size: 0.8rem;
     font-weight: 600;
-
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
 
 /* =========================================================
    AÇÕES
@@ -581,7 +491,6 @@
     gap: 8px;
 }
 
-
 /* =========================================================
    BOTÃO EXCLUIR
    ========================================================= */
@@ -590,20 +499,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 28px;
     height: 28px;
-
     border: none;
     border-radius: 50%;
-
     background: rgba(220, 60, 50, 0.08);
     color: #d94b3f;
-
     font-size: 1rem;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -614,37 +517,36 @@
     transform: scale(1.1);
 }
 
-
 /* =========================================================
-   ADESIVOS (STICKERS)
+   ADESIVOS (STICKERS) - TAMANHO GRANDE
    ========================================================= */
 
 .polaroid-stickers {
     position: absolute;
     inset: 0;
-
     pointer-events: none;
-
     z-index: 20;
 }
 
 .mural-sticker {
     position: absolute;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 104px;
-    height: 104px;
+    /* ÁREA DO STICKER */
+    width: 125px;
+    height: 125px;
 
-    font-size: 20px;
+    /* TAMANHO DO EMOJI */
+    font-size: 65px;
+
     line-height: 1;
-
     pointer-events: auto;
     user-select: none;
 
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+    filter:
+        drop-shadow(0 3px 6px rgba(0, 0, 0, 0.30));
 
     transition:
         transform 0.3s ease,
@@ -657,10 +559,9 @@
 
 .mural-sticker.sticker-proprio:hover {
     filter:
-        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25))
+        drop-shadow(0 3px 6px rgba(0, 0, 0, 0.30))
         brightness(1.15);
 }
-
 
 /* =========================================================
    BOTÃO "COLAR ADESIVO"
@@ -669,7 +570,6 @@
 .polaroid-sticker-acao {
     display: flex;
     justify-content: center;
-
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -677,18 +577,12 @@
 .botao-colar-adesivo {
     border: none;
     border-radius: 20px;
-
     background: transparent;
-
     color: #999999;
-
     font-size: 0.72rem;
     font-weight: 600;
-
     padding: 4px 10px;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         color 0.2s ease;
@@ -699,7 +593,6 @@
     color: #555555;
 }
 
-
 /* =========================================================
    POPOVER DE SELEÇÃO DE ADESIVO
    ========================================================= */
@@ -707,17 +600,12 @@
 .adesivo-popover {
     position: fixed;
     z-index: 500;
-
     display: none;
-    gap: 6px;
-
-    padding: 10px;
-
+    gap: 8px;
+    padding: 12px;
     background: #ffffff;
-
     border: 1px solid #eeeeee;
     border-radius: 12px;
-
     box-shadow:
         0 10px 28px rgba(0, 0, 0, 0.20);
 }
@@ -730,19 +618,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 36px;
-    height: 36px;
-
+    width: 45px;
+    height: 45px;
     border: none;
     border-radius: 8px;
-
     background: #fafafa;
-
-    font-size: 18px;
-
+    font-size: 27px;
     cursor: pointer;
-
     transition:
         transform 0.15s ease,
         background 0.15s ease;
@@ -753,24 +635,18 @@
     transform: scale(1.15);
 }
 
-
 /* =========================================================
    DATA
    ========================================================= */
 
 .polaroid-data {
     padding-top: 8px;
-
     border-top: 1px solid #eeeeee;
-
     color: #999999;
-
     font-size: 0.7rem;
     font-style: italic;
-
     text-align: center;
 }
-
 
 /* =========================================================
    NENHUMA FOTO
@@ -781,33 +657,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     min-height: 250px;
-
     padding: 40px;
-
     border: 1px solid #eeeeee;
     border-radius: 18px;
-
     background: #fafafa;
-
     text-align: center;
 }
 
 .mural-vazio h3 {
     margin: 0 0 8px;
-
     color: #333333;
     font-size: 20px;
 }
 
 .mural-vazio p {
     margin: 0;
-
     color: #777777;
     font-size: 14px;
 }
-
 
 /* =========================================================
    PAGINAÇÃO
@@ -817,27 +685,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 1rem;
-
     margin-top: 2rem;
-
     flex-wrap: wrap;
 }
 
 .paginacao-link {
     padding: 8px 16px;
-
     border: 1px solid #dddddd;
     border-radius: 8px;
-
     background: #ffffff;
     color: #555555;
-
     text-decoration: none;
-
     font-size: 13px;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -853,45 +713,34 @@
     font-size: 13px;
 }
 
-
 /* =========================================================
    MODAL
    ========================================================= */
 
 .modal {
     display: none;
-
     position: fixed;
-
     z-index: 1000;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
     background-color: rgba(0, 0, 0, 0.75);
-
     backdrop-filter: blur(5px);
 }
 
 .modal.ativo {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     animation: fadeIn 0.3s ease;
 }
-
 
 /* =========================================================
    ANIMAÇÃO
    ========================================================= */
 
 @keyframes fadeIn {
-
     from {
         opacity: 0;
     }
@@ -902,7 +751,6 @@
 }
 
 @keyframes slideUp {
-
     from {
         transform: translateY(30px);
         opacity: 0;
@@ -914,7 +762,6 @@
     }
 }
 
-
 /* =========================================================
    CONTEÚDO DO MODAL
    ========================================================= */
@@ -922,30 +769,21 @@
 .modal-conteudo {
     width: 90%;
     max-width: 500px;
-
     max-height: 90vh;
-
     padding: 2rem;
-
     overflow-y: auto;
-
     background:
         linear-gradient(
             135deg,
             #1a1a2e,
             #16213e
         );
-
     border: 1px solid rgba(255, 107, 107, 0.2);
-
     border-radius: 12px;
-
     box-shadow:
         0 15px 50px rgba(0, 0, 0, 0.6);
-
     animation: slideUp 0.3s ease;
 }
-
 
 /* =========================================================
    FECHAR MODAL
@@ -953,21 +791,16 @@
 
 .modal-fechar {
     float: right;
-
     color: rgba(255, 255, 255, 0.6);
-
     font-size: 2rem;
     line-height: 1;
-
     cursor: pointer;
-
     transition: color 0.2s ease;
 }
 
 .modal-fechar:hover {
     color: #ff6b6b;
 }
-
 
 /* =========================================================
    TÍTULO MODAL
@@ -976,10 +809,8 @@
 .modal-conteudo h2 {
     margin-top: 0;
     margin-bottom: 1.5rem;
-
     color: #ffffff;
 }
-
 
 /* =========================================================
    FORMULÁRIO
@@ -988,10 +819,8 @@
 .upload-form {
     display: flex;
     flex-direction: column;
-
     gap: 1.5rem;
 }
-
 
 /* =========================================================
    SEÇÃO UPLOAD
@@ -1000,10 +829,8 @@
 .upload-secao {
     display: flex;
     flex-direction: column;
-
     gap: 0.5rem;
 }
-
 
 /* =========================================================
    LABEL
@@ -1011,11 +838,9 @@
 
 .upload-label {
     color: rgba(255, 255, 255, 0.8);
-
     font-size: 0.9rem;
     font-weight: 600;
 }
-
 
 /* =========================================================
    ÁREA DE UPLOAD
@@ -1023,23 +848,16 @@
 
 .upload-area {
     padding: 2rem;
-
     border: 2px dashed rgba(255, 107, 107, 0.4);
-
     border-radius: 8px;
-
     background: rgba(255, 107, 107, 0.05);
-
     text-align: center;
-
     cursor: pointer;
-
     transition: all 0.2s ease;
 }
 
 .upload-area:hover {
     border-color: #ff6b6b;
-
     background: rgba(255, 107, 107, 0.1);
 }
 
@@ -1049,12 +867,9 @@
 
 .upload-area p {
     margin: 0;
-
     color: rgba(255, 255, 255, 0.6);
-
     font-size: 0.9rem;
 }
-
 
 /* =========================================================
    PREVIEW
@@ -1062,36 +877,26 @@
 
 .preview-container {
     position: relative;
-
     display: flex;
     flex-direction: column;
-
     gap: 1rem;
 }
 
 .preview-container img {
     width: 100%;
     height: auto;
-
     max-height: 300px;
-
     object-fit: contain;
-
     border-radius: 8px;
 }
 
 .preview-container button {
     padding: 0.5rem 1rem;
-
     border: 1px solid #ff6b6b;
     border-radius: 4px;
-
     background: rgba(255, 107, 107, 0.1);
-
     color: #ff6b6b;
-
     font-size: 0.9rem;
-
     cursor: pointer;
 }
 
@@ -1099,30 +904,22 @@
     background: rgba(255, 107, 107, 0.2);
 }
 
-
 /* =========================================================
    DESCRIÇÃO
    ========================================================= */
 
 #descricao {
     padding: 0.75rem;
-
     border: 1px solid rgba(255, 255, 255, 0.2);
-
     border-radius: 4px;
-
     background: rgba(255, 255, 255, 0.05);
-
     color: #ffffff;
-
     font-family: inherit;
-
     resize: vertical;
 }
 
 #descricao:focus {
     outline: none;
-
     border-color: #ff6b6b;
 }
 
@@ -1130,17 +927,14 @@
     color: rgba(255, 255, 255, 0.4);
 }
 
-
 /* =========================================================
    CONTADOR
    ========================================================= */
 
 #charCount {
     color: rgba(255, 255, 255, 0.5);
-
     font-size: 0.8rem;
 }
-
 
 /* =========================================================
    BOTÕES
@@ -1148,32 +942,24 @@
 
 .upload-botoes {
     display: flex;
-
     gap: 1rem;
-
     margin-top: 1rem;
 }
 
 .botao-cancelar,
 .botao-enviar {
     flex: 1;
-
     padding: 0.75rem;
-
     border: none;
     border-radius: 4px;
-
     font-size: 0.95rem;
     font-weight: 600;
-
     cursor: pointer;
 }
 
 .botao-cancelar {
     border: 1px solid rgba(255, 255, 255, 0.2);
-
     background: rgba(255, 255, 255, 0.1);
-
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -1188,28 +974,22 @@
             var(--laranja),
             #c52e00
         );
-
     color: #ffffff;
-
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .botao-enviar:hover {
     transform: translateY(-2px);
-
     box-shadow:
         0 7px 18px rgba(0, 0, 0, 0.4);
 }
 
 .botao-enviar:disabled {
     opacity: 0.5;
-
     cursor: not-allowed;
-
     transform: none;
 }
-
 
 /* =========================================================
    TABLET
@@ -1267,8 +1047,14 @@
     .polaroid-card:nth-child(9) {
         left: 45%;
     }
-}
 
+    /* STICKERS NO TABLET */
+    .mural-sticker {
+        width: 115px;
+        height: 115px;
+        font-size: 58px;
+    }
+}
 
 /* =========================================================
    CELULAR
@@ -1278,7 +1064,6 @@
 
     .mural-container {
         margin-top: 95px;
-
         padding:
             30px
             16px
@@ -1306,7 +1091,6 @@
         width: 100%;
     }
 
-
     /* =====================================================
        MENSAGEM NO CELULAR
        ===================================================== */
@@ -1315,12 +1099,10 @@
         top: 100px;
         right: 15px;
         left: 15px;
-
         width: auto;
         min-width: 0;
         max-width: none;
     }
-
 
     /* =====================================================
        POLAROIDS
@@ -1328,22 +1110,16 @@
 
     .mural-grid {
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         gap: 35px;
-
         min-height: auto;
     }
 
     .polaroid-card {
         position: relative;
-
         top: auto !important;
         left: auto !important;
-
         width: min(290px, 90vw);
     }
 
@@ -1362,9 +1138,29 @@
             rotate(0deg) !important;
     }
 
+    /* =====================================================
+       STICKERS GRANDES NO CELULAR
+       ===================================================== */
+
+    .mural-sticker {
+        width: 105px;
+        height: 105px;
+        font-size: 52px;
+    }
+
+    .adesivo-popover {
+        gap: 6px;
+        padding: 9px;
+    }
+
+    .adesivo-popover button {
+        width: 42px;
+        height: 42px;
+        font-size: 25px;
+    }
+
     .modal-conteudo {
         width: 95%;
-
         padding: 1.5rem;
     }
 
@@ -1372,7 +1168,6 @@
         padding: 1.5rem;
     }
 }
-
 
 /* =========================================================
    CELULAR PEQUENO
@@ -1400,8 +1195,14 @@
     .upload-botoes {
         flex-direction: column;
     }
-}
 
+    /* STICKERS EM CELULARES PEQUENOS */
+    .mural-sticker {
+        width: 95px;
+        height: 95px;
+        font-size: 48px;
+    }
+}
 
 /* =========================================================
    ACESSIBILIDADE
