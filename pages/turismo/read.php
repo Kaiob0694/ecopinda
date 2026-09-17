@@ -137,7 +137,7 @@ include "../../includes/head.php";
                                     <?php foreach ($fotosPonto as $indice => $foto): ?>
 
                                         <img class="turismo-imagem <?= $indice === 0 ? 'ativa' : '' ?>"
-                                            src="<?= $baseUrl ?>/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
+                                            src="<?= $baseUrl ?>/assets/uploads/turismo/<?= htmlspecialchars($foto['caminho']) ?>"
                                             alt="<?= htmlspecialchars($linha['nome']) ?>">
 
                                     <?php endforeach; ?>

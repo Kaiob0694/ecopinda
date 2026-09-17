@@ -138,16 +138,13 @@ if (!function_exists('iniciaisHeader')) {
             Restaurantes
         </a>
 
-        <a href="/../pages/feed.php">
-            +PINDA
-        </a>
 
 
         <?php if ($usuarioLogado): ?>
 
             <!-- MURAL -->
             <a href="/../pages/mural/read.php">
-                📸 Mural
+                Mural
             </a>
 
 

@@ -19,13 +19,20 @@ function salvarFotosHotel($id_hotel, $campo = 'fotos')
 
     $tamanhoMaximo = 5 * 1024 * 1024; // 5 MB por foto
 
-    $pasta = __DIR__ . '../assets/uploads/hoteis/';
+    // ✅ BUG FIX: Adicionou a "/" que faltava
+    $pasta = __DIR__ . '/../assets/uploads/hoteis/';
 
     if (!is_dir($pasta)) {
         if (!mkdir($pasta, 0755, true)) {
             $erros[] = "Não foi possível criar a pasta de imagens.";
             return $erros;
         }
+    }
+
+    // ✅ Verifica se a pasta é realmente gravável
+    if (!is_writable($pasta)) {
+        $erros[] = "A pasta de imagens não tem permissão de escrita.";
+        return $erros;
     }
 
     $hotelFoto = new HotelFoto();
@@ -69,7 +76,22 @@ function salvarFotosHotel($id_hotel, $campo = 'fotos')
             continue;
         }
 
-        $hotelFoto->adicionar($id_hotel, $nomeArquivo);
+        // ✅ BUG FIX: Agora valida se o banco foi atualizado com sucesso
+        try {
+            $resultado = $hotelFoto->adicionar($id_hotel, $nomeArquivo);
+
+            if (!$resultado) {
+                // Se falhar no banco, deleta o arquivo do servidor
+                @unlink($destino);
+                $erros[] = "Erro ao salvar informações da foto \"{$_FILES[$campo]['name'][$i]}\" no banco de dados.";
+                continue;
+            }
+        } catch (Exception $e) {
+            // Se der exception, também deleta o arquivo
+            @unlink($destino);
+            $erros[] = "Erro ao processar a foto \"{$_FILES[$campo]['name'][$i]}\": " . $e->getMessage();
+            continue;
+        }
     }
 
     return $erros;
