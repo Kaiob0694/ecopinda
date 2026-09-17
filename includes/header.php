@@ -238,4 +238,6 @@ if (!function_exists('iniciaisHeader')) {
 
     </nav>
 
+    <script src="/../assets/js/header-indicator.js" defer></script>
+
 </header>

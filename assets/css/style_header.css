@@ -67,6 +67,8 @@ body {
 =========================== */
 
 .menu {
+    position: relative;
+
     display: flex;
     gap: 50px;
     height: 100%;
@@ -94,7 +96,10 @@ body {
 
     position: relative;
 
-    transition: color .3s ease;
+    transition: color .45s cubic-bezier(.4, 0, .2, 1);
+
+    /* fica acima do indicador */
+    z-index: 1;
 }
 
 
@@ -108,58 +113,47 @@ body {
 
 
 /* ===========================
-   ANIMAÇÃO DO MENU
+   INDICADOR DESLIZANTE
 =========================== */
 
-.menu a::after {
-    content: "";
-
+.indicator {
     position: absolute;
-
     bottom: 0;
     left: 0;
 
-    width: 100%;
     height: 85%;
+
+    width: 0;
 
     background: var(--laranja);
 
-    transform: scaleY(.05);
-
-    transform-origin: bottom;
-
     border-radius: 15px 15px 0 0;
 
-    transition: transform .3s ease;
+    opacity: 0;
 
-    z-index: -1;
+    pointer-events: none;
+
+    transform: translateX(0) scaleY(.6);
+    transform-origin: bottom;
+
+    transition:
+        transform   .45s cubic-bezier(.34, 1.56, .64, 1),
+        left        .45s cubic-bezier(.34, 1.56, .64, 1),
+        width       .45s cubic-bezier(.34, 1.56, .64, 1),
+        background  .35s ease,
+        opacity     .3s ease;
+
+    z-index: 0;
+}
+
+.indicator.visivel {
+    opacity: 1;
+    transform: translateX(0) scaleY(1);
 }
 
 
 /* ===========================
-   HOVER ANIMAÇÃO
-=========================== */
-
-.menu a:hover::after {
-    transform: scaleY(1);
-}
-
-
-/* ===========================
-   CORES DOS MENUS
-=========================== */
-
-.menu > a:nth-child(2)::after {
-    background: var(--verde);
-}
-
-.menu-dropdown > a::after {
-    background: var(--amarelo);
-}
-
-
-/* ===========================
-   SUBMENU / DROPDOWN
+   ITEM COM SUBMENU
 =========================== */
 
 .menu-dropdown {
@@ -192,7 +186,7 @@ body {
 
     line-height: 1;
 
-    transition: transform .3s ease;
+    transition: transform .4s cubic-bezier(.4, 0, .2, 1);
 }
 
 .menu-dropdown:hover > a::before {
@@ -231,12 +225,13 @@ body {
 
     transform:
         translateX(-50%)
-        translateY(-8px);
+        translateY(-12px)
+        scale(.97);
 
     transition:
-        opacity .25s ease,
-        transform .25s ease,
-        visibility .25s ease;
+        opacity     .35s cubic-bezier(.4, 0, .2, 1),
+        transform   .4s  cubic-bezier(.34, 1.56, .64, 1),
+        visibility  .35s;
 }
 
 
@@ -260,12 +255,12 @@ body {
     white-space: nowrap;
 
     transition:
-        background .25s ease,
-        color .25s ease;
+        background .3s cubic-bezier(.4, 0, .2, 1),
+        color      .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 
-/* Remove animação do submenu */
+/* Remove animação antiga do submenu (agora o indicador cuida do menu principal) */
 
 .submenu a::after {
     display: none !important;
@@ -294,7 +289,8 @@ body {
 
     transform:
         translateX(-50%)
-        translateY(0);
+        translateY(0)
+        scale(1);
 }
 
 
@@ -336,6 +332,8 @@ body {
         var(--laranja),
         var(--verde)
     );
+    background-size: 200% 200%;
+    background-position: 0% 0%;
 
     display: flex;
 
@@ -351,6 +349,15 @@ body {
     text-transform: uppercase;
 
     overflow: hidden;
+
+    transition:
+        transform         .4s cubic-bezier(.34, 1.56, .64, 1),
+        background-position .6s ease;
+}
+
+.menu-usuario:hover .menu-avatar {
+    transform: scale(1.08);
+    background-position: 100% 100%;
 }
 
 
@@ -413,6 +420,8 @@ body {
     overflow: visible;
 
     text-overflow: unset;
+
+    transition: color .4s cubic-bezier(.4, 0, .2, 1);
 }
 
 
@@ -461,6 +470,15 @@ body {
     flex-shrink: 0;
 
     line-height: 1;
+
+    transition:
+        background .35s cubic-bezier(.4, 0, .2, 1),
+        color      .35s cubic-bezier(.4, 0, .2, 1),
+        transform  .35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.menu-usuario:hover .menu-pindacoins {
+    transform: scale(1.05);
 }
 
 
@@ -478,6 +496,8 @@ body {
     text-transform: uppercase;
 
     margin-top: 3px;
+
+    transition: color .4s cubic-bezier(.4, 0, .2, 1);
 }
 
 
@@ -607,6 +627,11 @@ body {
 
     .menu-usuario-cargo {
         font-size: 9px;
+    }
+
+    /* Em telas pequenas o indicador some para não deslocar layout */
+    .indicator {
+        display: none;
     }
 
 }
