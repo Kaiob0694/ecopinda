@@ -235,6 +235,7 @@ if (!function_exists('iniciaisHeader')) {
 
     </nav>
 
-    <script src="/../assets/js/header-indicator.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="/../assets/js/header-gsap.js" defer></script>
 
 </header>
