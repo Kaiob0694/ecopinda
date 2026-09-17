@@ -86,10 +86,10 @@ if (!function_exists('iniciaisHeader')) {
 
 <header class="header">
 
-    <!-- LOGO -->
-    <div class="logo">
+    <div class="header-shell">
 
-        <a href="<?= $baseUrl ?>/index.php">
+        <!-- LOGO -->
+        <a href="<?= $baseUrl ?>/index.php" class="logo-pill">
 
             <img
                 src="/../assets/img2/logo.png"
@@ -98,144 +98,114 @@ if (!function_exists('iniciaisHeader')) {
 
         </a>
 
-    </div>
 
+        <!-- MENU CENTRAL (PÍLULA) -->
+        <nav class="nav-pill">
 
-    <nav class="menu">
-
-        <a href="/../index.php">
-            Início
-        </a>
-
-        <a href="/../pages/cidade.php">
-            Cidade
-        </a>
-
-
-        <!-- ITEM COM SUBMENU -->
-        <div class="menu-dropdown">
-
-            <a href="/../pages/turismo/read.php">
-                Turismo
+            <a href="/../index.php">
+                Início
             </a>
 
-            <div class="submenu">
+            <a href="/../pages/cidade.php">
+                Cidade
+            </a>
 
-                <a href="/../pages/guia/read.php">
-                    Guia Turístico
+
+            <!-- ITEM COM SUBMENU -->
+            <div class="menu-dropdown">
+
+                <a href="/../pages/turismo/read.php">
+                    Turismo
                 </a>
+
+                <div class="submenu">
+
+                    <a href="/../pages/guia/read.php">
+                        Guia Turístico
+                    </a>
+
+                </div>
 
             </div>
 
-        </div>
 
-
-        <a href="/../pages/hoteis/read.php">
-            Hotéis
-        </a>
-
-        <a href="/../pages/restaurante/read.php">
-            Restaurantes
-        </a>
-
-
-
-        <?php if ($usuarioLogado): ?>
-
-            <!-- MURAL -->
-            <a href="/../pages/mural/read.php">
-                Mural
+            <a href="/../pages/hoteis/read.php">
+                Hotéis
             </a>
 
+            <a href="/../pages/restaurante/read.php">
+                Restaurantes
+            </a>
 
-            <!-- USUÁRIO -->
-            <a
-                href="/../pages/profile.php"
-                class="menu-usuario"
-            >
+            <a href="/../pages/feed.php">
+                +PINDA
+            </a>
 
-                <!-- FOTO / INICIAIS -->
-                <span class="menu-avatar">
+            <?php if ($usuarioLogado): ?>
 
-                    <?php if (!empty($usuarioFoto)): ?>
+                <a href="/../pages/mural/read.php">
+                    📸 Mural
+                </a>
 
-                        <img
-                            src="/../assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>"
-                            alt="Foto de perfil"
-                        >
+            <?php endif; ?>
 
-                    <?php else: ?>
-
-                        <?= htmlspecialchars(
-                            iniciaisHeader($usuarioNome)
-                        ) ?>
-
-                    <?php endif; ?>
-
-                </span>
+        </nav>
 
 
-                <!-- INFORMAÇÕES -->
-                <span class="menu-usuario-info">
+        <!-- AÇÕES (USUÁRIO / LOGIN) -->
+        <div class="header-actions">
 
-                    <!-- NOME + PINDACOINS -->
-                    <span class="menu-usuario-nome">
+            <?php if ($usuarioLogado): ?>
 
-                        <span class="nome-usuario">
+                <a href="/../pages/profile.php" class="user-chip">
+
+                    <span class="user-avatar">
+
+                        <?php if (!empty($usuarioFoto)): ?>
+
+                            <img
+                                src="/../assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>"
+                                alt="Foto de perfil"
+                            >
+
+                        <?php else: ?>
+
+                            <?= htmlspecialchars(iniciaisHeader($usuarioNome)) ?>
+
+                        <?php endif; ?>
+
+                    </span>
+
+                    <span class="user-meta">
+
+                        <span class="user-name">
                             <?= htmlspecialchars($usuarioNome) ?>
+
+                            <?php if ($usuarioMaster): ?>
+                                <span class="user-badge badge-master">Master</span>
+                            <?php elseif ($usuarioAdmin): ?>
+                                <span class="user-badge badge-admin">Admin</span>
+                            <?php endif; ?>
                         </span>
 
-                        <span
-                            class="menu-pindacoins"
-                            id="pindacoins"
-                        >
+                        <span class="user-coins" id="pindacoins">
                             PindaCOINS: <?= $pindaCoins ?>
                         </span>
 
                     </span>
 
+                </a>
 
-                    <!-- TIPO DE USUÁRIO -->
-                    <?php if ($usuarioMaster): ?>
+            <?php else: ?>
 
-                        <span class="menu-usuario-cargo master">
-                            Master
-                        </span>
+                <a href="/../pages/login.php" class="btn-login">
+                    Login
+                </a>
 
-                    <?php elseif ($usuarioAdmin): ?>
+            <?php endif; ?>
 
-                        <span class="menu-usuario-cargo admin">
-                            Administrador
-                        </span>
+        </div>
 
-                    <?php else: ?>
-
-                        <span class="menu-usuario-cargo">
-                            Usuário
-                        </span>
-
-                    <?php endif; ?>
-
-                </span>
-
-            </a>
-
-
-        <?php else: ?>
-
-            <!-- USUÁRIO NÃO LOGADO -->
-            <a href="/../pages/login.php">
-                Logi
-            </a>
-
-        <?php endif; ?>
-
-
-        <span class="indicator"></span>
-
-    </nav>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="/../assets/js/header-gsap.js" defer></script>
+    </div>
 
 </header>

@@ -22,28 +22,48 @@ body {
 
 
 /* ===========================
-   HEADER
+   HEADER — CONTAINER FLUTUANTE
 =========================== */
 
 .header {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 18px;
+    left: 50%;
 
-    width: 100%;
-    height: 95px;
+    transform: translateX(-50%);
 
-    padding: 0 25px;
-
-    background: var(--branco);
-
-    box-shadow: 0 4px 25px rgba(0, 0, 0, .25);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: calc(100% - 40px);
+    max-width: 1300px;
 
     z-index: 100;
+}
+
+
+/* ===========================
+   "CASCA" DE VIDRO (GLASSMORPHISM)
+=========================== */
+
+.header-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 10px 18px 10px 22px;
+
+    background: rgba(255, 255, 255, .72);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, .5);
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, .12),
+        0 1px 0 rgba(255, 255, 255, .6) inset;
 }
 
 
@@ -51,50 +71,70 @@ body {
    LOGO
 =========================== */
 
-.logo {
-    padding-right: 60px;
+.logo-pill {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-.logo img {
-    height: 80px;
-    will-change: transform;
+.logo-pill img {
+    height: 46px;
+    display: block;
 }
 
 
 /* ===========================
-   MENU
+   MENU CENTRAL (PÍLULA)
 =========================== */
 
-.menu {
+.nav-pill {
     position: relative;
 
     display: flex;
-    gap: 50px;
-    height: 100%;
+    align-items: center;
+    gap: 2px;
+
+    background: rgba(0, 0, 0, .04);
+
+    border-radius: 999px;
+
+    padding: 6px;
+
+    flex: 1;
+
+    justify-content: center;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+.nav-pill::-webkit-scrollbar {
+    display: none;
 }
 
 
 /* ===========================
-   BLOB (indicador líquido, criado via JS)
+   BLOB LÍQUIDO (criado via JS)
 =========================== */
 
-.menu-blob {
+.nav-blob {
     position: absolute;
-    left: 0;
-    bottom: 0;
 
+    top: 6px;
+    left: 6px;
+
+    height: calc(100% - 12px);
     width: 0;
-    height: 0;
 
     background: var(--laranja);
 
-    border-radius: 15px 15px 0 0;
+    border-radius: 999px;
 
     opacity: 0;
 
     pointer-events: none;
 
-    /* GSAP controla transform/left/width/height/opacity via JS */
     z-index: 0;
 }
 
@@ -103,37 +143,33 @@ body {
    LINKS DO MENU
 =========================== */
 
-.menu a {
+.nav-pill > a,
+.menu-dropdown > a {
+    position: relative;
+
+    z-index: 1;
+
     display: flex;
     align-items: center;
-    justify-content: center;
 
-    height: 100%;
+    padding: 11px 20px;
 
-    padding: 0 35px;
+    font-size: 15px;
+    font-weight: 600;
 
-    font-size: 20px;
-
-    color: #000000;
+    color: #222;
 
     text-decoration: none;
 
-    position: relative;
+    white-space: nowrap;
 
-    transition: color .35s ease;
+    border-radius: 999px;
 
-    /* fica acima do blob */
-    z-index: 1;
-
-    will-change: transform;
+    transition: color .3s ease;
 }
 
-
-/* ===========================
-   HOVER DO MENU
-=========================== */
-
-.menu a:hover {
+.nav-pill > a:hover,
+.menu-dropdown:hover > a {
     color: var(--branco);
 }
 
@@ -144,118 +180,176 @@ body {
 
 .menu-dropdown {
     position: relative;
-
-    height: 100%;
-
-    display: flex;
-    align-items: center;
 }
 
-.menu-dropdown > a {
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-
-    gap: 6px;
-}
-
-
-/* ===========================
-   SETA DO SUBMENU
-=========================== */
-
-.menu-dropdown > a::before {
+.menu-dropdown > a::after {
     content: "▾";
 
-    font-size: 13px;
+    margin-left: 6px;
 
-    line-height: 1;
+    font-size: 11px;
 
     display: inline-block;
 
-    will-change: transform;
+    transition: transform .3s ease;
+}
+
+.menu-dropdown:hover > a::after {
+    transform: rotate(180deg);
 }
 
 
 /* ===========================
-   SUBMENU
-   (visibilidade/animação controladas via GSAP no JS;
-   este bloco só define a aparência estática)
+   SUBMENU (aparência estática;
+   abertura controlada via GSAP)
 =========================== */
 
 .submenu {
     position: absolute;
 
-    top: 95px;
+    top: calc(100% + 14px);
     left: 50%;
 
-    min-width: 200px;
+    min-width: 190px;
 
     background: var(--branco);
 
-    border-top: 3px solid var(--amarelo);
+    border-radius: 18px;
 
-    border-radius: 0 0 12px 12px;
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .18);
 
     overflow: hidden;
 
     z-index: 101;
 
+    opacity: 0;
     pointer-events: none;
 
-    opacity: 0;
-
-    transform: translateX(-50%) translateY(-12px) scale(.95);
+    transform: translateX(-50%) translateY(-10px) scale(.95);
 }
 
+/* setinha apontando pro item pai */
+.submenu::before {
+    content: "";
 
-/* ===========================
-   LINKS DO SUBMENU
-=========================== */
+    position: absolute;
+    top: -7px;
+    left: 50%;
+
+    width: 14px;
+    height: 14px;
+
+    background: var(--branco);
+
+    transform: translateX(-50%) rotate(45deg);
+
+    border-radius: 3px;
+}
 
 .submenu a {
+    position: relative;
+
     display: block;
 
-    height: auto !important;
+    padding: 14px 20px;
 
-    padding: 14px 20px !important;
+    font-size: 14px;
+    font-weight: 600;
 
-    font-size: 16px !important;
-
-    color: #000000 !important;
+    color: var(--marrom);
 
     text-align: center;
 
     white-space: nowrap;
 
+    text-decoration: none;
+
     transition: background .25s ease, color .25s ease;
+
+    background: var(--branco);
 }
 
 .submenu a:hover {
     background: var(--amarelo);
-    color: var(--marrom) !important;
 }
 
 
 /* ===========================
-   USUÁRIO LOGADO
+   AÇÕES (USUÁRIO / LOGIN)
 =========================== */
 
-.menu-usuario {
-    display: flex !important;
+.header-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
 
+
+/* ===========================
+   BOTÃO LOGIN (visitante)
+=========================== */
+
+.btn-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 26px;
+
+    background: var(--laranja);
+
+    color: var(--branco);
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border-radius: 999px;
+
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 60, 0, .35);
+}
+
+
+/* ===========================
+   CHIP DO USUÁRIO
+=========================== */
+
+.user-chip {
+    display: flex;
     align-items: center;
 
     gap: 10px;
 
-    padding: 0 20px !important;
+    padding: 6px 18px 6px 6px;
 
-    flex-shrink: 0;
+    background: rgba(0, 0, 0, .04);
 
-    will-change: transform;
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    transition: background .3s ease, transform .3s ease;
+}
+
+.user-chip:hover {
+    background: var(--marrom);
+    transform: translateY(-2px);
+}
+
+.user-chip:hover .user-name,
+.user-chip:hover .user-coins {
+    color: var(--branco);
+}
+
+.user-chip:hover .user-coins {
+    background: rgba(255, 255, 255, .18);
+    color: var(--branco);
 }
 
 
@@ -263,9 +357,9 @@ body {
    AVATAR
 =========================== */
 
-.menu-avatar {
-    width: 40px;
-    height: 40px;
+.user-avatar {
+    width: 38px;
+    height: 38px;
 
     flex-shrink: 0;
 
@@ -274,24 +368,20 @@ body {
     background: linear-gradient(135deg, var(--laranja), var(--verde));
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     color: var(--branco);
 
-    font-size: 16px;
-
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 800;
 
     text-transform: uppercase;
 
     overflow: hidden;
-
-    will-change: transform;
 }
 
-.menu-avatar img {
+.user-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -299,156 +389,150 @@ body {
 
 
 /* ===========================
-   INFORMAÇÕES DO USUÁRIO
+   NOME / COINS / CARGO
 =========================== */
 
-.menu-usuario-info {
+.user-meta {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    line-height: 1.2;
+
+    line-height: 1.25;
+
     min-width: 0;
 }
 
-.menu-usuario-nome {
+.user-name {
     display: flex;
     align-items: center;
-    gap: 7px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #000;
+    gap: 6px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #111;
+
     white-space: nowrap;
-    max-width: none;
-    width: auto;
-    overflow: visible;
-    text-overflow: unset;
+
+    transition: color .3s ease;
 }
 
-.nome-usuario {
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.menu-pindacoins {
+.user-coins {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    padding: 3px 7px;
-    border-radius: 12px;
+
+    width: fit-content;
+
+    padding: 2px 8px;
+
+    margin-top: 2px;
+
+    border-radius: 999px;
+
     background: #fff4c2;
+
     color: #9a7200;
-    font-size: 11px;
+
+    font-size: 10px;
     font-weight: 800;
+
     white-space: nowrap;
-    flex-shrink: 0;
-    line-height: 1;
-}
 
-.menu-usuario-cargo {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--cinza);
-    text-transform: uppercase;
-    margin-top: 3px;
-}
-
-.menu-usuario-cargo.admin {
-    color: var(--laranja);
-}
-
-.menu-usuario-cargo.master {
-    color: var(--verde);
-}
-
-.menu-usuario:hover .menu-usuario-nome,
-.menu-usuario:hover .menu-usuario-cargo {
-    color: var(--branco);
+    transition: background .3s ease, color .3s ease;
 }
 
 
 /* ===========================
-   RESPONSIVO - TABLET
+   BADGES (ADMIN / MASTER)
+=========================== */
+
+.user-badge {
+    font-size: 9px;
+    font-weight: 800;
+
+    padding: 2px 7px;
+
+    border-radius: 999px;
+
+    text-transform: uppercase;
+
+    color: var(--branco);
+}
+
+.badge-admin {
+    background: var(--laranja);
+}
+
+.badge-master {
+    background: var(--verde);
+}
+
+
+/* ===========================
+   RESPONSIVO — TABLET
 =========================== */
 
 @media (max-width: 992px) {
 
-    .menu {
-        gap: 25px;
+    .header {
+        top: 12px;
+        width: calc(100% - 24px);
     }
 
-    .menu a {
-        padding: 0 18px;
-        font-size: 16px;
+    .header-shell {
+        padding: 8px 14px 8px 16px;
+        gap: 14px;
     }
 
-    .menu-usuario {
-        padding: 0 12px !important;
+    .logo-pill img {
+        height: 38px;
     }
 
-    .menu-usuario-nome {
+    .nav-pill > a,
+    .menu-dropdown > a {
+        padding: 9px 14px;
         font-size: 14px;
     }
 
-    .menu-pindacoins {
-        font-size: 10px;
-        padding: 3px 6px;
+    .user-meta {
+        display: none;
+    }
+
+    .user-chip {
+        padding: 6px;
     }
 
 }
 
 
 /* ===========================
-   RESPONSIVO - CELULAR
+   RESPONSIVO — CELULAR
 =========================== */
 
 @media (max-width: 768px) {
 
-    .logo {
-        padding-right: 20px;
+    .header-shell {
+        border-radius: 24px;
     }
 
-    .logo img {
-        height: 55px;
+    .nav-pill {
+        justify-content: flex-start;
     }
 
-    .menu {
-        gap: 12px;
-    }
-
-    .menu a {
-        padding: 0 10px;
+    .nav-pill > a,
+    .menu-dropdown > a {
+        padding: 8px 12px;
         font-size: 13px;
     }
 
-    .menu-usuario {
-        gap: 6px;
-        padding: 0 8px !important;
-    }
-
-    .menu-avatar {
-        width: 34px;
-        height: 34px;
-        font-size: 13px;
-    }
-
-    .menu-usuario-nome {
-        font-size: 13px;
-        gap: 5px;
-    }
-
-    .menu-pindacoins {
-        font-size: 9px;
-        padding: 3px 5px;
-    }
-
-    .menu-usuario-cargo {
-        font-size: 9px;
-    }
-
-    /* Em telas pequenas o blob some para não deslocar layout */
-    .menu-blob {
+    .nav-blob {
         display: none;
+    }
+
+    .btn-login {
+        padding: 9px 18px;
+        font-size: 13px;
     }
 
 }
