@@ -225,7 +225,7 @@ if (!function_exists('iniciaisHeader')) {
 
             <!-- USUÁRIO NÃO LOGADO -->
             <a href="/../pages/login.php">
-                Login
+                Logi
             </a>
 
         <?php endif; ?>
