@@ -1,12 +1,14 @@
 <?php
 /**
- * API REST de eventos do calendário.
+ * API REST de eventos.
  *
- * GET    /api/events.php            -> lista todos os eventos (formato FullCalendar)
- * POST   /api/events.php            -> cria um evento
- * PUT    /api/events.php?id=1       -> atualiza um evento (inclui mover via drag-and-drop)
- * DELETE /api/events.php?id=1       -> remove um evento
+ * GET    /api/events.php            -> lista todos os eventos (público)
+ * POST   /api/events.php            -> cria um evento (apenas usuário master)
+ * PUT    /api/events.php?id=1       -> atualiza um evento (apenas usuário master)
+ * DELETE /api/events.php?id=1       -> remove um evento (apenas usuário master)
  */
+
+session_start();
 
 header('Content-Type: application/json; charset=utf8');
 header('Access-Control-Allow-Origin: *');
@@ -24,31 +26,55 @@ $pdo = $conexao->conectar();
 
 $metodo = $_SERVER['REQUEST_METHOD'];
 
+function usuarioEhMaster()
+{
+    return isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'master';
+}
+
+function exigirMaster()
+{
+    if (!usuarioEhMaster()) {
+        http_response_code(403);
+        echo json_encode(['erro' => 'Apenas o usuário master pode gerenciar eventos.']);
+        exit;
+    }
+}
+
 switch ($metodo) {
 
     case 'GET':
+        // Leitura é pública - qualquer visitante pode ver os eventos
         $stmt = $pdo->query("SELECT * FROM eventos ORDER BY data_inicio ASC");
         $eventos = $stmt->fetchAll();
 
-        // Converte para o formato que o FullCalendar espera
         $resposta = array_map(function ($ev) {
             return [
-                'id'         => $ev['id'],
+                'id'         => (int) $ev['id'],
                 'title'      => $ev['titulo'],
                 'start'      => $ev['data_inicio'],
                 'end'        => $ev['data_fim'],
                 'allDay'     => (bool) $ev['dia_inteiro'],
                 'color'      => $ev['cor'],
+                'imagem'     => $ev['imagem'],
+                'local'      => $ev['local'],
+                'categoria'  => $ev['categoria'],
+                'formato'    => $ev['formato'],
+                'gratuito'   => (bool) $ev['gratuito'],
                 'extendedProps' => [
                     'descricao' => $ev['descricao'],
                 ],
             ];
         }, $eventos);
 
-        echo json_encode($resposta);
+        echo json_encode([
+            'eventos'  => $resposta,
+            'ehMaster' => usuarioEhMaster(),
+        ]);
         break;
 
     case 'POST':
+        exigirMaster();
+
         $dados = json_decode(file_get_contents('php://input'), true);
 
         if (empty($dados['titulo']) || empty($dados['data_inicio'])) {
@@ -58,8 +84,8 @@ switch ($metodo) {
         }
 
         $stmt = $pdo->prepare("
-            INSERT INTO eventos (titulo, descricao, data_inicio, data_fim, cor, dia_inteiro)
-            VALUES (:titulo, :descricao, :data_inicio, :data_fim, :cor, :dia_inteiro)
+            INSERT INTO eventos (titulo, descricao, data_inicio, data_fim, cor, dia_inteiro, imagem, local, categoria, formato, gratuito)
+            VALUES (:titulo, :descricao, :data_inicio, :data_fim, :cor, :dia_inteiro, :imagem, :local, :categoria, :formato, :gratuito)
         ");
         $stmt->execute([
             ':titulo'      => $dados['titulo'],
@@ -68,12 +94,19 @@ switch ($metodo) {
             ':data_fim'    => $dados['data_fim'] ?? null,
             ':cor'         => $dados['cor'] ?? '#3788d8',
             ':dia_inteiro' => !empty($dados['dia_inteiro']) ? 1 : 0,
+            ':imagem'      => $dados['imagem'] ?? null,
+            ':local'       => $dados['local'] ?? null,
+            ':categoria'   => $dados['categoria'] ?? 'Evento',
+            ':formato'     => $dados['formato'] ?? 'Presencial',
+            ':gratuito'    => !empty($dados['gratuito']) ? 1 : 0,
         ]);
 
         echo json_encode(['id' => $pdo->lastInsertId(), 'mensagem' => 'Evento criado com sucesso.']);
         break;
 
     case 'PUT':
+        exigirMaster();
+
         $id = $_GET['id'] ?? null;
         if (!$id) {
             http_response_code(400);
@@ -86,7 +119,7 @@ switch ($metodo) {
         $campos = [];
         $params = [':id' => $id];
 
-        foreach (['titulo', 'descricao', 'data_inicio', 'data_fim', 'cor'] as $campo) {
+        foreach (['titulo', 'descricao', 'data_inicio', 'data_fim', 'cor', 'imagem', 'local', 'categoria', 'formato'] as $campo) {
             if (array_key_exists($campo, $dados)) {
                 $campos[] = "$campo = :$campo";
                 $params[":$campo"] = $dados[$campo];
@@ -95,6 +128,10 @@ switch ($metodo) {
         if (array_key_exists('dia_inteiro', $dados)) {
             $campos[] = "dia_inteiro = :dia_inteiro";
             $params[':dia_inteiro'] = !empty($dados['dia_inteiro']) ? 1 : 0;
+        }
+        if (array_key_exists('gratuito', $dados)) {
+            $campos[] = "gratuito = :gratuito";
+            $params[':gratuito'] = !empty($dados['gratuito']) ? 1 : 0;
         }
 
         if (empty($campos)) {
@@ -111,6 +148,8 @@ switch ($metodo) {
         break;
 
     case 'DELETE':
+        exigirMaster();
+
         $id = $_GET['id'] ?? null;
         if (!$id) {
             http_response_code(400);
