@@ -156,11 +156,7 @@ if (!function_exists('iniciaisHeader')) {
                         +PINDA
                     </a>
 
-                    <nav class="nav-pill">
 
-            <a href="/../index.php">
-                Loja de Recompensas
-            </a>
 
                     <?php if ($usuarioLogado): ?>
 
@@ -171,6 +167,12 @@ if (!function_exists('iniciaisHeader')) {
                     <?php endif; ?>
 
                 </div>
+
+                <nav class="nav-pill">
+
+                    <a href="/../index.php">
+                        Início
+                    </a>
 
             </div>
 
