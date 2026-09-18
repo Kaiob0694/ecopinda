@@ -1,101 +1,32 @@
 /* =========================================================
-   PINDA ECO TOUR
-   PÁGINA PÚBLICA DE EVENTOS
-   ========================================================= */
-
-
-/* =========================================================
-   CONTAINER PRINCIPAL
+   PINDA ECO TOUR — PÁGINA DE EVENTOS
    ========================================================= */
 
 .eventos-container {
     width: 100%;
     min-height: 100vh;
-
-    padding: 140px 30px 70px;
-
     background: #ffffff;
-    
-    position: relative;
-    overflow: hidden;
+    padding: 40px 30px 70px;
 }
-
-
-/* =========================================================
-   CONTEÚDO
-   ========================================================= */
 
 .eventos-conteudo {
     width: 100%;
     max-width: 1300px;
-
     margin: 0 auto;
-    
-    position: relative;
-    z-index: 1;
 }
 
 
 /* =========================================================
-   TOPO COM TÍTULO
+   BARRA DE FILTROS
    ========================================================= */
 
-.eventos-topo {
-    margin-bottom: 32px;
-}
-
-.eventos-titulo {
-    margin: 0;
-
-    color: #222222;
-
-    font-size: 34px;
-    font-weight: 700;
-
-    line-height: 1.2;
-}
-
-.eventos-titulo::after {
-    content: "";
-
-    display: block;
-
-    width: 60px;
-    height: 4px;
-
-    margin-top: 12px;
-
-    border-radius: 10px;
-
-    background: linear-gradient(
-        90deg,
-        var(--laranja),
-        var(--amarelo)
-    );
-}
-
-.eventos-subtitulo {
-    margin: 12px 0 0;
-
-    color: #666666;
-
-    font-size: 16px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   FILTROS SIMPLIFICADOS
-   ========================================================= */
-
-.filtros-simplificados {
+.filtros-barra {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 12px;
 
-    padding: 20px 0;
+    padding-bottom: 24px;
     margin-bottom: 28px;
 
     border-bottom: 1px solid #eeeeee;
@@ -114,12 +45,6 @@
 
     background: #ffffff;
     color: #444444;
-
-    transition: border-color 0.2s ease;
-}
-
-.filtro-busca:focus-within {
-    border-color: var(--laranja);
 }
 
 .filtro-busca i {
@@ -135,10 +60,6 @@
     font-family: inherit;
     color: #333333;
     background: transparent;
-}
-
-.filtro-busca input::placeholder {
-    color: #aaaaaa;
 }
 
 .filtro-select {
@@ -158,12 +79,6 @@
     font-weight: 500;
 
     cursor: pointer;
-
-    transition: border-color 0.2s ease;
-}
-
-.filtro-select:focus-within {
-    border-color: var(--laranja);
 }
 
 .filtro-select i:first-child {
@@ -184,7 +99,6 @@
 .filtro-select .fa-chevron-down {
     color: #aaaaaa;
     font-size: 11px;
-    pointer-events: none;
 }
 
 .filtro-passados {
@@ -201,7 +115,7 @@
 
     cursor: pointer;
 
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background .2s ease, color .2s ease;
 }
 
 .filtro-passados.ativo,
@@ -212,10 +126,10 @@
 
 
 /* =========================================================
-   AÇÕES TOPO
+   CABEÇALHO DA LISTA
    ========================================================= */
 
-.eventos-acoes-topo {
+.eventos-topo {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -225,15 +139,32 @@
     margin-bottom: 26px;
 }
 
-.eventos-quantidade {
-    color: #777777;
-    font-size: 14px;
-}
-
-.eventos-acoes-direita {
+.eventos-topo-esquerda {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.eventos-titulo {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.eventos-contador {
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    color: #666666;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.eventos-acoes-topo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .eventos-toggle {
@@ -262,7 +193,7 @@
 
     cursor: pointer;
 
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background .2s ease, color .2s ease;
 }
 
 .eventos-toggle button.ativo {
@@ -270,147 +201,106 @@
     color: #ffffff;
 }
 
+.eventos-botao-novo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, var(--laranja), #ff6a2c);
+    color: #ffffff;
+
+    font-size: 13.5px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eventos-botao-novo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(255, 100, 0, 0.25);
+}
+
 
 /* =========================================================
-   GRID
+   GRID DE CARDS
    ========================================================= */
 
 .eventos-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 25px;
-
-    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
 }
 
-
-/* =========================================================
-   CARD
-   ========================================================= */
-
 .evento-card {
+    position: relative;
     display: flex;
     flex-direction: column;
 
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 18px;
     overflow: hidden;
 
-    min-width: 0;
-
-    background: #ffffff;
-
-    border: 1px solid #eeeeee;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.07);
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .evento-card:hover {
     transform: translateY(-5px);
-
-    box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
-
-
-/* =========================================================
-   IMAGEM / GALERIA
-   ========================================================= */
 
 .evento-imagem-container {
     position: relative;
-    
     width: 100%;
-    height: 220px;
-
-    overflow: hidden;
-
+    height: 190px;
     background: #f2f2f2;
-}
-
-.evento-galeria {
-    position: relative;
-    width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 
 .evento-imagem {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition: opacity 0.35s ease;
+    transition: transform 0.4s ease;
 }
 
-.evento-imagem.ativa {
-    opacity: 1;
-    pointer-events: auto;
+.evento-card:hover .evento-imagem {
+    transform: scale(1.04);
 }
-
-
-/* =========================================================
-   PLACEHOLDER
-   ========================================================= */
 
 .evento-imagem-placeholder {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: 100%;
     height: 100%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f5f5f5,
-            #e9e9e9
-        );
-
+    background: linear-gradient(135deg, #f5f5f5, #e9e9e9);
     color: #999999;
-
     font-size: 30px;
 }
 
-
-/* =========================================================
-   BADGES
-   ========================================================= */
-
-.evento-categoria {
-    display: inline-flex;
-    align-items: center;
+.evento-badge-categoria {
+    position: absolute;
+    top: 12px;
+    right: 12px;
 
     padding: 5px 12px;
 
     border-radius: 20px;
 
-    background: rgba(255, 150, 0, 0.12);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #eeeeee;
 
-    color: var(--laranja);
-
+    color: #333333;
     font-size: 11.5px;
     font-weight: 700;
 }
@@ -431,129 +321,21 @@
     font-weight: 700;
 }
 
-
-/* =========================================================
-   SETAS DA GALERIA
-   ========================================================= */
-
-.galeria-seta {
-    position: absolute;
-
-    top: 50%;
-
-    z-index: 5;
-
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
-    border: none;
-    border-radius: 50%;
-
-    background: rgba(0, 0, 0, 0.55);
-
-    color: #fff;
-
-    font-size: 18px;
-
-    cursor: pointer;
-
-    transform: translateY(-50%);
-
-    transition: 0.2s ease;
-}
-
-.galeria-seta:hover {
-    background: rgba(0, 0, 0, 0.75);
-
-    transform:
-        translateY(-50%)
-        scale(1.08);
-}
-
-.galeria-anterior {
-    left: 12px;
-}
-
-.galeria-proxima {
-    right: 12px;
-}
-
-
-/* =========================================================
-   CONTADOR DE FOTOS
-   ========================================================= */
-
-.galeria-contador {
-    position: absolute;
-
-    right: 12px;
-    bottom: 12px;
-
-    z-index: 5;
-
-    padding: 5px 9px;
-
-    border-radius: 20px;
-
-    background: rgba(0, 0, 0, 0.60);
-
-    color: #fff;
-
-    font-size: 11px;
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   INFORMAÇÕES
-   ========================================================= */
-
 .evento-info {
     display: flex;
     flex-direction: column;
-
     flex: 1;
-
-    padding: 20px;
+    padding: 18px 20px;
 }
-
-
-/* =========================================================
-   TÍTULO
-   ========================================================= */
-
-.evento-titulo {
-    margin: 0 0 8px;
-
-    color: #222222;
-
-    font-size: 20px;
-    font-weight: 700;
-
-    line-height: 1.3;
-}
-
-
-/* =========================================================
-   DATA E HORA
-   ========================================================= */
 
 .evento-datahora {
     display: flex;
     align-items: center;
-
     gap: 16px;
-
-    margin: 12px 0 0;
 
     color: #888888;
     font-size: 12.5px;
+    margin-bottom: 8px;
 }
 
 .evento-datahora span {
@@ -567,40 +349,18 @@
     font-size: 11px;
 }
 
-
-/* =========================================================
-   LOCAL
-   ========================================================= */
-
-.evento-local {
-    display: inline-flex;
-    align-items: center;
-
-    gap: 6px;
-
-    margin: 12px 0 0;
-
-    color: #666666;
-    font-size: 14px;
+.evento-titulo {
+    margin: 0 0 8px;
+    color: var(--verde);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
 }
-
-.evento-local i {
-    color: #aaaaaa;
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   DESCRIÇÃO
-   ========================================================= */
 
 .evento-descricao {
-    margin: 10px 0 0;
-
+    margin: 0;
     color: #666666;
-
     font-size: 13.5px;
-
     line-height: 1.55;
 
     display: -webkit-box;
@@ -609,168 +369,105 @@
     overflow: hidden;
 }
 
-
-/* =========================================================
-   RODAPÉ DO CARD
-   ========================================================= */
-
 .evento-footer {
     display: flex;
-
-    flex-direction: column;
-
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
 
     margin-top: auto;
-    padding-top: 20px;
+    padding-top: 16px;
 }
 
-
-/* =========================================================
-   BOTÃO VER MAIS
-   ========================================================= */
-
-.evento-botao {
+.evento-local {
     display: inline-flex;
-
     align-items: center;
-    justify-content: center;
+    gap: 6px;
 
-    width: 100%;
-    min-height: 42px;
+    color: #777777;
+    font-size: 12.5px;
 
-    padding: 10px 16px;
+    min-width: 0;
+}
 
-    border-radius: 10px;
+.evento-local span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--verde),
-            #075c0b
-        );
+.evento-local i {
+    color: #aaaaaa;
+    font-size: 12px;
+    flex-shrink: 0;
+}
 
-    color: #ffffff;
+.evento-ver-mais {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 
-    text-decoration: none;
-
+    color: var(--verde);
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
 
+    background: none;
     border: none;
     cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        filter 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
-.evento-botao:hover {
-    transform: translateY(-2px);
-
-    filter: brightness(1.05);
-
-    box-shadow:
-        0 8px 18px
-        rgba(0, 120, 30, 0.20);
+.evento-ver-mais:hover {
+    text-decoration: underline;
 }
 
-.evento-botao:active {
-    transform: translateY(0);
-}
-
-
-/* =========================================================
-   AÇÕES DO MASTER
-   ========================================================= */
-
-.evento-acoes {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
+/* Ações do master no card */
+.evento-acoes-master {
+    display: flex;
     gap: 8px;
-
-    width: 100%;
-
     padding: 0 20px 18px;
 }
 
-
-/* =========================================================
-   BOTÕES EDITAR / EXCLUIR
-   ========================================================= */
-
 .evento-editar,
 .evento-excluir {
+    flex: 1;
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
+    gap: 6px;
 
-    min-height: 38px;
-
-    padding: 8px 12px;
+    min-height: 34px;
+    padding: 7px 10px;
 
     border-radius: 9px;
-
-    text-decoration: none;
 
     font-size: 12px;
     font-weight: 600;
 
-    border: 1px solid;
-    
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
 }
-
-
-/* =========================================================
-   EDITAR
-   ========================================================= */
 
 .evento-editar {
     background: #fff7df;
-
-    border-color: #f0d27a;
-
+    border: 1px solid #f0d27a;
     color: #806000;
 }
 
 .evento-editar:hover {
     background: #ffedb8;
-
-    box-shadow:
-        0 5px 12px rgba(180, 140, 0, 0.12);
-
     transform: translateY(-1px);
 }
 
-
-/* =========================================================
-   EXCLUIR
-   ========================================================= */
-
 .evento-excluir {
     background: #fff0f0;
-
-    border-color: #efb0b0;
-
+    border: 1px solid #efb0b0;
     color: #b42323;
 }
 
 .evento-excluir:hover {
     background: #ffdcdc;
-
-    box-shadow:
-        0 5px 12px rgba(180, 35, 35, 0.12);
-
     transform: translateY(-1px);
 }
 
@@ -781,46 +478,36 @@
 
 .eventos-vazio {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
-    min-height: 250px;
-
+    min-height: 220px;
     padding: 40px;
 
     border: 1px solid #eeeeee;
-
     border-radius: 18px;
-
     background: #fafafa;
 
     text-align: center;
-
     grid-column: 1 / -1;
 }
 
 .eventos-vazio h3 {
     margin: 0 0 8px;
-
     color: #333333;
-
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .eventos-vazio p {
     margin: 0;
-
     color: #777777;
-
     font-size: 14px;
 }
 
 
 /* =========================================================
-   VISTA CALENDÁRIO
+   VISTA CALENDÁRIO (FullCalendar)
    ========================================================= */
 
 .vista-calendario {
@@ -867,7 +554,7 @@
     border-radius: 9px !important;
     padding: 7px 14px;
     box-shadow: none;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background .2s ease, transform .2s ease;
 }
 
 .fc .fc-button:hover {
@@ -940,7 +627,7 @@
 
 
 /* =========================================================
-   MODAIS
+   MODAIS (edição e visualização)
    ========================================================= */
 
 .modal-overlay {
@@ -988,46 +675,6 @@
     margin: 0 0 22px;
 }
 
-/* Modal de visualização */
-.modal-visualizar {
-    max-width: 500px;
-}
-
-.modal-visualizar .evento-imagem-container {
-    margin-bottom: 18px;
-    border-radius: 12px;
-}
-
-.modal-visualizar .evento-view-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 14px;
-    color: #777777;
-    font-size: 13px;
-}
-
-.modal-visualizar .evento-view-meta span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.modal-visualizar .evento-view-meta i {
-    color: var(--laranja);
-}
-
-.modal-visualizar p {
-    color: #555555;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   CAMPOS DE FORMULÁRIO
-   ========================================================= */
-
 .campo {
     display: flex;
     flex-direction: column;
@@ -1070,7 +717,7 @@
     font-family: inherit;
     outline: none;
     resize: vertical;
-    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
 .modal input:hover, .modal textarea:hover, .modal select:hover {
@@ -1093,11 +740,6 @@
     cursor: pointer;
 }
 
-
-/* =========================================================
-   BOTÕES
-   ========================================================= */
-
 .modal-botoes {
     margin-top: 24px;
     display: flex;
@@ -1119,7 +761,7 @@
     font-size: 13.5px;
     font-weight: 600;
     font-family: inherit;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .btn-salvar {
@@ -1152,133 +794,58 @@
     background: #ececec;
 }
 
+/* Modal de visualização (somente leitura) */
+.modal-visualizar .evento-view-imagem {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    background: #f2f2f2;
+}
 
-/* =========================================================
-   BOTÃO CADASTRAR EVENTO
-   ========================================================= */
+.modal-visualizar .evento-view-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 14px;
+    color: #777777;
+    font-size: 13px;
+}
 
-.evento-botao-cadastrar {
+.modal-visualizar .evento-view-meta span {
     display: inline-flex;
-    flex-shrink: 0;
-
     align-items: center;
-    justify-content: center;
+    gap: 6px;
+}
 
-    min-height: 44px;
+.modal-visualizar .evento-view-meta i {
+    color: var(--verde);
+}
 
-    padding: 12px 22px;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--laranja),
-            #ff6a2c
-        );
-
-    color: #ffffff;
-
-    text-decoration: none;
-
+.modal-visualizar p {
+    color: #555555;
     font-size: 14px;
-    font-weight: 700;
-
-    white-space: nowrap;
-
-    border: none;
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        filter 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.evento-botao-cadastrar:hover {
-    transform: translateY(-2px);
-
-    filter: brightness(1.05);
-
-    box-shadow:
-        0 8px 18px
-        rgba(255, 100, 0, 0.25);
-}
-
-.evento-botao-cadastrar:active {
-    transform: translateY(0);
+    line-height: 1.6;
 }
 
 
 /* =========================================================
-   BLOBS DECORATIVOS
-   ========================================================= */
-
-.eventos-container::before,
-.eventos-container::after {
-    content: "";
-
-    position: absolute;
-
-    z-index: 0;
-
-    border-radius: 50%;
-
-    filter: blur(80px);
-
-    pointer-events: none;
-}
-
-/* blob verde, canto superior direito */
-.eventos-container::before {
-    top: -120px;
-    right: -100px;
-
-    width: 420px;
-    height: 420px;
-
-    background: radial-gradient(
-        circle,
-        rgba(0, 120, 30, 0.14),
-        rgba(0, 120, 30, 0) 70%
-    );
-}
-
-/* blob laranja/amarelo, canto inferior esquerdo */
-.eventos-container::after {
-    bottom: -140px;
-    left: -120px;
-
-    width: 460px;
-    height: 460px;
-
-    background: radial-gradient(
-        circle,
-        rgba(255, 150, 0, 0.12),
-        rgba(255, 200, 0, 0) 70%
-    );
-}
-
-
-/* =========================================================
-   TABLET
+   RESPONSIVO
    ========================================================= */
 
 @media (max-width: 1050px) {
-
-    .eventos-container {
-        padding:
-            130px
-            25px
-            60px;
-    }
-
     .eventos-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .eventos-container {
+        padding: 24px 16px 45px;
     }
 
-    .filtros-simplificados {
+    .filtros-barra {
         flex-direction: column;
         align-items: stretch;
     }
@@ -1286,58 +853,18 @@
     .filtro-select {
         justify-content: space-between;
     }
-}
 
-
-/* =========================================================
-   CELULAR
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .eventos-container {
-        padding:
-            120px
-            16px
-            45px;
-    }
-
-    .eventos-titulo {
-        font-size: 28px;
-    }
-
-    .eventos-subtitulo {
-        font-size: 15px;
-    }
-
-    .eventos-grid {
-        grid-template-columns: 1fr;
-
-        gap: 20px;
-    }
-
-    .evento-imagem-container {
-        height: 210px;
-    }
-
-    .filtros-simplificados {
+    .eventos-topo {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .filtro-busca,
-    .filtro-select,
-    .filtro-passados {
-        width: 100%;
-    }
-
     .eventos-acoes-topo {
-        flex-direction: column;
+        justify-content: space-between;
     }
 
-    .eventos-acoes-direita {
-        width: 100%;
-        justify-content: space-between;
+    .eventos-grid {
+        grid-template-columns: 1fr;
     }
 
     .campo-linha {
@@ -1354,66 +881,13 @@
         display: flex;
         justify-content: center;
     }
-
-    .eventos-container::before,
-    .eventos-container::after {
-        display: none;
-    }
 }
-
-
-/* =========================================================
-   CELULAR PEQUENO
-   ========================================================= */
-
-@media (max-width: 400px) {
-
-    .eventos-container {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .eventos-titulo {
-        font-size: 25px;
-    }
-
-    .evento-info {
-        padding: 17px;
-    }
-
-    .evento-titulo {
-        font-size: 18px;
-    }
-
-    .evento-acoes {
-        grid-template-columns: 1fr;
-    }
-
-    .modal {
-        max-width: calc(100% - 20px);
-    }
-}
-
-
-/* =========================================================
-   ACESSIBILIDADE
-   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
     .evento-card,
     .evento-imagem,
-    .evento-botao,
-    .evento-editar,
-    .evento-excluir,
-    .evento-botao-cadastrar,
-    .galeria-seta,
+    .eventos-botao-novo,
     .filtro-passados {
         transition: none;
-    }
-    
-    .eventos-container::before,
-    .eventos-container::after {
-        filter: blur(60px);
     }
 }
