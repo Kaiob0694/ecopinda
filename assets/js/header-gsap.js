@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
             gsap.killTweensOf(submenu);
             gsap.to(submenu, {
                 opacity: 0,
-                y: -10,
+                y: -6,
                 scale: 0.95,
                 duration: 0.3,
                 ease: 'power2.in',

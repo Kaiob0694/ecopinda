@@ -201,14 +201,14 @@ body {
 .submenu {
     position: absolute;
 
-    top: calc(100% + 14px);
+    top: 100%;
     left: 50%;
 
     min-width: 210px;
 
     background: var(--branco);
 
-    border-radius: 18px;
+    border-radius: 0 0 22px 22px;
 
     box-shadow: 0 20px 45px rgba(0, 0, 0, .18);
 
@@ -219,25 +219,8 @@ body {
     opacity: 0;
     pointer-events: none;
 
-    transform: translateX(-50%) translateY(-10px) scale(.95);
-}
-
-/* setinha apontando pro item pai */
-.submenu::before {
-    content: "";
-
-    position: absolute;
-    top: -7px;
-    left: 50%;
-
-    width: 14px;
-    height: 14px;
-
-    background: var(--branco);
-
-    transform: translateX(-50%) rotate(45deg);
-
-    border-radius: 3px;
+    transform: translateX(-50%) translateY(-6px) scale(.98);
+    transform-origin: top center;
 }
 
 .submenu a {
