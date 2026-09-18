@@ -24,14 +24,14 @@
 .eventos-banner {
     position: relative;
     overflow: hidden;
-
     display: flex;
     align-items: center;
 
-    min-height: 220px;
-    /* espaço extra no topo para não ficar embaixo do header fixo */
+    width: 100%;
+    min-height: 180px;
+
     margin-top: 110px;
-    padding: 46px 40px;
+    padding: 35px 40px;
 
     background-color: #0a3d12;
     background-size: cover;
@@ -57,8 +57,9 @@
 .eventos-banner-conteudo {
     position: relative;
     z-index: 2;
+
     max-width: 640px;
-    padding: 0 40px;
+    padding: 0 20px;
 }
 
 .eventos-banner-tag {
@@ -67,51 +68,64 @@
     gap: 8px;
 
     padding: 6px 14px;
+
     border-radius: 20px;
 
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
+
     color: #ffffff;
 
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 700;
+
     text-transform: uppercase;
     letter-spacing: .04em;
 
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 .eventos-banner-titulo {
-    margin: 0 0 10px;
-    font-size: 32px;
+    margin: 0 0 8px;
+
+    font-size: 30px;
     font-weight: 800;
+
     line-height: 1.2;
+
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 .eventos-banner-texto {
     margin: 0;
-    font-size: 15px;
-    line-height: 1.6;
+
+    font-size: 14px;
+    line-height: 1.5;
+
     color: rgba(255, 255, 255, 0.92);
+
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* conteúdo abaixo do banner (filtros, grid, etc.) */
-.eventos-conteudo > *:not(.eventos-banner) {
-    margin-top: 0;
+/* Espaço entre banner e conteúdo */
+.eventos-banner + * {
+    margin-top: 35px;
 }
 
-.eventos-banner + * {
-    margin-top: 40px;
-}
+
+/* =========================================================
+   BANNER — MOBILE
+   ========================================================= */
 
 @media (max-width: 700px) {
 
     .eventos-banner {
-        min-height: 260px;
+        min-height: 230px;
+
         margin-top: 70px;
-        padding: 32px 22px;
+
+        padding: 28px 20px;
+
         align-items: flex-end;
     }
 
@@ -123,14 +137,22 @@
         background: linear-gradient(
             180deg,
             rgba(5, 40, 10, 0.3) 0%,
-            rgba(5, 40, 10, 0.85) 100%
+            rgba(5, 40, 10, 0.88) 100%
         );
+    }
+
+    .eventos-banner-tag {
+        font-size: 11px;
+        padding: 5px 12px;
     }
 
     .eventos-banner-titulo {
         font-size: 24px;
     }
 
+    .eventos-banner-texto {
+        font-size: 13px;
+    }
 }
 
 
