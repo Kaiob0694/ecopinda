@@ -10,39 +10,31 @@
 <title>Calendário de Eventos | Pinda Eco</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/locales-all.global.min.js"></script>
 
-<!-- ajuste o caminho se o style_header.css / style.css do site ficar em outro lugar -->
+<!-- FullCalendar via jsdelivr (CDN oficial recomendado pela documentação) -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales-all.global.min.js"></script>
+
+<!-- ajuste o caminho se o style.css do site ficar em outro lugar -->
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/assets/css/calendario.css">
 </head>
-<body class="calendario-page">
-
-<img class="bg-photo" src="/assets/img/fundo-floresta.jpg" alt="">
-<div class="bg-overlay"></div>
-<div class="cloud c1"></div>
-<div class="cloud c2"></div>
-<div class="cloud c3"></div>
+<body>
 
 <div class="calendario-container">
-    <div class="calendario-card">
+    <div class="calendario-conteudo">
 
-        <div class="calendario-header">
-            <div class="calendario-header-info">
-                <div class="calendario-icone"><i class="fa-solid fa-calendar-days"></i></div>
-                <div>
-                    <h1>Calendário de Eventos</h1>
-                    <p><i class="fa-solid fa-leaf"></i> Pinda Eco</p>
-                </div>
+        <div class="calendario-topo">
+            <div>
+                <h1 class="calendario-titulo">Calendário de Eventos</h1>
+                <p class="calendario-subtitulo">Acompanhe e organize os eventos do Pinda Eco Tour.</p>
             </div>
-            <button class="btn-novo-evento" id="btnNovoEvento">
+            <button class="calendario-botao-novo" id="btnNovoEvento">
                 <i class="fa-solid fa-plus"></i> Novo evento
             </button>
         </div>
 
-        <div class="calendario-corpo">
+        <div class="calendario-card">
             <div id="calendar"></div>
         </div>
 
