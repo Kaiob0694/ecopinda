@@ -195,7 +195,7 @@ if (!function_exists('iniciaisHeader')) {
             <a href="/../index.php">
                 Loja de Recompensas
             </a>
-            <a href="/../pages/calendario.php">
+            <a href="/../pages/calendario/calendario.php">
                 Calendario
             </a>
 
