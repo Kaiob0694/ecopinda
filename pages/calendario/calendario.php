@@ -39,6 +39,38 @@ include "../../includes/head.php";
 
 
 <!-- =====================================================
+     BANNER DE EVENTOS
+====================================================== -->
+
+<div
+    class="eventos-banner"
+    style="background-image: url('<?= $baseUrl ?>/assets/img/banner-eventos.jpg');"
+>
+
+    <div class="eventos-banner-overlay"></div>
+
+    <div class="eventos-banner-conteudo">
+
+        <span class="eventos-banner-tag">
+            <i class="fa-solid fa-calendar-days"></i>
+            Agenda Pinda Eco Tour
+        </span>
+
+        <h1 class="eventos-banner-titulo">
+            Viva a natureza em Pindamonhangaba
+        </h1>
+
+        <p class="eventos-banner-texto">
+            Confira mutirões, shows e passeios ecológicos.
+            Fique por dentro de tudo o que vai rolar na cidade.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
      CONTAINER PRINCIPAL
 ====================================================== -->
 

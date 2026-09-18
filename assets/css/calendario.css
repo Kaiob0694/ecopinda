@@ -17,6 +17,106 @@
 
 
 /* =========================================================
+   BANNER DE EVENTOS
+   ========================================================= */
+
+.eventos-banner {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 320px;
+    padding: 46px 40px;
+
+    background-color: #0a3d12;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #ffffff;
+}
+
+.eventos-banner-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background: linear-gradient(
+        90deg,
+        rgba(5, 40, 10, 0.85) 0%,
+        rgba(5, 40, 10, 0.55) 55%,
+        rgba(5, 40, 10, 0.25) 100%
+    );
+}
+
+.eventos-banner-conteudo {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+}
+
+.eventos-banner-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px 14px;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+
+    margin-bottom: 14px;
+}
+
+.eventos-banner-titulo {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.eventos-banner-texto {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 700px) {
+
+    .eventos-banner {
+        min-height: 260px;
+        padding: 32px 22px;
+        align-items: flex-end;
+    }
+
+    .eventos-banner-overlay {
+        background: linear-gradient(
+            180deg,
+            rgba(5, 40, 10, 0.3) 0%,
+            rgba(5, 40, 10, 0.85) 100%
+        );
+    }
+
+    .eventos-banner-titulo {
+        font-size: 24px;
+    }
+
+}
+
+
+/* =========================================================
    BARRA DE FILTROS
    ========================================================= */
 
