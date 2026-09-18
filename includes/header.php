@@ -108,6 +108,10 @@ if (!function_exists('iniciaisHeader')) {
                 Roteiros Prontos
             </a>
 
+            <a href="/../index.php">
+                Loja de Recompensas
+            </a>
+
 
             <!-- EXPLORAR (Cidade, Turismo, Guia, Hotéis, Restaurantes) -->
             <div class="menu-dropdown">
@@ -156,7 +160,7 @@ if (!function_exists('iniciaisHeader')) {
                         +PINDA
                     </a>
 
-
+                    
 
                     <?php if ($usuarioLogado): ?>
 
@@ -167,12 +171,6 @@ if (!function_exists('iniciaisHeader')) {
                     <?php endif; ?>
 
                 </div>
-
-                <nav class="nav-pill">
-
-                    <a href="/../index.php">
-                        Início
-                    </a>
 
             </div>
 
