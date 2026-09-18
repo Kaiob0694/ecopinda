@@ -105,14 +105,6 @@ body {
     flex: 1;
 
     justify-content: center;
-
-    overflow-x: auto;
-
-    scrollbar-width: none;
-}
-
-.nav-pill::-webkit-scrollbar {
-    display: none;
 }
 
 
