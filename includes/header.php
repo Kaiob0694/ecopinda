@@ -7,10 +7,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $usuarioLogado = isset($_SESSION['usuario_id']);
-
-$usuarioNome = $_SESSION['usuario_nome'] ?? '';
-$usuarioFoto = $_SESSION['usuario_foto'] ?? '';
-$usuarioTipo = $_SESSION['usuario_tipo'] ?? 'usuario';
+$usuarioNome   = $_SESSION['usuario_nome'] ?? '';
+$usuarioFoto   = $_SESSION['usuario_foto'] ?? '';
+$usuarioTipo   = $_SESSION['usuario_tipo'] ?? 'usuario';
 
 $usuarioAdmin  = in_array($usuarioTipo, ['admin', 'master'], true);
 $usuarioMaster = $usuarioTipo === 'master';
@@ -43,12 +42,13 @@ if ($usuarioLogado) {
         ]);
 
         $pindaCoins = (int) $stmt->fetchColumn();
+
     } catch (Exception $e) {
 
         $pindaCoins = 0;
+
     }
 }
-
 
 /*
 |--------------------------------------------------------------------------
@@ -75,10 +75,12 @@ if (!function_exists('iniciaisHeader')) {
                 0,
                 1
             );
+
         }
 
         return $iniciais;
     }
+
 }
 
 ?>
@@ -100,23 +102,27 @@ if (!function_exists('iniciaisHeader')) {
         <!-- MENU CENTRAL (PÍLULA) -->
         <nav class="nav-pill">
 
+
+            <!-- =====================================================
+                 INÍCIO
+            ====================================================== -->
+
             <a href="/../index.php">
                 Início
             </a>
 
-            <a href="/../index.php">
-                Roteiros Prontos
-            </a>
-
-            <a href="/../index.php">
-                Loja de Recompensas
-            </a>
 
 
-            <!-- EXPLORAR (Cidade, Turismo, Guia, Hotéis, Restaurantes) -->
+            <!-- =====================================================
+                 EXPLORAR
+            ====================================================== -->
+
             <div class="menu-dropdown">
 
-                <a href="/../pages/cidade.php" data-indicator-color="verde">
+                <a
+                    href="/../pages/cidade.php"
+                    data-indicator-color="verde"
+                >
                     Explorar
                 </a>
 
@@ -147,10 +153,17 @@ if (!function_exists('iniciaisHeader')) {
             </div>
 
 
-            <!-- COMUNIDADE (+PINDA, Mural) -->
+
+            <!-- =====================================================
+                 COMUNIDADE
+            ====================================================== -->
+
             <div class="menu-dropdown">
 
-                <a href="/../pages/feed.php" data-indicator-color="azul">
+                <a
+                    href="/../pages/feed.php"
+                    data-indicator-color="azul"
+                >
                     Comunidade
                 </a>
 
@@ -160,7 +173,6 @@ if (!function_exists('iniciaisHeader')) {
                         +PINDA
                     </a>
 
-                    
 
                     <?php if ($usuarioLogado): ?>
 
@@ -174,16 +186,35 @@ if (!function_exists('iniciaisHeader')) {
 
             </div>
 
+
+
+            <!-- =====================================================
+                 LOJA DE RECOMPENSAS
+            ====================================================== -->
+
+            <a href="/../index.php">
+                Loja de Recompensas
+            </a>
+
+
         </nav>
 
 
-        <!-- AÇÕES (USUÁRIO / LOGIN) -->
+
+        <!-- =====================================================
+             AÇÕES — USUÁRIO / LOGIN
+        ====================================================== -->
+
         <div class="header-actions">
 
             <?php if ($usuarioLogado): ?>
 
-                <a href="/../pages/profile.php" class="user-chip">
+                <a
+                    href="/../pages/profile.php"
+                    class="user-chip"
+                >
 
+                    <!-- AVATAR -->
                     <span class="user-avatar">
 
                         <?php if (!empty($usuarioFoto)): ?>
@@ -194,25 +225,48 @@ if (!function_exists('iniciaisHeader')) {
 
                         <?php else: ?>
 
-                            <?= htmlspecialchars(iniciaisHeader($usuarioNome)) ?>
+                            <?= htmlspecialchars(
+                                iniciaisHeader($usuarioNome)
+                            ) ?>
 
                         <?php endif; ?>
 
                     </span>
 
+
+                    <!-- INFORMAÇÕES DO USUÁRIO -->
                     <span class="user-meta">
 
                         <span class="user-name">
+
                             <?= htmlspecialchars($usuarioNome) ?>
 
+
+                            <!-- MASTER -->
                             <?php if ($usuarioMaster): ?>
-                                <span class="user-badge badge-master">Master</span>
+
+                                <span class="user-badge badge-master">
+                                    Master
+                                </span>
+
+
+                            <!-- ADMIN -->
                             <?php elseif ($usuarioAdmin): ?>
-                                <span class="user-badge badge-admin">Admin</span>
+
+                                <span class="user-badge badge-admin">
+                                    Admin
+                                </span>
+
                             <?php endif; ?>
+
                         </span>
 
-                        <span class="user-coins" id="pindacoins">
+
+                        <!-- PINDA COINS -->
+                        <span
+                            class="user-coins"
+                            id="pindacoins"
+                        >
                             PindaCOINS: <?= $pindaCoins ?>
                         </span>
 
@@ -220,11 +274,18 @@ if (!function_exists('iniciaisHeader')) {
 
                 </a>
 
+
             <?php else: ?>
 
-                <a href="/../pages/login.php" class="btn-login">
+
+                <!-- LOGIN -->
+                <a
+                    href="/../pages/login.php"
+                    class="btn-login"
+                >
                     Login
                 </a>
+
 
             <?php endif; ?>
 
