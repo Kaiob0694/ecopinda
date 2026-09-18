@@ -204,22 +204,27 @@ body {
     top: 100%;
     left: 50%;
 
-    min-width: 210px;
+    min-width: 220px;
 
-    background: var(--branco);
+    padding: 10px;
 
-    border-radius: 0 0 22px 22px;
+    background: rgba(255, 255, 255, .85);
 
-    box-shadow: 0 20px 45px rgba(0, 0, 0, .18);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
-    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .6);
+
+    border-radius: 26px;
+
+    box-shadow: 0 24px 50px rgba(0, 0, 0, .16);
 
     z-index: 101;
 
     opacity: 0;
     pointer-events: none;
 
-    transform: translateX(-50%) translateY(-6px) scale(.98);
+    transform: translateX(-50%) translateY(4px) scale(.96);
     transform-origin: top center;
 }
 
@@ -228,7 +233,9 @@ body {
 
     display: block;
 
-    padding: 14px 20px;
+    padding: 13px 22px;
+
+    margin-bottom: 3px;
 
     font-size: 14px;
     font-weight: 600;
@@ -241,13 +248,26 @@ body {
 
     text-decoration: none;
 
-    transition: background .25s ease, color .25s ease;
+    border-radius: 18px;
 
-    background: var(--branco);
+    background: transparent;
+
+    transition: background .3s ease, color .3s ease, transform .3s ease, padding-left .3s ease;
+
+    /* estado inicial para o efeito cascata (controlado via GSAP) */
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+.submenu a:last-child {
+    margin-bottom: 0;
 }
 
 .submenu a:hover {
     background: var(--amarelo);
+    color: var(--marrom);
+    padding-left: 30px;
+    box-shadow: inset 4px 0 0 var(--laranja);
 }
 
 

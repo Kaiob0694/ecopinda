@@ -139,28 +139,61 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        var linhas = submenu.querySelectorAll('a');
+
         dropdown.addEventListener('mouseenter', function () {
+
             gsap.killTweensOf(submenu);
-            gsap.to(submenu, {
+            gsap.killTweensOf(linhas);
+
+            var tl = gsap.timeline();
+
+            tl.to(submenu, {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 0.5,
-                ease: 'back.out(1.7)',
+                duration: 0.45,
+                ease: 'back.out(1.6)',
                 pointerEvents: 'auto'
             });
+
+            // itens entram em cascata, um pouco depois do card
+            tl.to(linhas, {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                stagger: 0.055,
+                ease: 'power2.out'
+            }, '-=0.25');
         });
 
         dropdown.addEventListener('mouseleave', function () {
+
             gsap.killTweensOf(submenu);
-            gsap.to(submenu, {
+            gsap.killTweensOf(linhas);
+
+            var tl = gsap.timeline();
+
+            // itens saem em cascata reversa (debaixo pra cima), bem rápido
+            tl.to(linhas, {
                 opacity: 0,
                 y: -6,
-                scale: 0.95,
-                duration: 0.3,
+                duration: 0.18,
+                stagger: {
+                    each: 0.03,
+                    from: 'end'
+                },
+                ease: 'power1.in'
+            });
+
+            tl.to(submenu, {
+                opacity: 0,
+                y: 4,
+                scale: 0.96,
+                duration: 0.22,
                 ease: 'power2.in',
                 pointerEvents: 'none'
-            });
+            }, '-=0.1');
         });
     });
 
