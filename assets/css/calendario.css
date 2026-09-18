@@ -6,13 +6,14 @@
     width: 100%;
     min-height: 100vh;
     background: #ffffff;
-    padding: 40px 30px 70px;
+    padding: 0 0 70px;
 }
 
 .eventos-conteudo {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
+    padding: 0 30px;
 }
 
 
@@ -28,6 +29,8 @@
     align-items: center;
 
     min-height: 320px;
+    /* espaço extra no topo para não ficar embaixo do header fixo */
+    margin-top: 90px;
     padding: 46px 40px;
 
     background-color: #0a3d12;
@@ -55,6 +58,7 @@
     position: relative;
     z-index: 2;
     max-width: 640px;
+    padding: 0 40px;
 }
 
 .eventos-banner-tag {
@@ -93,12 +97,26 @@
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* conteúdo abaixo do banner (filtros, grid, etc.) */
+.eventos-conteudo > *:not(.eventos-banner) {
+    margin-top: 0;
+}
+
+.eventos-banner + * {
+    margin-top: 40px;
+}
+
 @media (max-width: 700px) {
 
     .eventos-banner {
         min-height: 260px;
+        margin-top: 70px;
         padding: 32px 22px;
         align-items: flex-end;
+    }
+
+    .eventos-banner-conteudo {
+        padding: 0;
     }
 
     .eventos-banner-overlay {
@@ -941,8 +959,8 @@
 }
 
 @media (max-width: 700px) {
-    .eventos-container {
-        padding: 24px 16px 45px;
+    .eventos-conteudo {
+        padding: 0 16px;
     }
 
     .filtros-barra {
