@@ -1,0 +1,134 @@
+/*
+|--------------------------------------------------------------------------
+| PRELOADER — TELA DE CARREGAMENTO
+|--------------------------------------------------------------------------
+| Usa as mesmas variáveis de cor do site (--laranja, --verde, --amarelo)
+| mais duas cores extras que aparecem na logo (azul e verde-claro).
+*/
+
+:root {
+    --preloader-azul: #1f6fd6;
+    --preloader-verde-claro: #4cb417;
+}
+
+#preloader {
+    position: fixed;
+    inset: 0;
+
+    background: var(--branco, #fff);
+
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 22px;
+}
+
+
+/* ===========================
+   BLOCO CENTRAL (ANEL + LOGO)
+=========================== */
+
+.preloader-inner {
+    position: relative;
+
+    width: 140px;
+    height: 140px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ===========================
+   ANEL GIRATÓRIO
+=========================== */
+
+.preloader-ring {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    background: conic-gradient(
+        var(--laranja, #ff3c00),
+        var(--amarelo, #d9d900),
+        var(--preloader-verde-claro),
+        var(--verde, #22a645),
+        var(--preloader-azul),
+        var(--laranja, #ff3c00)
+    );
+
+    /* transforma o círculo cheio em um anel fino */
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 6px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 6px));
+
+    animation: preloader-girar 1.4s linear infinite;
+}
+
+@keyframes preloader-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ===========================
+   LOGO
+=========================== */
+
+.preloader-logo {
+    position: relative;
+    z-index: 1;
+
+    width: 76px;
+    height: auto;
+
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .15));
+}
+
+
+/* ===========================
+   TEXTO
+=========================== */
+
+.preloader-text {
+    font-family: 'Inter', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    letter-spacing: .5px;
+
+    color: var(--cinza, #555);
+
+    text-transform: uppercase;
+}
+
+.preloader-dots {
+    display: inline-block;
+    width: 1.2em;
+    text-align: left;
+}
+
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width: 480px) {
+
+    .preloader-inner {
+        width: 110px;
+        height: 110px;
+    }
+
+    .preloader-logo {
+        width: 60px;
+    }
+
+}
