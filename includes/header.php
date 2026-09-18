@@ -43,7 +43,6 @@ if ($usuarioLogado) {
         ]);
 
         $pindaCoins = (int) $stmt->fetchColumn();
-
     } catch (Exception $e) {
 
         $pindaCoins = 0;
@@ -93,8 +92,7 @@ if (!function_exists('iniciaisHeader')) {
 
             <img
                 src="/../assets/img2/logo.png"
-                alt="Pinda Eco"
-            >
+                alt="Pinda Eco">
 
         </a>
 
@@ -104,6 +102,10 @@ if (!function_exists('iniciaisHeader')) {
 
             <a href="/../index.php">
                 Início
+            </a>
+
+            <a href="/../index.php">
+                Roteiros Prontos
             </a>
 
 
@@ -154,6 +156,12 @@ if (!function_exists('iniciaisHeader')) {
                         +PINDA
                     </a>
 
+                    <nav class="nav-pill">
+
+            <a href="/../index.php">
+                Loja de Recompensas
+            </a>
+
                     <?php if ($usuarioLogado): ?>
 
                         <a href="/../pages/mural/read.php">
@@ -182,8 +190,7 @@ if (!function_exists('iniciaisHeader')) {
 
                             <img
                                 src="/../assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>"
-                                alt="Foto de perfil"
-                            >
+                                alt="Foto de perfil">
 
                         <?php else: ?>
 
