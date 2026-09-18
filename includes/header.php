@@ -106,22 +106,34 @@ if (!function_exists('iniciaisHeader')) {
                 Início
             </a>
 
-            <a href="/../pages/cidade.php">
-                Cidade
-            </a>
 
-
-            <!-- ITEM COM SUBMENU -->
+            <!-- EXPLORAR (Cidade, Turismo, Guia, Hotéis, Restaurantes) -->
             <div class="menu-dropdown">
 
-                <a href="/../pages/turismo/read.php">
-                    Turismo
+                <a href="/../pages/cidade.php" data-indicator-color="verde">
+                    Explorar
                 </a>
 
                 <div class="submenu">
 
+                    <a href="/../pages/cidade.php">
+                        Cidade
+                    </a>
+
+                    <a href="/../pages/turismo/read.php">
+                        Turismo
+                    </a>
+
                     <a href="/../pages/guia/read.php">
                         Guia Turístico
+                    </a>
+
+                    <a href="/../pages/hoteis/read.php">
+                        Hotéis
+                    </a>
+
+                    <a href="/../pages/restaurante/read.php">
+                        Restaurantes
                     </a>
 
                 </div>
@@ -129,25 +141,30 @@ if (!function_exists('iniciaisHeader')) {
             </div>
 
 
-            <a href="/../pages/hoteis/read.php">
-                Hotéis
-            </a>
+            <!-- COMUNIDADE (+PINDA, Mural) -->
+            <div class="menu-dropdown">
 
-            <a href="/../pages/restaurante/read.php">
-                Restaurantes
-            </a>
-
-            <a href="/../pages/feed.php">
-                +PINDA
-            </a>
-
-            <?php if ($usuarioLogado): ?>
-
-                <a href="/../pages/mural/read.php">
-                    📸 Mural
+                <a href="/../pages/feed.php" data-indicator-color="azul">
+                    Comunidade
                 </a>
 
-            <?php endif; ?>
+                <div class="submenu">
+
+                    <a href="/../pages/feed.php">
+                        +PINDA
+                    </a>
+
+                    <?php if ($usuarioLogado): ?>
+
+                        <a href="/../pages/mural/read.php">
+                            📸 Mural
+                        </a>
+
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
 
         </nav>
 

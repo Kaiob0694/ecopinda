@@ -212,7 +212,7 @@ body {
     top: calc(100% + 14px);
     left: 50%;
 
-    min-width: 190px;
+    min-width: 210px;
 
     background: var(--branco);
 

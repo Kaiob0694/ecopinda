@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var CORES = {
         laranja: getComputedStyle(document.documentElement).getPropertyValue('--laranja').trim(),
         verde: getComputedStyle(document.documentElement).getPropertyValue('--verde').trim(),
-        amarelo: getComputedStyle(document.documentElement).getPropertyValue('--amarelo').trim()
+        amarelo: getComputedStyle(document.documentElement).getPropertyValue('--amarelo').trim(),
+        azul: getComputedStyle(document.documentElement).getPropertyValue('--azul').trim()
     };
 
     function corDoItem(item) {
@@ -47,17 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
             return CORES[item.dataset.indicatorColor];
         }
 
+        // fallback para qualquer link com submenu que não tenha cor definida
         if (item.closest('.menu-dropdown')) {
             return CORES.amarelo;
-        }
-
-        var diretos = Array.prototype.filter.call(navPill.children, function (el) {
-            return el.tagName === 'A' || el.classList.contains('menu-dropdown');
-        });
-
-        // "Cidade" é o 2º item direto (mesma regra do design original)
-        if (diretos.indexOf(item.closest('.menu-dropdown') || item) === 1) {
-            return CORES.verde;
         }
 
         return CORES.laranja;
@@ -132,14 +125,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*
     |----------------------------------------------------------------
-    | 2) SUBMENU (Turismo > Guia Turístico)
+    | 2) SUBMENUS (Explorar / Comunidade)
     |----------------------------------------------------------------
     */
 
-    var dropdown = document.querySelector('.menu-dropdown');
-    var submenu = dropdown ? dropdown.querySelector('.submenu') : null;
+    var dropdowns = document.querySelectorAll('.menu-dropdown');
 
-    if (dropdown && submenu) {
+    dropdowns.forEach(function (dropdown) {
+
+        var submenu = dropdown.querySelector('.submenu');
+
+        if (!submenu) {
+            return;
+        }
 
         dropdown.addEventListener('mouseenter', function () {
             gsap.killTweensOf(submenu);
@@ -164,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 pointerEvents: 'none'
             });
         });
-    }
+    });
 
 
     /*
