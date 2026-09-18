@@ -6,6 +6,8 @@
     --cinza: #555;
     --cinza-claro: #666;
     --branco: #fff;
+    --azul: #1f6fd6;
+    --verde-claro: #4cb417;
 }
 
 * {
@@ -36,6 +38,44 @@ body {
     max-width: 1300px;
 
     z-index: 100;
+}
+
+
+/* ===========================
+   AURÉOLA COLORIDA GIRATÓRIA
+   (brilho suave atrás do header)
+=========================== */
+
+.header::before {
+    content: "";
+
+    position: absolute;
+    inset: -14px;
+
+    z-index: -1;
+
+    border-radius: 999px;
+
+    background: conic-gradient(
+        var(--laranja),
+        var(--amarelo),
+        var(--verde-claro),
+        var(--verde),
+        var(--azul),
+        var(--laranja)
+    );
+
+    filter: blur(22px);
+
+    opacity: .4;
+
+    animation: header-aura-girar 8s linear infinite;
+}
+
+@keyframes header-aura-girar {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
@@ -80,6 +120,34 @@ body {
 .logo-pill img {
     height: 46px;
     display: block;
+
+    animation:
+        logo-respirar 3.2s ease-in-out infinite,
+        logo-brilho 6s ease-in-out infinite;
+}
+
+@keyframes logo-respirar {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+@keyframes logo-brilho {
+    0%, 100% {
+        filter: drop-shadow(0 0 0 transparent);
+    }
+    25% {
+        filter: drop-shadow(0 0 10px rgba(255, 60, 0, .45));
+    }
+    50% {
+        filter: drop-shadow(0 0 10px rgba(34, 166, 69, .45));
+    }
+    75% {
+        filter: drop-shadow(0 0 10px rgba(31, 111, 214, .45));
+    }
 }
 
 
@@ -171,6 +239,57 @@ body {
 .nav-pill > a:hover,
 .menu-dropdown:hover > a {
     color: var(--branco);
+}
+
+
+/* ===========================
+   PONTINHOS COLORIDOS FIXOS
+   (um por item, mesmo sem hover)
+=========================== */
+
+.nav-pill > a::before,
+.menu-dropdown > a::before {
+    content: "";
+
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--laranja);
+
+    transform: translateX(-50%) scale(1);
+
+    transition: transform .3s ease, opacity .3s ease;
+
+    opacity: .55;
+}
+
+/* cores alternadas por posição do link direto
+   (o item com submenu não é um <a> direto, então tem cor própria abaixo) */
+.nav-pill > a:nth-of-type(1) { --cor-item: var(--laranja); } /* Início */
+.nav-pill > a:nth-of-type(2) { --cor-item: var(--verde); }   /* Cidade */
+.nav-pill > a:nth-of-type(3) { --cor-item: var(--azul); }    /* Hotéis */
+.nav-pill > a:nth-of-type(4) { --cor-item: var(--verde-claro); } /* Restaurantes */
+.nav-pill > a:nth-of-type(5) { --cor-item: var(--laranja); } /* +PINDA */
+.nav-pill > a:nth-of-type(6) { --cor-item: var(--verde); }   /* Mural */
+
+.nav-pill > a::before {
+    background: var(--cor-item, var(--laranja));
+}
+
+.menu-dropdown > a::before {
+    background: var(--amarelo);
+}
+
+.nav-pill > a:hover::before,
+.menu-dropdown:hover > a::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.8);
 }
 
 
@@ -296,7 +415,14 @@ body {
 
     padding: 11px 26px;
 
-    background: var(--laranja);
+    background: linear-gradient(
+        90deg,
+        var(--laranja),
+        var(--amarelo),
+        var(--verde),
+        var(--laranja)
+    );
+    background-size: 300% 100%;
 
     color: var(--branco);
 
@@ -308,11 +434,22 @@ body {
     border-radius: 999px;
 
     transition: transform .3s ease, box-shadow .3s ease;
+
+    animation: btn-login-gradiente 5s ease infinite;
 }
 
 .btn-login:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 60, 0, .35);
+}
+
+@keyframes btn-login-gradiente {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 
@@ -358,6 +495,8 @@ body {
 =========================== */
 
 .user-avatar {
+    position: relative;
+
     width: 38px;
     height: 38px;
 
@@ -377,14 +516,44 @@ body {
     font-weight: 800;
 
     text-transform: uppercase;
+}
 
-    overflow: hidden;
+/* anel colorido girando ao redor do avatar */
+.user-avatar::before {
+    content: "";
+
+    position: absolute;
+    inset: -3px;
+
+    z-index: -1;
+
+    border-radius: 50%;
+
+    background: conic-gradient(
+        var(--laranja),
+        var(--amarelo),
+        var(--verde-claro),
+        var(--verde),
+        var(--azul),
+        var(--laranja)
+    );
+
+    animation: avatar-anel-girar 4s linear infinite;
+}
+
+@keyframes avatar-anel-girar {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .user-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -448,6 +617,8 @@ body {
 =========================== */
 
 .user-badge {
+    position: relative;
+
     font-size: 9px;
     font-weight: 800;
 
@@ -458,6 +629,8 @@ body {
     text-transform: uppercase;
 
     color: var(--branco);
+
+    overflow: hidden;
 }
 
 .badge-admin {
@@ -466,6 +639,33 @@ body {
 
 .badge-master {
     background: var(--verde);
+}
+
+/* brilho passando por cima do badge de tempos em tempos */
+.user-badge::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -60%;
+
+    width: 40%;
+    height: 100%;
+
+    background: rgba(255, 255, 255, .55);
+
+    transform: skewX(-20deg);
+
+    animation: badge-brilho 3.5s ease-in-out infinite;
+}
+
+@keyframes badge-brilho {
+    0% {
+        left: -60%;
+    }
+    35%, 100% {
+        left: 130%;
+    }
 }
 
 
@@ -533,6 +733,36 @@ body {
     .btn-login {
         padding: 9px 18px;
         font-size: 13px;
+    }
+
+    /* efeitos decorativos mais pesados saem no celular (performance) */
+    .header::before {
+        display: none;
+    }
+
+    .logo-pill img {
+        animation: none;
+    }
+
+    .user-avatar::before {
+        animation-duration: 6s;
+    }
+
+}
+
+
+/* ===========================
+   RESPEITO A "REDUZIR MOVIMENTO"
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .header::before,
+    .logo-pill img,
+    .user-avatar::before,
+    .btn-login,
+    .user-badge::after {
+        animation: none !important;
     }
 
 }
