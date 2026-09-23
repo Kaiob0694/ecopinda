@@ -11,7 +11,7 @@ CONFIGURAÇÕES
 =========================================================
 */
 
-$ehMaster = isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'master';
+$ehMaster = isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] === 'master';
 
 $baseUrl = 'https://pindaeco.rf.gd';
 
@@ -227,7 +227,7 @@ include "../../includes/head.php";
 
                 <?php if ($ehMaster): ?>
 
-                    <a
+                    
                         href="create.php"
                         class="eventos-botao-novo"
                     >
