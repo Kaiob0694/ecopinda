@@ -2,6 +2,9 @@
 
 session_start();
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once "../../config/conexao.php";
 
 $baseUrl = 'https://pindaeco.rf.gd';
@@ -37,27 +40,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        $stmt = $pdo->prepare("
-            INSERT INTO eventos (titulo, descricao, data_inicio, data_fim, cor, dia_inteiro, imagem, local, categoria, formato, gratuito)
-            VALUES (:titulo, :descricao, :data_inicio, :data_fim, :cor, :dia_inteiro, :imagem, :local, :categoria, :formato, :gratuito)
-        ");
+        try {
 
-        $stmt->execute([
-            ':titulo'      => $titulo,
-            ':descricao'   => $descricao !== '' ? $descricao : null,
-            ':data_inicio' => str_replace('T', ' ', $data_inicio) . ':00',
-            ':data_fim'    => $data_fim !== '' ? str_replace('T', ' ', $data_fim) . ':00' : null,
-            ':cor'         => $cor,
-            ':dia_inteiro' => $dia_inteiro,
-            ':imagem'      => $imagem !== '' ? $imagem : null,
-            ':local'       => $local !== '' ? $local : null,
-            ':categoria'   => $categoria,
-            ':formato'     => $formato,
-            ':gratuito'    => $gratuito,
-        ]);
+            $stmt = $pdo->prepare("
+                INSERT INTO eventos (titulo, descricao, data_inicio, data_fim, cor, dia_inteiro, imagem, local, categoria, formato, gratuito)
+                VALUES (:titulo, :descricao, :data_inicio, :data_fim, :cor, :dia_inteiro, :imagem, :local, :categoria, :formato, :gratuito)
+            ");
 
-        header("Location: index.php");
-        exit;
+            $stmt->execute([
+                ':titulo'      => $titulo,
+                ':descricao'   => $descricao !== '' ? $descricao : null,
+                ':data_inicio' => str_replace('T', ' ', $data_inicio) . ':00',
+                ':data_fim'    => $data_fim !== '' ? str_replace('T', ' ', $data_fim) . ':00' : null,
+                ':cor'         => $cor,
+                ':dia_inteiro' => $dia_inteiro,
+                ':imagem'      => $imagem !== '' ? $imagem : null,
+                ':local'       => $local !== '' ? $local : null,
+                ':categoria'   => $categoria,
+                ':formato'     => $formato,
+                ':gratuito'    => $gratuito,
+            ]);
+
+            header("Location: index.php");
+            exit;
+
+        } catch (PDOException $e) {
+
+            $erro = 'Erro ao salvar o evento: ' . $e->getMessage();
+
+        }
+
     }
 }
 
