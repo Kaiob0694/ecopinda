@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-require __DIR__ . '/../config/Conexao.php'; // ajuste o caminho se o arquivo estiver em outro lugar
+require __DIR__ . '/../config/conexao.php'; // ajuste o caminho se o arquivo estiver em outro lugar
 
 $conexao = new Conexao();
 $pdo = $conexao->conectar();
