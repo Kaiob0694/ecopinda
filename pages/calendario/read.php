@@ -227,17 +227,16 @@ include "../../includes/head.php";
 
                 <?php if ($ehMaster): ?>
 
-                    <button
-                        type="button"
+                    <a
+                        href="create.php"
                         class="eventos-botao-novo"
-                        id="btnNovoEvento"
                     >
 
                         <i class="fa-solid fa-plus"></i>
 
                         Novo evento
 
-                    </button>
+                    </a>
 
                 <?php endif; ?>
 
@@ -387,9 +386,10 @@ include "../../includes/head.php";
 
 
 <!-- =====================================================
-     MODAL DE CRIAÇÃO / EDIÇÃO
+     MODAL DE EDIÇÃO
      
      Apenas para usuário master
+     (a criação agora acontece em create.php)
 ====================================================== -->
 
 <div
@@ -401,7 +401,7 @@ include "../../includes/head.php";
 
 
         <h2 id="modalTitulo">
-            Novo evento
+            Editar evento
         </h2>
 
 
@@ -1604,6 +1604,8 @@ modalVisualizarOverlay.addEventListener(
 /*
 =========================================================
 MODAL MASTER
+(criação agora fica em create.php;
+este modal só edita/exclui)
 =========================================================
 */
 
@@ -1625,11 +1627,6 @@ const btnCancelar =
 const btnExcluir =
     document.getElementById(
         'btnExcluir'
-    );
-
-const btnNovoEvento =
-    document.getElementById(
-        'btnNovoEvento'
     );
 
 
@@ -1773,12 +1770,6 @@ btnCancelar.addEventListener(
 );
 
 
-btnNovoEvento.addEventListener(
-    'click',
-    () => abrirModal(null)
-);
-
-
 
 /*
 =========================================================
@@ -1862,7 +1853,7 @@ function excluirEvento(id) {
 
 /*
 =========================================================
-SALVAR EVENTO
+SALVAR EVENTO (EDIÇÃO)
 =========================================================
 */
 
