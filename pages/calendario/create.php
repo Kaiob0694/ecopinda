@@ -2,12 +2,12 @@
 
 session_start();
 
-require_once "../../config/Conexao.php";
+require_once "../../config/conexao.php";
 
 $baseUrl = 'https://pindaeco.rf.gd';
 
 // Apenas o usuário master pode cadastrar eventos
-if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'master') {
+if (!isset($_SESSION['usuario_tipo']) || $_SESSION['usuario_tipo'] !== 'master') {
     header("Location: index.php");
     exit;
 }
