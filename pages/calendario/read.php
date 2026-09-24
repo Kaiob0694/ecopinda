@@ -225,20 +225,11 @@ include "../../includes/head.php";
 
                 <!-- NOVO EVENTO -->
 
-                <?php if ($ehMaster): ?>
-
-                    
-                        href="create.php"
-                        class="eventos-botao-novo"
-                    >
-
-                        <i class="fa-solid fa-plus"></i>
-
-                        Novo evento
-
-                    </a>
-
-                <?php endif; ?>
+            <?php if ($ehMaster): ?> 
+                <a href="create.php" class="eventos-botao-novo"> 
+                    <i class="fa-solid fa-plus"></i> Novo evento 
+                </a> 
+            <?php endif; ?>
 
 
             </div>
