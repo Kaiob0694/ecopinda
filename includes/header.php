@@ -52,9 +52,11 @@ if ($usuarioLogado) {
         ]);
 
         $pindaCoins = (int) $stmt->fetchColumn();
+
     } catch (Exception $e) {
 
         $pindaCoins = 0;
+
     }
 }
 
@@ -88,6 +90,7 @@ if (!function_exists('iniciaisHeader')) {
                 0,
                 1
             );
+
         }
 
         return $iniciais;
@@ -108,11 +111,13 @@ if (!function_exists('iniciaisHeader')) {
 
         <a
             href="<?= $baseUrl ?>/index.php"
-            class="logo-pill">
+            class="logo-pill"
+        >
 
             <img
                 src="/../assets/img2/logo.png"
-                alt="Pinda Eco">
+                alt="Pinda Eco"
+            >
 
         </a>
 
@@ -141,7 +146,8 @@ if (!function_exists('iniciaisHeader')) {
 
                 <a
                     href="/../pages/cidade.php"
-                    data-indicator-color="verde">
+                    data-indicator-color="verde"
+                >
                     Explorar
                 </a>
 
@@ -161,7 +167,7 @@ if (!function_exists('iniciaisHeader')) {
 
                     <!-- ROTAS -->
 
-                    <a href="<?= $baseUrl ?>/pages/rotas/rotas.php">
+                    <a href="/../pages/rotas/rotas.php">
                         🗺️ Rotas
                     </a>
 
@@ -194,7 +200,8 @@ if (!function_exists('iniciaisHeader')) {
 
                 <a
                     href="/../pages/feed.php"
-                    data-indicator-color="azul">
+                    data-indicator-color="azul"
+                >
                     Comunidade
                 </a>
 
@@ -258,7 +265,8 @@ if (!function_exists('iniciaisHeader')) {
 
                 <a
                     href="/../pages/profile.php"
-                    class="user-chip">
+                    class="user-chip"
+                >
 
 
                     <!-- AVATAR -->
@@ -271,7 +279,8 @@ if (!function_exists('iniciaisHeader')) {
 
                             <img
                                 src="/../assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>"
-                                alt="Foto de perfil">
+                                alt="Foto de perfil"
+                            >
 
 
                         <?php else: ?>
@@ -310,7 +319,7 @@ if (!function_exists('iniciaisHeader')) {
                                 </span>
 
 
-                                <!-- ADMIN -->
+                            <!-- ADMIN -->
 
                             <?php elseif ($usuarioAdmin): ?>
 
@@ -328,7 +337,8 @@ if (!function_exists('iniciaisHeader')) {
 
                         <span
                             class="user-coins"
-                            id="pindacoins">
+                            id="pindacoins"
+                        >
 
                             PindaCOINS:
                             <?= $pindaCoins ?>
@@ -351,7 +361,8 @@ if (!function_exists('iniciaisHeader')) {
 
                 <a
                     href="/../pages/login.php"
-                    class="btn-login">
+                    class="btn-login"
+                >
 
                     Login
 
