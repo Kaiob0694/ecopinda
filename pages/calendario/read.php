@@ -44,7 +44,8 @@ include "../../includes/head.php";
 
 <div
     class="eventos-banner"
-    style="background-image: url('<?= $baseUrl ?>/assets/img/banner-eventos.jpg');">
+    style="background-image: url('<?= $baseUrl ?>/assets/img/banner-eventos.jpg');"
+>
 
     <div class="eventos-banner-overlay"></div>
 
@@ -93,7 +94,8 @@ include "../../includes/head.php";
                 <input
                     type="text"
                     id="filtroBusca"
-                    placeholder="Buscar eventos...">
+                    placeholder="Buscar eventos..."
+                >
 
             </div>
 
@@ -162,7 +164,8 @@ include "../../includes/head.php";
             <button
                 type="button"
                 class="filtro-passados"
-                id="btnPassados">
+                id="btnPassados"
+            >
                 Passados
             </button>
 
@@ -184,7 +187,8 @@ include "../../includes/head.php";
 
                 <span
                     class="eventos-contador"
-                    id="eventosContador">
+                    id="eventosContador"
+                >
                     0 encontrados
                 </span>
 
@@ -201,7 +205,8 @@ include "../../includes/head.php";
                     <button
                         type="button"
                         id="btnVistaLista"
-                        class="ativo">
+                        class="ativo"
+                    >
                         <i class="fa-solid fa-table-cells"></i>
                         Lista
                     </button>
@@ -209,7 +214,8 @@ include "../../includes/head.php";
 
                     <button
                         type="button"
-                        id="btnVistaCalendario">
+                        id="btnVistaCalendario"
+                    >
                         <i class="fa-solid fa-calendar-days"></i>
                         Calendário
                     </button>
@@ -221,11 +227,15 @@ include "../../includes/head.php";
 
                 <?php if ($ehMaster): ?>
 
-                    <a
+                    
                         href="create.php"
-                        class="eventos-botao-novo">
+                        class="eventos-botao-novo"
+                    >
+
                         <i class="fa-solid fa-plus"></i>
+
                         Novo evento
+
                     </a>
 
                 <?php endif; ?>
@@ -243,11 +253,13 @@ include "../../includes/head.php";
 
         <div
             class="vista-lista"
-            id="vistaLista">
+            id="vistaLista"
+        >
 
             <div
                 class="eventos-grid"
-                id="eventosGrid">
+                id="eventosGrid"
+            >
 
                 <!--
                     Os eventos são inseridos
@@ -266,7 +278,8 @@ include "../../includes/head.php";
 
         <div
             class="vista-calendario"
-            id="vistaCalendario">
+            id="vistaCalendario"
+        >
 
             <div class="calendario-card">
 
@@ -291,7 +304,8 @@ include "../../includes/head.php";
 
 <div
     class="modal-overlay"
-    id="modalVisualizarOverlay">
+    id="modalVisualizarOverlay"
+>
 
     <div class="modal modal-visualizar">
 
@@ -301,7 +315,8 @@ include "../../includes/head.php";
             id="viewImagem"
             src=""
             alt=""
-            style="display:none">
+            style="display:none"
+        >
 
 
         <h2 id="viewTitulo">
@@ -352,7 +367,8 @@ include "../../includes/head.php";
                 <button
                     type="button"
                     class="btn btn-cancelar"
-                    id="btnFecharVisualizar">
+                    id="btnFecharVisualizar"
+                >
                     Fechar
                 </button>
 
@@ -369,298 +385,311 @@ include "../../includes/head.php";
 <?php if ($ehMaster): ?>
 
 
-    <!-- =====================================================
+<!-- =====================================================
      MODAL DE EDIÇÃO
      
      Apenas para usuário master
      (a criação agora acontece em create.php)
 ====================================================== -->
 
-    <div
-        class="modal-overlay"
-        id="modalOverlay">
+<div
+    class="modal-overlay"
+    id="modalOverlay"
+>
 
-        <div class="modal">
+    <div class="modal">
 
 
-            <h2 id="modalTitulo">
-                Editar evento
-            </h2>
+        <h2 id="modalTitulo">
+            Editar evento
+        </h2>
 
+
+        <input
+            type="hidden"
+            id="eventoId"
+        >
+
+
+        <!-- TÍTULO -->
+
+        <div class="campo">
+
+            <label>
+
+                <i class="fa-solid fa-heading"></i>
+
+                Título
+
+            </label>
 
             <input
-                type="hidden"
-                id="eventoId">
+                type="text"
+                id="campoTitulo"
+                placeholder="Ex: Mutirão de plantio"
+            >
+
+        </div>
 
 
-            <!-- TÍTULO -->
+        <!-- DESCRIÇÃO -->
+
+        <div class="campo">
+
+            <label>
+
+                <i class="fa-solid fa-align-left"></i>
+
+                Descrição
+
+            </label>
+
+            <textarea
+                id="campoDescricao"
+                rows="3"
+                placeholder="Detalhes do evento"
+            ></textarea>
+
+        </div>
+
+
+        <!-- IMAGEM -->
+
+        <div class="campo">
+
+            <label>
+
+                <i class="fa-solid fa-image"></i>
+
+                URL da imagem
+
+            </label>
+
+            <input
+                type="text"
+                id="campoImagem"
+                placeholder="https://..."
+            >
+
+        </div>
+
+
+        <!-- LOCAL -->
+
+        <div class="campo">
+
+            <label>
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Local
+
+            </label>
+
+            <input
+                type="text"
+                id="campoLocal"
+                placeholder="Ex: Shopping Pátio Pinda"
+            >
+
+        </div>
+
+
+        <!-- CATEGORIA / FORMATO -->
+
+        <div class="campo-linha">
+
 
             <div class="campo">
 
                 <label>
 
-                    <i class="fa-solid fa-heading"></i>
+                    <i class="fa-solid fa-tag"></i>
 
-                    Título
+                    Categoria
 
                 </label>
 
                 <input
                     type="text"
-                    id="campoTitulo"
-                    placeholder="Ex: Mutirão de plantio">
+                    id="campoCategoria"
+                    placeholder="Ex: Evento, Show"
+                >
 
             </div>
 
-
-            <!-- DESCRIÇÃO -->
 
             <div class="campo">
 
                 <label>
 
-                    <i class="fa-solid fa-align-left"></i>
+                    <i class="fa-solid fa-globe"></i>
 
-                    Descrição
-
-                </label>
-
-                <textarea
-                    id="campoDescricao"
-                    rows="3"
-                    placeholder="Detalhes do evento"></textarea>
-
-            </div>
-
-
-            <!-- IMAGEM -->
-
-            <div class="campo">
-
-                <label>
-
-                    <i class="fa-solid fa-image"></i>
-
-                    URL da imagem
+                    Formato
 
                 </label>
 
-                <input
-                    type="text"
-                    id="campoImagem"
-                    placeholder="https://...">
+                <select id="campoFormatoInput">
 
-            </div>
+                    <option value="Presencial">
+                        Presencial
+                    </option>
 
+                    <option value="Online">
+                        Online
+                    </option>
 
-            <!-- LOCAL -->
-
-            <div class="campo">
-
-                <label>
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    Local
-
-                </label>
-
-                <input
-                    type="text"
-                    id="campoLocal"
-                    placeholder="Ex: Shopping Pátio Pinda">
-
-            </div>
-
-
-            <!-- CATEGORIA / FORMATO -->
-
-            <div class="campo-linha">
-
-
-                <div class="campo">
-
-                    <label>
-
-                        <i class="fa-solid fa-tag"></i>
-
-                        Categoria
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="campoCategoria"
-                        placeholder="Ex: Evento, Show">
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>
-
-                        <i class="fa-solid fa-globe"></i>
-
-                        Formato
-
-                    </label>
-
-                    <select id="campoFormatoInput">
-
-                        <option value="Presencial">
-                            Presencial
-                        </option>
-
-                        <option value="Online">
-                            Online
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- INÍCIO / FIM -->
-
-            <div class="campo-linha">
-
-
-                <div class="campo">
-
-                    <label>
-
-                        <i class="fa-solid fa-clock"></i>
-
-                        Início
-
-                    </label>
-
-                    <input
-                        type="datetime-local"
-                        id="campoInicio">
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>
-
-                        <i class="fa-solid fa-clock"></i>
-
-                        Fim
-
-                    </label>
-
-                    <input
-                        type="datetime-local"
-                        id="campoFim">
-
-                </div>
-
-
-            </div>
-
-
-            <!-- COR / GRATUITO -->
-
-            <div class="campo-linha">
-
-
-                <div class="campo">
-
-                    <label>
-
-                        <i class="fa-solid fa-palette"></i>
-
-                        Cor
-
-                    </label>
-
-                    <input
-                        type="color"
-                        id="campoCor"
-                        value="#ff7a1a">
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>
-
-                        <i class="fa-solid fa-ticket"></i>
-
-                        Gratuito?
-
-                    </label>
-
-                    <select id="campoGratuito">
-
-                        <option value="0">
-                            Não
-                        </option>
-
-                        <option value="1">
-                            Sim
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- BOTÕES -->
-
-            <div class="modal-botoes">
-
-
-                <button
-                    type="button"
-                    class="btn btn-excluir"
-                    id="btnExcluir"
-                    style="display:none">
-
-                    <i class="fa-solid fa-trash"></i>
-
-                    Excluir
-
-                </button>
-
-
-                <div class="modal-botoes-direita">
-
-                    <button
-                        type="button"
-                        class="btn btn-cancelar"
-                        id="btnCancelar">
-                        Cancelar
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn btn-salvar"
-                        id="btnSalvar">
-                        Salvar
-                    </button>
-
-                </div>
-
+                </select>
 
             </div>
 
 
         </div>
 
+
+        <!-- INÍCIO / FIM -->
+
+        <div class="campo-linha">
+
+
+            <div class="campo">
+
+                <label>
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    Início
+
+                </label>
+
+                <input
+                    type="datetime-local"
+                    id="campoInicio"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    Fim
+
+                </label>
+
+                <input
+                    type="datetime-local"
+                    id="campoFim"
+                >
+
+            </div>
+
+
+        </div>
+
+
+        <!-- COR / GRATUITO -->
+
+        <div class="campo-linha">
+
+
+            <div class="campo">
+
+                <label>
+
+                    <i class="fa-solid fa-palette"></i>
+
+                    Cor
+
+                </label>
+
+                <input
+                    type="color"
+                    id="campoCor"
+                    value="#ff7a1a"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+
+                    <i class="fa-solid fa-ticket"></i>
+
+                    Gratuito?
+
+                </label>
+
+                <select id="campoGratuito">
+
+                    <option value="0">
+                        Não
+                    </option>
+
+                    <option value="1">
+                        Sim
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- BOTÕES -->
+
+        <div class="modal-botoes">
+
+
+            <button
+                type="button"
+                class="btn btn-excluir"
+                id="btnExcluir"
+                style="display:none"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+                Excluir
+
+            </button>
+
+
+            <div class="modal-botoes-direita">
+
+                <button
+                    type="button"
+                    class="btn btn-cancelar"
+                    id="btnCancelar"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-salvar"
+                    id="btnSalvar"
+                >
+                    Salvar
+                </button>
+
+            </div>
+
+
+        </div>
+
+
     </div>
+
+</div>
 
 
 <?php endif; ?>
@@ -668,110 +697,111 @@ include "../../includes/head.php";
 
 
 <script>
-    /*
+
+/*
 =========================================================
 CONFIGURAÇÕES
 =========================================================
 */
 
-    const API_URL = '<?= $baseUrl ?>/api/events.php';
+const API_URL = '<?= $baseUrl ?>/api/events.php';
 
-    const EH_MASTER =
-        <?php echo $ehMaster ? 'true' : 'false'; ?>;
-
-
-    /*
-    =========================================================
-    VARIÁVEIS
-    =========================================================
-    */
-
-    let TODOS_EVENTOS = [];
-
-    let mostrandoPassados = false;
-
-    let vistaAtual = 'lista';
-
-    let calendarInstance = null;
+const EH_MASTER =
+    <?php echo $ehMaster ? 'true' : 'false'; ?>;
 
 
-    /*
-    =========================================================
-    ELEMENTOS
-    =========================================================
-    */
+/*
+=========================================================
+VARIÁVEIS
+=========================================================
+*/
 
-    const grid =
-        document.getElementById('eventosGrid');
+let TODOS_EVENTOS = [];
 
-    const contador =
-        document.getElementById('eventosContador');
+let mostrandoPassados = false;
 
-    const filtroBusca =
-        document.getElementById('filtroBusca');
+let vistaAtual = 'lista';
 
-    const filtroCategoria =
-        document.getElementById('filtroCategoria');
-
-    const filtroFormato =
-        document.getElementById('filtroFormato');
-
-    const filtroLocal =
-        document.getElementById('filtroLocal');
-
-    const btnPassados =
-        document.getElementById('btnPassados');
+let calendarInstance = null;
 
 
+/*
+=========================================================
+ELEMENTOS
+=========================================================
+*/
 
-    /*
-    =========================================================
-    CARREGAR EVENTOS
-    =========================================================
-    */
+const grid =
+    document.getElementById('eventosGrid');
 
-    function carregarEventos() {
+const contador =
+    document.getElementById('eventosContador');
 
-        fetch(API_URL)
+const filtroBusca =
+    document.getElementById('filtroBusca');
 
-            .then(response => {
+const filtroCategoria =
+    document.getElementById('filtroCategoria');
 
-                if (!response.ok) {
-                    throw new Error('Erro HTTP');
-                }
+const filtroFormato =
+    document.getElementById('filtroFormato');
 
-                return response.json();
+const filtroLocal =
+    document.getElementById('filtroLocal');
 
-            })
-
-            .then(dados => {
-
-                TODOS_EVENTOS =
-                    Array.isArray(dados.eventos) ?
-                    dados.eventos :
-                    [];
-
-                popularFiltros();
-
-                renderizarLista();
+const btnPassados =
+    document.getElementById('btnPassados');
 
 
-                if (calendarInstance) {
 
-                    calendarInstance.refetchEvents();
+/*
+=========================================================
+CARREGAR EVENTOS
+=========================================================
+*/
 
-                }
+function carregarEventos() {
 
-            })
+    fetch(API_URL)
 
-            .catch(erro => {
+        .then(response => {
 
-                console.error(
-                    'Erro ao carregar eventos:',
-                    erro
-                );
+            if (!response.ok) {
+                throw new Error('Erro HTTP');
+            }
 
-                grid.innerHTML = `
+            return response.json();
+
+        })
+
+        .then(dados => {
+
+            TODOS_EVENTOS =
+                Array.isArray(dados.eventos)
+                    ? dados.eventos
+                    : [];
+
+            popularFiltros();
+
+            renderizarLista();
+
+
+            if (calendarInstance) {
+
+                calendarInstance.refetchEvents();
+
+            }
+
+        })
+
+        .catch(erro => {
+
+            console.error(
+                'Erro ao carregar eventos:',
+                erro
+            );
+
+            grid.innerHTML = `
 
                 <div class="eventos-vazio">
 
@@ -787,42 +817,42 @@ CONFIGURAÇÕES
 
             `;
 
-            });
+        });
 
-    }
+}
 
 
 
-    /*
-    =========================================================
-    POPULAR FILTROS
-    =========================================================
-    */
+/*
+=========================================================
+POPULAR FILTROS
+=========================================================
+*/
 
-    function popularFiltros() {
+function popularFiltros() {
 
-        const categorias = [
-            ...new Set(
-                TODOS_EVENTOS
+    const categorias = [
+        ...new Set(
+            TODOS_EVENTOS
                 .map(evento => evento.categoria)
                 .filter(Boolean)
-            )
-        ];
+        )
+    ];
 
 
-        const locais = [
-            ...new Set(
-                TODOS_EVENTOS
+    const locais = [
+        ...new Set(
+            TODOS_EVENTOS
                 .map(evento => evento.local)
                 .filter(Boolean)
-            )
-        ];
+        )
+    ];
 
 
-        filtroCategoria.innerHTML =
-            '<option value="">Todas</option>' +
+    filtroCategoria.innerHTML =
+        '<option value="">Todas</option>' +
 
-            categorias
+        categorias
             .map(categoria =>
                 `<option value="${escapeHtml(categoria)}">
                     ${escapeHtml(categoria)}
@@ -831,10 +861,10 @@ CONFIGURAÇÕES
             .join('');
 
 
-        filtroLocal.innerHTML =
-            '<option value="">Todas</option>' +
+    filtroLocal.innerHTML =
+        '<option value="">Todas</option>' +
 
-            locais
+        locais
             .map(local =>
                 `<option value="${escapeHtml(local)}">
                     ${escapeHtml(local)}
@@ -842,78 +872,78 @@ CONFIGURAÇÕES
             )
             .join('');
 
+}
+
+
+
+/*
+=========================================================
+ESCAPAR HTML
+=========================================================
+*/
+
+function escapeHtml(valor) {
+
+    if (valor === null || valor === undefined) {
+        return '';
     }
 
+    return String(valor)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 
-
-    /*
-    =========================================================
-    ESCAPAR HTML
-    =========================================================
-    */
-
-    function escapeHtml(valor) {
-
-        if (valor === null || valor === undefined) {
-            return '';
-        }
-
-        return String(valor)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-
-    }
+}
 
 
 
-    /*
-    =========================================================
-    EVENTOS FILTRADOS
-    =========================================================
-    */
+/*
+=========================================================
+EVENTOS FILTRADOS
+=========================================================
+*/
 
-    function eventosFiltrados() {
+function eventosFiltrados() {
 
-        const agora = new Date();
+    const agora = new Date();
 
-        const busca =
-            filtroBusca.value
+    const busca =
+        filtroBusca.value
             .trim()
             .toLowerCase();
 
-        const categoria =
-            filtroCategoria.value;
+    const categoria =
+        filtroCategoria.value;
 
-        const formato =
-            filtroFormato.value;
+    const formato =
+        filtroFormato.value;
 
-        const local =
-            filtroLocal.value;
-
-
-        return TODOS_EVENTOS
-
-            .filter(evento => {
-
-                const dataEvento =
-                    new Date(evento.start);
-
-                const ehPassado =
-                    dataEvento < agora;
+    const local =
+        filtroLocal.value;
 
 
-                if (
-                    mostrandoPassados !==
-                    ehPassado
-                ) {
-                    return false;
-                }
+    return TODOS_EVENTOS
+
+        .filter(evento => {
+
+            const dataEvento =
+                new Date(evento.start);
+
+            const ehPassado =
+                dataEvento < agora;
 
 
-                const textoBusca = `
+            if (
+                mostrandoPassados !==
+                ehPassado
+            ) {
+                return false;
+            }
+
+
+            const textoBusca = `
 
                 ${evento.title || ''}
 
@@ -922,117 +952,119 @@ CONFIGURAÇÕES
             `.toLowerCase();
 
 
-                if (
-                    busca &&
-                    !textoBusca.includes(busca)
-                ) {
-                    return false;
-                }
+            if (
+                busca &&
+                !textoBusca.includes(busca)
+            ) {
+                return false;
+            }
 
 
-                if (
-                    categoria &&
-                    evento.categoria !== categoria
-                ) {
-                    return false;
-                }
+            if (
+                categoria &&
+                evento.categoria !== categoria
+            ) {
+                return false;
+            }
 
 
-                if (
-                    formato &&
-                    evento.formato !== formato
-                ) {
-                    return false;
-                }
+            if (
+                formato &&
+                evento.formato !== formato
+            ) {
+                return false;
+            }
 
 
-                if (
-                    local &&
-                    evento.local !== local
-                ) {
-                    return false;
-                }
+            if (
+                local &&
+                evento.local !== local
+            ) {
+                return false;
+            }
 
 
-                return true;
+            return true;
 
-            })
+        })
 
-            .sort(
-                (a, b) =>
+        .sort(
+            (a, b) =>
                 new Date(a.start) -
                 new Date(b.start)
-            );
-
-    }
-
-
-
-    /*
-    =========================================================
-    FORMATAR DATA
-    =========================================================
-    */
-
-    function formatarDataBR(dataStr) {
-
-        const data = new Date(dataStr);
-
-        return data.toLocaleDateString(
-            'pt-BR', {
-                day: '2-digit',
-                month: 'long'
-            }
         );
 
-    }
+}
 
 
 
-    /*
-    =========================================================
-    FORMATAR HORA
-    =========================================================
-    */
+/*
+=========================================================
+FORMATAR DATA
+=========================================================
+*/
 
-    function formatarHoraBR(dataStr) {
+function formatarDataBR(dataStr) {
 
-        const data = new Date(dataStr);
+    const data = new Date(dataStr);
 
-        return data.toLocaleTimeString(
-            'pt-BR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            }
-        );
+    return data.toLocaleDateString(
+        'pt-BR',
+        {
+            day: '2-digit',
+            month: 'long'
+        }
+    );
 
-    }
-
-
-
-    /*
-    =========================================================
-    RENDERIZAR LISTA
-    =========================================================
-    */
-
-    function renderizarLista() {
-
-        const eventos =
-            eventosFiltrados();
+}
 
 
-        contador.textContent =
-            `${eventos.length} encontrado${
+
+/*
+=========================================================
+FORMATAR HORA
+=========================================================
+*/
+
+function formatarHoraBR(dataStr) {
+
+    const data = new Date(dataStr);
+
+    return data.toLocaleTimeString(
+        'pt-BR',
+        {
+            hour: '2-digit',
+            minute: '2-digit'
+        }
+    );
+
+}
+
+
+
+/*
+=========================================================
+RENDERIZAR LISTA
+=========================================================
+*/
+
+function renderizarLista() {
+
+    const eventos =
+        eventosFiltrados();
+
+
+    contador.textContent =
+        `${eventos.length} encontrado${
             eventos.length === 1
                 ? ''
                 : 's'
         }`;
 
 
-        if (eventos.length === 0) {
+    if (eventos.length === 0) {
 
-            grid.innerHTML = `
+        grid.innerHTML = `
 
             <div class="eventos-vazio">
 
@@ -1048,19 +1080,18 @@ CONFIGURAÇÕES
 
         `;
 
-            return;
+        return;
 
-        }
-
-
-        grid.innerHTML = eventos.map(evento => {
+    }
 
 
-            const imagemHtml =
-                evento.imagem
+    grid.innerHTML = eventos.map(evento => {
 
-                ?
-                `
+
+        const imagemHtml =
+            evento.imagem
+
+                ? `
 
                     <img
                         class="evento-imagem"
@@ -1071,8 +1102,7 @@ CONFIGURAÇÕES
 
                 `
 
-                :
-                `
+                : `
 
                     <div class="evento-imagem-placeholder">
 
@@ -1083,11 +1113,10 @@ CONFIGURAÇÕES
                 `;
 
 
-            const localHtml =
-                evento.local
+        const localHtml =
+            evento.local
 
-                ?
-                `
+                ? `
 
                     <span class="evento-local">
 
@@ -1101,15 +1130,13 @@ CONFIGURAÇÕES
 
                 `
 
-                :
-                '<span></span>';
+                : '<span></span>';
 
 
-            const acoesMaster =
-                EH_MASTER
+        const acoesMaster =
+            EH_MASTER
 
-                ?
-                `
+                ? `
 
                     <div class="evento-acoes-master">
 
@@ -1142,11 +1169,10 @@ CONFIGURAÇÕES
 
                 `
 
-                :
-                '';
+                : '';
 
 
-            return `
+        return `
 
             <div class="evento-card">
 
@@ -1262,836 +1288,864 @@ CONFIGURAÇÕES
 
         `;
 
-        }).join('');
+    }).join('');
+
+}
+
+
+
+/*
+=========================================================
+FILTROS
+=========================================================
+*/
+
+[
+    filtroBusca,
+    filtroCategoria,
+    filtroFormato,
+    filtroLocal
+
+].forEach(elemento => {
+
+    elemento.addEventListener(
+        'input',
+        renderizarLista
+    );
+
+    elemento.addEventListener(
+        'change',
+        renderizarLista
+    );
+
+});
+
+
+
+/*
+=========================================================
+PASSADOS / PRÓXIMOS
+=========================================================
+*/
+
+btnPassados.addEventListener(
+    'click',
+    () => {
+
+        mostrandoPassados =
+            !mostrandoPassados;
+
+
+        btnPassados.classList.toggle(
+            'ativo',
+            mostrandoPassados
+        );
+
+
+        btnPassados.textContent =
+            mostrandoPassados
+                ? 'Próximos'
+                : 'Passados';
+
+
+        renderizarLista();
+
+    }
+);
+
+
+
+/*
+=========================================================
+VISTAS
+=========================================================
+*/
+
+const btnVistaLista =
+    document.getElementById(
+        'btnVistaLista'
+    );
+
+const btnVistaCalendario =
+    document.getElementById(
+        'btnVistaCalendario'
+    );
+
+const vistaLista =
+    document.getElementById(
+        'vistaLista'
+    );
+
+const vistaCalendario =
+    document.getElementById(
+        'vistaCalendario'
+    );
+
+
+btnVistaLista.addEventListener(
+    'click',
+    () => alternarVista('lista')
+);
+
+
+btnVistaCalendario.addEventListener(
+    'click',
+    () => alternarVista('calendario')
+);
+
+
+
+function alternarVista(vista) {
+
+    vistaAtual = vista;
+
+
+    btnVistaLista.classList.toggle(
+        'ativo',
+        vista === 'lista'
+    );
+
+
+    btnVistaCalendario.classList.toggle(
+        'ativo',
+        vista === 'calendario'
+    );
+
+
+    vistaLista.classList.toggle(
+        'oculta',
+        vista !== 'lista'
+    );
+
+
+    vistaCalendario.classList.toggle(
+        'ativa',
+        vista === 'calendario'
+    );
+
+
+    if (
+        vista === 'calendario' &&
+        !calendarInstance
+    ) {
+
+        inicializarCalendario();
 
     }
 
 
+    if (
+        vista === 'calendario' &&
+        calendarInstance
+    ) {
 
-    /*
-    =========================================================
-    FILTROS
-    =========================================================
-    */
+        setTimeout(() => {
 
-    [
-        filtroBusca,
-        filtroCategoria,
-        filtroFormato,
-        filtroLocal
+            calendarInstance.updateSize();
 
-    ].forEach(elemento => {
+        }, 100);
 
-        elemento.addEventListener(
-            'input',
-            renderizarLista
-        );
+    }
 
-        elemento.addEventListener(
-            'change',
-            renderizarLista
-        );
-
-    });
+}
 
 
 
-    /*
-    =========================================================
-    PASSADOS / PRÓXIMOS
-    =========================================================
-    */
+/*
+=========================================================
+MODAL DE VISUALIZAÇÃO
+=========================================================
+*/
 
-    btnPassados.addEventListener(
+const modalVisualizarOverlay =
+    document.getElementById(
+        'modalVisualizarOverlay'
+    );
+
+
+document
+    .getElementById('btnFecharVisualizar')
+    .addEventListener(
         'click',
         () => {
 
-            mostrandoPassados = !mostrandoPassados;
-
-
-            btnPassados.classList.toggle(
-                'ativo',
-                mostrandoPassados
-            );
-
-
-            btnPassados.textContent =
-                mostrandoPassados ?
-                'Próximos' :
-                'Passados';
-
-
-            renderizarLista();
-
-        }
-    );
-
-
-
-    /*
-    =========================================================
-    VISTAS
-    =========================================================
-    */
-
-    const btnVistaLista =
-        document.getElementById(
-            'btnVistaLista'
-        );
-
-    const btnVistaCalendario =
-        document.getElementById(
-            'btnVistaCalendario'
-        );
-
-    const vistaLista =
-        document.getElementById(
-            'vistaLista'
-        );
-
-    const vistaCalendario =
-        document.getElementById(
-            'vistaCalendario'
-        );
-
-
-    btnVistaLista.addEventListener(
-        'click',
-        () => alternarVista('lista')
-    );
-
-
-    btnVistaCalendario.addEventListener(
-        'click',
-        () => alternarVista('calendario')
-    );
-
-
-
-    function alternarVista(vista) {
-
-        vistaAtual = vista;
-
-
-        btnVistaLista.classList.toggle(
-            'ativo',
-            vista === 'lista'
-        );
-
-
-        btnVistaCalendario.classList.toggle(
-            'ativo',
-            vista === 'calendario'
-        );
-
-
-        vistaLista.classList.toggle(
-            'oculta',
-            vista !== 'lista'
-        );
-
-
-        vistaCalendario.classList.toggle(
-            'ativa',
-            vista === 'calendario'
-        );
-
-
-        if (
-            vista === 'calendario' &&
-            !calendarInstance
-        ) {
-
-            inicializarCalendario();
-
-        }
-
-
-        if (
-            vista === 'calendario' &&
-            calendarInstance
-        ) {
-
-            setTimeout(() => {
-
-                calendarInstance.updateSize();
-
-            }, 100);
-
-        }
-
-    }
-
-
-
-    /*
-    =========================================================
-    MODAL DE VISUALIZAÇÃO
-    =========================================================
-    */
-
-    const modalVisualizarOverlay =
-        document.getElementById(
-            'modalVisualizarOverlay'
-        );
-
-
-    document
-        .getElementById('btnFecharVisualizar')
-        .addEventListener(
-            'click',
-            () => {
-
-                modalVisualizarOverlay
-                    .classList
-                    .remove('aberto');
-
-            }
-        );
-
-
-
-    function visualizarEvento(id) {
-
-        const evento =
-            TODOS_EVENTOS.find(
-                e => Number(e.id) === Number(id)
-            );
-
-
-        if (!evento) {
-            return;
-        }
-
-
-        const imagem =
-            document.getElementById(
-                'viewImagem'
-            );
-
-
-        if (evento.imagem) {
-
-            imagem.src =
-                evento.imagem;
-
-            imagem.style.display =
-                'block';
-
-        } else {
-
-            imagem.src = '';
-
-            imagem.style.display =
-                'none';
-
-        }
-
-
-        document.getElementById(
-                'viewTitulo'
-            ).textContent =
-            evento.title || 'Evento';
-
-
-        document.getElementById(
-                'viewData'
-            ).textContent =
-            formatarDataBR(evento.start);
-
-
-        document.getElementById(
-                'viewHora'
-            ).textContent =
-            formatarHoraBR(evento.start);
-
-
-        document.getElementById(
-                'viewDescricao'
-            ).textContent =
-            evento.extendedProps?.descricao || '';
-
-
-        const localWrap =
-            document.getElementById(
-                'viewLocalWrap'
-            );
-
-
-        if (evento.local) {
-
-            localWrap.style.display =
-                'inline-flex';
-
-
-            document.getElementById(
-                    'viewLocal'
-                ).textContent =
-                evento.local;
-
-        } else {
-
-            localWrap.style.display =
-                'none';
-
-        }
-
-
-        modalVisualizarOverlay
-            .classList
-            .add('aberto');
-
-    }
-
-
-
-    /*
-    =========================================================
-    FECHAR MODAL AO CLICAR FORA
-    =========================================================
-    */
-
-    modalVisualizarOverlay.addEventListener(
-        'click',
-        evento => {
-
-            if (
-                evento.target ===
-                modalVisualizarOverlay
-            ) {
-
-                modalVisualizarOverlay
-                    .classList
-                    .remove('aberto');
-
-            }
-
-        }
-    );
-
-
-
-    <?php if ($ehMaster): ?>
-
-
-        /*
-        =========================================================
-        MODAL MASTER
-        (criação agora fica em create.php;
-        este modal só edita/exclui)
-        =========================================================
-        */
-
-        const modalOverlay =
-            document.getElementById(
-                'modalOverlay'
-            );
-
-        const btnSalvar =
-            document.getElementById(
-                'btnSalvar'
-            );
-
-        const btnCancelar =
-            document.getElementById(
-                'btnCancelar'
-            );
-
-        const btnExcluir =
-            document.getElementById(
-                'btnExcluir'
-            );
-
-
-
-        /*
-        =========================================================
-        ABRIR MODAL
-        =========================================================
-        */
-
-        function abrirModal(evento = null) {
-
-            document.getElementById(
-                    'eventoId'
-                ).value =
-                evento ?
-                evento.id :
-                '';
-
-
-            document.getElementById(
-                    'campoTitulo'
-                ).value =
-                evento ?
-                evento.title || '' :
-                '';
-
-
-            document.getElementById(
-                    'campoDescricao'
-                ).value =
-                evento ?
-                evento.extendedProps?.descricao || '' :
-                '';
-
-
-            document.getElementById(
-                    'campoImagem'
-                ).value =
-                evento ?
-                evento.imagem || '' :
-                '';
-
-
-            document.getElementById(
-                    'campoLocal'
-                ).value =
-                evento ?
-                evento.local || '' :
-                '';
-
-
-            document.getElementById(
-                    'campoCategoria'
-                ).value =
-                evento ?
-                evento.categoria || '' :
-                'Evento';
-
-
-            document.getElementById(
-                    'campoFormatoInput'
-                ).value =
-                evento ?
-                evento.formato || 'Presencial' :
-                'Presencial';
-
-
-            document.getElementById(
-                    'campoInicio'
-                ).value =
-                evento ?
-                formatarParaInput(evento.start) :
-                '';
-
-
-            document.getElementById(
-                    'campoFim'
-                ).value =
-                evento && evento.end ?
-                formatarParaInput(evento.end) :
-                '';
-
-
-            document.getElementById(
-                    'campoCor'
-                ).value =
-                evento ?
-                evento.color || '#ff7a1a' :
-                '#ff7a1a';
-
-
-            document.getElementById(
-                    'campoGratuito'
-                ).value =
-                evento && evento.gratuito ?
-                '1' :
-                '0';
-
-
-            document.getElementById(
-                    'modalTitulo'
-                ).textContent =
-                evento ?
-                'Editar evento' :
-                'Novo evento';
-
-
-            btnExcluir.style.display =
-                evento ?
-                'inline-flex' :
-                'none';
-
-
-            modalOverlay
+            modalVisualizarOverlay
                 .classList
-                .add('aberto');
+                .remove('aberto');
 
         }
+    );
 
 
 
-        /*
-        =========================================================
-        FECHAR MODAL
-        =========================================================
-        */
+function visualizarEvento(id) {
 
-        function fecharModal() {
+    const evento =
+        TODOS_EVENTOS.find(
+            e => Number(e.id) === Number(id)
+        );
 
-            modalOverlay
+
+    if (!evento) {
+        return;
+    }
+
+
+    const imagem =
+        document.getElementById(
+            'viewImagem'
+        );
+
+
+    if (evento.imagem) {
+
+        imagem.src =
+            evento.imagem;
+
+        imagem.style.display =
+            'block';
+
+    } else {
+
+        imagem.src = '';
+
+        imagem.style.display =
+            'none';
+
+    }
+
+
+    document.getElementById(
+        'viewTitulo'
+    ).textContent =
+        evento.title || 'Evento';
+
+
+    document.getElementById(
+        'viewData'
+    ).textContent =
+        formatarDataBR(evento.start);
+
+
+    document.getElementById(
+        'viewHora'
+    ).textContent =
+        formatarHoraBR(evento.start);
+
+
+    document.getElementById(
+        'viewDescricao'
+    ).textContent =
+        evento.extendedProps?.descricao || '';
+
+
+    const localWrap =
+        document.getElementById(
+            'viewLocalWrap'
+        );
+
+
+    if (evento.local) {
+
+        localWrap.style.display =
+            'inline-flex';
+
+
+        document.getElementById(
+            'viewLocal'
+        ).textContent =
+            evento.local;
+
+    } else {
+
+        localWrap.style.display =
+            'none';
+
+    }
+
+
+    modalVisualizarOverlay
+        .classList
+        .add('aberto');
+
+}
+
+
+
+/*
+=========================================================
+FECHAR MODAL AO CLICAR FORA
+=========================================================
+*/
+
+modalVisualizarOverlay.addEventListener(
+    'click',
+    evento => {
+
+        if (
+            evento.target ===
+            modalVisualizarOverlay
+        ) {
+
+            modalVisualizarOverlay
                 .classList
                 .remove('aberto');
 
         }
 
+    }
+);
 
-        btnCancelar.addEventListener(
-            'click',
-            fecharModal
+
+
+<?php if ($ehMaster): ?>
+
+
+/*
+=========================================================
+MODAL MASTER
+(criação agora fica em create.php;
+este modal só edita/exclui)
+=========================================================
+*/
+
+const modalOverlay =
+    document.getElementById(
+        'modalOverlay'
+    );
+
+const btnSalvar =
+    document.getElementById(
+        'btnSalvar'
+    );
+
+const btnCancelar =
+    document.getElementById(
+        'btnCancelar'
+    );
+
+const btnExcluir =
+    document.getElementById(
+        'btnExcluir'
+    );
+
+
+
+/*
+=========================================================
+ABRIR MODAL
+=========================================================
+*/
+
+function abrirModal(evento = null) {
+
+    document.getElementById(
+        'eventoId'
+    ).value =
+        evento
+            ? evento.id
+            : '';
+
+
+    document.getElementById(
+        'campoTitulo'
+    ).value =
+        evento
+            ? evento.title || ''
+            : '';
+
+
+    document.getElementById(
+        'campoDescricao'
+    ).value =
+        evento
+            ? evento.extendedProps?.descricao || ''
+            : '';
+
+
+    document.getElementById(
+        'campoImagem'
+    ).value =
+        evento
+            ? evento.imagem || ''
+            : '';
+
+
+    document.getElementById(
+        'campoLocal'
+    ).value =
+        evento
+            ? evento.local || ''
+            : '';
+
+
+    document.getElementById(
+        'campoCategoria'
+    ).value =
+        evento
+            ? evento.categoria || ''
+            : 'Evento';
+
+
+    document.getElementById(
+        'campoFormatoInput'
+    ).value =
+        evento
+            ? evento.formato || 'Presencial'
+            : 'Presencial';
+
+
+    document.getElementById(
+        'campoInicio'
+    ).value =
+        evento
+            ? formatarParaInput(evento.start)
+            : '';
+
+
+    document.getElementById(
+        'campoFim'
+    ).value =
+        evento && evento.end
+            ? formatarParaInput(evento.end)
+            : '';
+
+
+    document.getElementById(
+        'campoCor'
+    ).value =
+        evento
+            ? evento.color || '#ff7a1a'
+            : '#ff7a1a';
+
+
+    document.getElementById(
+        'campoGratuito'
+    ).value =
+        evento && evento.gratuito
+            ? '1'
+            : '0';
+
+
+    document.getElementById(
+        'modalTitulo'
+    ).textContent =
+        evento
+            ? 'Editar evento'
+            : 'Novo evento';
+
+
+    btnExcluir.style.display =
+        evento
+            ? 'inline-flex'
+            : 'none';
+
+
+    modalOverlay
+        .classList
+        .add('aberto');
+
+}
+
+
+
+/*
+=========================================================
+FECHAR MODAL
+=========================================================
+*/
+
+function fecharModal() {
+
+    modalOverlay
+        .classList
+        .remove('aberto');
+
+}
+
+
+btnCancelar.addEventListener(
+    'click',
+    fecharModal
+);
+
+
+
+/*
+=========================================================
+EDITAR EVENTO
+=========================================================
+*/
+
+function editarEvento(id) {
+
+    const evento =
+        TODOS_EVENTOS.find(
+            e => Number(e.id) === Number(id)
         );
 
 
+    if (evento) {
 
-        /*
-        =========================================================
-        EDITAR EVENTO
-        =========================================================
-        */
+        abrirModal(evento);
 
-        function editarEvento(id) {
+    }
 
-            const evento =
-                TODOS_EVENTOS.find(
-                    e => Number(e.id) === Number(id)
-                );
+}
 
 
-            if (evento) {
 
-                abrirModal(evento);
+/*
+=========================================================
+EXCLUIR EVENTO
+=========================================================
+*/
 
-            }
+function excluirEvento(id) {
 
+    if (
+        !confirm(
+            'Tem certeza que deseja excluir o evento?'
+        )
+    ) {
+        return;
+    }
+
+
+    fetch(
+        `${API_URL}?id=${id}`,
+        {
+            method: 'DELETE'
         }
+    )
 
+        .then(response => {
 
-
-        /*
-        =========================================================
-        EXCLUIR EVENTO
-        =========================================================
-        */
-
-        function excluirEvento(id) {
-
-            if (
-                !confirm(
-                    'Tem certeza que deseja excluir o evento?'
-                )
-            ) {
-                return;
+            if (!response.ok) {
+                throw new Error('Erro ao excluir');
             }
 
+            return response.json();
 
-            fetch(
-                    `${API_URL}?id=${id}`, {
-                        method: 'DELETE'
-                    }
-                )
+        })
 
-                .then(response => {
+        .then(() => {
 
-                    if (!response.ok) {
-                        throw new Error('Erro ao excluir');
-                    }
+            fecharModal();
 
-                    return response.json();
+            carregarEventos();
 
-                })
+        })
 
-                .then(() => {
+        .catch(erro => {
 
-                    fecharModal();
+            console.error(erro);
 
-                    carregarEventos();
-
-                })
-
-                .catch(erro => {
-
-                    console.error(erro);
-
-                    alert(
-                        'Erro ao excluir o evento.'
-                    );
-
-                });
-
-        }
-
-
-
-        /*
-        =========================================================
-        SALVAR EVENTO (EDIÇÃO)
-        =========================================================
-        */
-
-        btnSalvar.addEventListener(
-            'click',
-            function() {
-
-
-                const id =
-                    document.getElementById(
-                        'eventoId'
-                    ).value;
-
-
-                const corpo = {
-
-                    titulo: document.getElementById(
-                        'campoTitulo'
-                    ).value.trim(),
-
-                    descricao: document.getElementById(
-                        'campoDescricao'
-                    ).value.trim(),
-
-                    imagem: document.getElementById(
-                        'campoImagem'
-                    ).value.trim(),
-
-                    local: document.getElementById(
-                        'campoLocal'
-                    ).value.trim(),
-
-                    categoria: document.getElementById(
-                        'campoCategoria'
-                    ).value.trim(),
-
-                    formato: document.getElementById(
-                        'campoFormatoInput'
-                    ).value,
-
-                    data_inicio: formatarParaMySQL(
-                        document.getElementById(
-                            'campoInicio'
-                        ).value
-                    ),
-
-                    data_fim: document.getElementById(
-                            'campoFim'
-                        ).value ?
-                        formatarParaMySQL(
-                            document.getElementById(
-                                'campoFim'
-                            ).value
-                        ) :
-                        null,
-
-                    cor: document.getElementById(
-                        'campoCor'
-                    ).value,
-
-                    gratuito: document.getElementById(
-                        'campoGratuito'
-                    ).value === '1'
-
-                };
-
-
-                if (
-                    !corpo.titulo ||
-                    !corpo.data_inicio
-                ) {
-
-                    alert(
-                        'Preencha ao menos o título e o início.'
-                    );
-
-                    return;
-
-                }
-
-
-                const url =
-                    id ?
-                    `${API_URL}?id=${id}` :
-                    API_URL;
-
-
-                const metodo =
-                    id ?
-                    'PUT' :
-                    'POST';
-
-
-                fetch(
-                        url, {
-
-                            method: metodo,
-
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-
-                            body: JSON.stringify(corpo)
-
-                        }
-                    )
-
-                    .then(response => {
-
-                        if (!response.ok) {
-                            throw new Error(
-                                'Erro ao salvar'
-                            );
-                        }
-
-                        return response.json();
-
-                    })
-
-                    .then(() => {
-
-                        fecharModal();
-
-                        carregarEventos();
-
-                    })
-
-                    .catch(erro => {
-
-                        console.error(erro);
-
-                        alert(
-                            'Erro ao salvar o evento.'
-                        );
-
-                    });
-
-            }
-        );
-
-
-
-        /*
-        =========================================================
-        EXCLUIR PELO MODAL
-        =========================================================
-        */
-
-        btnExcluir.addEventListener(
-            'click',
-            function() {
-
-                const id =
-                    document.getElementById(
-                        'eventoId'
-                    ).value;
-
-
-                if (
-                    !id ||
-                    !confirm(
-                        'Tem certeza que deseja excluir o evento?'
-                    )
-                ) {
-                    return;
-                }
-
-
-                excluirEvento(
-                    Number(id)
-                );
-
-            }
-        );
-
-
-
-        /*
-        =========================================================
-        FECHAR MODAL CLICANDO FORA
-        =========================================================
-        */
-
-        modalOverlay.addEventListener(
-            'click',
-            evento => {
-
-                if (
-                    evento.target ===
-                    modalOverlay
-                ) {
-
-                    fecharModal();
-
-                }
-
-            }
-        );
-
-
-    <?php endif; ?>
-
-
-
-    /*
-    =========================================================
-    FULLCALENDAR
-    =========================================================
-    */
-
-    function inicializarCalendario() {
-
-        const calendarEl =
-            document.getElementById(
-                'calendar'
+            alert(
+                'Erro ao excluir o evento.'
             );
 
+        });
 
-        if (!calendarEl) {
+}
+
+
+
+/*
+=========================================================
+SALVAR EVENTO (EDIÇÃO)
+=========================================================
+*/
+
+btnSalvar.addEventListener(
+    'click',
+    function () {
+
+
+        const id =
+            document.getElementById(
+                'eventoId'
+            ).value;
+
+
+        const corpo = {
+
+            titulo:
+                document.getElementById(
+                    'campoTitulo'
+                ).value.trim(),
+
+            descricao:
+                document.getElementById(
+                    'campoDescricao'
+                ).value.trim(),
+
+            imagem:
+                document.getElementById(
+                    'campoImagem'
+                ).value.trim(),
+
+            local:
+                document.getElementById(
+                    'campoLocal'
+                ).value.trim(),
+
+            categoria:
+                document.getElementById(
+                    'campoCategoria'
+                ).value.trim(),
+
+            formato:
+                document.getElementById(
+                    'campoFormatoInput'
+                ).value,
+
+            data_inicio:
+                formatarParaMySQL(
+                    document.getElementById(
+                        'campoInicio'
+                    ).value
+                ),
+
+            data_fim:
+                document.getElementById(
+                    'campoFim'
+                ).value
+                    ? formatarParaMySQL(
+                        document.getElementById(
+                            'campoFim'
+                        ).value
+                    )
+                    : null,
+
+            cor:
+                document.getElementById(
+                    'campoCor'
+                ).value,
+
+            gratuito:
+                document.getElementById(
+                    'campoGratuito'
+                ).value === '1'
+
+        };
+
+
+        if (
+            !corpo.titulo ||
+            !corpo.data_inicio
+        ) {
+
+            alert(
+                'Preencha ao menos o título e o início.'
+            );
+
+            return;
+
+        }
+
+
+        const url =
+            id
+                ? `${API_URL}?id=${id}`
+                : API_URL;
+
+
+        const metodo =
+            id
+                ? 'PUT'
+                : 'POST';
+
+
+        fetch(
+            url,
+            {
+
+                method: metodo,
+
+                headers: {
+                    'Content-Type':
+                        'application/json'
+                },
+
+                body:
+                    JSON.stringify(corpo)
+
+            }
+        )
+
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error(
+                        'Erro ao salvar'
+                    );
+                }
+
+                return response.json();
+
+            })
+
+            .then(() => {
+
+                fecharModal();
+
+                carregarEventos();
+
+            })
+
+            .catch(erro => {
+
+                console.error(erro);
+
+                alert(
+                    'Erro ao salvar o evento.'
+                );
+
+            });
+
+    }
+);
+
+
+
+/*
+=========================================================
+EXCLUIR PELO MODAL
+=========================================================
+*/
+
+btnExcluir.addEventListener(
+    'click',
+    function () {
+
+        const id =
+            document.getElementById(
+                'eventoId'
+            ).value;
+
+
+        if (
+            !id ||
+            !confirm(
+                'Tem certeza que deseja excluir o evento?'
+            )
+        ) {
             return;
         }
 
 
-        calendarInstance =
-            new FullCalendar.Calendar(
-                calendarEl, {
+        excluirEvento(
+            Number(id)
+        );
 
-                    locale: 'pt-br',
-
-                    initialView: 'dayGridMonth',
-
-                    height: 'auto',
-
-                    contentHeight: 'auto',
+    }
+);
 
 
-                    headerToolbar: {
 
-                        left: 'prev,next today',
+/*
+=========================================================
+FECHAR MODAL CLICANDO FORA
+=========================================================
+*/
 
-                        center: 'title',
+modalOverlay.addEventListener(
+    'click',
+    evento => {
 
-                        right: 'dayGridMonth,timeGridWeek,listWeek'
+        if (
+            evento.target ===
+            modalOverlay
+        ) {
 
-                    },
+            fecharModal();
 
+        }
 
-                    buttonText: {
-
-                        today: 'Hoje',
-
-                        month: 'Mês',
-
-                        week: 'Semana',
-
-                        list: 'Lista'
-
-                    },
-
-
-                    editable: EH_MASTER,
-
-                    selectable: EH_MASTER,
+    }
+);
 
 
-                    events: function(
+<?php endif; ?>
+
+
+
+/*
+=========================================================
+FULLCALENDAR
+=========================================================
+*/
+
+function inicializarCalendario() {
+
+    const calendarEl =
+        document.getElementById(
+            'calendar'
+        );
+
+
+    if (!calendarEl) {
+        return;
+    }
+
+
+    calendarInstance =
+        new FullCalendar.Calendar(
+            calendarEl,
+            {
+
+                locale: 'pt-br',
+
+                initialView:
+                    'dayGridMonth',
+
+                height: 'auto',
+
+                contentHeight:
+                    'auto',
+
+
+                headerToolbar: {
+
+                    left:
+                        'prev,next today',
+
+                    center:
+                        'title',
+
+                    right:
+                        'dayGridMonth,timeGridWeek,listWeek'
+
+                },
+
+
+                buttonText: {
+
+                    today:
+                        'Hoje',
+
+                    month:
+                        'Mês',
+
+                    week:
+                        'Semana',
+
+                    list:
+                        'Lista'
+
+                },
+
+
+                editable:
+                    EH_MASTER,
+
+                selectable:
+                    EH_MASTER,
+
+
+                events:
+                    function (
                         info,
                         successCallback
                     ) {
@@ -2106,7 +2160,8 @@ CONFIGURAÇÕES
                     },
 
 
-                    select: function(info) {
+                select:
+                    function (info) {
 
                         if (!EH_MASTER) {
                             return;
@@ -2115,9 +2170,11 @@ CONFIGURAÇÕES
 
                         abrirModal({
 
-                            start: info.start,
+                            start:
+                                info.start,
 
-                            end: info.end
+                            end:
+                                info.end
 
                         });
 
@@ -2128,7 +2185,8 @@ CONFIGURAÇÕES
                     },
 
 
-                    eventClick: function(info) {
+                eventClick:
+                    function (info) {
 
                         const id =
                             Number(
@@ -2149,7 +2207,8 @@ CONFIGURAÇÕES
                     },
 
 
-                    eventDrop: function(info) {
+                eventDrop:
+                    function (info) {
 
                         if (!EH_MASTER) {
                             return;
@@ -2162,7 +2221,8 @@ CONFIGURAÇÕES
                     },
 
 
-                    eventResize: function(info) {
+                eventResize:
+                    function (info) {
 
                         if (!EH_MASTER) {
                             return;
@@ -2175,7 +2235,8 @@ CONFIGURAÇÕES
                     },
 
 
-                    eventDidMount: function(info) {
+                eventDidMount:
+                    function (info) {
 
                         if (
                             info.event.extendedProps &&
@@ -2184,119 +2245,124 @@ CONFIGURAÇÕES
 
                             info.el.title =
                                 info.event
-                                .extendedProps
-                                .descricao;
+                                    .extendedProps
+                                    .descricao;
 
                         }
 
                     }
 
-                }
-            );
+            }
+        );
 
 
-        calendarInstance.render();
+    calendarInstance.render();
 
-    }
+}
 
 
 
-    /*
-    =========================================================
-    SALVAR MOVIMENTAÇÃO
-    =========================================================
-    */
+/*
+=========================================================
+SALVAR MOVIMENTAÇÃO
+=========================================================
+*/
 
-    function salvarMovimentacao(evento) {
+function salvarMovimentacao(evento) {
 
-        fetch(
-                `${API_URL}?id=${evento.id}`, {
+    fetch(
+        `${API_URL}?id=${evento.id}`,
+        {
 
-                    method: 'PUT',
+            method: 'PUT',
 
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+            headers: {
+                'Content-Type':
+                    'application/json'
+            },
 
-                    body: JSON.stringify({
+            body:
+                JSON.stringify({
 
-                        data_inicio: formatarParaMySQL(
+                    data_inicio:
+                        formatarParaMySQL(
                             evento.start
                         ),
 
-                        data_fim: evento.end ?
-                            formatarParaMySQL(
+                    data_fim:
+                        evento.end
+                            ? formatarParaMySQL(
                                 evento.end
-                            ) :
-                            null
+                            )
+                            : null
 
-                    })
+                })
 
-                }
-            )
+        }
+    )
 
-            .then(response => {
+        .then(response => {
 
-                if (!response.ok) {
-                    throw new Error(
-                        'Erro ao movimentar evento'
-                    );
-                }
-
-                return response.json();
-
-            })
-
-            .then(() => {
-
-                carregarEventos();
-
-            })
-
-            .catch(erro => {
-
-                console.error(erro);
-
-                alert(
-                    'Erro ao mover o evento.'
+            if (!response.ok) {
+                throw new Error(
+                    'Erro ao movimentar evento'
                 );
+            }
 
-                if (calendarInstance) {
+            return response.json();
 
-                    calendarInstance.refetchEvents();
+        })
 
-                }
+        .then(() => {
 
-            });
+            carregarEventos();
 
+        })
+
+        .catch(erro => {
+
+            console.error(erro);
+
+            alert(
+                'Erro ao mover o evento.'
+            );
+
+            if (calendarInstance) {
+
+                calendarInstance.refetchEvents();
+
+            }
+
+        });
+
+}
+
+
+
+/*
+=========================================================
+FORMATAR PARA INPUT
+=========================================================
+*/
+
+function formatarParaInput(data) {
+
+    if (!data) {
+        return '';
     }
 
 
-
-    /*
-    =========================================================
-    FORMATAR PARA INPUT
-    =========================================================
-    */
-
-    function formatarParaInput(data) {
-
-        if (!data) {
-            return '';
-        }
+    const d =
+        new Date(data);
 
 
-        const d =
-            new Date(data);
-
-
-        const pad =
-            numero =>
+    const pad =
+        numero =>
             String(numero)
-            .padStart(2, '0');
+                .padStart(2, '0');
 
 
-        return `${d.getFullYear()}-${pad(
+    return `${d.getFullYear()}-${pad(
         d.getMonth() + 1
     )}-${pad(
         d.getDate()
@@ -2306,34 +2372,34 @@ CONFIGURAÇÕES
         d.getMinutes()
     )}`;
 
+}
+
+
+
+/*
+=========================================================
+FORMATAR PARA MYSQL
+=========================================================
+*/
+
+function formatarParaMySQL(data) {
+
+    if (!data) {
+        return null;
     }
 
 
-
-    /*
-    =========================================================
-    FORMATAR PARA MYSQL
-    =========================================================
-    */
-
-    function formatarParaMySQL(data) {
-
-        if (!data) {
-            return null;
-        }
+    const d =
+        new Date(data);
 
 
-        const d =
-            new Date(data);
-
-
-        const pad =
-            numero =>
+    const pad =
+        numero =>
             String(numero)
-            .padStart(2, '0');
+                .padStart(2, '0');
 
 
-        return `${d.getFullYear()}-${pad(
+    return `${d.getFullYear()}-${pad(
         d.getMonth() + 1
     )}-${pad(
         d.getDate()
@@ -2343,17 +2409,18 @@ CONFIGURAÇÕES
         d.getMinutes()
     )}:00`;
 
-    }
+}
 
 
 
-    /*
-    =========================================================
-    INICIAR
-    =========================================================
-    */
+/*
+=========================================================
+INICIAR
+=========================================================
+*/
 
-    carregarEventos();
+carregarEventos();
+
 </script>
 
 

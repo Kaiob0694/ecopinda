@@ -28,7 +28,7 @@ $metodo = $_SERVER['REQUEST_METHOD'];
 
 function usuarioEhMaster()
 {
-    return isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'master';
+    return isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] === 'master';
 }
 
 function exigirMaster()
@@ -157,8 +157,23 @@ switch ($metodo) {
             exit;
         }
 
+        // Busca a imagem do evento antes de excluir, para remover o arquivo físico
+        $stmt = $pdo->prepare("SELECT imagem FROM eventos WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        $evento = $stmt->fetch(PDO::FETCH_ASSOC);
+
         $stmt = $pdo->prepare("DELETE FROM eventos WHERE id = :id");
         $stmt->execute([':id' => $id]);
+
+        if ($evento && !empty($evento['imagem']) && strpos($evento['imagem'], '/assets/uploads/eventos/') === 0) {
+
+            $caminhoArquivo = __DIR__ . '/..' . $evento['imagem'];
+
+            if (file_exists($caminhoArquivo)) {
+                @unlink($caminhoArquivo);
+            }
+
+        }
 
         echo json_encode(['mensagem' => 'Evento removido com sucesso.']);
         break;
