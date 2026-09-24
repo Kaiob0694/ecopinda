@@ -20,11 +20,16 @@ $pdo = $conexao->conectar();
 
 $erro = '';
 
+// Pasta física onde as imagens serão salvas
+$pastaUploads = __DIR__ . '/../../assets/uploads/eventos/';
+
+// Caminho público (usado para acessar a imagem pelo navegador)
+$caminhoPublico = '/assets/uploads/eventos/';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $titulo      = trim($_POST['titulo'] ?? '');
     $descricao   = trim($_POST['descricao'] ?? '');
-    $imagem      = trim($_POST['imagem'] ?? '');
     $local       = trim($_POST['local'] ?? '');
     $categoria   = trim($_POST['categoria'] ?? '') ?: 'Evento';
     $formato     = $_POST['formato'] ?? 'Presencial';
@@ -34,39 +39,98 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dia_inteiro = isset($_POST['dia_inteiro']) ? 1 : 0;
     $gratuito    = isset($_POST['gratuito']) && $_POST['gratuito'] === '1' ? 1 : 0;
 
+    $imagem = null;
+
     if (empty($titulo) || empty($data_inicio)) {
 
         $erro = 'Preencha ao menos o título e a data/hora de início.';
 
     } else {
 
-        try {
+        // ============================
+        // TRATAMENTO DO UPLOAD DA IMAGEM
+        // ============================
 
-            $stmt = $pdo->prepare("
-                INSERT INTO eventos (titulo, descricao, data_inicio, data_fim, cor, dia_inteiro, imagem, local, categoria, formato, gratuito)
-                VALUES (:titulo, :descricao, :data_inicio, :data_fim, :cor, :dia_inteiro, :imagem, :local, :categoria, :formato, :gratuito)
-            ");
+        if (!empty($_FILES['imagem']['name']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
 
-            $stmt->execute([
-                ':titulo'      => $titulo,
-                ':descricao'   => $descricao !== '' ? $descricao : null,
-                ':data_inicio' => str_replace('T', ' ', $data_inicio) . ':00',
-                ':data_fim'    => $data_fim !== '' ? str_replace('T', ' ', $data_fim) . ':00' : null,
-                ':cor'         => $cor,
-                ':dia_inteiro' => $dia_inteiro,
-                ':imagem'      => $imagem !== '' ? $imagem : null,
-                ':local'       => $local !== '' ? $local : null,
-                ':categoria'   => $categoria,
-                ':formato'     => $formato,
-                ':gratuito'    => $gratuito,
-            ]);
+            $extensoesPermitidas = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+            $tamanhoMaximo = 5 * 1024 * 1024; // 5 MB
 
-            header("Location: index.php");
-            exit;
+            $nomeOriginal = $_FILES['imagem']['name'];
+            $extensao = strtolower(pathinfo($nomeOriginal, PATHINFO_EXTENSION));
+            $tamanho = $_FILES['imagem']['size'];
+            $tmpPath = $_FILES['imagem']['tmp_name'];
 
-        } catch (PDOException $e) {
+            if (!in_array($extensao, $extensoesPermitidas)) {
 
-            $erro = 'Erro ao salvar o evento: ' . $e->getMessage();
+                $erro = 'Formato de imagem inválido. Use JPG, PNG, WEBP ou GIF.';
+
+            } elseif ($tamanho > $tamanhoMaximo) {
+
+                $erro = 'A imagem deve ter no máximo 5MB.';
+
+            } elseif (!getimagesize($tmpPath)) {
+
+                // Confirma que o arquivo é realmente uma imagem
+                $erro = 'O arquivo enviado não é uma imagem válida.';
+
+            } else {
+
+                // Garante que a pasta existe
+                if (!is_dir($pastaUploads)) {
+                    mkdir($pastaUploads, 0755, true);
+                }
+
+                // Nome de arquivo único para evitar sobrescrever outras imagens
+                $nomeArquivo = uniqid('evento_', true) . '.' . $extensao;
+                $destino = $pastaUploads . $nomeArquivo;
+
+                if (move_uploaded_file($tmpPath, $destino)) {
+
+                    $imagem = $caminhoPublico . $nomeArquivo;
+
+                } else {
+
+                    $erro = 'Não foi possível salvar a imagem enviada.';
+
+                }
+
+            }
+
+        }
+
+        // Só continua se não houver erro de imagem
+        if (empty($erro)) {
+
+            try {
+
+                $stmt = $pdo->prepare("
+                    INSERT INTO eventos (titulo, descricao, data_inicio, data_fim, cor, dia_inteiro, imagem, local, categoria, formato, gratuito)
+                    VALUES (:titulo, :descricao, :data_inicio, :data_fim, :cor, :dia_inteiro, :imagem, :local, :categoria, :formato, :gratuito)
+                ");
+
+                $stmt->execute([
+                    ':titulo'      => $titulo,
+                    ':descricao'   => $descricao !== '' ? $descricao : null,
+                    ':data_inicio' => str_replace('T', ' ', $data_inicio) . ':00',
+                    ':data_fim'    => $data_fim !== '' ? str_replace('T', ' ', $data_fim) . ':00' : null,
+                    ':cor'         => $cor,
+                    ':dia_inteiro' => $dia_inteiro,
+                    ':imagem'      => $imagem,
+                    ':local'       => $local !== '' ? $local : null,
+                    ':categoria'   => $categoria,
+                    ':formato'     => $formato,
+                    ':gratuito'    => $gratuito,
+                ]);
+
+                header("Location: index.php");
+                exit;
+
+            } catch (PDOException $e) {
+
+                $erro = 'Erro ao salvar o evento: ' . $e->getMessage();
+
+            }
 
         }
 
@@ -93,7 +157,7 @@ include "../../includes/header.php";
             </div>
         <?php endif; ?>
 
-        <form method="POST" class="formulario-evento">
+        <form method="POST" class="formulario-evento" enctype="multipart/form-data">
 
             <div class="formulario-evento-grid">
 
@@ -108,8 +172,8 @@ include "../../includes/header.php";
                 </div>
 
                 <div class="campo-evento largo">
-                    <label>URL da imagem</label>
-                    <input type="text" name="imagem" placeholder="https://...">
+                    <label>Imagem do evento</label>
+                    <input type="file" name="imagem" accept="image/png, image/jpeg, image/webp, image/gif">
                 </div>
 
                 <div class="campo-evento">

@@ -1,11 +1,33 @@
 /* =========================================================
+   ESPAÇO PARA O HEADER FLUTUANTE (fixed)
+========================================================= */
+
+.cadastro-evento-container {
+    padding-top: 130px;
+}
+
+@media (max-width: 992px) {
+    .cadastro-evento-container {
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cadastro-evento-container {
+        padding-top: 90px;
+    }
+}
+
+/* =========================================================
    CADASTRAR EVENTO
 ========================================================= */
 
 .cadastro-evento-container {
     display: flex;
     justify-content: center;
-    padding: 40px 20px 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
 }
 
 .cadastro-evento-painel {
@@ -106,6 +128,47 @@
     width: 18px;
     height: 18px;
     cursor: pointer;
+}
+
+/* =========================================================
+   UPLOAD DE IMAGEM
+========================================================= */
+
+.campo-evento input[type="file"] {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.campo-evento input[type="file"]::file-selector-button {
+    padding: 8px 16px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff7a1a;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.campo-evento input[type="file"]::file-selector-button:hover {
+    background: #e6690f;
+}
+
+.preview-imagem {
+    margin-top: 10px;
+    display: none;
+    max-width: 220px;
+    border-radius: 10px;
+    border: 1px solid #d8dfda;
+    overflow: hidden;
+}
+
+.preview-imagem img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 /* =========================================================
