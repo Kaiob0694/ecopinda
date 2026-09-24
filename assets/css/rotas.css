@@ -1,0 +1,622 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6f3;
+    color: #333;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero-rotas {
+    min-height: 300px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 60px;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.45),
+            rgba(0,0,0,.45)
+        ),
+        url("../img2/pindamonhangaba_cidade.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+}
+
+
+.hero-rotas h1 {
+    font-size: 46px;
+    margin: 15px 0;
+}
+
+
+.hero-rotas p {
+    font-size: 18px;
+}
+
+
+.tag {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.conteudo-rotas {
+
+    max-width: 1400px;
+
+    margin: 40px auto;
+
+    padding: 0 30px;
+
+    display: grid;
+
+    grid-template-columns: 240px 1fr;
+
+    gap: 40px;
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+.filtros {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    height: fit-content;
+}
+
+
+.filtros h3 {
+    margin-bottom: 20px;
+}
+
+
+.filtros input {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    margin-bottom: 25px;
+}
+
+
+.filtros h4 {
+    margin-bottom: 15px;
+}
+
+
+.filtro {
+
+    display: block;
+
+    width: 100%;
+
+    text-align: left;
+
+    padding: 10px;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    border-radius: 7px;
+}
+
+
+.filtro:hover {
+    background: #f1f1f1;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.titulo-lista {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+.btn-nova-rota,
+.btn-ver-rota,
+.btn-criar {
+
+    display: inline-block;
+
+    background: #ff3c00;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    border: 0;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.grid-rotas {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+
+.card-rota {
+
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.08);
+}
+
+
+.card-imagem {
+
+    height: 200px;
+
+    background: #ddd;
+}
+
+
+.card-imagem img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.sem-imagem {
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 60px;
+}
+
+
+.card-conteudo {
+
+    padding: 20px;
+}
+
+
+.categoria {
+
+    color: #22a645;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+
+.card-conteudo h3 {
+
+    margin: 8px 0;
+
+    font-size: 23px;
+}
+
+
+.card-conteudo p {
+
+    color: #666;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+.informacoes {
+
+    display: flex;
+
+    gap: 15px;
+
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   DETALHES
+========================= */
+
+.detalhes-rota {
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 30px;
+}
+
+
+.topo-detalhes {
+
+    margin-bottom: 30px;
+}
+
+
+.topo-detalhes a {
+
+    text-decoration: none;
+
+    color: #333;
+}
+
+
+.cabecalho-rota {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    margin-bottom: 30px;
+}
+
+
+.cabecalho-rota h1 {
+
+    font-size: 42px;
+
+    margin: 10px 0 15px;
+}
+
+
+.cabecalho-rota p {
+
+    max-width: 800px;
+
+    line-height: 1.7;
+
+    color: #666;
+}
+
+
+.dados-rota {
+
+    display: flex;
+
+    gap: 30px;
+
+    margin-top: 25px;
+}
+
+
+.rota-layout {
+
+    display: grid;
+
+    grid-template-columns: 350px 1fr;
+
+    gap: 25px;
+}
+
+
+.pontos-rota {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+}
+
+
+.ponto-rota {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.numero-ponto {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #22a645;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+
+.ponto-rota h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+
+.ponto-rota span {
+
+    font-size: 13px;
+
+    color: #888;
+}
+
+
+/* =========================
+   MAPA
+========================= */
+
+.mapa {
+
+    height: 650px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.rotas-container {
+
+    max-width: 1000px;
+
+    margin: 50px auto;
+
+    padding: 0 25px;
+}
+
+
+.rotas-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+.form-rota {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 18px;
+}
+
+
+.campo {
+
+    margin-bottom: 20px;
+}
+
+
+.campo label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+.campo input,
+.campo textarea,
+.campo select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+}
+
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+.lista-pontos {
+
+    margin: 20px 0 30px;
+}
+
+
+.ponto-item {
+
+    display: block;
+
+    padding: 15px;
+
+    background: #f7f7f7;
+
+    margin-bottom: 8px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+.ponto-item:hover {
+
+    background: #eee;
+}
+
+
+.ajuda {
+
+    color: #777;
+
+    margin: 8px 0 15px;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 800px) {
+
+    .conteudo-rotas {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .grid-rotas {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .rota-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .mapa {
+
+        height: 450px;
+
+    }
+
+
+    .hero-rotas {
+
+        padding: 35px 25px;
+
+    }
+
+
+    .hero-rotas h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .dados-rota {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

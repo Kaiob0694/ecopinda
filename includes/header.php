@@ -7,16 +7,25 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $usuarioLogado = isset($_SESSION['usuario_id']);
-$usuarioNome   = $_SESSION['usuario_nome'] ?? '';
-$usuarioFoto   = $_SESSION['usuario_foto'] ?? '';
-$usuarioTipo   = $_SESSION['usuario_tipo'] ?? 'usuario';
 
-$usuarioAdmin  = in_array($usuarioTipo, ['admin', 'master'], true);
+$usuarioNome = $_SESSION['usuario_nome'] ?? '';
+
+$usuarioFoto = $_SESSION['usuario_foto'] ?? '';
+
+$usuarioTipo = $_SESSION['usuario_tipo'] ?? 'usuario';
+
+$usuarioAdmin = in_array(
+    $usuarioTipo,
+    ['admin', 'master'],
+    true
+);
+
 $usuarioMaster = $usuarioTipo === 'master';
+
 
 /*
 |--------------------------------------------------------------------------
-| PINDACOINS DO USUÁRIO
+| PINDA COINS DO USUÁRIO
 |--------------------------------------------------------------------------
 */
 
@@ -29,6 +38,7 @@ if ($usuarioLogado) {
     try {
 
         $conexao = new Conexao();
+
         $pdo = $conexao->conectar();
 
         $stmt = $pdo->prepare("
@@ -50,6 +60,7 @@ if ($usuarioLogado) {
     }
 }
 
+
 /*
 |--------------------------------------------------------------------------
 | INICIAIS DO USUÁRIO
@@ -60,7 +71,11 @@ if (!function_exists('iniciaisHeader')) {
 
     function iniciaisHeader($nome)
     {
-        $partes = preg_split('/\s+/', trim($nome));
+
+        $partes = preg_split(
+            '/\s+/',
+            trim($nome)
+        );
 
         $iniciais = mb_substr(
             $partes[0] ?? '',
@@ -80,42 +95,52 @@ if (!function_exists('iniciaisHeader')) {
 
         return $iniciais;
     }
-
 }
 
 ?>
+
 
 <header class="header">
 
     <div class="header-shell">
 
-        <!-- LOGO -->
-        <a href="<?= $baseUrl ?>/index.php" class="logo-pill">
+
+        <!-- =====================================================
+             LOGO
+        ====================================================== -->
+
+        <a
+            href="<?= $baseUrl ?>/index.php"
+            class="logo-pill"
+        >
 
             <img
                 src="/../assets/img2/logo.png"
-                alt="Pinda Eco">
+                alt="Pinda Eco"
+            >
 
         </a>
 
 
-        <!-- MENU CENTRAL (PÍLULA) -->
+        <!-- =====================================================
+             MENU CENTRAL
+        ====================================================== -->
+
         <nav class="nav-pill">
 
 
-            <!-- =====================================================
+            <!-- =================================================
                  INÍCIO
-            ====================================================== -->
+            ================================================== -->
 
             <a href="/../index.php">
                 Início
             </a>
 
 
-
-            <!-- =====================================================
+            <!-- =================================================
                  EXPLORAR
-            ====================================================== -->
+            ================================================== -->
 
             <div class="menu-dropdown">
 
@@ -126,37 +151,50 @@ if (!function_exists('iniciaisHeader')) {
                     Explorar
                 </a>
 
+
                 <div class="submenu">
+
 
                     <a href="/../pages/cidade.php">
                         Cidade
                     </a>
 
+
                     <a href="/../pages/turismo/read.php">
                         Turismo
                     </a>
+
+
+                    <!-- ROTAS -->
+
+                    <a href="/../pages/rotas/rotas.php">
+                        🗺️ Rotas
+                    </a>
+
 
                     <a href="/../pages/guia/read.php">
                         Guia Turístico
                     </a>
 
+
                     <a href="/../pages/hoteis/read.php">
                         Hotéis
                     </a>
 
+
                     <a href="/../pages/restaurante/read.php">
                         Restaurantes
                     </a>
+
 
                 </div>
 
             </div>
 
 
-
-            <!-- =====================================================
+            <!-- =================================================
                  COMUNIDADE
-            ====================================================== -->
+            ================================================== -->
 
             <div class="menu-dropdown">
 
@@ -167,7 +205,9 @@ if (!function_exists('iniciaisHeader')) {
                     Comunidade
                 </a>
 
+
                 <div class="submenu">
+
 
                     <a href="/../pages/feed.php">
                         +PINDA
@@ -182,26 +222,31 @@ if (!function_exists('iniciaisHeader')) {
 
                     <?php endif; ?>
 
+
                 </div>
 
             </div>
 
 
-
-            <!-- =====================================================
+            <!-- =================================================
                  LOJA DE RECOMPENSAS
-            ====================================================== -->
+            ================================================== -->
 
             <a href="/../index.php">
                 Loja de Recompensas
             </a>
+
+
+            <!-- =================================================
+                 CALENDÁRIO
+            ================================================== -->
+
             <a href="/../pages/calendario/read.php">
-                Calendario
+                Calendário
             </a>
 
 
         </nav>
-
 
 
         <!-- =====================================================
@@ -210,42 +255,63 @@ if (!function_exists('iniciaisHeader')) {
 
         <div class="header-actions">
 
+
             <?php if ($usuarioLogado): ?>
+
+
+                <!-- =================================================
+                     USUÁRIO LOGADO
+                ================================================== -->
 
                 <a
                     href="/../pages/profile.php"
                     class="user-chip"
                 >
 
+
                     <!-- AVATAR -->
+
                     <span class="user-avatar">
+
 
                         <?php if (!empty($usuarioFoto)): ?>
 
+
                             <img
                                 src="/../assets/uploads/perfil/<?= htmlspecialchars($usuarioFoto) ?>"
-                                alt="Foto de perfil">
+                                alt="Foto de perfil"
+                            >
+
 
                         <?php else: ?>
+
 
                             <?= htmlspecialchars(
                                 iniciaisHeader($usuarioNome)
                             ) ?>
 
+
                         <?php endif; ?>
+
 
                     </span>
 
 
                     <!-- INFORMAÇÕES DO USUÁRIO -->
+
                     <span class="user-meta">
+
 
                         <span class="user-name">
 
-                            <?= htmlspecialchars($usuarioNome) ?>
+
+                            <?= htmlspecialchars(
+                                $usuarioNome
+                            ) ?>
 
 
                             <!-- MASTER -->
+
                             <?php if ($usuarioMaster): ?>
 
                                 <span class="user-badge badge-master">
@@ -254,6 +320,7 @@ if (!function_exists('iniciaisHeader')) {
 
 
                             <!-- ADMIN -->
+
                             <?php elseif ($usuarioAdmin): ?>
 
                                 <span class="user-badge badge-admin">
@@ -262,18 +329,25 @@ if (!function_exists('iniciaisHeader')) {
 
                             <?php endif; ?>
 
+
                         </span>
 
 
                         <!-- PINDA COINS -->
+
                         <span
                             class="user-coins"
                             id="pindacoins"
                         >
-                            PindaCOINS: <?= $pindaCoins ?>
+
+                            PindaCOINS:
+                            <?= $pindaCoins ?>
+
                         </span>
 
+
                     </span>
+
 
                 </a>
 
@@ -281,18 +355,25 @@ if (!function_exists('iniciaisHeader')) {
             <?php else: ?>
 
 
-                <!-- LOGIN -->
+                <!-- =================================================
+                     LOGIN
+                ================================================== -->
+
                 <a
                     href="/../pages/login.php"
                     class="btn-login"
                 >
+
                     Login
+
                 </a>
 
 
             <?php endif; ?>
 
+
         </div>
+
 
     </div>
 
