@@ -4,12 +4,17 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once "../../classes/rotas.php";
+include "../../includes/header.php";
+include "../../includes/head.php";
+$baseUrl = 'https://pindaeco.rf.gd';
 
 $rotas = new Rotas();
 
 $lista = $rotas->listar();
 
 ?>
+
+
 
 <!DOCTYPE html>
 
@@ -19,240 +24,222 @@ $lista = $rotas->listar();
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Rotas - PindaEco</title>
 
-    <link
-        rel="stylesheet"
-        href="../../assets/css/rotas.css"
-    >
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/rotas.css?v=<?= time(); ?>">
 
 </head>
 
 <body>
 
 
-<div class="pagina-rotas">
+    <div class="pagina-rotas">
 
 
-    <header class="hero-rotas">
+        <header class="hero-rotas">
 
-        <div>
+            <div>
 
-            <span class="tag">
-                PINDAECO
-            </span>
+                <span class="tag">
+                    PINDAECO
+                </span>
 
-            <h1>
-                Descubra novas rotas
-            </h1>
+                <h1>
+                    Descubra novas rotas
+                </h1>
 
-            <p>
-                Explore experiências, lugares e histórias
-                de Pindamonhangaba.
-            </p>
-
-        </div>
-
-    </header>
-
-
-    <div class="conteudo-rotas">
-
-
-        <aside class="filtros">
-
-            <h3>
-                Filtrar rotas
-            </h3>
-
-
-            <input
-                type="text"
-                id="buscarRota"
-                placeholder="🔎 Buscar rota..."
-            >
-
-
-            <h4>
-                Categoria
-            </h4>
-
-            <button class="filtro">
-                Todas
-            </button>
-
-            <button class="filtro">
-                🌳 Natureza
-            </button>
-
-            <button class="filtro">
-                🏛️ História
-            </button>
-
-            <button class="filtro">
-                🍽️ Gastronomia
-            </button>
-
-            <button class="filtro">
-                👨‍👩‍👧 Família
-            </button>
-
-        </aside>
-
-
-        <main class="lista-rotas">
-
-
-            <div class="titulo-lista">
-
-                <h2>
-                    Rotas em Pindamonhangaba
-                </h2>
-
-                <a
-                    href="create.php"
-                    class="btn-nova-rota"
-                >
-                    + Nova rota
-                </a>
+                <p>
+                    Explore experiências, lugares e histórias
+                    de Pindamonhangaba.
+                </p>
 
             </div>
 
-
-            <div class="grid-rotas">
-
-
-                <?php foreach ($lista as $rota): ?>
+        </header>
 
 
-                    <article class="card-rota">
+        <div class="conteudo-rotas">
 
 
-                        <div class="card-imagem">
+            <aside class="filtros">
 
-                            <?php if (!empty($rota["imagem"])): ?>
-
-                                <img
-                                    src="../../<?= htmlspecialchars($rota["imagem"]) ?>"
-                                    alt="<?= htmlspecialchars($rota["nome"]) ?>"
-                                >
-
-                            <?php else: ?>
-
-                                <div class="sem-imagem">
-                                    🗺️
-                                </div>
-
-                            <?php endif; ?>
-
-                        </div>
+                <h3>
+                    Filtrar rotas
+                </h3>
 
 
-                        <div class="card-conteudo">
+                <input type="text" id="buscarRota" placeholder="🔎 Buscar rota...">
 
 
-                            <span class="categoria">
+                <h4>
+                    Categoria
+                </h4>
 
-                                <?= htmlspecialchars($rota["categoria"]) ?>
+                <button class="filtro">
+                    Todas
+                </button>
 
-                            </span>
+                <button class="filtro">
+                    🌳 Natureza
+                </button>
 
+                <button class="filtro">
+                    🏛️ História
+                </button>
 
-                            <h3>
+                <button class="filtro">
+                    🍽️ Gastronomia
+                </button>
 
-                                <?= htmlspecialchars($rota["nome"]) ?>
+                <button class="filtro">
+                    👨‍👩‍👧 Família
+                </button>
 
-                            </h3>
-
-
-                            <p>
-
-                                <?= htmlspecialchars(
-                                    mb_strimwidth(
-                                        $rota["descricao"],
-                                        0,
-                                        120,
-                                        "..."
-                                    )
-                                ) ?>
-
-                            </p>
+            </aside>
 
 
-                            <div class="informacoes">
+            <main class="lista-rotas">
 
-                                <span>
-                                    ⏱️ <?= htmlspecialchars($rota["duracao"]) ?>
-                                </span>
 
-                                <span>
-                                    🚶 <?= htmlspecialchars($rota["dificuldade"]) ?>
-                                </span>
+                <div class="titulo-lista">
+
+                    <h2>
+                        Rotas em Pindamonhangaba
+                    </h2>
+
+                    <a href="create.php" class="btn-nova-rota">
+                        + Nova rota
+                    </a>
+
+                </div>
+
+
+                <div class="grid-rotas">
+
+
+                    <?php foreach ($lista as $rota): ?>
+
+
+                        <article class="card-rota">
+
+
+                            <div class="card-imagem">
+
+                                <?php if (!empty($rota["imagem"])): ?>
+
+                                    <img src="../../<?= htmlspecialchars($rota["imagem"]) ?>"
+                                        alt="<?= htmlspecialchars($rota["nome"]) ?>">
+
+                                <?php else: ?>
+
+                                    <div class="sem-imagem">
+                                        🗺️
+                                    </div>
+
+                                <?php endif; ?>
 
                             </div>
 
 
-                            <a
-                                href="detalhes.php?id=<?= $rota["id"] ?>"
-                                class="btn-ver-rota"
-                            >
-
-                                Ver rota
-
-                            </a>
+                            <div class="card-conteudo">
 
 
-                        </div>
+                                <span class="categoria">
+
+                                    <?= htmlspecialchars($rota["categoria"]) ?>
+
+                                </span>
 
 
-                    </article>
+                                <h3>
+
+                                    <?= htmlspecialchars($rota["nome"]) ?>
+
+                                </h3>
 
 
-                <?php endforeach; ?>
+                                <p>
+
+                                    <?= htmlspecialchars(
+                                        mb_strimwidth(
+                                            $rota["descricao"],
+                                            0,
+                                            120,
+                                            "..."
+                                        )
+                                    ) ?>
+
+                                </p>
 
 
-            </div>
+                                <div class="informacoes">
+
+                                    <span>
+                                        ⏱️ <?= htmlspecialchars($rota["duracao"]) ?>
+                                    </span>
+
+                                    <span>
+                                        🚶 <?= htmlspecialchars($rota["dificuldade"]) ?>
+                                    </span>
+
+                                </div>
 
 
-        </main>
+                                <a href="detalhes.php?id=<?= $rota["id"] ?>" class="btn-ver-rota">
+
+                                    Ver rota
+
+                                </a>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    <?php endforeach; ?>
+
+
+                </div>
+
+
+            </main>
+
+
+        </div>
 
 
     </div>
 
 
-</div>
+    <script>
 
+        const campo = document.getElementById("buscarRota");
 
-<script>
+        campo.addEventListener("input", function () {
 
-const campo = document.getElementById("buscarRota");
+            const busca = this.value.toLowerCase();
 
-campo.addEventListener("input", function () {
+            document
+                .querySelectorAll(".card-rota")
+                .forEach(function (card) {
 
-    const busca = this.value.toLowerCase();
+                    const texto =
+                        card.innerText.toLowerCase();
 
-    document
-        .querySelectorAll(".card-rota")
-        .forEach(function (card) {
+                    card.style.display =
+                        texto.includes(busca)
+                            ? ""
+                            : "none";
 
-            const texto =
-                card.innerText.toLowerCase();
-
-            card.style.display =
-                texto.includes(busca)
-                    ? ""
-                    : "none";
+                });
 
         });
 
-});
-
-</script>
+    </script>
 
 
 </body>
