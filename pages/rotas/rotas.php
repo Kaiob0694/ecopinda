@@ -241,6 +241,8 @@ $lista = $rotas->listar();
 
     </script>
 
+    <?php include "../../includes/footer.php"; ?>
+
 
 </body>
 
