@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 require_once "../../classes/rotas.php";
 require_once "../../classes/ponto_turistico.php";
+$baseUrl = 'https://pindaeco.rf.gd';
 
 $rota = new Rotas();
 $ponto = new PontoTuristico();
@@ -25,11 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($nome)) {
 
         $mensagem = "Informe o nome da rota.";
-
     } elseif (empty($pontos)) {
 
         $mensagem = "Selecione pelo menos um ponto turístico.";
-
     } else {
 
         $rotaId = $rota->criar(
@@ -68,211 +67,201 @@ $pontosTuristicos = $ponto->listar();
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0">
 
     <title>Criar rota - PindaEco</title>
 
-    <link
-        rel="stylesheet"
-        href="../../assets/css/rotas.css"
-    >
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/rotas_create.css?v=<?= time(); ?>">
 
 </head>
 
 <body>
 
-<div class="rotas-container">
+    <div class="rotas-container">
 
-    <div class="rotas-header">
+        <div class="rotas-header">
 
-        <h1>Nova rota</h1>
+            <h1>Nova rota</h1>
 
-        <a
-            href="rotas.php"
-            class="btn-voltar"
-        >
-            ← Voltar
-        </a>
-
-    </div>
-
-    <?php if (!empty($mensagem)): ?>
-
-        <div class="mensagem">
-            <?= htmlspecialchars($mensagem) ?>
-        </div>
-
-    <?php endif; ?>
-
-
-    <form method="POST" class="form-rota">
-
-        <div class="campo">
-
-            <label>Nome da rota</label>
-
-            <input
-                type="text"
-                name="nome"
-                placeholder="Ex: Rota Histórica de Pindamonhangaba"
-                required
-            >
+            <a
+                href="rotas.php"
+                class="btn-voltar">
+                ← Voltar
+            </a>
 
         </div>
 
+        <?php if (!empty($mensagem)): ?>
 
-        <div class="campo">
-
-            <label>Descrição</label>
-
-            <textarea
-                name="descricao"
-                rows="5"
-                placeholder="Descreva a experiência..."
-            ></textarea>
-
-        </div>
-
-
-        <div class="form-grid">
-
-            <div class="campo">
-
-                <label>Categoria</label>
-
-                <select name="categoria">
-
-                    <option value="Natureza">
-                        Natureza
-                    </option>
-
-                    <option value="História">
-                        História
-                    </option>
-
-                    <option value="Gastronomia">
-                        Gastronomia
-                    </option>
-
-                    <option value="Família">
-                        Família
-                    </option>
-
-                    <option value="Cultura">
-                        Cultura
-                    </option>
-
-                </select>
-
+            <div class="mensagem">
+                <?= htmlspecialchars($mensagem) ?>
             </div>
 
+        <?php endif; ?>
+
+
+        <form method="POST" class="form-rota">
 
             <div class="campo">
 
-                <label>Dificuldade</label>
-
-                <select name="dificuldade">
-
-                    <option value="Fácil">
-                        Fácil
-                    </option>
-
-                    <option value="Moderada">
-                        Moderada
-                    </option>
-
-                    <option value="Difícil">
-                        Difícil
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>Duração</label>
+                <label>Nome da rota</label>
 
                 <input
                     type="text"
-                    name="duracao"
-                    placeholder="Ex: 2h 30min"
-                >
+                    name="nome"
+                    placeholder="Ex: Rota Histórica de Pindamonhangaba"
+                    required>
 
             </div>
 
 
             <div class="campo">
 
-                <label>Transporte</label>
+                <label>Descrição</label>
 
-                <select name="transporte">
-
-                    <option value="Caminhada">
-                        🚶 Caminhada
-                    </option>
-
-                    <option value="Bicicleta">
-                        🚲 Bicicleta
-                    </option>
-
-                    <option value="Carro">
-                        🚗 Carro
-                    </option>
-
-                </select>
+                <textarea
+                    name="descricao"
+                    rows="5"
+                    placeholder="Descreva a experiência..."></textarea>
 
             </div>
 
-        </div>
+
+            <div class="form-grid">
+
+                <div class="campo">
+
+                    <label>Categoria</label>
+
+                    <select name="categoria">
+
+                        <option value="Natureza">
+                            Natureza
+                        </option>
+
+                        <option value="História">
+                            História
+                        </option>
+
+                        <option value="Gastronomia">
+                            Gastronomia
+                        </option>
+
+                        <option value="Família">
+                            Família
+                        </option>
+
+                        <option value="Cultura">
+                            Cultura
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-        <h2>Pontos da rota</h2>
+                <div class="campo">
 
-        <p class="ajuda">
-            Selecione os pontos na ordem em que o visitante deverá passar.
-        </p>
+                    <label>Dificuldade</label>
+
+                    <select name="dificuldade">
+
+                        <option value="Fácil">
+                            Fácil
+                        </option>
+
+                        <option value="Moderada">
+                            Moderada
+                        </option>
+
+                        <option value="Difícil">
+                            Difícil
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-        <div class="lista-pontos">
+                <div class="campo">
 
-            <?php foreach ($pontosTuristicos as $p): ?>
-
-                <label class="ponto-item">
+                    <label>Duração</label>
 
                     <input
-                        type="checkbox"
-                        name="pontos[]"
-                        value="<?= $p["id"] ?>"
-                    >
+                        type="text"
+                        name="duracao"
+                        placeholder="Ex: 2h 30min">
 
-                    <span>
-
-                        <?= htmlspecialchars($p["nome"]) ?>
-
-                    </span>
-
-                </label>
-
-            <?php endforeach; ?>
-
-        </div>
+                </div>
 
 
-        <button
-            type="submit"
-            class="btn-criar"
-        >
+                <div class="campo">
 
-            Criar rota
+                    <label>Transporte</label>
 
-        </button>
+                    <select name="transporte">
 
-    </form>
+                        <option value="Caminhada">
+                            🚶 Caminhada
+                        </option>
 
-</div>
+                        <option value="Bicicleta">
+                            🚲 Bicicleta
+                        </option>
+
+                        <option value="Carro">
+                            🚗 Carro
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <h2>Pontos da rota</h2>
+
+            <p class="ajuda">
+                Selecione os pontos na ordem em que o visitante deverá passar.
+            </p>
+
+
+            <div class="lista-pontos">
+
+                <?php foreach ($pontosTuristicos as $p): ?>
+
+                    <label class="ponto-item">
+
+                        <input
+                            type="checkbox"
+                            name="pontos[]"
+                            value="<?= $p["id"] ?>">
+
+                        <span>
+
+                            <?= htmlspecialchars($p["nome"]) ?>
+
+                        </span>
+
+                    </label>
+
+                <?php endforeach; ?>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-criar">
+
+                Criar rota
+
+            </button>
+
+        </form>
+
+    </div>
 
 </body>
 
